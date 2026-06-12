@@ -65,6 +65,17 @@
         --lemon: #fff3c4;
         --lavender: #eee9ff;
         --shadow: 0 10px 24px rgba(62, 42, 67, 0.08);
+        --font-cute:
+          "UD デジタル 教科書体 NP",
+          "UD デジタル 教科書体 N",
+          "Hiragino Maru Gothic ProN",
+          "BIZ UDPゴシック",
+          "BIZ UDPGothic",
+          "Yu Gothic",
+          "Yu Gothic UI",
+          "Meiryo",
+          system-ui,
+          sans-serif;
       }
 
       * {
@@ -81,12 +92,8 @@
         overflow-x: hidden;
         background: linear-gradient(180deg, #fffdf8 0, var(--bg) 460px, #f7fbff 100%);
         color: var(--ink);
-        font-family:
-          "Segoe UI",
-          "Hiragino Kaku Gothic ProN",
-          "Yu Gothic",
-          system-ui,
-          sans-serif;
+        font-family: var(--font-cute);
+        letter-spacing: 0;
         line-height: 1.65;
       }
 
@@ -129,6 +136,22 @@
         color: var(--ink);
         font-weight: 900;
         text-decoration: none;
+      }
+
+      .brand-name {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .site-clip-symbol {
+        font-family:
+          "Segoe UI Emoji",
+          "Apple Color Emoji",
+          "Noto Color Emoji",
+          sans-serif;
+        font-weight: 400;
+        line-height: 1;
       }
 
       .brand-mark {
@@ -1052,7 +1075,11 @@
           <span class="brand-mark" aria-hidden="true">
             <img class="brand-icon" src="./assets/rukalun/Hi-112px.png" width="34" height="34" alt="" decoding="async" />
           </span>
-          <span>🖇るっかるんくりっぷ🖇</span>
+          <span class="brand-name">
+            <span class="site-clip-symbol" aria-hidden="true">🖇</span>
+            <span>るっかるんくりっぷ</span>
+            <span class="site-clip-symbol" aria-hidden="true">🖇</span>
+          </span>
         </a>
       </div>
     </header>
