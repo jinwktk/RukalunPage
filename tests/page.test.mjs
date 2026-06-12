@@ -155,10 +155,10 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /-320x180/);
 
   const filterChipStyle = html.match(/\.filter-chip\s*\{([\s\S]*?)\n      \}/)?.[1] ?? "";
-  assert.match(filterChipStyle, /min-width: 0;/);
-  assert.match(filterChipStyle, /white-space: normal;/);
-  assert.match(filterChipStyle, /overflow-wrap: anywhere;/);
-  assert.doesNotMatch(filterChipStyle, /overflow: hidden;|text-overflow: ellipsis;|white-space: nowrap;/);
+  assert.match(filterChipStyle, /white-space: nowrap;/);
+  assert.match(filterChipStyle, /width: fit-content;/);
+  assert.match(filterChipStyle, /max-width: 100%;/);
+  assert.doesNotMatch(filterChipStyle, /text-overflow: ellipsis;/);
 });
 
 test("index.html exposes search-oriented SEO metadata and structured data", () => {
@@ -250,7 +250,11 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
   assert.match(html, /return String\(url\)\.replace\("-480x272\.", "-320x180\."\);/);
   assert.match(html, /const countDiff = creatorCounts\.get\(b\) - creatorCounts\.get\(a\);/);
   assert.match(html, /return countDiff \|\| a\.localeCompare\(b, "ja-JP"\);/);
+  assert.match(html, /function getActiveFilterChipLabel\(\)/);
+  assert.match(html, /return `\$\{visibleLabel\} \/ \$\{totalLabel\} clips \/ 条件あり`;/);
   assert.match(html, /elements\.searchPanelSummary\.textContent = `\$\{resultLabel\} \/ \$\{summary\}`;/);
+  assert.match(html, /elements\.activeFilterChip\.textContent = getActiveFilterChipLabel\(\);/);
+  assert.doesNotMatch(html, /elements\.activeFilterChip\.textContent = `\$\{resultLabel\} \/ \$\{summary\}`;/);
   assert.match(html, /image\.loading = "lazy";/);
   assert.match(html, /image\.decoding = "async";/);
   assert.match(
