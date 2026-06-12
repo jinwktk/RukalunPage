@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="るっかるんのTwitch Clipをタイトル、作成者名、ゲーム名で探せる公開Clip検索ページです。" />
+    <meta name="description" content="るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。" />
     <meta name="keywords" content="るっかるん, rukalun, Twitch, Clip, クリップ, 配信, FF14, 雑談" />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#fff8fb" />
@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="るっかるん Clip検索" />
     <meta property="og:title" content="るっかるん Clip検索" />
-    <meta property="og:description" content="るっかるんのTwitch Clipをタイトル、作成者名、ゲーム名で探せる公開Clip検索ページです。" />
+    <meta property="og:description" content="るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。" />
     <meta property="og:url" content="https://jinwktk.github.io/RukalunPage/" />
     <meta property="og:image" content="https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.png" />
     <meta property="og:image:width" content="1200" />
@@ -19,7 +19,7 @@
     <meta property="og:image:alt" content="るっかるんのキャラクターを使ったClip検索キービジュアル" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="るっかるん Clip検索" />
-    <meta name="twitter:description" content="るっかるんのTwitch Clipをタイトル、作成者名、ゲーム名で探せる公開Clip検索ページです。" />
+    <meta name="twitter:description" content="るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。" />
     <meta name="twitter:image" content="https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.png" />
     <title>るっかるん Clip検索</title>
     <link rel="icon" href="./assets/rukalun/clip-search-favicon.ico" sizes="any" />
@@ -30,7 +30,7 @@
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "name": "るっかるん Clip検索",
-        "description": "るっかるんのTwitch Clipをタイトル、作成者名、ゲーム名で探せる公開Clip検索ページです。",
+        "description": "るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。",
         "url": "https://jinwktk.github.io/RukalunPage/",
         "image": "https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.png",
         "inLanguage": "ja",
@@ -77,6 +77,7 @@
       body {
         margin: 0;
         min-height: 100vh;
+        overflow-x: hidden;
         background: linear-gradient(180deg, #fffdf8 0, var(--bg) 460px, #f7fbff 100%);
         color: var(--ink);
         font-family:
@@ -203,6 +204,7 @@
       }
 
       .hero-copy {
+        min-width: 0;
         max-width: 690px;
       }
 
@@ -237,6 +239,7 @@
         margin-top: 14px;
         font-size: 3.6rem;
         line-height: 1.12;
+        overflow-wrap: anywhere;
       }
 
       .title-phrase {
@@ -248,6 +251,11 @@
         margin-top: 14px;
         color: var(--muted);
         font-size: 1.05rem;
+        overflow-wrap: anywhere;
+      }
+
+      .lead-line {
+        display: inline;
       }
 
       .hero-actions {
@@ -1011,6 +1019,14 @@
           font-size: 2.25rem;
         }
 
+        .lead {
+          font-size: 0.96rem;
+        }
+
+        .lead-line {
+          display: block;
+        }
+
         .metric-value {
           font-size: 1.12rem;
         }
@@ -1074,12 +1090,15 @@
         <div class="hero-copy">
           <span class="eyebrow">
             <img class="eyebrow-icon" src="./assets/rukalun/プレゼント-112px.png" width="24" height="24" alt="" decoding="async" />
-            Rukalun Clip Library
+            おはるっか Clip回収所
           </span>
-          <h1 id="pageTitle">見たいClipへ、<span class="title-phrase">すぐ届く。</span></h1>
+          <h1 id="pageTitle">るっかと愉快な名場面、<span class="title-phrase">すぐ回収。</span></h1>
           <p class="lead">
-            るっかるんの配信で生まれたClipを、タイトル、作成者名、ゲーム名から軽く探せます。
-            画像は低画質サムネイルで読み込み、電波が弱い時も先に検索できます。
+            <span class="lead-line">FF14もLoLもVALOも、</span>
+            <span class="lead-line">笑い声も絶叫も言質もあとから探せます。</span>
+            <span class="lead-line">タイトル・作成者・ゲームでさくっと絞れて、</span>
+            <span class="lead-line">軽いサムネイルだから電波が弱くても、</span>
+            <span class="lead-line">迷子になりにくいです。</span>
           </p>
           <div class="hero-actions" aria-label="主要操作">
             <a class="button primary" href="#searchPanel">検索する</a>

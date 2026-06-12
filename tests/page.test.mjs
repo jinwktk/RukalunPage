@@ -55,6 +55,14 @@ test("index.html exposes the modern search-first design surface", () => {
   const html = readText("index.html");
 
   assert.match(html, /data-design-version="2026-search-first"/);
+  assert.match(html, /おはるっか Clip回収所/);
+  assert.match(html, /るっかと愉快な名場面、<span class="title-phrase">すぐ回収。<\/span>/);
+  assert.match(html, /笑い声、絶叫、言質Clip/);
+  assert.match(html, /h1\s*\{[\s\S]*?overflow-wrap: anywhere;/);
+  assert.match(html, /\.lead\s*\{[\s\S]*?overflow-wrap: anywhere;/);
+  assert.match(html, /class="lead-line">笑い声も絶叫も言質もあとから探せます。/);
+  assert.match(html, /\.lead-line\s*\{[\s\S]*?display: inline;/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.lead-line\s*\{[\s\S]*display: block;/);
   assert.match(html, /id="heroClipCount"/);
   assert.match(html, /id="heroVisibleCount"/);
   assert.match(html, /id="heroClipSyncedAt"/);
