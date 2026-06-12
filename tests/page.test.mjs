@@ -4,10 +4,27 @@ import path from "node:path";
 import test from "node:test";
 
 const repoDir = process.cwd();
+const siteName = "🖇るっかるんくりっぷ🖇";
 const pageUrl = "https://jinwktk.github.io/RukalunPage/";
+const pageTitle = `${siteName} | Twitch Clip検索`;
+const seoDescription =
+  "るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
+const dataUrl = `${pageUrl}clip-search-data.json`;
 
 function readText(relativePath) {
   return fs.readFileSync(path.join(repoDir, relativePath), "utf8");
+}
+
+function getStructuredData(html) {
+  const match = html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
+  assert.ok(match, "JSON-LD script should exist");
+  return JSON.parse(match[1]);
+}
+
+function getGraphNode(graph, type) {
+  const node = graph.find((entry) => entry["@type"] === type);
+  assert.ok(node, `${type} node should exist`);
+  return node;
 }
 
 test("index.html is the public clip search page for RukalunPage", () => {
@@ -46,6 +63,7 @@ test("required page assets and data are present", () => {
 test("clip-search.html keeps old new-repo paths working", () => {
   const html = readText("clip-search.html");
 
+  assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
   assert.match(html, /content="0; url=\.\/"/);
   assert.match(html, /location\.replace\(target\.href\)/);
   assert.match(html, new RegExp(`<link rel="canonical" href="${pageUrl}" />`));
@@ -55,8 +73,8 @@ test("index.html exposes the modern search-first design surface", () => {
   const html = readText("index.html");
 
   assert.match(html, /data-design-version="2026-search-first"/);
-  assert.match(html, /<title>🖇るっかるんくりっぷ🖇<\/title>/);
-  assert.match(html, /<meta property="og:title" content="🖇るっかるんくりっぷ🖇" \/>/);
+  assert.ok(html.includes(`<title>${pageTitle}</title>`));
+  assert.ok(html.includes(`<meta property="og:title" content="${pageTitle}" />`));
   assert.match(html, /aria-label="🖇るっかるんくりっぷ🖇"/);
   assert.match(html, /--font-cute:[\s\S]*?UD デジタル 教科書体 NP/);
   assert.match(html, /font-family: var\(--font-cute\);/);
@@ -135,6 +153,75 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.doesNotMatch(html, /RUKALUN_ICON_PATHS|setIconText/);
   assert.match(html, /-480x272/);
   assert.match(html, /-320x180/);
+});
+
+test("index.html exposes search-oriented SEO metadata and structured data", () => {
+  const html = readText("index.html");
+
+  assert.ok(html.includes(`<meta name="description" content="${seoDescription}" />`));
+  assert.ok(html.includes(`<meta property="og:description" content="${seoDescription}" />`));
+  assert.ok(html.includes(`<meta name="twitter:description" content="${seoDescription}" />`));
+  assert.ok(html.includes(`<meta name="twitter:title" content="${pageTitle}" />`));
+  assert.doesNotMatch(html, /<meta name="keywords"/);
+  assert.match(html, /<section id="clipSearchOverview" class="seo-summary" aria-labelledby="clipSearchOverviewTitle">/);
+  assert.match(html, /<h2 id="clipSearchOverviewTitle">るっかるんのTwitch Clipをまとめて検索<\/h2>/);
+
+  const structuredData = getStructuredData(html);
+  assert.equal(structuredData["@context"], "https://schema.org");
+  assert.ok(Array.isArray(structuredData["@graph"]), "JSON-LD should use @graph");
+
+  const graph = structuredData["@graph"];
+  const website = getGraphNode(graph, "WebSite");
+  assert.equal(website.name, siteName);
+  assert.equal(website.url, pageUrl);
+  assert.equal(website.potentialAction["@type"], "SearchAction");
+  assert.equal(website.potentialAction.target, `${pageUrl}?q={search_term_string}`);
+
+  const page = getGraphNode(graph, "CollectionPage");
+  assert.equal(page.name, pageTitle);
+  assert.equal(page.description, seoDescription);
+  assert.equal(page.url, pageUrl);
+  assert.equal(page.mainEntity["@id"], `${pageUrl}#clipDataset`);
+  assert.match(page.dateModified, /^\d{4}-\d{2}-\d{2}$/);
+
+  const dataset = getGraphNode(graph, "Dataset");
+  assert.equal(dataset["@id"], `${pageUrl}#clipDataset`);
+  assert.equal(dataset.name, "るっかるん Twitch Clip公開データ");
+  assert.equal(dataset.url, dataUrl);
+  assert.match(dataset.description, /Twitch配信Clip/);
+  assert.equal(dataset.publisher.name, siteName);
+  assert.equal(dataset.distribution["@type"], "DataDownload");
+  assert.equal(dataset.distribution.contentUrl, dataUrl);
+  assert.equal(dataset.distribution.encodingFormat, "application/json");
+  assert.match(dataset.dateModified, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(dataset.measurementTechnique, "twitchRaid clip export");
+  assert.equal(dataset.variableMeasured, "title, creator, gameName, createdAt, views");
+});
+
+test("sitemap lists only the canonical public URL", () => {
+  const sitemap = readText("sitemap.xml");
+
+  assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
+  assert.match(sitemap, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
+  assert.match(sitemap, new RegExp(`<loc>${pageUrl}</loc>`));
+  assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+  assert.match(sitemap, /<changefreq>daily<\/changefreq>/);
+  assert.match(sitemap, /<priority>1\.0<\/priority>/);
+  assert.doesNotMatch(sitemap, /clip-search\.html/);
+});
+
+test("documentation records SEO operation constraints", () => {
+  const readme = readText("README.md");
+  const agents = readText("AGENTS.md");
+
+  assert.match(readme, /sitemap\.xml/);
+  assert.match(readme, /Search Console/);
+  assert.match(readme, /GitHub Pages project site/);
+  assert.match(readme, /robots\.txt/);
+  assert.match(agents, /sitemap\.xml/);
+  assert.match(agents, /Search Console/);
+  assert.match(agents, /GitHub Pages project site/);
+  assert.match(agents, /robots\.txt/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
