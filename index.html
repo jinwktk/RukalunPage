@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。" />
-    <meta name="keywords" content="るっかるん, rukalun, Twitch, Clip, クリップ, 配信, FF14, 雑談" />
+    <meta name="description" content="るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。" />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#fff8fb" />
     <link rel="canonical" href="https://jinwktk.github.io/RukalunPage/" />
+    <link rel="sitemap" type="application/xml" href="./sitemap.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="🖇るっかるんくりっぷ🖇" />
-    <meta property="og:title" content="🖇るっかるんくりっぷ🖇" />
-    <meta property="og:description" content="るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。" />
+    <meta property="og:title" content="🖇るっかるんくりっぷ🖇 | Twitch Clip検索" />
+    <meta property="og:description" content="るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。" />
     <meta property="og:url" content="https://jinwktk.github.io/RukalunPage/" />
     <meta property="og:image" content="https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -19,32 +19,66 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="るっかるんのキャラクターを使ったClip検索キービジュアル" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="🖇るっかるんくりっぷ🖇" />
-    <meta name="twitter:description" content="るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。" />
+    <meta name="twitter:title" content="🖇るっかるんくりっぷ🖇 | Twitch Clip検索" />
+    <meta name="twitter:description" content="るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。" />
     <meta name="twitter:image" content="https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.jpg" />
-    <title>🖇るっかるんくりっぷ🖇</title>
+    <title>🖇るっかるんくりっぷ🖇 | Twitch Clip検索</title>
     <link rel="icon" href="./assets/rukalun/clip-search-favicon.ico" sizes="any" />
     <link rel="icon" href="./assets/rukalun/clip-search-favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/rukalun/clip-search-apple-touch-icon.png" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "🖇るっかるんくりっぷ🖇",
-        "description": "るっかるんの配信で生まれた笑い声、絶叫、言質Clipを、タイトル・作成者名・ゲーム名で軽く探せる公開Clip検索ページです。",
-        "url": "https://jinwktk.github.io/RukalunPage/",
-        "image": "https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.jpg",
-        "inLanguage": "ja",
-        "isPartOf": {
-          "@type": "WebSite",
-          "name": "🖇るっかるんくりっぷ🖇",
-          "url": "https://jinwktk.github.io/RukalunPage/",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://jinwktk.github.io/RukalunPage/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://jinwktk.github.io/RukalunPage/#website",
+            "name": "🖇るっかるんくりっぷ🖇",
+            "url": "https://jinwktk.github.io/RukalunPage/",
+            "inLanguage": "ja",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://jinwktk.github.io/RukalunPage/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "CollectionPage",
+            "@id": "https://jinwktk.github.io/RukalunPage/#collection",
+            "name": "🖇るっかるんくりっぷ🖇 | Twitch Clip検索",
+            "description": "るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。",
+            "url": "https://jinwktk.github.io/RukalunPage/",
+            "image": "https://jinwktk.github.io/RukalunPage/assets/rukalun/clip-search-og.jpg",
+            "inLanguage": "ja",
+            "dateModified": "2026-06-13",
+            "isPartOf": {
+              "@id": "https://jinwktk.github.io/RukalunPage/#website"
+            },
+            "mainEntity": {
+              "@id": "https://jinwktk.github.io/RukalunPage/#clipDataset"
+            }
+          },
+          {
+            "@type": "Dataset",
+            "@id": "https://jinwktk.github.io/RukalunPage/#clipDataset",
+            "name": "るっかるん Twitch Clip公開データ",
+            "description": "るっかるんのTwitch配信Clipを、タイトル、作成者、ゲーム名、作成日時、再生数で検索するための公開データです。",
+            "url": "https://jinwktk.github.io/RukalunPage/",
+            "inLanguage": "ja",
+            "measurementTechnique": "twitchRaid clip export",
+            "variableMeasured": "title, creator, gameName, createdAt, views",
+            "publisher": {
+              "@type": "Organization",
+              "name": "🖇るっかるんくりっぷ🖇",
+              "url": "https://jinwktk.github.io/RukalunPage/"
+            },
+            "distribution": {
+              "@type": "DataDownload",
+              "encodingFormat": "application/json",
+              "contentUrl": "https://jinwktk.github.io/RukalunPage/clip-search-data.json"
+            }
           }
-        }
+        ]
       }
     </script>
     <style>
@@ -336,7 +370,8 @@
 
       .filter-chip {
         align-self: end;
-        max-width: min(360px, 40vw);
+        min-width: 0;
+        max-width: min(520px, 48vw);
         border: 1px solid #cde8df;
         border-radius: 999px;
         background: var(--mint);
@@ -344,9 +379,9 @@
         padding: 9px 12px;
         font-size: 0.88rem;
         font-weight: 900;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+        white-space: normal;
       }
 
       .search-toggle-wrap {

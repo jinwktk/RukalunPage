@@ -83,7 +83,7 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.doesNotMatch(html, /fonts\.googleapis|fonts\.gstatic|@font-face/);
   assert.doesNotMatch(html, /おはるっか Clip回収所|class="eyebrow"|class="eyebrow-icon"/);
   assert.match(html, /るっかと愉快な名場面、<span class="title-phrase">すぐ回収。<\/span>/);
-  assert.match(html, /笑い声、絶叫、言質Clip/);
+  assert.match(html, /笑い声も絶叫も言質も/);
   assert.match(html, /h1\s*\{[\s\S]*?overflow-wrap: anywhere;/);
   assert.match(html, /\.lead\s*\{[\s\S]*?overflow-wrap: anywhere;/);
   assert.match(html, /class="lead-line">笑い声も絶叫も言質も、あとからふわっと。/);
@@ -153,6 +153,12 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.doesNotMatch(html, /RUKALUN_ICON_PATHS|setIconText/);
   assert.match(html, /-480x272/);
   assert.match(html, /-320x180/);
+
+  const filterChipStyle = html.match(/\.filter-chip\s*\{([\s\S]*?)\n      \}/)?.[1] ?? "";
+  assert.match(filterChipStyle, /min-width: 0;/);
+  assert.match(filterChipStyle, /white-space: normal;/);
+  assert.match(filterChipStyle, /overflow-wrap: anywhere;/);
+  assert.doesNotMatch(filterChipStyle, /overflow: hidden;|text-overflow: ellipsis;|white-space: nowrap;/);
 });
 
 test("index.html exposes search-oriented SEO metadata and structured data", () => {
@@ -163,8 +169,9 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.ok(html.includes(`<meta name="twitter:description" content="${seoDescription}" />`));
   assert.ok(html.includes(`<meta name="twitter:title" content="${pageTitle}" />`));
   assert.doesNotMatch(html, /<meta name="keywords"/);
-  assert.match(html, /<section id="clipSearchOverview" class="seo-summary" aria-labelledby="clipSearchOverviewTitle">/);
-  assert.match(html, /<h2 id="clipSearchOverviewTitle">るっかるんのTwitch Clipをまとめて検索<\/h2>/);
+  assert.match(html, /class="lead-line">FF14もLoLもVALOも、/);
+  assert.match(html, /class="lead-line">タイトル・作成者・ゲームでそっと探して、/);
+  assert.doesNotMatch(html, /id="clipSearchOverview"/);
 
   const structuredData = getStructuredData(html);
   assert.equal(structuredData["@context"], "https://schema.org");
@@ -187,13 +194,13 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   const dataset = getGraphNode(graph, "Dataset");
   assert.equal(dataset["@id"], `${pageUrl}#clipDataset`);
   assert.equal(dataset.name, "るっかるん Twitch Clip公開データ");
-  assert.equal(dataset.url, dataUrl);
+  assert.equal(dataset.url, pageUrl);
   assert.match(dataset.description, /Twitch配信Clip/);
   assert.equal(dataset.publisher.name, siteName);
   assert.equal(dataset.distribution["@type"], "DataDownload");
   assert.equal(dataset.distribution.contentUrl, dataUrl);
   assert.equal(dataset.distribution.encodingFormat, "application/json");
-  assert.match(dataset.dateModified, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(dataset.dateModified, undefined);
   assert.equal(dataset.measurementTechnique, "twitchRaid clip export");
   assert.equal(dataset.variableMeasured, "title, creator, gameName, createdAt, views");
 });
@@ -205,8 +212,7 @@ test("sitemap lists only the canonical public URL", () => {
   assert.match(sitemap, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
   assert.match(sitemap, new RegExp(`<loc>${pageUrl}</loc>`));
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
-  assert.match(sitemap, /<changefreq>daily<\/changefreq>/);
-  assert.match(sitemap, /<priority>1\.0<\/priority>/);
+  assert.doesNotMatch(sitemap, /<changefreq>|<priority>/);
   assert.doesNotMatch(sitemap, /clip-search\.html/);
 });
 
