@@ -19,7 +19,7 @@ test("index.html is the public clip search page for RukalunPage", () => {
   assert.match(html, new RegExp(`${pageUrl}\\?q=\\{search_term_string\\}`));
   assert.match(
     html,
-    /https:\/\/jinwktk\.github\.io\/RukalunPage\/assets\/rukalun\/clip-search-og\.png/
+    /https:\/\/jinwktk\.github\.io\/RukalunPage\/assets\/rukalun\/clip-search-og\.jpg/
   );
   assert.doesNotMatch(html, /https:\/\/jinwktk\.github\.io\/twitchRaid/);
   assert.doesNotMatch(html, /docs:export-clips|SQLite|公開JSON/);
@@ -29,7 +29,7 @@ test("required page assets and data are present", () => {
   const requiredFiles = [
     "clip-search-data.json",
     "assets/rukalun/clip-search-hero.png",
-    "assets/rukalun/clip-search-og.png",
+    "assets/rukalun/clip-search-og.jpg",
     "assets/rukalun/clip-search-favicon.png",
     "assets/rukalun/clip-search-favicon.ico",
     "assets/rukalun/clip-search-apple-touch-icon.png",
