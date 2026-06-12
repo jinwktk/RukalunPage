@@ -10,6 +10,7 @@ const pageTitle = `${siteName} | Twitch Clip検索`;
 const seoDescription =
   "るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
+const googleVerificationFile = "googled9f512eea3a99dc1.html";
 
 function readText(relativePath) {
   return fs.readFileSync(path.join(repoDir, relativePath), "utf8");
@@ -45,6 +46,7 @@ test("index.html is the public clip search page for RukalunPage", () => {
 test("required page assets and data are present", () => {
   const requiredFiles = [
     "clip-search-data.json",
+    googleVerificationFile,
     "assets/rukalun/clip-search-hero.png",
     "assets/rukalun/clip-search-og.jpg",
     "assets/rukalun/clip-search-favicon.png",
@@ -58,6 +60,11 @@ test("required page assets and data are present", () => {
   for (const relativePath of requiredFiles) {
     assert.equal(fs.existsSync(path.join(repoDir, relativePath)), true, relativePath);
   }
+
+  assert.equal(
+    readText(googleVerificationFile).trim(),
+    `google-site-verification: ${googleVerificationFile}`
+  );
 });
 
 test("clip-search.html keeps old new-repo paths working", () => {
@@ -222,10 +229,12 @@ test("documentation records SEO operation constraints", () => {
 
   assert.match(readme, /sitemap\.xml/);
   assert.match(readme, /Search Console/);
+  assert.match(readme, new RegExp(googleVerificationFile));
   assert.match(readme, /GitHub Pages project site/);
   assert.match(readme, /robots\.txt/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /Search Console/);
+  assert.match(agents, new RegExp(googleVerificationFile));
   assert.match(agents, /GitHub Pages project site/);
   assert.match(agents, /robots\.txt/);
 });
