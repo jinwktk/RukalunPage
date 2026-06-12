@@ -8,7 +8,6 @@
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#fff8fb" />
     <link rel="canonical" href="https://jinwktk.github.io/RukalunPage/" />
-    <link rel="preload" as="image" href="./assets/rukalun/clip-search-hero.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="るっかるん Clip検索" />
     <meta property="og:title" content="るっかるん Clip検索" />
@@ -50,20 +49,21 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #fff8fb;
+        --bg: #fff9fb;
         --paper: #ffffff;
-        --ink: #30283a;
-        --muted: #756b7f;
-        --line: #eadde8;
-        --pink: #e86f9f;
-        --pink-soft: #ffe7f0;
-        --mint: #dff7ed;
-        --mint-ink: #26796f;
+        --surface: #fffefe;
+        --ink: #2c2633;
+        --muted: #6f6478;
+        --line: #eadfe8;
+        --pink: #dc5f92;
+        --pink-soft: #ffe8f0;
+        --mint: #e1f8ef;
+        --mint-ink: #216f67;
         --sky: #e8f5ff;
-        --sky-ink: #356ba3;
-        --lemon: #fff4c9;
-        --lavender: #efe9ff;
-        --shadow: 0 14px 36px rgba(88, 55, 88, 0.1);
+        --sky-ink: #305f97;
+        --lemon: #fff3c4;
+        --lavender: #eee9ff;
+        --shadow: 0 10px 24px rgba(62, 42, 67, 0.08);
       }
 
       * {
@@ -77,9 +77,7 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background:
-          linear-gradient(135deg, rgba(255, 231, 240, 0.85) 0 18%, transparent 18% 100%),
-          linear-gradient(180deg, #fffdf8 0, var(--bg) 540px, #f6fbff 100%);
+        background: linear-gradient(180deg, #fffdf8 0, var(--bg) 460px, #f7fbff 100%);
         color: var(--ink);
         font-family:
           "Segoe UI",
@@ -111,8 +109,7 @@
 
       .topbar {
         border-bottom: 1px solid rgba(234, 221, 232, 0.86);
-        background: rgba(255, 255, 255, 0.78);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.92);
       }
 
       .topbar-inner {
@@ -169,11 +166,10 @@
       .hero {
         position: relative;
         display: grid;
-        min-height: clamp(340px, 43vw, 500px);
+        min-height: clamp(310px, 35vw, 430px);
         align-items: center;
         overflow: hidden;
         isolation: isolate;
-        border-bottom: 1px solid rgba(234, 221, 232, 0.86);
         background: #fff8fb;
       }
 
@@ -182,8 +178,8 @@
         inset: 0;
         z-index: -1;
         background:
-          linear-gradient(90deg, rgba(255, 253, 248, 0.96) 0%, rgba(255, 253, 248, 0.86) 42%, rgba(255, 248, 251, 0.42) 68%, rgba(232, 245, 255, 0.22) 100%),
-          linear-gradient(180deg, rgba(255, 248, 251, 0.18), rgba(255, 253, 248, 0.72));
+          linear-gradient(90deg, rgba(255, 253, 248, 0.98) 0%, rgba(255, 253, 248, 0.9) 47%, rgba(255, 248, 251, 0.54) 72%, rgba(232, 245, 255, 0.3) 100%),
+          linear-gradient(180deg, rgba(255, 248, 251, 0.08), rgba(255, 253, 248, 0.8));
         content: "";
       }
 
@@ -193,12 +189,17 @@
         z-index: -2;
         width: 100%;
         height: 100%;
+        opacity: 0.72;
         object-fit: cover;
         object-position: center;
       }
 
       .hero-content {
-        padding: clamp(42px, 7vw, 76px) 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: 20px;
+        align-items: end;
+        padding: clamp(32px, 5vw, 58px) 0;
       }
 
       .hero-copy {
@@ -234,7 +235,7 @@
       h1 {
         max-width: 720px;
         margin-top: 14px;
-        font-size: clamp(2.1rem, 5vw, 4rem);
+        font-size: 3.6rem;
         line-height: 1.12;
       }
 
@@ -249,14 +250,90 @@
         font-size: 1.05rem;
       }
 
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric-card {
+        min-height: 92px;
+        border: 1px solid rgba(234, 221, 232, 0.9);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.88);
+        padding: 12px;
+        box-shadow: var(--shadow);
+      }
+
+      .metric-card.is-wide {
+        grid-column: 1 / -1;
+        min-height: 76px;
+      }
+
+      .metric-label {
+        display: block;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .metric-value {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+        font-size: 1.45rem;
+        font-weight: 900;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+      }
+
       .search-panel {
         position: sticky;
         top: 0;
         z-index: 5;
-        border-top: 1px solid rgba(234, 221, 232, 0.7);
         border-bottom: 1px solid rgba(234, 221, 232, 0.9);
-        background: rgba(255, 248, 251, 0.9);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 249, 251, 0.96);
+      }
+
+      .search-shell {
+        display: grid;
+        gap: 10px;
+        padding: 12px 0;
+      }
+
+      .search-primary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: end;
+      }
+
+      .keyword-field input {
+        min-height: 50px;
+        font-size: 1.02rem;
+        font-weight: 800;
+      }
+
+      .filter-chip {
+        align-self: end;
+        max-width: min(360px, 40vw);
+        border: 1px solid #cde8df;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--mint-ink);
+        padding: 9px 12px;
+        font-size: 0.88rem;
+        font-weight: 900;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .search-toggle-wrap {
@@ -319,10 +396,10 @@
 
       .search-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 190px 170px auto;
+        grid-template-columns: minmax(160px, 1fr) minmax(160px, 1fr) minmax(150px, 0.8fr) auto;
         gap: 10px;
         align-items: end;
-        padding: 14px 0;
+        padding: 0;
       }
 
       .field {
@@ -373,12 +450,30 @@
         color: var(--ink);
         padding: 10px 12px;
         font-weight: 900;
+        text-decoration: none;
+        transition:
+          border-color 0.16s ease,
+          background 0.16s ease,
+          transform 0.16s ease;
       }
 
       .button.primary {
         border-color: #d94f89;
         background: var(--pink);
         color: #fff;
+      }
+
+      .button.search-close-button {
+        display: none;
+        margin-left: auto;
+        width: 44px;
+        padding: 10px;
+        font-size: 1.35rem;
+        line-height: 1;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
       }
 
       .button-icon {
@@ -393,36 +488,6 @@
         padding: 24px 0 56px;
       }
 
-      .status-row {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
-        align-items: center;
-        margin-bottom: 18px;
-      }
-
-      .status {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .pill {
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: var(--paper);
-        padding: 5px 10px;
-        color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 800;
-      }
-
-      .pill.mint {
-        border-color: #b9e8d9;
-        background: var(--mint);
-        color: var(--mint-ink);
-      }
-
       .notice {
         border: 1px solid #f1d6a2;
         border-radius: 8px;
@@ -433,13 +498,36 @@
       }
 
       .clip-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: grid;
+        align-items: stretch;
+        grid-template-columns: minmax(0, 20fr) minmax(0, 80fr);
+        gap: 0;
+        min-height: 44px;
+        border: 1px solid #ead6e1;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 8px 18px rgba(88, 55, 88, 0.06);
       }
 
       .clip-actions > * {
-        flex: 1 1 128px;
+        min-width: 0;
+      }
+
+      .clip-action-link-group {
+        display: grid;
+        grid-template-columns: minmax(0, 60fr) minmax(0, 20fr);
+        min-width: 0;
+      }
+
+      .clip-action-link-group .clip-link {
+        width: 100%;
+        border-left: 1px solid #ead6e1;
+        border-radius: 0;
+      }
+
+      .clip-action-link-group .clip-copy-button {
+        border-left: 1px solid #ead6e1;
+        border-radius: 0 8px 8px 0;
       }
 
       .results {
@@ -458,6 +546,15 @@
           var(--paper);
         box-shadow: 0 12px 28px rgba(88, 55, 88, 0.08);
         overflow: hidden;
+        transition:
+          border-color 0.16s ease,
+          transform 0.16s ease,
+          box-shadow 0.16s ease;
+      }
+
+      .clip-card:hover {
+        border-color: #f0bed2;
+        transform: translateY(-2px);
       }
 
       .clip-thumbnail {
@@ -475,15 +572,52 @@
         overflow: hidden;
       }
 
+      .clip-thumbnail::after {
+        position: absolute;
+        inset: 0;
+        box-shadow: inset 0 -24px 36px rgba(48, 40, 58, 0.08);
+        content: "";
+        pointer-events: none;
+      }
+
       .clip-thumbnail img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.18s ease;
+      }
+
+      .clip-thumbnail.is-loaded img {
+        opacity: 1;
+      }
+
+      .thumbnail-loader {
+        position: absolute;
+        z-index: 1;
+        width: 30px;
+        height: 30px;
+        border: 3px solid rgba(232, 111, 159, 0.18);
+        border-top-color: #dc5f92;
+        border-radius: 999px;
+        animation: thumbnail-spin 0.8s linear infinite;
+      }
+
+      .clip-thumbnail.is-loaded .thumbnail-loader,
+      .clip-thumbnail.has-placeholder .thumbnail-loader {
+        display: none;
       }
 
       .clip-thumbnail-placeholder {
+        z-index: 1;
         padding: 10px;
         text-align: center;
+      }
+
+      @keyframes thumbnail-spin {
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .clip-card:nth-child(4n + 1) .clip-ribbon {
@@ -558,9 +692,9 @@
       }
 
       .clip-meta {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
         gap: 6px;
+        justify-items: start;
       }
 
       .meta-chip {
@@ -575,32 +709,178 @@
         overflow-wrap: anywhere;
       }
 
+      .meta-chip-creator {
+        grid-row: 2;
+      }
+
       .clip-link,
-      .clip-favorite-button {
+      .clip-favorite-button,
+      .clip-copy-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 7px;
-        min-height: 40px;
-        border: 1px solid #d94f89;
+        gap: 0;
+        min-height: 42px;
+        min-width: 0;
+        border: 0;
         border-radius: 8px;
-        background: #fff5f9;
-        color: #b63d74;
-        padding: 8px 10px;
+        background: #fff;
+        color: #8f5a78;
+        padding: 0;
         font-weight: 900;
         text-decoration: none;
+        transition:
+          background-color 120ms ease,
+          color 120ms ease;
       }
 
       .clip-favorite-button {
-        border-color: #d9bf57;
-        background: var(--lemon);
-        color: #705200;
+        width: 100%;
+        border-radius: 8px 0 0 8px;
+        background: #fff6d9;
+        color: #8a5a05;
+      }
+
+      .clip-action-link-group .clip-link {
+        background: #f4efff;
+        color: #6f46c7;
+      }
+
+      .clip-action-link-group .clip-copy-button {
+        background: #e8f8f4;
+        color: #20746b;
+      }
+
+      .clip-favorite-button:hover {
+        background: #ffedb3;
+        color: #7c4b00;
+      }
+
+      .clip-action-link-group .clip-link:hover {
+        background: #eadfff;
+        color: #5f35b2;
+      }
+
+      .clip-action-link-group .clip-copy-button:hover {
+        background: #d4f1ea;
+        color: #17665e;
+      }
+
+      .clip-link:focus-visible,
+      .clip-favorite-button:focus-visible,
+      .clip-copy-button:focus-visible {
+        outline: 2px solid #e86f9f;
+        outline-offset: 2px;
+      }
+
+      .button-svg-icon {
+        display: block;
+        width: 22px;
+        height: 22px;
+      }
+
+      .favorite-heart {
+        fill: transparent;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2;
+      }
+
+      .video-icon-path {
+        fill: transparent;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2;
+      }
+
+      .clip-copy-button {
+        position: relative;
+        width: 100%;
+        min-height: 42px;
+      }
+
+      .clip-copy-button.is-copied {
+        background: #d4f1ea;
+        color: var(--mint-ink);
+      }
+
+      .clip-copy-button.is-copied::after {
+        position: absolute;
+        right: 0;
+        bottom: calc(100% + 8px);
+        z-index: 2;
+        border: 1px solid #b9e8d9;
+        border-radius: 999px;
+        background: #f6fffb;
+        color: var(--mint-ink);
+        padding: 5px 8px;
+        box-shadow: 0 8px 18px rgba(33, 111, 103, 0.12);
+        content: attr(data-copy-status);
+        font-size: 0.78rem;
+        font-weight: 900;
+        line-height: 1;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      .copy-icon {
+        position: relative;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+      }
+
+      .copy-icon::before,
+      .copy-icon::after {
+        position: absolute;
+        box-sizing: border-box;
+        width: 13px;
+        height: 15px;
+        border: 2px solid currentColor;
+        border-radius: 4px;
+        background: #fff;
+        content: "";
+      }
+
+      .copy-icon::before {
+        top: 2px;
+        left: 3px;
+        opacity: 0.48;
+      }
+
+      .copy-icon::after {
+        top: 5px;
+        left: 7px;
+        background: #fff;
+      }
+
+      .clip-copy-button.is-copied .copy-icon::before {
+        top: 5px;
+        left: 4px;
+        width: 15px;
+        height: 8px;
+        border: 0;
+        border-bottom: 3px solid currentColor;
+        border-left: 3px solid currentColor;
+        border-radius: 1px;
+        background: transparent;
+        opacity: 1;
+        transform: rotate(-45deg);
+      }
+
+      .clip-copy-button.is-copied .copy-icon::after {
+        display: none;
       }
 
       .clip-favorite-button[aria-pressed="true"] {
-        border-color: #e86f9f;
-        background: var(--pink-soft);
-        color: #a43c70;
+        background: #ffe7f0;
+        color: #b63d74;
+      }
+
+      .clip-favorite-button[aria-pressed="true"] .favorite-heart {
+        fill: currentColor;
       }
 
       .clip-card.is-favorite {
@@ -631,6 +911,21 @@
         display: flex;
       }
 
+      .clip-card-skeleton {
+        min-height: 230px;
+      }
+
+      .skeleton-line {
+        display: block;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #f3edf2, #ffffff, #f3edf2);
+      }
+
+      .skeleton-line.short {
+        width: 62%;
+      }
+
       .footer-note {
         margin-top: 34px;
         color: var(--muted);
@@ -638,6 +933,18 @@
       }
 
       @media (max-width: 900px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 3rem;
+        }
+
+        .metric-value {
+          font-size: 1.3rem;
+        }
+
         .hero::after {
           background:
             linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(255, 248, 251, 0.86) 58%, rgba(232, 245, 255, 0.34) 100%),
@@ -658,8 +965,7 @@
       }
 
       @media (max-width: 620px) {
-        .topbar-inner,
-        .status-row {
+        .topbar-inner {
           align-items: flex-start;
           grid-template-columns: 1fr;
         }
@@ -669,9 +975,14 @@
           padding: 12px 0;
         }
 
+        .search-primary,
         .search-grid,
         .results {
           grid-template-columns: 1fr;
+        }
+
+        .filter-chip {
+          display: none;
         }
 
         .search-toggle-wrap {
@@ -679,29 +990,64 @@
           padding: 10px 0;
         }
 
+        .search-panel:not(.is-collapsed) .search-toggle-wrap {
+          display: none;
+        }
+
+        .search-panel.is-collapsed .search-primary,
         .search-panel.is-collapsed .search-grid {
           display: none;
         }
 
+        .button.search-close-button {
+          display: inline-flex;
+        }
+
         .search-grid {
-          padding: 0 0 14px;
+          padding-bottom: 2px;
         }
 
         h1 {
           font-size: 2.25rem;
         }
 
+        .metric-value {
+          font-size: 1.12rem;
+        }
+
         .hero {
-          min-height: 330px;
+          min-height: 300px;
         }
 
         .hero-content {
-          padding: 34px 0;
+          padding: 30px 0;
+        }
+
+        .hero-metrics {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .button,
+        .clip-card,
+        .clip-thumbnail img,
+        .search-toggle-icon {
+          transition: none;
+        }
+
+        .button:hover,
+        .clip-card:hover {
+          transform: none;
         }
       }
     </style>
   </head>
-  <body>
+  <body data-design-version="2026-search-first">
     <header class="topbar">
       <div class="wrap topbar-inner">
         <a class="brand" href="./clip-search.html" aria-label="るっかるん Clip検索">
@@ -720,7 +1066,9 @@
         width="1600"
         height="900"
         alt=""
+        loading="lazy"
         decoding="async"
+        fetchpriority="low"
       />
       <div class="wrap hero-content">
         <div class="hero-copy">
@@ -728,81 +1076,150 @@
             <img class="eyebrow-icon" src="./assets/rukalun/プレゼント-112px.png" width="24" height="24" alt="" decoding="async" />
             Rukalun Clip Library
           </span>
-          <h1 id="pageTitle">かわいい瞬間を、<span class="title-phrase">ふわっと探す。</span></h1>
+          <h1 id="pageTitle">見たいClipへ、<span class="title-phrase">すぐ届く。</span></h1>
           <p class="lead">
-            るっかるんの配信で生まれたClipを、タイトル、作成者名、ゲーム名から探せます。
-            見たい言葉を入れて、気になるClipを開いてください。
+            るっかるんの配信で生まれたClipを、タイトル、作成者名、ゲーム名から軽く探せます。
+            画像は低画質サムネイルで読み込み、電波が弱い時も先に検索できます。
           </p>
+          <div class="hero-actions" aria-label="主要操作">
+            <a class="button primary" href="#searchPanel">検索する</a>
+            <a class="button" href="https://www.twitch.tv/rukalun" target="_blank" rel="noreferrer">Twitchへ</a>
+          </div>
+        </div>
+        <div class="hero-metrics" aria-label="Clipライブラリの状態">
+          <div class="metric-card">
+            <span class="metric-label">総Clip数</span>
+            <span id="heroClipCount" class="metric-value">読み込み中</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">表示中</span>
+            <span id="heroVisibleCount" class="metric-value">読み込み中</span>
+          </div>
+          <div class="metric-card is-wide">
+            <span class="metric-label">Clip同期</span>
+            <span id="heroClipSyncedAt" class="metric-value">確認中</span>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="searchPanel" class="search-panel is-collapsed" aria-label="Clip検索">
-      <div class="wrap search-toggle-wrap">
-        <button
-          id="searchPanelToggle"
-          class="search-toggle"
-          type="button"
-          aria-controls="searchControls"
-          aria-expanded="false"
-        >
-          <span class="search-toggle-copy">
-            <span id="searchPanelToggleLabel" class="search-toggle-label">検索条件を開く</span>
-            <span id="searchPanelSummary" class="search-toggle-summary">検索条件を確認中</span>
-          </span>
-          <span class="search-toggle-icon" aria-hidden="true">▽</span>
-        </button>
-      </div>
-      <div id="searchControls" class="wrap search-grid">
-        <div class="field">
-          <label for="searchInput">キーワード</label>
-          <input id="searchInput" type="search" placeholder="例: FF14 / 雑談 / 迷子 / 作成者名" autocomplete="off" />
-        </div>
-        <div class="field">
-          <label for="creatorFilter">作成者</label>
-          <select id="creatorFilter">
-            <option value="">すべて</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="sortSelect">並び替え</label>
-          <select id="sortSelect">
-            <option value="newest">新しい順</option>
-            <option value="oldest">古い順</option>
-            <option value="favorites">お気に入り順</option>
-            <option value="views">再生数順</option>
-            <option value="title">タイトル順</option>
-          </select>
-        </div>
-        <div class="button-row">
-          <button id="randomButton" class="button primary" type="button">
-            <img class="button-icon" src="./assets/rukalun/bikkuri-112px.png" width="24" height="24" alt="" decoding="async" />
-            おまかせ
-          </button>
-          <button id="clearButton" class="button" type="button">
-            <img class="button-icon" src="./assets/rukalun/Hi-112px.png" width="24" height="24" alt="" decoding="async" />
-            クリア
-          </button>
+      <div class="wrap">
+        <div class="search-shell">
+          <div class="search-primary">
+            <div class="field keyword-field">
+              <label for="searchInput">キーワード</label>
+              <input id="searchInput" type="search" placeholder="例: FF14 / 雑談 / 迷子 / 作成者名" autocomplete="off" />
+            </div>
+            <span id="activeFilterChip" class="filter-chip">検索条件を確認中</span>
+          </div>
+          <div class="search-toggle-wrap">
+            <button
+              id="searchPanelToggle"
+              class="search-toggle"
+              type="button"
+              aria-controls="searchControls"
+              aria-expanded="false"
+            >
+              <span class="search-toggle-copy">
+                <span id="searchPanelToggleLabel" class="search-toggle-label">検索を開く</span>
+                <span id="searchPanelSummary" class="search-toggle-summary">検索条件を確認中</span>
+              </span>
+              <span class="search-toggle-icon" aria-hidden="true">▽</span>
+            </button>
+          </div>
+          <div id="searchControls" class="search-grid">
+            <div class="field">
+              <label for="creatorFilter">作成者</label>
+              <select id="creatorFilter">
+                <option value="">すべて</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="gameFilter">ゲーム</label>
+              <select id="gameFilter">
+                <option value="">すべて</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sortSelect">並び替え</label>
+              <select id="sortSelect">
+                <option value="newest">新しい順</option>
+                <option value="oldest">古い順</option>
+                <option value="favorites">お気に入り順</option>
+                <option value="views">再生数順</option>
+                <option value="title">タイトル順</option>
+              </select>
+            </div>
+            <div class="button-row">
+              <button id="randomButton" class="button primary" type="button">
+                <img class="button-icon" src="./assets/rukalun/bikkuri-112px.png" width="24" height="24" alt="" decoding="async" />
+                おまかせ
+              </button>
+              <button id="clearButton" class="button" type="button">
+                <img class="button-icon" src="./assets/rukalun/Hi-112px.png" width="24" height="24" alt="" decoding="async" />
+                クリア
+              </button>
+              <button id="closeSearchButton" class="button search-close-button" type="button" aria-label="検索を閉じる">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <main class="wrap">
-      <div class="status-row">
-        <div class="status" aria-live="polite">
-          <span id="resultCount" class="pill mint">読み込み中</span>
-          <span id="updatedAt" class="pill">更新日時を確認中</span>
-          <span id="clipSyncedAt" class="pill">Clip最終同期を確認中</span>
-        </div>
-      </div>
-
       <div id="notice" class="notice" hidden></div>
       <section id="emptyState" class="empty">
         <h2>見つかりませんでした</h2>
         <p>検索語を短くするか、作成者の絞り込みを外してください。</p>
       </section>
 
-      <section id="results" class="results" aria-label="検索結果"></section>
+      <section id="results" class="results" aria-label="検索結果">
+        <article class="clip-card clip-card-skeleton" aria-label="Clipを読み込み中">
+          <div class="clip-ribbon">
+            <span class="skeleton-line short"></span>
+            <span class="skeleton-line short"></span>
+          </div>
+          <div class="clip-thumbnail" data-light-thumbnail="true">
+            <span class="thumbnail-loader" aria-hidden="true"></span>
+            <span class="clip-thumbnail-placeholder">Clipを読み込み中</span>
+          </div>
+          <div class="clip-card-body">
+            <span class="skeleton-line"></span>
+            <span class="skeleton-line short"></span>
+          </div>
+        </article>
+        <article class="clip-card clip-card-skeleton" aria-label="Clipを読み込み中">
+          <div class="clip-ribbon">
+            <span class="skeleton-line short"></span>
+            <span class="skeleton-line short"></span>
+          </div>
+          <div class="clip-thumbnail" data-light-thumbnail="true">
+            <span class="thumbnail-loader" aria-hidden="true"></span>
+            <span class="clip-thumbnail-placeholder">Clipを読み込み中</span>
+          </div>
+          <div class="clip-card-body">
+            <span class="skeleton-line"></span>
+            <span class="skeleton-line short"></span>
+          </div>
+        </article>
+        <article class="clip-card clip-card-skeleton" aria-label="Clipを読み込み中">
+          <div class="clip-ribbon">
+            <span class="skeleton-line short"></span>
+            <span class="skeleton-line short"></span>
+          </div>
+          <div class="clip-thumbnail" data-light-thumbnail="true">
+            <span class="thumbnail-loader" aria-hidden="true"></span>
+            <span class="clip-thumbnail-placeholder">Clipを読み込み中</span>
+          </div>
+          <div class="clip-card-body">
+            <span class="skeleton-line"></span>
+            <span class="skeleton-line short"></span>
+          </div>
+        </article>
+      </section>
 
       <div id="loadMoreWrap" class="load-more-wrap">
         <button id="loadMoreButton" class="button" type="button">
@@ -816,33 +1233,38 @@
     <script>
       const DATA_URL = "clip-search-data.json";
       const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
-      const RUKALUN_ICON_PATHS = {
-        hi: "./assets/rukalun/Hi-112px.png",
-        gift: "./assets/rukalun/プレゼント-112px.png",
-        surprise: "./assets/rukalun/bikkuri-112px.png",
-      };
       const INITIAL_LIMIT = 48;
       const MORE_STEP = 48;
       const NEW_CLIP_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
+      const SVG_NS = "http://www.w3.org/2000/svg";
+
+      function requireElement(selector) {
+        const element = document.querySelector(selector);
+        if (!element) throw new Error(`Missing required element: ${selector}`);
+        return element;
+      }
 
       const elements = {
-        searchPanel: document.querySelector("#searchPanel"),
-        searchPanelToggle: document.querySelector("#searchPanelToggle"),
-        searchPanelToggleLabel: document.querySelector("#searchPanelToggleLabel"),
-        searchPanelSummary: document.querySelector("#searchPanelSummary"),
-        searchInput: document.querySelector("#searchInput"),
-        creatorFilter: document.querySelector("#creatorFilter"),
-        sortSelect: document.querySelector("#sortSelect"),
-        randomButton: document.querySelector("#randomButton"),
-        clearButton: document.querySelector("#clearButton"),
-        loadMoreButton: document.querySelector("#loadMoreButton"),
-        loadMoreWrap: document.querySelector("#loadMoreWrap"),
-        results: document.querySelector("#results"),
-        emptyState: document.querySelector("#emptyState"),
-        resultCount: document.querySelector("#resultCount"),
-        updatedAt: document.querySelector("#updatedAt"),
-        clipSyncedAt: document.querySelector("#clipSyncedAt"),
-        notice: document.querySelector("#notice"),
+        searchPanel: requireElement("#searchPanel"),
+        searchPanelToggle: requireElement("#searchPanelToggle"),
+        searchPanelToggleLabel: requireElement("#searchPanelToggleLabel"),
+        searchPanelSummary: requireElement("#searchPanelSummary"),
+        activeFilterChip: requireElement("#activeFilterChip"),
+        searchInput: requireElement("#searchInput"),
+        creatorFilter: requireElement("#creatorFilter"),
+        gameFilter: requireElement("#gameFilter"),
+        sortSelect: requireElement("#sortSelect"),
+        randomButton: requireElement("#randomButton"),
+        clearButton: requireElement("#clearButton"),
+        closeSearchButton: requireElement("#closeSearchButton"),
+        loadMoreButton: requireElement("#loadMoreButton"),
+        loadMoreWrap: requireElement("#loadMoreWrap"),
+        results: requireElement("#results"),
+        emptyState: requireElement("#emptyState"),
+        heroClipCount: requireElement("#heroClipCount"),
+        heroVisibleCount: requireElement("#heroVisibleCount"),
+        heroClipSyncedAt: requireElement("#heroClipSyncedAt"),
+        notice: requireElement("#notice"),
       };
 
       const initialQuery = new URLSearchParams(window.location.search).get("q");
@@ -854,6 +1276,7 @@
       let filteredClips = [];
       let visibleLimit = INITIAL_LIMIT;
       let favoriteClips = loadFavoriteClips();
+      let dataLoadState = "loading";
 
       function normalizeText(value) {
         return String(value ?? "")
@@ -958,6 +1381,49 @@
         }
       }
 
+      function getSafeClipUrl(clip) {
+        return isSafeTwitchClipUrl(clip?.url) ? clip.url : "https://www.twitch.tv/rukalun";
+      }
+
+      async function copyTextToClipboard(text) {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.top = "-1000px";
+        textArea.style.opacity = "0";
+        document.body.append(textArea);
+        textArea.select();
+        const copied = document.execCommand("copy");
+        textArea.remove();
+        if (!copied) throw new Error("Copy command failed");
+      }
+
+      function showCopyFeedback(button) {
+        button.classList.add("is-copied");
+        button.dataset.copyStatus = "コピーしました";
+        button.setAttribute("aria-label", "Twitch URLをコピーしました");
+        window.setTimeout(() => {
+          button.classList.remove("is-copied");
+          delete button.dataset.copyStatus;
+          button.setAttribute("aria-label", "Twitch URLをコピー");
+        }, 1800);
+      }
+
+      async function copyClipUrl(clip, button) {
+        try {
+          await copyTextToClipboard(getSafeClipUrl(clip));
+          showCopyFeedback(button);
+        } catch {
+          setNotice("Twitch URLをコピーできませんでした。Twitchで開いてからコピーしてください。");
+        }
+      }
+
       function isSafeImageUrl(url) {
         try {
           const parsed = new URL(url);
@@ -965,6 +1431,11 @@
         } catch {
           return false;
         }
+      }
+
+      function toLightThumbnailUrl(url) {
+        if (!isSafeImageUrl(url)) return "";
+        return String(url).replace("-480x272.", "-320x180.");
       }
 
       function setNotice(message) {
@@ -977,30 +1448,81 @@
         elements.notice.textContent = message;
       }
 
-      function createButtonIcon(src) {
-        const icon = document.createElement("img");
-        icon.className = "button-icon";
-        icon.src = src;
-        icon.alt = "";
-        icon.width = 24;
-        icon.height = 24;
-        icon.decoding = "async";
+      function createSvgIcon(className) {
+        const icon = document.createElementNS(SVG_NS, "svg");
+        icon.setAttribute("class", `button-svg-icon ${className}`);
+        icon.setAttribute("viewBox", "0 0 24 24");
+        icon.setAttribute("aria-hidden", "true");
+        icon.setAttribute("focusable", "false");
         return icon;
       }
 
-      function setIconText(element, iconSrc, label) {
-        element.replaceChildren(createButtonIcon(iconSrc), document.createTextNode(label));
+      function createSvgPath(className, pathData) {
+        const path = document.createElementNS(SVG_NS, "path");
+        path.setAttribute("class", className);
+        path.setAttribute("d", pathData);
+        return path;
+      }
+
+      function createFavoriteIcon() {
+        const icon = createSvgIcon("favorite-icon");
+        icon.append(
+          createSvgPath(
+            "favorite-heart",
+            "M12 20.5s-7.5-4.2-9.3-9C1.35 7.9 3.55 5 6.9 5c1.9 0 3.25.95 4.1 2.2C11.85 5.95 13.2 5 15.1 5c3.35 0 5.55 2.9 4.2 6.5-1.8 4.8-7.3 9-7.3 9Z"
+          )
+        );
+        return icon;
+      }
+
+      function createVideoIcon() {
+        const icon = createSvgIcon("video-icon");
+        icon.append(
+          createSvgPath("video-icon-path", "M4.8 7h9.4c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2H4.8c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2Z"),
+          createSvgPath("video-icon-path", "M16.2 10.2 21 7.8v8.4l-4.8-2.4v-3.6Z")
+        );
+        return icon;
       }
 
       function buildCreatorOptions(clips) {
-        const creators = [...new Set(clips.map((clip) => clip.creator).filter(Boolean))].sort((a, b) =>
-          a.localeCompare(b, "ja-JP")
-        );
+        const creatorCounts = clips.reduce((counts, clip) => {
+          if (clip.creator) counts.set(clip.creator, (counts.get(clip.creator) ?? 0) + 1);
+          return counts;
+        }, new Map());
+        const creators = [...creatorCounts.keys()].sort((a, b) => {
+          const countDiff = creatorCounts.get(b) - creatorCounts.get(a);
+          return countDiff || a.localeCompare(b, "ja-JP");
+        });
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = `すべて (${clips.length.toLocaleString("ja-JP")})`;
+        elements.creatorFilter.replaceChildren(defaultOption);
         for (const creator of creators) {
           const option = document.createElement("option");
           option.value = creator;
-          option.textContent = creator;
+          option.textContent = `${creator} (${creatorCounts.get(creator).toLocaleString("ja-JP")})`;
           elements.creatorFilter.append(option);
+        }
+      }
+
+      function buildGameOptions(clips) {
+        const gameCounts = clips.reduce((counts, clip) => {
+          if (clip.gameName) counts.set(clip.gameName, (counts.get(clip.gameName) ?? 0) + 1);
+          return counts;
+        }, new Map());
+        const games = [...gameCounts.keys()].sort((a, b) => {
+          const countDiff = gameCounts.get(b) - gameCounts.get(a);
+          return countDiff || a.localeCompare(b, "ja-JP");
+        });
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = `すべて (${clips.length.toLocaleString("ja-JP")})`;
+        elements.gameFilter.replaceChildren(defaultOption);
+        for (const game of games) {
+          const option = document.createElement("option");
+          option.value = game;
+          option.textContent = `${game} (${gameCounts.get(game).toLocaleString("ja-JP")})`;
+          elements.gameFilter.append(option);
         }
       }
 
@@ -1039,10 +1561,12 @@
         const query = normalizeText(elements.searchInput.value);
         const terms = query ? query.split(" ") : [];
         const creator = elements.creatorFilter.value;
+        const game = elements.gameFilter.value;
 
         filteredClips = sortClips(
           allClips.filter((clip) => {
             if (creator && clip.creator !== creator) return false;
+            if (game && clip.gameName !== game) return false;
             if (terms.length === 0) return true;
 
             return terms.every((term) => clip.searchText.includes(term));
@@ -1058,14 +1582,31 @@
       function updateSearchPanelSummary() {
         const query = elements.searchInput.value.trim();
         const creator = elements.creatorFilter.value || "すべて";
+        const game = elements.gameFilter.value || "すべて";
         const queryLabel = query ? `検索: ${query}` : "検索なし";
-        elements.searchPanelSummary.textContent = `${queryLabel} / ${creator} / ${getSelectedSortLabel()}`;
+        const resultLabel =
+          dataLoadState === "failed"
+            ? "読み込み失敗"
+            : dataLoadState === "loaded"
+              ? `${filteredClips.length.toLocaleString("ja-JP")} / ${allClips.length.toLocaleString("ja-JP")} clips`
+              : "読み込み中";
+        const summary = `${queryLabel} / 作成者: ${creator} / ゲーム: ${game} / ${getSelectedSortLabel()}`;
+        elements.searchPanelSummary.textContent = `${resultLabel} / ${summary}`;
+        elements.activeFilterChip.textContent = `${resultLabel} / ${summary}`;
+      }
+
+      function updateHeroMetrics() {
+        const loadingLabel = dataLoadState === "failed" ? "失敗" : "読み込み中";
+        elements.heroClipCount.textContent =
+          dataLoadState === "loaded" ? allClips.length.toLocaleString("ja-JP") : loadingLabel;
+        elements.heroVisibleCount.textContent =
+          dataLoadState === "loaded" ? filteredClips.length.toLocaleString("ja-JP") : loadingLabel;
       }
 
       function setSearchPanelExpanded(expanded) {
         elements.searchPanel.classList.toggle("is-collapsed", !expanded);
         elements.searchPanelToggle.setAttribute("aria-expanded", String(expanded));
-        elements.searchPanelToggleLabel.textContent = expanded ? "検索条件を閉じる" : "検索条件を開く";
+        elements.searchPanelToggleLabel.textContent = expanded ? "検索を閉じる" : "検索を開く";
       }
 
       function renderCard(clip) {
@@ -1093,24 +1634,35 @@
 
         const thumbnail = document.createElement("div");
         thumbnail.className = "clip-thumbnail";
-        if (isSafeImageUrl(clip.thumbnailUrl)) {
+        thumbnail.setAttribute("data-light-thumbnail", "true");
+        const loader = document.createElement("span");
+        loader.className = "thumbnail-loader";
+        loader.setAttribute("aria-hidden", "true");
+        thumbnail.append(loader);
+        const lightThumbnailUrl = toLightThumbnailUrl(clip.thumbnailUrl);
+        if (lightThumbnailUrl) {
           const image = document.createElement("img");
-          image.src = clip.thumbnailUrl;
           image.alt = clip.title ? `${clip.title}のサムネイル` : "Clipサムネイル";
           image.loading = "lazy";
           image.decoding = "async";
+          image.addEventListener("load", () => {
+            thumbnail.classList.add("is-loaded");
+          });
           image.addEventListener("error", () => {
             thumbnail.replaceChildren();
+            thumbnail.classList.add("has-placeholder");
             const placeholder = document.createElement("span");
             placeholder.className = "clip-thumbnail-placeholder";
-            placeholder.textContent = "サムネイル準備中";
+            placeholder.textContent = clip.title ? `${clip.title} / サムネイル準備中` : "サムネイル準備中";
             thumbnail.append(placeholder);
           });
+          image.src = lightThumbnailUrl;
           thumbnail.append(image);
         } else {
+          thumbnail.classList.add("has-placeholder");
           const placeholder = document.createElement("span");
           placeholder.className = "clip-thumbnail-placeholder";
-          placeholder.textContent = "サムネイル準備中";
+          placeholder.textContent = clip.title ? `${clip.title} / サムネイル準備中` : "サムネイル準備中";
           thumbnail.append(placeholder);
         }
 
@@ -1124,10 +1676,10 @@
         const meta = document.createElement("div");
         meta.className = "clip-meta";
         const creator = document.createElement("span");
-        creator.className = "meta-chip";
+        creator.className = "meta-chip meta-chip-creator";
         creator.textContent = clip.creator ? `作成: ${clip.creator}` : "作成者不明";
         const game = document.createElement("span");
-        game.className = "meta-chip";
+        game.className = "meta-chip meta-chip-game";
         game.textContent = clip.gameName ? `ゲーム: ${clip.gameName}` : "ゲーム不明";
         meta.append(game, creator);
 
@@ -1140,31 +1692,61 @@
         const favoriteLabel = isFavoriteClip(clip) ? "お気に入り済み" : "お気に入りに追加";
         favoriteButton.setAttribute("aria-pressed", String(isFavoriteClip(clip)));
         favoriteButton.setAttribute("aria-label", favoriteLabel);
-        setIconText(favoriteButton, RUKALUN_ICON_PATHS.gift, favoriteLabel);
+        favoriteButton.title = favoriteLabel;
+        favoriteButton.append(createFavoriteIcon());
         favoriteButton.addEventListener("click", () => toggleFavoriteClip(clip));
 
         const link = document.createElement("a");
         link.className = "clip-link";
         link.target = "_blank";
         link.rel = "noreferrer";
-        link.href = isSafeTwitchClipUrl(clip.url) ? clip.url : "https://www.twitch.tv/rukalun";
-        setIconText(link, RUKALUN_ICON_PATHS.hi, "Twitchで見る");
+        link.href = getSafeClipUrl(clip);
+        link.title = "Twitchで見る";
+        link.setAttribute("aria-label", "Twitchで見る");
+        link.append(createVideoIcon());
 
-        actions.append(favoriteButton, link);
+        const copyButton = document.createElement("button");
+        copyButton.className = "clip-copy-button";
+        copyButton.type = "button";
+        copyButton.title = "Twitch URLをコピー";
+        copyButton.setAttribute("aria-label", "Twitch URLをコピー");
+        const copyIcon = document.createElement("span");
+        copyIcon.className = "copy-icon";
+        copyIcon.setAttribute("aria-hidden", "true");
+        copyButton.append(copyIcon);
+        copyButton.addEventListener("click", () => copyClipUrl(clip, copyButton));
+
+        const linkGroup = document.createElement("div");
+        linkGroup.className = "clip-action-link-group";
+        linkGroup.append(link, copyButton);
+
+        actions.append(favoriteButton, linkGroup);
         body.append(title, meta, actions);
         card.append(ribbon, thumbnail, body);
         return card;
       }
 
       function render() {
-        updateSearchPanelSummary();
         filterClips();
+
+        if (dataLoadState === "loading") {
+          elements.emptyState.classList.remove("is-visible");
+          elements.loadMoreWrap.classList.remove("is-visible");
+          updateSearchPanelSummary();
+          updateHeroMetrics();
+          return;
+        }
+
         const visible = filteredClips.slice(0, visibleLimit);
 
         elements.results.replaceChildren(...visible.map(renderCard));
-        elements.emptyState.classList.toggle("is-visible", filteredClips.length === 0);
+        elements.emptyState.classList.toggle(
+          "is-visible",
+          dataLoadState === "loaded" && filteredClips.length === 0
+        );
         elements.loadMoreWrap.classList.toggle("is-visible", filteredClips.length > visibleLimit);
-        elements.resultCount.textContent = `${filteredClips.length.toLocaleString("ja-JP")} / ${allClips.length.toLocaleString("ja-JP")} clips`;
+        updateSearchPanelSummary();
+        updateHeroMetrics();
       }
 
       function resetVisibleAndRender() {
@@ -1181,6 +1763,7 @@
         const clip = filteredClips[Math.floor(Math.random() * filteredClips.length)];
         elements.searchInput.value = clip.title;
         elements.creatorFilter.value = "";
+        elements.gameFilter.value = "";
         visibleLimit = INITIAL_LIMIT;
         render();
         elements.results.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1188,7 +1771,7 @@
 
       async function loadData() {
         try {
-          const response = await fetch(DATA_URL, { cache: "no-store" });
+          const response = await fetch(DATA_URL);
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const data = await response.json();
           allClips = Array.isArray(data.clips)
@@ -1197,22 +1780,23 @@
                 searchText: normalizeText(`${clip.title} ${clip.creator} ${clip.gameName}`),
               }))
             : [];
+          dataLoadState = "loaded";
           buildCreatorOptions(allClips);
-          elements.updatedAt.textContent = data.generatedAt
-            ? `JSON生成: ${formatDateTimeWithSeconds(data.generatedAt)}`
-            : "JSON生成: 未記録";
+          buildGameOptions(allClips);
           const recentSyncedAt = data.clipSync?.recentSyncedAt ?? null;
-          elements.clipSyncedAt.textContent = recentSyncedAt
-            ? `Clip最終同期: ${formatDateTimeWithSeconds(recentSyncedAt)}`
-            : "Clip最終同期: 未記録";
+          elements.heroClipSyncedAt.textContent = recentSyncedAt
+            ? formatDateTimeWithSeconds(recentSyncedAt)
+            : "未記録";
           setNotice(allClips.length === 0 ? "Clipデータがまだありません。しばらくしてから再読み込みしてください。" : "");
           render();
         } catch (error) {
           allClips = [];
           filteredClips = [];
-          elements.resultCount.textContent = "読み込み失敗";
-          elements.updatedAt.textContent = "JSON生成: 未記録";
-          elements.clipSyncedAt.textContent = "Clip最終同期: 未記録";
+          dataLoadState = "failed";
+          elements.heroClipCount.textContent = "失敗";
+          elements.heroVisibleCount.textContent = "失敗";
+          elements.heroClipSyncedAt.textContent = "未記録";
+          elements.activeFilterChip.textContent = "Clipデータを読み込めませんでした";
           setNotice("Clipデータを読み込めませんでした。しばらくしてから再読み込みしてください。");
           render();
         }
@@ -1220,6 +1804,7 @@
 
       elements.searchInput.addEventListener("input", resetVisibleAndRender);
       elements.creatorFilter.addEventListener("change", resetVisibleAndRender);
+      elements.gameFilter.addEventListener("change", resetVisibleAndRender);
       elements.sortSelect.addEventListener("change", resetVisibleAndRender);
       elements.searchPanelToggle.addEventListener("click", () => {
         const isExpanded = elements.searchPanelToggle.getAttribute("aria-expanded") === "true";
@@ -1228,10 +1813,12 @@
       elements.clearButton.addEventListener("click", () => {
         elements.searchInput.value = "";
         elements.creatorFilter.value = "";
+        elements.gameFilter.value = "";
         elements.sortSelect.value = "newest";
         resetVisibleAndRender();
       });
       elements.randomButton.addEventListener("click", pickRandomClip);
+      elements.closeSearchButton.addEventListener("click", () => setSearchPanelExpanded(false));
       elements.loadMoreButton.addEventListener("click", () => {
         visibleLimit += MORE_STEP;
         render();
