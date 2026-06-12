@@ -58,7 +58,7 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /<title>🖇るっかるんくりっぷ🖇<\/title>/);
   assert.match(html, /<meta property="og:title" content="🖇るっかるんくりっぷ🖇" \/>/);
   assert.match(html, /aria-label="🖇るっかるんくりっぷ🖇"/);
-  assert.match(html, /おはるっか Clip回収所/);
+  assert.doesNotMatch(html, /おはるっか Clip回収所|class="eyebrow"|class="eyebrow-icon"/);
   assert.match(html, /るっかと愉快な名場面、<span class="title-phrase">すぐ回収。<\/span>/);
   assert.match(html, /笑い声、絶叫、言質Clip/);
   assert.match(html, /h1\s*\{[\s\S]*?overflow-wrap: anywhere;/);
