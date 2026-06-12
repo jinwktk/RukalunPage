@@ -223,16 +223,25 @@ test("sitemap lists only the canonical public URL", () => {
   assert.doesNotMatch(sitemap, /clip-search\.html/);
 });
 
+test("text sitemap lists only the canonical public URL", () => {
+  const sitemap = readText("sitemap.txt");
+
+  assert.equal(sitemap.trim(), pageUrl);
+  assert.doesNotMatch(sitemap, /clip-search\.html/);
+});
+
 test("documentation records SEO operation constraints", () => {
   const readme = readText("README.md");
   const agents = readText("AGENTS.md");
 
   assert.match(readme, /sitemap\.xml/);
+  assert.match(readme, /sitemap\.txt/);
   assert.match(readme, /Search Console/);
   assert.match(readme, new RegExp(googleVerificationFile));
   assert.match(readme, /GitHub Pages project site/);
   assert.match(readme, /robots\.txt/);
   assert.match(agents, /sitemap\.xml/);
+  assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /Search Console/);
   assert.match(agents, new RegExp(googleVerificationFile));
   assert.match(agents, /GitHub Pages project site/);
