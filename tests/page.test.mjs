@@ -5,7 +5,7 @@ import test from "node:test";
 
 const repoDir = process.cwd();
 const siteName = "🖇るっかるんくりっぷ🖇";
-const pageUrl = "https://jinwktk.github.io/RukalunPage/";
+const pageUrl = "https://www.rukalun.mydns.jp/";
 const pageTitle = `${siteName} | Twitch Clip検索`;
 const faviconIcoUrl = `${pageUrl}assets/rukalun/clip-search-favicon.ico`;
 const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
@@ -60,10 +60,8 @@ test("index.html is the public clip search page for RukalunPage", () => {
   assert.match(html, new RegExp(`<link rel="canonical" href="${pageUrl}" />`));
   assert.match(html, new RegExp(`"url": "${pageUrl}"`));
   assert.match(html, new RegExp(`${pageUrl}\\?q=\\{search_term_string\\}`));
-  assert.match(
-    html,
-    /https:\/\/jinwktk\.github\.io\/RukalunPage\/assets\/rukalun\/clip-search-og\.jpg/
-  );
+  assert.match(html, new RegExp(`${pageUrl}assets/rukalun/clip-search-og\\.jpg`));
+  assert.doesNotMatch(html, /https:\/\/jinwktk\.github\.io\/RukalunPage/);
   assert.doesNotMatch(html, /https:\/\/jinwktk\.github\.io\/twitchRaid/);
   assert.doesNotMatch(html, /docs:export-clips|SQLite|公開JSON/);
 });
@@ -288,14 +286,16 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /hostname単位/);
   assert.match(readme, /Search Console/);
   assert.match(readme, new RegExp(googleVerificationFile));
-  assert.match(readme, /GitHub Pages project site/);
+  assert.match(readme, /www\.rukalun\.mydns\.jp/);
+  assert.match(readme, /カスタムドメイン/);
   assert.match(readme, /robots\.txt/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
   assert.match(agents, /Search Console/);
   assert.match(agents, new RegExp(googleVerificationFile));
-  assert.match(agents, /GitHub Pages project site/);
+  assert.match(agents, /www\.rukalun\.mydns\.jp/);
+  assert.match(agents, /カスタムドメイン/);
   assert.match(agents, /robots\.txt/);
 });
 
