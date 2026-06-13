@@ -352,3 +352,9 @@ test("clip search data is minified to reduce network payload", () => {
 
   assert.equal(rawData.trim(), minifiedData);
 });
+
+test("generated clip search data is hidden from noisy GitHub diffs", () => {
+  const attributes = readText(".gitattributes");
+
+  assert.match(attributes, /^clip-search-data\.json\s+linguist-generated=true\s+-diff$/m);
+});
