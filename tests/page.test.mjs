@@ -79,8 +79,11 @@ test("required page assets and data are present", () => {
     "assets/rukalun/clip-search-favicon.ico",
     "assets/rukalun/clip-search-apple-touch-icon.png",
     "assets/rukalun/Hi-112px.png",
+    "assets/rukalun/Hi-56px.webp",
     "assets/rukalun/プレゼント-112px.png",
+    "assets/rukalun/present-56px.webp",
     "assets/rukalun/bikkuri-112px.png",
+    "assets/rukalun/bikkuri-56px.webp",
   ];
 
   for (const relativePath of requiredFiles) {
@@ -112,6 +115,10 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.ok(html.includes(`<link rel="icon" href="${faviconPngUrl}" type="image/png" sizes="512x512" />`));
   assert.ok(html.includes(`<link rel="apple-touch-icon" href="${appleTouchIconUrl}" />`));
   assert.match(html, /aria-label="🖇るっかるんくりっぷ🖇"/);
+  assert.match(html, /class="brand-icon" src="\.\/assets\/rukalun\/Hi-56px\.webp"/);
+  assert.match(html, /class="button-icon" src="\.\/assets\/rukalun\/bikkuri-56px\.webp"/);
+  assert.match(html, /class="button-icon" src="\.\/assets\/rukalun\/Hi-56px\.webp"/);
+  assert.match(html, /class="button-icon" src="\.\/assets\/rukalun\/present-56px\.webp"/);
   assert.match(html, /--font-cute:[\s\S]*?UD デジタル 教科書体 NP/);
   assert.match(html, /font-family: var\(--font-cute\);/);
   assert.match(html, /class="brand-name"/);
