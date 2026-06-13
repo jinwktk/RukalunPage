@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#fff8fb" />
     <link rel="canonical" href="https://jinwktk.github.io/RukalunPage/" />
     <link rel="sitemap" type="application/xml" href="./sitemap.xml" />
+    <link rel="preload" as="image" href="./assets/rukalun/clip-search-hero.webp" type="image/webp" fetchpriority="high" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="🖇るっかるんくりっぷ🖇" />
     <meta property="og:title" content="🖇るっかるんくりっぷ🖇 | Twitch Clip検索" />
@@ -91,7 +92,7 @@
         --ink: #2c2633;
         --muted: #6f6478;
         --line: #eadfe8;
-        --pink: #dc5f92;
+        --pink: #c2487d;
         --pink-soft: #ffe8f0;
         --mint: #e1f8ef;
         --mint-ink: #216f67;
@@ -507,7 +508,7 @@
       }
 
       .button.primary {
-        border-color: #d94f89;
+        border-color: #b93670;
         background: var(--pink);
         color: #fff;
       }
@@ -1121,16 +1122,18 @@
     </header>
 
     <section class="hero" aria-labelledby="pageTitle">
-      <img
-        class="hero-image"
-        src="./assets/rukalun/clip-search-hero.png"
-        width="1600"
-        height="900"
-        alt=""
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-      />
+      <picture>
+        <source srcset="./assets/rukalun/clip-search-hero.webp" type="image/webp" />
+        <img
+          class="hero-image"
+          src="./assets/rukalun/clip-search-hero.png"
+          width="1600"
+          height="900"
+          alt=""
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
       <div class="wrap hero-content">
         <div class="hero-copy">
           <h1 id="pageTitle">るっかと愉快な名場面、<span class="title-phrase">すぐ回収。</span></h1>
@@ -1293,8 +1296,8 @@
     <script>
       const DATA_URL = "clip-search-data.json";
       const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
-      const INITIAL_LIMIT = 48;
-      const MORE_STEP = 48;
+      const INITIAL_LIMIT = 24;
+      const MORE_STEP = 24;
       const NEW_CLIP_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
       const SVG_NS = "http://www.w3.org/2000/svg";
 
@@ -1883,6 +1886,23 @@
         }
       }
 
+      function scheduleDataLoad() {
+        const runLoadData = () => {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(() => loadData(), { timeout: 1200 });
+            return;
+          }
+          window.setTimeout(() => loadData(), 160);
+        };
+
+        if (document.readyState === "complete") {
+          runLoadData();
+          return;
+        }
+
+        window.addEventListener("load", runLoadData, { once: true });
+      }
+
       elements.searchInput.addEventListener("input", resetVisibleAndRender);
       elements.creatorFilter.addEventListener("change", resetVisibleAndRender);
       elements.gameFilter.addEventListener("change", resetVisibleAndRender);
@@ -1905,7 +1925,7 @@
         render();
       });
 
-      loadData();
+      scheduleDataLoad();
     </script>
   </body>
 </html>

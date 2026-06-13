@@ -19,6 +19,28 @@ function readText(relativePath) {
   return fs.readFileSync(path.join(repoDir, relativePath), "utf8");
 }
 
+function getCssVariable(html, name) {
+  const match = html.match(new RegExp(`${name}:\\s*(#[0-9a-fA-F]{6});`));
+  assert.ok(match, `${name} should be defined as a hex color`);
+  return match[1];
+}
+
+function relativeLuminance(hexColor) {
+  const channels = [1, 3, 5].map((start) => {
+    const channel = Number.parseInt(hexColor.slice(start, start + 2), 16) / 255;
+    return channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function contrastRatio(foreground, background) {
+  const foregroundLuminance = relativeLuminance(foreground);
+  const backgroundLuminance = relativeLuminance(background);
+  const lighter = Math.max(foregroundLuminance, backgroundLuminance);
+  const darker = Math.min(foregroundLuminance, backgroundLuminance);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 function getStructuredData(html) {
   const match = html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
   assert.ok(match, "JSON-LD script should exist");
@@ -51,6 +73,7 @@ test("required page assets and data are present", () => {
     "clip-search-data.json",
     googleVerificationFile,
     "assets/rukalun/clip-search-hero.png",
+    "assets/rukalun/clip-search-hero.webp",
     "assets/rukalun/clip-search-og.jpg",
     "assets/rukalun/clip-search-favicon.png",
     "assets/rukalun/clip-search-favicon.ico",
@@ -113,6 +136,13 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /id="gameFilter"/);
   assert.match(html, /class="search-shell"/);
   assert.match(html, /class="hero-metrics"/);
+  assert.match(
+    html,
+    /<link rel="preload" as="image" href="\.\/assets\/rukalun\/clip-search-hero\.webp" type="image\/webp" fetchpriority="high" \/>/
+  );
+  assert.match(html, /<picture>[\s\S]*<source srcset="\.\/assets\/rukalun\/clip-search-hero\.webp" type="image\/webp" \/>[\s\S]*class="hero-image"/);
+  assert.match(html, /class="hero-image"[\s\S]*src="\.\/assets\/rukalun\/clip-search-hero\.png"[\s\S]*fetchpriority="high"/);
+  assert.doesNotMatch(html, /class="hero-image"[\s\S]*loading="lazy"/);
   assert.match(html, /class="thumbnail-loader"/);
   assert.match(html, /data-light-thumbnail="true"/);
   assert.match(html, /function toLightThumbnailUrl/);
@@ -166,6 +196,11 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.doesNotMatch(html, /RUKALUN_ICON_PATHS|setIconText/);
   assert.match(html, /-480x272/);
   assert.match(html, /-320x180/);
+
+  assert.ok(
+    contrastRatio("#ffffff", getCssVariable(html, "--pink")) >= 4.5,
+    "primary pink buttons with white text should meet AA contrast"
+  );
 
   const filterChipStyle = html.match(/\.filter-chip\s*\{([\s\S]*?)\n      \}/)?.[1] ?? "";
   assert.match(filterChipStyle, /white-space: nowrap;/);
@@ -290,9 +325,23 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
   );
   assert.match(html, /dataLoadState === "loaded" && filteredClips\.length === 0/);
   assert.doesNotMatch(html, /cache:\s*"no-store"/);
+  assert.match(html, /const INITIAL_LIMIT = 24;/);
+  assert.match(html, /const MORE_STEP = 24;/);
+  assert.match(html, /function scheduleDataLoad\(\)/);
+  assert.match(html, /window\.requestIdleCallback\(\(\) => loadData\(\), \{ timeout: 1200 \}\);/);
+  assert.match(html, /window\.setTimeout\(\(\) => loadData\(\), 160\);/);
+  assert.match(html, /window\.addEventListener\("load", runLoadData, \{ once: true \}\);/);
+  assert.doesNotMatch(html, /\n\s*loadData\(\);\s*\n\s*<\/script>/);
   assert.doesNotMatch(
     html,
     /font-size:\s*[^;]*(?:vw|vmin|vmax|clamp\()/,
     "font-size must not scale directly with viewport width"
   );
+});
+
+test("clip search data is minified to reduce network payload", () => {
+  const rawData = readText("clip-search-data.json");
+  const minifiedData = JSON.stringify(JSON.parse(rawData));
+
+  assert.equal(rawData.trim(), minifiedData);
 });
