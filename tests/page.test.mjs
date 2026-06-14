@@ -4,9 +4,10 @@ import path from "node:path";
 import test from "node:test";
 
 const repoDir = process.cwd();
-const siteName = "🖇るっかるんくりっぷ🖇";
+const displaySiteName = "🖇るっかるんくりっぷ🖇";
+const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://www.rukalun.mydns.jp/";
-const pageTitle = `${siteName} | Twitch Clip検索`;
+const pageTitle = `${displaySiteName} | Twitch Clip検索`;
 const faviconIcoUrl = `${pageUrl}assets/rukalun/clip-search-favicon.ico`;
 const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
 const appleTouchIconUrl = `${pageUrl}assets/rukalun/clip-search-apple-touch-icon.png`;
@@ -17,6 +18,28 @@ const googleVerificationFile = "googled9f512eea3a99dc1.html";
 
 function readText(relativePath) {
   return fs.readFileSync(path.join(repoDir, relativePath), "utf8");
+}
+
+function readPngSize(relativePath) {
+  const buffer = fs.readFileSync(path.join(repoDir, relativePath));
+  assert.equal(buffer.toString("ascii", 1, 4), "PNG", `${relativePath} should be a PNG`);
+  return {
+    width: buffer.readUInt32BE(16),
+    height: buffer.readUInt32BE(20),
+  };
+}
+
+function readIcoSizes(relativePath) {
+  const buffer = fs.readFileSync(path.join(repoDir, relativePath));
+  assert.equal(buffer.readUInt16LE(0), 0, `${relativePath} should have an ICO reserved field`);
+  assert.equal(buffer.readUInt16LE(2), 1, `${relativePath} should be an icon file`);
+  const count = buffer.readUInt16LE(4);
+  return Array.from({ length: count }, (_, index) => {
+    const offset = 6 + index * 16;
+    const width = buffer[offset] || 256;
+    const height = buffer[offset + 1] || 256;
+    return `${width}x${height}`;
+  }).sort((a, b) => Number.parseInt(a) - Number.parseInt(b));
 }
 
 function getCssVariable(html, name) {
@@ -94,6 +117,25 @@ test("required page assets and data are present", () => {
   );
 });
 
+test("favicon assets stay high resolution and search-result friendly", () => {
+  assert.deepEqual(readPngSize("assets/rukalun/clip-search-favicon.png"), {
+    width: 512,
+    height: 512,
+  });
+  assert.deepEqual(readPngSize("assets/rukalun/clip-search-apple-touch-icon.png"), {
+    width: 180,
+    height: 180,
+  });
+  assert.deepEqual(readIcoSizes("assets/rukalun/clip-search-favicon.ico"), [
+    "16x16",
+    "32x32",
+    "48x48",
+    "64x64",
+    "128x128",
+    "256x256",
+  ]);
+});
+
 test("clip-search.html keeps old new-repo paths working", () => {
   const html = readText("clip-search.html");
 
@@ -108,6 +150,7 @@ test("index.html exposes the modern search-first design surface", () => {
 
   assert.match(html, /data-design-version="2026-search-first"/);
   assert.ok(html.includes(`<title>${pageTitle}</title>`));
+  assert.ok(html.includes(`<meta property="og:site_name" content="${structuredSiteName}" />`));
   assert.ok(html.includes(`<meta property="og:title" content="${pageTitle}" />`));
   assert.ok(html.includes(`<link rel="icon" href="${faviconIcoUrl}" sizes="any" />`));
   assert.ok(html.includes(`<link rel="icon" href="${faviconPngUrl}" type="image/png" sizes="512x512" />`));
@@ -232,8 +275,8 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
 
   const graph = structuredData["@graph"];
   const website = getGraphNode(graph, "WebSite");
-  assert.equal(website.name, siteName);
-  assert.deepEqual(website.alternateName, ["るっかるんくりっぷ", "Rukalun Clip"]);
+  assert.equal(website.name, structuredSiteName);
+  assert.deepEqual(website.alternateName, ["Rukalun Clip", "るっかるん Clip検索", "www.rukalun.mydns.jp"]);
   assert.equal(website.url, pageUrl);
   assert.equal(website.potentialAction["@type"], "SearchAction");
   assert.equal(website.potentialAction.target, `${pageUrl}?q={search_term_string}`);
@@ -250,7 +293,7 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.equal(dataset.name, "るっかるん Twitch Clip公開データ");
   assert.equal(dataset.url, pageUrl);
   assert.match(dataset.description, /Twitch配信Clip/);
-  assert.equal(dataset.publisher.name, siteName);
+  assert.equal(dataset.publisher.name, structuredSiteName);
   assert.equal(dataset.distribution["@type"], "DataDownload");
   assert.equal(dataset.distribution.contentUrl, dataUrl);
   assert.equal(dataset.distribution.encodingFormat, "application/json");
