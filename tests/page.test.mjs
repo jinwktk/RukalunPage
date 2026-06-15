@@ -8,6 +8,8 @@ const displaySiteName = "🖇るっかるんくりっぷ🖇";
 const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://www.rukalun.mydns.jp/";
 const pageTitle = `${displaySiteName} | Twitch Clip検索`;
+const gaMeasurementId = "G-TTVJN1V2LJ";
+const gaScriptUrl = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
 const faviconIcoUrl = `${pageUrl}assets/rukalun/clip-search-favicon.ico`;
 const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
 const appleTouchIconUrl = `${pageUrl}assets/rukalun/clip-search-apple-touch-icon.png`;
@@ -302,6 +304,32 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.equal(dataset.variableMeasured, "title, creator, gameName, createdAt, views");
 });
 
+test("index.html installs the GA4 Google tag after critical hero discovery", () => {
+  const html = readText("index.html");
+  const gaScriptTag = `<script async src="${gaScriptUrl}"></script>`;
+  const gaScriptTags =
+    html.match(/<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+"><\/script>/g) ?? [];
+  const gaConfigCalls = html.match(/gtag\("config", "G-[A-Z0-9]+"\);/g) ?? [];
+  const heroPreload =
+    '<link rel="preload" as="image" href="./assets/rukalun/clip-search-hero.webp" type="image/webp" fetchpriority="high" />';
+  const jsonLdScript = '<script type="application/ld+json">';
+
+  assert.match(gaMeasurementId, /^G-[A-Z0-9]+$/);
+  assert.deepEqual(gaScriptTags, [gaScriptTag]);
+  assert.deepEqual(gaConfigCalls, [`gtag("config", "${gaMeasurementId}");`]);
+  assert.match(html, /window\.dataLayer = window\.dataLayer \|\| \[\];/);
+  assert.match(html, /function gtag\(\) \{\s*dataLayer\.push\(arguments\);\s*\}/);
+  assert.match(html, /gtag\("js", new Date\(\)\);/);
+  assert.ok(
+    html.indexOf(heroPreload) < html.indexOf(gaScriptTag),
+    "GA4 should not be inserted before the LCP hero preload"
+  );
+  assert.ok(
+    html.indexOf(gaScriptTag) < html.indexOf(jsonLdScript),
+    "GA4 should be declared before JSON-LD so head analytics stays grouped with metadata"
+  );
+});
+
 test("sitemap lists only the canonical public URL", () => {
   const sitemap = readText("sitemap.xml");
 
@@ -332,6 +360,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /www\.rukalun\.mydns\.jp/);
   assert.match(readme, /カスタムドメイン/);
   assert.match(readme, /robots\.txt/);
+  assert.match(readme, /Google Analytics 4/);
+  assert.match(readme, new RegExp(gaMeasurementId));
+  assert.match(readme, /カスタムイベントは未導入/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -340,6 +371,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /www\.rukalun\.mydns\.jp/);
   assert.match(agents, /カスタムドメイン/);
   assert.match(agents, /robots\.txt/);
+  assert.match(agents, /Google Analytics 4/);
+  assert.match(agents, new RegExp(gaMeasurementId));
+  assert.match(agents, /カスタムイベントは未導入/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
