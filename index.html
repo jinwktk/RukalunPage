@@ -998,7 +998,11 @@
         right: 18px !important;
         bottom: 18px !important;
         z-index: 30 !important;
+        width: 88px !important;
+        height: 56px !important;
         max-width: calc(100vw - 28px) !important;
+        border-radius: 999px;
+        overflow: hidden !important;
         font-family: var(--font-cute) !important;
         transform-origin: right bottom;
       }
@@ -2085,7 +2089,11 @@
           left: auto !important;
           right: 18px !important;
           bottom: 18px !important;
+          width: 88px !important;
+          height: 56px !important;
           max-width: calc(100vw - 28px) !important;
+          border-radius: 999px;
+          overflow: hidden !important;
           transform-origin: right bottom;
         }
 
@@ -2185,7 +2193,7 @@
         try {
           window.kofiWidgetOverlay?.draw?.("jinnymeia", {
             "type": "floating-chat",
-            "floating-chat.donateButton.text": "応援",
+            "floating-chat.donateButton.text": " ",
             "floating-chat.donateButton.background-color": "#ffe8f0",
             "floating-chat.donateButton.text-color": "#2c2633",
           });

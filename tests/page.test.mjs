@@ -334,6 +334,7 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
 
 test("index.html installs a small non-blocking Ko-fi support widget", () => {
   const html = readText("index.html");
+  const dynamicKofiCss = html.match(/const KOFI_WIDGET_POSITION_CSS = `([\s\S]*?)`;/)?.[1] ?? "";
   const kofiScriptTags =
     html.match(/<script[^>]+src="https:\/\/storage\.ko-fi\.com\/cdn\/scripts\/overlay-widget\.js"[^>]*><\/script>/g) ??
     [];
@@ -362,12 +363,16 @@ test("index.html installs a small non-blocking Ko-fi support widget", () => {
   assert.match(html, /window\.setTimeout\(installKofiWidgetStyles, 0\);/);
   assert.match(html, new RegExp(`window\\.kofiWidgetOverlay\\?\\.draw\\?\\.\\("${kofiUsername}", \\{`));
   assert.match(html, /"type": "floating-chat"/);
-  assert.match(html, /"floating-chat\.donateButton\.text": "応援"/);
+  assert.match(html, /"floating-chat\.donateButton\.text": " "/);
   assert.match(html, /"floating-chat\.donateButton\.background-color": "#ffe8f0"/);
   assert.match(html, /"floating-chat\.donateButton\.text-color": "#2c2633"/);
   assert.match(
     html,
-    /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*position: fixed !important;[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*z-index: 30 !important;/
+    /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*position: fixed !important;[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*z-index: 30 !important;[\s\S]*width: 88px !important;[\s\S]*height: 56px !important;[\s\S]*overflow: hidden !important;/
+  );
+  assert.match(
+    dynamicKofiCss,
+    /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*width: 88px !important;[\s\S]*height: 56px !important;[\s\S]*overflow: hidden !important;/
   );
   assert.match(
     html,
@@ -430,7 +435,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /カスタムイベントは未導入/);
   assert.match(readme, /Ko-fi/);
   assert.match(readme, new RegExp(kofiUsername));
-  assert.match(readme, /SPでは文字なし/);
+  assert.match(readme, /PC\/SPとも文字なし/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -444,7 +449,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /カスタムイベントは未導入/);
   assert.match(agents, /Ko-fi/);
   assert.match(agents, new RegExp(kofiUsername));
-  assert.match(agents, /SPでは文字なし/);
+  assert.match(agents, /PC\/SPとも文字なし/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
