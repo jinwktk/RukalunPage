@@ -362,9 +362,9 @@ test("index.html installs a small non-blocking Ko-fi support widget", () => {
   assert.match(html, /window\.setTimeout\(installKofiWidgetStyles, 0\);/);
   assert.match(html, new RegExp(`window\\.kofiWidgetOverlay\\?\\.draw\\?\\.\\("${kofiUsername}", \\{`));
   assert.match(html, /"type": "floating-chat"/);
-  assert.match(html, /"floating-chat\.donateButton\.text": ""/);
-  assert.match(html, /"floating-chat\.donateButton\.background-color": "#ffffff"/);
-  assert.match(html, /"floating-chat\.donateButton\.text-color": "#323842"/);
+  assert.match(html, /"floating-chat\.donateButton\.text": "応援"/);
+  assert.match(html, /"floating-chat\.donateButton\.background-color": "#ffe8f0"/);
+  assert.match(html, /"floating-chat\.donateButton\.text-color": "#2c2633"/);
   assert.match(
     html,
     /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*position: fixed !important;[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*z-index: 30 !important;/
@@ -376,6 +376,18 @@ test("index.html installs a small non-blocking Ko-fi support widget", () => {
   assert.match(
     html,
     /\.floatingchat-container-wrap-mobi\s*\{[\s\S]*left: auto !important;[\s\S]*right: 18px !important;[\s\S]*width: 88px !important;[\s\S]*overflow: hidden !important;/
+  );
+  assert.match(
+    html,
+    /\.floatingchat-container-wrap \[class\*="donateButton"\],[\s\S]*\.floatingchat-container \[class\*="donateButton"\],[\s\S]*\.floatingchat-container-wrap-mobi \[class\*="donateButton"\]\s*\{[\s\S]*border: 1px solid #f2b4ce !important;[\s\S]*border-radius: 8px !important;[\s\S]*background: linear-gradient\(135deg, #fff6fb 0%, var\(--pink-soft\) 52%, var\(--mint\) 100%\) !important;[\s\S]*color: var\(--ink\) !important;[\s\S]*box-shadow: var\(--shadow\) !important;/
+  );
+  assert.match(
+    html,
+    /\.floatingchat-container-wrap \[class\*="donateButton"\]:hover,[\s\S]*\.floatingchat-container \[class\*="donateButton"\]:hover,[\s\S]*\.floatingchat-container-wrap-mobi \[class\*="donateButton"\]:hover\s*\{[\s\S]*border-color: #e86f9f !important;[\s\S]*background: linear-gradient\(135deg, #fff 0%, #ffe7f0 48%, #d4f1ea 100%\) !important;/
+  );
+  assert.match(
+    html,
+    /\.floatingchat-container-wrap \[class\*="donateButton"\] img,[\s\S]*\.floatingchat-container \[class\*="donateButton"\] img,[\s\S]*\.floatingchat-container-wrap-mobi \[class\*="donateButton"\] img\s*\{[\s\S]*width: 22px !important;[\s\S]*height: 22px !important;[\s\S]*border-radius: 6px !important;/
   );
   assert.match(
     html,
@@ -516,6 +528,11 @@ test("random button remains usable across repeated clicks", () => {
   );
   assert.match(html, /lastRandomSearchValue = clip\.title;/);
   assert.match(html, /lastRandomClipId = clip\.id \?\? "";/);
+  assert.doesNotMatch(
+    pickRandomBlock,
+    /scrollIntoView/,
+    "random clicks must not move the viewport away from the random button"
+  );
   assert.doesNotMatch(pickRandomBlock, /elements\.creatorFilter\.value = "";/);
   assert.doesNotMatch(pickRandomBlock, /elements\.gameFilter\.value = "";/);
   assert.doesNotMatch(pickRandomBlock, /elements\.sortSelect\.value = [^;]+;/);

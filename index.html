@@ -1007,6 +1007,35 @@
         filter: drop-shadow(0 10px 20px rgba(62, 42, 67, 0.12));
       }
 
+      .floatingchat-container-wrap [class*="donateButton"],
+      .floatingchat-container [class*="donateButton"],
+      .floatingchat-container-wrap-mobi [class*="donateButton"] {
+        min-height: 44px !important;
+        border: 1px solid #f2b4ce !important;
+        border-radius: 8px !important;
+        background: linear-gradient(135deg, #fff6fb 0%, var(--pink-soft) 52%, var(--mint) 100%) !important;
+        color: var(--ink) !important;
+        box-shadow: var(--shadow) !important;
+        font-family: var(--font-cute) !important;
+        font-weight: 900 !important;
+        letter-spacing: 0 !important;
+      }
+
+      .floatingchat-container-wrap [class*="donateButton"]:hover,
+      .floatingchat-container [class*="donateButton"]:hover,
+      .floatingchat-container-wrap-mobi [class*="donateButton"]:hover {
+        border-color: #e86f9f !important;
+        background: linear-gradient(135deg, #fff 0%, #ffe7f0 48%, #d4f1ea 100%) !important;
+      }
+
+      .floatingchat-container-wrap [class*="donateButton"] img,
+      .floatingchat-container [class*="donateButton"] img,
+      .floatingchat-container-wrap-mobi [class*="donateButton"] img {
+        width: 22px !important;
+        height: 22px !important;
+        border-radius: 6px !important;
+      }
+
       .floatingchat-container-wrap-mobi {
         position: fixed !important;
         left: auto !important;
@@ -1169,7 +1198,9 @@
         .floatingchat-container-wrap .kofi-button-text,
         .floatingchat-container-wrap-mobi .kofi-button-text,
         .floatingchat-container .kofi-button-text,
-        .floatingchat-container-wrap [class*="donateButton"] span {
+        .floatingchat-container-wrap [class*="donateButton"] span,
+        .floatingchat-container-wrap-mobi [class*="donateButton"] span,
+        .floatingchat-container [class*="donateButton"] span {
           display: none !important;
         }
       }
@@ -1963,7 +1994,6 @@
         lastRandomClipId = clip.id ?? "";
         visibleLimit = INITIAL_LIMIT;
         render();
-        elements.results.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       async function loadData() {
@@ -2059,6 +2089,35 @@
           transform-origin: right bottom;
         }
 
+        .floatingchat-container-wrap [class*="donateButton"],
+        .floatingchat-container [class*="donateButton"],
+        .floatingchat-container-wrap-mobi [class*="donateButton"] {
+          min-height: 44px !important;
+          border: 1px solid #f2b4ce !important;
+          border-radius: 8px !important;
+          background: linear-gradient(135deg, #fff6fb 0%, var(--pink-soft) 52%, var(--mint) 100%) !important;
+          color: var(--ink) !important;
+          box-shadow: var(--shadow) !important;
+          font-family: var(--font-cute) !important;
+          font-weight: 900 !important;
+          letter-spacing: 0 !important;
+        }
+
+        .floatingchat-container-wrap [class*="donateButton"]:hover,
+        .floatingchat-container [class*="donateButton"]:hover,
+        .floatingchat-container-wrap-mobi [class*="donateButton"]:hover {
+          border-color: #e86f9f !important;
+          background: linear-gradient(135deg, #fff 0%, #ffe7f0 48%, #d4f1ea 100%) !important;
+        }
+
+        .floatingchat-container-wrap [class*="donateButton"] img,
+        .floatingchat-container [class*="donateButton"] img,
+        .floatingchat-container-wrap-mobi [class*="donateButton"] img {
+          width: 22px !important;
+          height: 22px !important;
+          border-radius: 6px !important;
+        }
+
         .floatingchat-container-wrap-mobi {
           left: auto !important;
           right: 18px !important;
@@ -2103,6 +2162,15 @@
             right: var(--kofi-mobile-right) !important;
             bottom: 74px !important;
           }
+
+          .floatingchat-container-wrap .kofi-button-text,
+          .floatingchat-container-wrap-mobi .kofi-button-text,
+          .floatingchat-container .kofi-button-text,
+          .floatingchat-container-wrap [class*="donateButton"] span,
+          .floatingchat-container-wrap-mobi [class*="donateButton"] span,
+          .floatingchat-container [class*="donateButton"] span {
+            display: none !important;
+          }
         }
       `;
 
@@ -2117,9 +2185,9 @@
         try {
           window.kofiWidgetOverlay?.draw?.("jinnymeia", {
             "type": "floating-chat",
-            "floating-chat.donateButton.text": "",
-            "floating-chat.donateButton.background-color": "#ffffff",
-            "floating-chat.donateButton.text-color": "#323842",
+            "floating-chat.donateButton.text": "応援",
+            "floating-chat.donateButton.background-color": "#ffe8f0",
+            "floating-chat.donateButton.text-color": "#2c2633",
           });
         } catch (error) {
           // Keep the support widget isolated from the clip search experience.
