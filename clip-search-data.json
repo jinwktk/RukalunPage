@@ -1,10 +1,40 @@
 {
-  "generatedAt": "2026-06-16T07:25:45.433Z",
-  "total": 2759,
+  "generatedAt": "2026-06-16T10:29:10.618Z",
+  "total": 2762,
   "clipSync": {
-    "recentSyncedAt": "2026-06-16T07:25:44.706Z"
+    "recentSyncedAt": "2026-06-16T10:29:09.760Z"
   },
   "clips": [
+    {
+      "id": "DiligentAbstruseWoodcockCmonBruh-qayUC6cEGBTGvEFv",
+      "url": "https://www.twitch.tv/rukalun/clip/DiligentAbstruseWoodcockCmonBruh-qayUC6cEGBTGvEFv",
+      "title": "それはどういう意味なんですか？",
+      "creator": "あまはねまな",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/51591ab1-3897-4550-ae44-9192a4392681/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-06-16T09:37:35.000Z",
+      "views": 5
+    },
+    {
+      "id": "SparklingVictoriousTardigradeTakeNRG-eavzxe_SP18fY7ca",
+      "url": "https://www.twitch.tv/rukalun/clip/SparklingVictoriousTardigradeTakeNRG-eavzxe_SP18fY7ca",
+      "title": "自認キルジョイ",
+      "creator": "にめいや",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/fdda7675-5677-4d5f-b116-8577b9d7c7ee/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-06-16T09:25:57.000Z",
+      "views": 1
+    },
+    {
+      "id": "LachrymoseNeighborlyPlumShadyLulu-kuBe34YfgENa2yzY",
+      "url": "https://www.twitch.tv/rukalun/clip/LachrymoseNeighborlyPlumShadyLulu-kuBe34YfgENa2yzY",
+      "title": "ないすおねえさん",
+      "creator": "もりとら",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/de1c031c-3f14-430e-b0e2-d801f437a643/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-06-16T07:23:23.000Z",
+      "views": 3
+    },
     {
       "id": "ObedientEphemeralWhaleBIRB-odDbEln2uao3t13J",
       "url": "https://www.twitch.tv/rukalun/clip/ObedientEphemeralWhaleBIRB-odDbEln2uao3t13J",
