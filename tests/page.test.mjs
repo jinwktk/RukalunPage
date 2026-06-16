@@ -10,6 +10,8 @@ const pageUrl = "https://www.rukalun.mydns.jp/";
 const pageTitle = `${displaySiteName} | Twitch Clip検索`;
 const gaMeasurementId = "G-TTVJN1V2LJ";
 const gaScriptUrl = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+const kofiUsername = "jinnymeia";
+const kofiWidgetScriptUrl = "https://storage.ko-fi.com/cdn/scripts/overlay-widget.js";
 const faviconIcoUrl = `${pageUrl}assets/rukalun/clip-search-favicon.ico`;
 const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
 const appleTouchIconUrl = `${pageUrl}assets/rukalun/clip-search-apple-touch-icon.png`;
@@ -330,6 +332,57 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   );
 });
 
+test("index.html installs a small non-blocking Ko-fi support widget", () => {
+  const html = readText("index.html");
+  const kofiScriptTags =
+    html.match(/<script[^>]+src="https:\/\/storage\.ko-fi\.com\/cdn\/scripts\/overlay-widget\.js"[^>]*><\/script>/g) ??
+    [];
+
+  assert.deepEqual(kofiScriptTags, [], "Ko-fi must not be a static third-party script that can delay window load");
+  assert.match(html, new RegExp(`const KOFI_WIDGET_SCRIPT_URL = "${kofiWidgetScriptUrl}";`));
+  assert.match(html, /function drawKofiWidget\(\)/);
+  assert.match(html, /function scheduleKofiWidget\(\)/);
+  assert.match(html, /function installKofiWidgetStyles\(\)/);
+  assert.match(html, /id = "kofi-widget-position-style"/);
+  assert.match(html, /const script = document\.createElement\("script"\);/);
+  assert.match(html, /script\.src = KOFI_WIDGET_SCRIPT_URL;/);
+  assert.match(html, /script\.async = true;/);
+  assert.match(html, /script\.addEventListener\("load", drawKofiWidget, \{ once: true \}\);/);
+  assert.match(html, /script\.addEventListener\("error", installKofiWidgetStyles, \{ once: true \}\);/);
+  assert.match(html, /document\.body\.append\(script\);/);
+  assert.match(
+    html,
+    /window\.requestIdleCallback\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, \{ timeout: 1200 \}\);/
+  );
+  assert.match(
+    html,
+    /window\.setTimeout\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, 160\);/
+  );
+  assert.match(html, /catch \(error\) \{[\s\S]*\} finally \{[\s\S]*window\.setTimeout\(installKofiWidgetStyles, 0\);/);
+  assert.match(html, /window\.setTimeout\(installKofiWidgetStyles, 0\);/);
+  assert.match(html, new RegExp(`window\\.kofiWidgetOverlay\\?\\.draw\\?\\.\\("${kofiUsername}", \\{`));
+  assert.match(html, /"type": "floating-chat"/);
+  assert.match(html, /"floating-chat\.donateButton\.text": ""/);
+  assert.match(html, /"floating-chat\.donateButton\.background-color": "#ffffff"/);
+  assert.match(html, /"floating-chat\.donateButton\.text-color": "#323842"/);
+  assert.match(
+    html,
+    /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*position: fixed !important;[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*z-index: 30 !important;/
+  );
+  assert.match(
+    html,
+    /\.floating-chat-kofi-popup-iframe,\s*\.floating-chat-kofi-popup-iframe-mobi,\s*\.floatingchat-container-wrap iframe\s*\{[\s\S]*max-width: calc\(100vw - 28px\) !important;/
+  );
+  assert.match(
+    html,
+    /\.floatingchat-container-wrap-mobi\s*\{[\s\S]*left: auto !important;[\s\S]*right: 18px !important;[\s\S]*width: 88px !important;[\s\S]*overflow: hidden !important;/
+  );
+  assert.match(
+    html,
+    /@media \(max-width: 620px\) \{[\s\S]*--kofi-mobile-right: max\(10px, calc\(100vw - 390px\)\);[\s\S]*\.floatingchat-container-wrap,\s*\.floatingchat-container,\s*\.floatingchat-container-wrap-mobi\s*\{[\s\S]*right: var\(--kofi-mobile-right\) !important;[\s\S]*bottom: 10px !important;[\s\S]*transform: scale\(0\.86\);[\s\S]*\.floatingchat-container-wrap \.kofi-button-text,[\s\S]*display: none !important;/
+  );
+});
+
 test("sitemap lists only the canonical public URL", () => {
   const sitemap = readText("sitemap.xml");
 
@@ -363,6 +416,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /Google Analytics 4/);
   assert.match(readme, new RegExp(gaMeasurementId));
   assert.match(readme, /カスタムイベントは未導入/);
+  assert.match(readme, /Ko-fi/);
+  assert.match(readme, new RegExp(kofiUsername));
+  assert.match(readme, /SPでは文字なし/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -374,6 +430,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /Google Analytics 4/);
   assert.match(agents, new RegExp(gaMeasurementId));
   assert.match(agents, /カスタムイベントは未導入/);
+  assert.match(agents, /Ko-fi/);
+  assert.match(agents, new RegExp(kofiUsername));
+  assert.match(agents, /SPでは文字なし/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -412,8 +471,14 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
   assert.match(html, /const INITIAL_LIMIT = 24;/);
   assert.match(html, /const MORE_STEP = 24;/);
   assert.match(html, /function scheduleDataLoad\(\)/);
-  assert.match(html, /window\.requestIdleCallback\(\(\) => loadData\(\), \{ timeout: 1200 \}\);/);
-  assert.match(html, /window\.setTimeout\(\(\) => loadData\(\), 160\);/);
+  assert.match(
+    html,
+    /window\.requestIdleCallback\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, \{ timeout: 1200 \}\);/
+  );
+  assert.match(
+    html,
+    /window\.setTimeout\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, 160\);/
+  );
   assert.match(html, /window\.addEventListener\("load", runLoadData, \{ once: true \}\);/);
   assert.doesNotMatch(html, /\n\s*loadData\(\);\s*\n\s*<\/script>/);
   assert.doesNotMatch(
@@ -421,6 +486,45 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
     /font-size:\s*[^;]*(?:vw|vmin|vmax|clamp\()/,
     "font-size must not scale directly with viewport width"
   );
+});
+
+test("random button remains usable across repeated clicks", () => {
+  const html = readText("index.html");
+  const pickRandomStart = html.indexOf("function pickRandomClip()");
+  const pickRandomEnd = html.indexOf("async function loadData()");
+  assert.notEqual(pickRandomStart, -1, "pickRandomClip should exist");
+  assert.ok(pickRandomEnd > pickRandomStart, "pickRandomClip should appear before loadData");
+  const pickRandomBlock = html.slice(pickRandomStart, pickRandomEnd);
+
+  assert.match(html, /let lastRandomSearchValue = "";/);
+  assert.match(html, /let lastRandomClipId = "";/);
+  assert.match(
+    html,
+    /function clearRandomSelectionState\(\) \{[\s\S]*lastRandomSearchValue = "";[\s\S]*lastRandomClipId = "";[\s\S]*\}/
+  );
+  assert.match(
+    html,
+    /const shouldClearPreviousRandomQuery = Boolean\([\s\S]*lastRandomSearchValue[\s\S]*elements\.searchInput\.value === lastRandomSearchValue[\s\S]*\);/
+  );
+  assert.match(
+    html,
+    /if \(shouldClearPreviousRandomQuery\) \{[\s\S]*elements\.searchInput\.value = "";[\s\S]*\}/
+  );
+  assert.match(
+    html,
+    /const randomPool =[\s\S]*filteredClips\.length > 1[\s\S]*filteredClips\.filter\(\(candidate\) => candidate\.id !== lastRandomClipId\)[\s\S]*: filteredClips;/
+  );
+  assert.match(html, /lastRandomSearchValue = clip\.title;/);
+  assert.match(html, /lastRandomClipId = clip\.id \?\? "";/);
+  assert.doesNotMatch(pickRandomBlock, /elements\.creatorFilter\.value = "";/);
+  assert.doesNotMatch(pickRandomBlock, /elements\.gameFilter\.value = "";/);
+  assert.doesNotMatch(pickRandomBlock, /elements\.sortSelect\.value = [^;]+;/);
+  assert.match(html, /function handleSearchInputChange\(\) \{[\s\S]*clearRandomSelectionState\(\);[\s\S]*resetVisibleAndRender\(\);[\s\S]*\}/);
+  assert.match(html, /elements\.searchInput\.addEventListener\("input", handleSearchInputChange\);/);
+  assert.match(html, /elements\.creatorFilter\.addEventListener\("change", resetVisibleAndRender\);/);
+  assert.match(html, /elements\.gameFilter\.addEventListener\("change", resetVisibleAndRender\);/);
+  assert.match(html, /elements\.sortSelect\.addEventListener\("change", resetVisibleAndRender\);/);
+  assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
 });
 
 test("clip search data is minified to reduce network payload", () => {

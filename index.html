@@ -61,7 +61,7 @@
             "url": "https://www.rukalun.mydns.jp/",
             "image": "https://www.rukalun.mydns.jp/assets/rukalun/clip-search-og.jpg",
             "inLanguage": "ja",
-            "dateModified": "2026-06-15",
+            "dateModified": "2026-06-16",
             "isPartOf": {
               "@id": "https://www.rukalun.mydns.jp/#website"
             },
@@ -991,6 +991,53 @@
         font-size: 0.92rem;
       }
 
+      .floatingchat-container-wrap,
+      .floatingchat-container {
+        position: fixed !important;
+        left: auto !important;
+        right: 18px !important;
+        bottom: 18px !important;
+        z-index: 30 !important;
+        max-width: calc(100vw - 28px) !important;
+        font-family: var(--font-cute) !important;
+        transform-origin: right bottom;
+      }
+
+      .floatingchat-container-wrap {
+        filter: drop-shadow(0 10px 20px rgba(62, 42, 67, 0.12));
+      }
+
+      .floatingchat-container-wrap-mobi {
+        position: fixed !important;
+        left: auto !important;
+        right: 18px !important;
+        bottom: 18px !important;
+        z-index: 30 !important;
+        width: 88px !important;
+        height: 56px !important;
+        border-radius: 999px;
+        overflow: hidden !important;
+        transform-origin: right bottom;
+      }
+
+      .floatingchat-container-mobi {
+        width: 88px !important;
+        height: 56px !important;
+      }
+
+      .floating-chat-kofi-popup-iframe,
+      .floating-chat-kofi-popup-iframe-mobi,
+      .floatingchat-container-wrap iframe {
+        max-width: calc(100vw - 28px) !important;
+      }
+
+      .floating-chat-kofi-popup-iframe,
+      .floating-chat-kofi-popup-iframe-mobi {
+        left: auto !important;
+        right: 18px !important;
+        bottom: 86px !important;
+      }
+
       @media (max-width: 900px) {
         .hero-content {
           grid-template-columns: 1fr;
@@ -1024,6 +1071,10 @@
       }
 
       @media (max-width: 620px) {
+        body {
+          --kofi-mobile-right: max(10px, calc(100vw - 390px));
+        }
+
         .topbar-inner {
           align-items: flex-start;
           grid-template-columns: 1fr;
@@ -1092,6 +1143,34 @@
 
         .hero-metrics {
           grid-template-columns: 1fr 1fr;
+        }
+
+        .floatingchat-container-wrap,
+        .floatingchat-container,
+        .floatingchat-container-wrap-mobi {
+          left: auto !important;
+          right: var(--kofi-mobile-right) !important;
+          bottom: 10px !important;
+          transform: scale(0.86);
+        }
+
+        .floatingchat-container-mobi {
+          width: 88px !important;
+          height: 56px !important;
+        }
+
+        .floating-chat-kofi-popup-iframe,
+        .floating-chat-kofi-popup-iframe-mobi {
+          left: auto !important;
+          right: var(--kofi-mobile-right) !important;
+          bottom: 74px !important;
+        }
+
+        .floatingchat-container-wrap .kofi-button-text,
+        .floatingchat-container-wrap-mobi .kofi-button-text,
+        .floatingchat-container .kofi-button-text,
+        .floatingchat-container-wrap [class*="donateButton"] span {
+          display: none !important;
         }
       }
 
@@ -1349,6 +1428,8 @@
       let visibleLimit = INITIAL_LIMIT;
       let favoriteClips = loadFavoriteClips();
       let dataLoadState = "loading";
+      let lastRandomSearchValue = "";
+      let lastRandomClipId = "";
 
       function normalizeText(value) {
         return String(value ?? "")
@@ -1847,16 +1928,39 @@
         render();
       }
 
+      function clearRandomSelectionState() {
+        lastRandomSearchValue = "";
+        lastRandomClipId = "";
+      }
+
+      function handleSearchInputChange() {
+        clearRandomSelectionState();
+        resetVisibleAndRender();
+      }
+
       function pickRandomClip() {
+        const shouldClearPreviousRandomQuery = Boolean(
+          lastRandomSearchValue && elements.searchInput.value === lastRandomSearchValue
+        );
+        if (shouldClearPreviousRandomQuery) {
+          elements.searchInput.value = "";
+        }
+
         filterClips();
         if (filteredClips.length === 0) {
+          clearRandomSelectionState();
           render();
           return;
         }
-        const clip = filteredClips[Math.floor(Math.random() * filteredClips.length)];
+        const randomPool =
+          filteredClips.length > 1 && lastRandomClipId
+            ? filteredClips.filter((candidate) => candidate.id !== lastRandomClipId)
+            : filteredClips;
+        const candidates = randomPool.length > 0 ? randomPool : filteredClips;
+        const clip = candidates[Math.floor(Math.random() * candidates.length)];
         elements.searchInput.value = clip.title;
-        elements.creatorFilter.value = "";
-        elements.gameFilter.value = "";
+        lastRandomSearchValue = clip.title;
+        lastRandomClipId = clip.id ?? "";
         visibleLimit = INITIAL_LIMIT;
         render();
         elements.results.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1898,10 +2002,16 @@
       function scheduleDataLoad() {
         const runLoadData = () => {
           if ("requestIdleCallback" in window) {
-            window.requestIdleCallback(() => loadData(), { timeout: 1200 });
+            window.requestIdleCallback(() => {
+              loadData();
+              scheduleKofiWidget();
+            }, { timeout: 1200 });
             return;
           }
-          window.setTimeout(() => loadData(), 160);
+          window.setTimeout(() => {
+            loadData();
+            scheduleKofiWidget();
+          }, 160);
         };
 
         if (document.readyState === "complete") {
@@ -1912,7 +2022,7 @@
         window.addEventListener("load", runLoadData, { once: true });
       }
 
-      elements.searchInput.addEventListener("input", resetVisibleAndRender);
+      elements.searchInput.addEventListener("input", handleSearchInputChange);
       elements.creatorFilter.addEventListener("change", resetVisibleAndRender);
       elements.gameFilter.addEventListener("change", resetVisibleAndRender);
       elements.sortSelect.addEventListener("change", resetVisibleAndRender);
@@ -1925,6 +2035,7 @@
         elements.creatorFilter.value = "";
         elements.gameFilter.value = "";
         elements.sortSelect.value = "newest";
+        clearRandomSelectionState();
         resetVisibleAndRender();
       });
       elements.randomButton.addEventListener("click", pickRandomClip);
@@ -1935,6 +2046,98 @@
       });
 
       scheduleDataLoad();
+    </script>
+    <script>
+      const KOFI_WIDGET_SCRIPT_URL = "https://storage.ko-fi.com/cdn/scripts/overlay-widget.js";
+      const KOFI_WIDGET_POSITION_CSS = `
+        .floatingchat-container-wrap,
+        .floatingchat-container {
+          left: auto !important;
+          right: 18px !important;
+          bottom: 18px !important;
+          max-width: calc(100vw - 28px) !important;
+          transform-origin: right bottom;
+        }
+
+        .floatingchat-container-wrap-mobi {
+          left: auto !important;
+          right: 18px !important;
+          bottom: 18px !important;
+          width: 88px !important;
+          height: 56px !important;
+          border-radius: 999px;
+          overflow: hidden !important;
+          transform-origin: right bottom;
+        }
+
+        .floatingchat-container-mobi {
+          width: 88px !important;
+          height: 56px !important;
+        }
+
+        .floating-chat-kofi-popup-iframe,
+        .floating-chat-kofi-popup-iframe-mobi {
+          left: auto !important;
+          right: 18px !important;
+          bottom: 86px !important;
+          max-width: calc(100vw - 28px) !important;
+        }
+
+        @media (max-width: 620px) {
+          body {
+            --kofi-mobile-right: max(10px, calc(100vw - 390px));
+          }
+
+          .floatingchat-container-wrap,
+          .floatingchat-container,
+          .floatingchat-container-wrap-mobi {
+            left: auto !important;
+            right: var(--kofi-mobile-right) !important;
+            bottom: 10px !important;
+            transform: scale(0.86);
+          }
+
+          .floating-chat-kofi-popup-iframe,
+          .floating-chat-kofi-popup-iframe-mobi {
+            left: auto !important;
+            right: var(--kofi-mobile-right) !important;
+            bottom: 74px !important;
+          }
+        }
+      `;
+
+      function installKofiWidgetStyles() {
+        const style = document.getElementById("kofi-widget-position-style") || document.createElement("style");
+        style.id = "kofi-widget-position-style";
+        style.textContent = KOFI_WIDGET_POSITION_CSS;
+        document.head.append(style);
+      }
+
+      function drawKofiWidget() {
+        try {
+          window.kofiWidgetOverlay?.draw?.("jinnymeia", {
+            "type": "floating-chat",
+            "floating-chat.donateButton.text": "",
+            "floating-chat.donateButton.background-color": "#ffffff",
+            "floating-chat.donateButton.text-color": "#323842",
+          });
+        } catch (error) {
+          // Keep the support widget isolated from the clip search experience.
+        } finally {
+          window.setTimeout(installKofiWidgetStyles, 0);
+        }
+      }
+
+      function scheduleKofiWidget() {
+        if (document.querySelector(`script[src="${KOFI_WIDGET_SCRIPT_URL}"]`)) return;
+        installKofiWidgetStyles();
+        const script = document.createElement("script");
+        script.src = KOFI_WIDGET_SCRIPT_URL;
+        script.async = true;
+        script.addEventListener("load", drawKofiWidget, { once: true });
+        script.addEventListener("error", installKofiWidgetStyles, { once: true });
+        document.body.append(script);
+      }
     </script>
   </body>
 </html>
