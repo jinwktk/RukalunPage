@@ -19,6 +19,7 @@ const seoDescription =
   "るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
+const pageUpdatedOn = "2026-06-17";
 
 function readText(relativePath) {
   return fs.readFileSync(path.join(repoDir, relativePath), "utf8");
@@ -229,8 +230,8 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.doesNotMatch(html, /\.clip-copy-button \.copy-icon\s*\{[\s\S]*?transform: scale/);
   assert.match(html, /\.clip-meta\s*\{[\s\S]*?display: grid;/);
   assert.match(html, /\.meta-chip-creator\s*\{[\s\S]*?grid-row: 2;/);
-  assert.match(html, /creator\.className = "meta-chip meta-chip-creator"/);
-  assert.match(html, /game\.className = "meta-chip meta-chip-game"/);
+  assert.match(html, /createMetaFilterButton\("creator", clip\.creator, `作成: \$\{clip\.creator\}`\)/);
+  assert.match(html, /createMetaFilterButton\("game", clip\.gameName, `ゲーム: \$\{clip\.gameName\}`\)/);
   assert.match(html, /gameFilter: requireElement\("#gameFilter"\)/);
   assert.match(html, /function buildGameOptions\(clips\)/);
   assert.match(html, /buildGameOptions\(allClips\)/);
@@ -291,6 +292,7 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.equal(page.url, pageUrl);
   assert.equal(page.mainEntity["@id"], `${pageUrl}#clipDataset`);
   assert.match(page.dateModified, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(page.dateModified, pageUpdatedOn);
 
   const dataset = getGraphNode(graph, "Dataset");
   assert.equal(dataset["@id"], `${pageUrl}#clipDataset`);
@@ -407,6 +409,7 @@ test("sitemap lists only the canonical public URL", () => {
   assert.match(sitemap, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
   assert.match(sitemap, new RegExp(`<loc>${pageUrl}</loc>`));
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+  assert.match(sitemap, new RegExp(`<lastmod>${pageUpdatedOn}</lastmod>`));
   assert.doesNotMatch(sitemap, /<changefreq>|<priority>/);
   assert.doesNotMatch(sitemap, /clip-search\.html/);
 });
@@ -436,6 +439,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /Ko-fi/);
   assert.match(readme, new RegExp(kofiUsername));
   assert.match(readme, /PC\/SPとも文字なし/);
+  assert.match(readme, /カード内のゲーム名や作成者名/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -450,6 +454,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /Ko-fi/);
   assert.match(agents, new RegExp(kofiUsername));
   assert.match(agents, /PC\/SPとも文字なし/);
+  assert.match(agents, /カード内のゲーム名や作成者名/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -547,6 +552,50 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.gameFilter\.addEventListener\("change", resetVisibleAndRender\);/);
   assert.match(html, /elements\.sortSelect\.addEventListener\("change", resetVisibleAndRender\);/);
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
+});
+
+test("clip card meta chips can apply creator and game filters", () => {
+  const html = readText("index.html");
+  const applyStart = html.indexOf("function applyMetaFilter(type, value)");
+  const applyEnd = html.indexOf("function renderCard(clip)");
+  assert.notEqual(applyStart, -1, "applyMetaFilter should exist");
+  assert.ok(applyEnd > applyStart, "applyMetaFilter should be defined before renderCard");
+  const applyBlock = html.slice(applyStart, applyEnd);
+  const metaChipStyle = html.match(/\.meta-chip\s*\{([\s\S]*?)\n      \}/)?.[1] ?? "";
+
+  assert.match(metaChipStyle, /appearance: none;/);
+  assert.match(metaChipStyle, /border: 1px solid var\(--line\);/);
+  assert.match(metaChipStyle, /text-align: left;/);
+  assert.match(metaChipStyle, /cursor: pointer;/);
+  assert.match(html, /\.meta-chip:not\(\.is-static\):hover/);
+  assert.match(html, /\.meta-chip:not\(\.is-static\):focus-visible/);
+  assert.match(html, /\.meta-chip\.is-static/);
+
+  assert.match(applyBlock, /const filter = type === "creator" \? elements\.creatorFilter : elements\.gameFilter;/);
+  assert.match(applyBlock, /filter\.value = value;/);
+  assert.match(applyBlock, /clearRandomSelectionState\(\);/);
+  assert.match(applyBlock, /setSearchPanelExpanded\(true\);/);
+  assert.match(applyBlock, /resetVisibleAndRender\(\);/);
+  assert.doesNotMatch(applyBlock, /elements\.searchInput\.value = "";/);
+  assert.doesNotMatch(applyBlock, /elements\.sortSelect\.value = [^;]+;/);
+
+  assert.match(html, /function createMetaFilterButton\(type, value, label\) \{/);
+  assert.match(html, /const button = document\.createElement\("button"\);/);
+  assert.match(html, /button\.className = `meta-chip meta-chip-\$\{type\}`;/);
+  assert.match(html, /button\.type = "button";/);
+  assert.match(html, /button\.textContent = label;/);
+  assert.match(html, /button\.setAttribute\("aria-label", `\$\{label\}で絞り込む`\);/);
+  assert.match(html, /button\.addEventListener\("click", \(\) => applyMetaFilter\(type, value\)\);/);
+  assert.match(html, /function createStaticMetaChip\(type, label\) \{/);
+  assert.match(html, /chip\.className = `meta-chip meta-chip-\$\{type\} is-static`;/);
+  assert.match(
+    html,
+    /const creator = clip\.creator\s*\? createMetaFilterButton\("creator", clip\.creator, `作成: \$\{clip\.creator\}`\)\s*: createStaticMetaChip\("creator", "作成者不明"\);/
+  );
+  assert.match(
+    html,
+    /const game = clip\.gameName\s*\? createMetaFilterButton\("game", clip\.gameName, `ゲーム: \$\{clip\.gameName\}`\)\s*: createStaticMetaChip\("game", "ゲーム不明"\);/
+  );
 });
 
 test("clip search data is minified to reduce network payload", () => {

@@ -61,7 +61,7 @@
             "url": "https://www.rukalun.mydns.jp/",
             "image": "https://www.rukalun.mydns.jp/assets/rukalun/clip-search-og.jpg",
             "inLanguage": "ja",
-            "dateModified": "2026-06-16",
+            "dateModified": "2026-06-17",
             "isPartOf": {
               "@id": "https://www.rukalun.mydns.jp/#website"
             },
@@ -757,15 +757,34 @@
       }
 
       .meta-chip {
+        appearance: none;
         max-width: 100%;
         border: 1px solid var(--line);
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.72);
         padding: 4px 8px;
         color: var(--muted);
+        cursor: pointer;
         font-size: 0.82rem;
         font-weight: 800;
+        font-family: inherit;
         overflow-wrap: anywhere;
+        text-align: left;
+      }
+
+      .meta-chip:not(.is-static):hover {
+        border-color: #f2b4ce;
+        background: #fff6fb;
+        color: #9f3364;
+      }
+
+      .meta-chip:not(.is-static):focus-visible {
+        outline: 2px solid #e86f9f;
+        outline-offset: 2px;
+      }
+
+      .meta-chip.is-static {
+        cursor: default;
       }
 
       .meta-chip-creator {
@@ -1818,6 +1837,33 @@
         elements.searchPanelToggleLabel.textContent = expanded ? "検索を閉じる" : "検索を開く";
       }
 
+      function applyMetaFilter(type, value) {
+        if (!value) return;
+        const filter = type === "creator" ? elements.creatorFilter : elements.gameFilter;
+        filter.value = value;
+        clearRandomSelectionState();
+        setSearchPanelExpanded(true);
+        resetVisibleAndRender();
+      }
+
+      function createMetaFilterButton(type, value, label) {
+        const button = document.createElement("button");
+        button.className = `meta-chip meta-chip-${type}`;
+        button.type = "button";
+        button.textContent = label;
+        button.setAttribute("aria-label", `${label}で絞り込む`);
+        button.title = `${label}で絞り込む`;
+        button.addEventListener("click", () => applyMetaFilter(type, value));
+        return button;
+      }
+
+      function createStaticMetaChip(type, label) {
+        const chip = document.createElement("span");
+        chip.className = `meta-chip meta-chip-${type} is-static`;
+        chip.textContent = label;
+        return chip;
+      }
+
       function renderCard(clip) {
         const card = document.createElement("article");
         card.className = "clip-card";
@@ -1884,12 +1930,12 @@
 
         const meta = document.createElement("div");
         meta.className = "clip-meta";
-        const creator = document.createElement("span");
-        creator.className = "meta-chip meta-chip-creator";
-        creator.textContent = clip.creator ? `作成: ${clip.creator}` : "作成者不明";
-        const game = document.createElement("span");
-        game.className = "meta-chip meta-chip-game";
-        game.textContent = clip.gameName ? `ゲーム: ${clip.gameName}` : "ゲーム不明";
+        const creator = clip.creator
+          ? createMetaFilterButton("creator", clip.creator, `作成: ${clip.creator}`)
+          : createStaticMetaChip("creator", "作成者不明");
+        const game = clip.gameName
+          ? createMetaFilterButton("game", clip.gameName, `ゲーム: ${clip.gameName}`)
+          : createStaticMetaChip("game", "ゲーム不明");
         meta.append(game, creator);
 
         const actions = document.createElement("div");
