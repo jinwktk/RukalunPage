@@ -7,7 +7,7 @@ const repoDir = process.cwd();
 const displaySiteName = "🖇るっかるんくりっぷ🖇";
 const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://www.rukalun.mydns.jp/";
-const pageTitle = `${displaySiteName} | Twitch Clip検索`;
+const pageTitle = `${displaySiteName} | Twitch Clip・配信切り抜き検索`;
 const gaMeasurementId = "G-TTVJN1V2LJ";
 const gaScriptUrl = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
 const kofiUsername = "jinnymeia";
@@ -16,13 +16,69 @@ const faviconIcoUrl = `${pageUrl}assets/rukalun/clip-search-favicon.ico`;
 const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
 const appleTouchIconUrl = `${pageUrl}assets/rukalun/clip-search-apple-touch-icon.png`;
 const seoDescription =
-  "るっかるんのTwitch配信Clipを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
+  "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-06-17";
+const pageUpdatedOn = "2026-06-21";
+const seoKeywordTerms = [
+  "るっかるん",
+  "Rukalun",
+  "Twitch",
+  "ツイッチ",
+  "Clip",
+  "クリップ",
+  "配信切り抜き",
+  "FF14",
+  "FFXIV",
+  "LoL",
+  "League of Legends",
+  "VALORANT",
+  "VALO",
+  "雑談",
+  "絶叫",
+  "言質",
+  "迷子",
+];
+const popularSearches = [
+  ["FF14", "FF14"],
+  ["FFXIV", "FINAL FANTASY XIV ONLINE"],
+  ["LoL", "LoL"],
+  ["League of Legends", "League of Legends"],
+  ["VALORANT", "VALORANT"],
+  ["VALO", "VALO"],
+  ["雑談", "雑談"],
+  ["絶叫", "絶叫"],
+  ["言質", "言質"],
+  ["迷子", "迷子"],
+];
 
 function readText(relativePath) {
   return fs.readFileSync(path.join(repoDir, relativePath), "utf8");
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function stripTags(htmlFragment) {
+  return htmlFragment.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function normalizeSearchText(value) {
+  return String(value ?? "")
+    .normalize("NFKC")
+    .toLocaleLowerCase("ja-JP")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function getClipSearchHitCount(query) {
+  const data = JSON.parse(readText("clip-search-data.json"));
+  const terms = normalizeSearchText(query).split(" ");
+  return data.clips.filter((clip) => {
+    const searchText = normalizeSearchText(`${clip.title} ${clip.creator} ${clip.gameName}`);
+    return terms.every((term) => searchText.includes(term));
+  }).length;
 }
 
 function readPngSize(relativePath) {
@@ -264,6 +320,9 @@ test("index.html exposes the modern search-first design surface", () => {
 
 test("index.html exposes search-oriented SEO metadata and structured data", () => {
   const html = readText("index.html");
+  const keywordGuide = html.match(/<section id="keywordGuide"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const keywordGuideText = stripTags(keywordGuide);
+  const keywordGuideStyle = html.match(/\.keyword-guide\s*\{([\s\S]*?)\n      \}/)?.[1] ?? "";
 
   assert.ok(html.includes(`<meta name="description" content="${seoDescription}" />`));
   assert.ok(html.includes(`<meta property="og:description" content="${seoDescription}" />`));
@@ -273,6 +332,24 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.match(html, /class="lead-line">FF14もLoLもVALOも、/);
   assert.match(html, /class="lead-line">タイトル・作成者・ゲームでそっと探して、/);
   assert.doesNotMatch(html, /id="clipSearchOverview"/);
+  assert.match(html, /id="keywordGuide"/);
+  assert.match(html, /id="keywordGuideTitle"/);
+  assert.match(html, /class="keyword-link-list"/);
+  assert.match(html, /\.keyword-guide\s*\{[\s\S]*?border-top: 1px solid var\(--line\);/);
+  assert.doesNotMatch(keywordGuideStyle, /display:\s*none/);
+
+  for (const term of seoKeywordTerms) {
+    assert.ok(keywordGuideText.includes(term), `${term} should be visible in the keyword guide`);
+  }
+
+  for (const [label, query] of popularSearches) {
+    const href = `./?q=${encodeURIComponent(query)}#searchPanel`;
+    assert.match(
+      keywordGuide,
+      new RegExp(`<a href="${escapeRegExp(href)}">${escapeRegExp(label)}</a>`)
+    );
+    assert.ok(getClipSearchHitCount(query) > 0, `${label} should search at least one current clip`);
+  }
 
   const structuredData = getStructuredData(html);
   assert.equal(structuredData["@context"], "https://schema.org");
@@ -281,7 +358,13 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   const graph = structuredData["@graph"];
   const website = getGraphNode(graph, "WebSite");
   assert.equal(website.name, structuredSiteName);
-  assert.deepEqual(website.alternateName, ["Rukalun Clip", "るっかるん Clip検索", "www.rukalun.mydns.jp"]);
+  assert.deepEqual(website.alternateName, [
+    "Rukalun Clip",
+    "るっかるん Clip検索",
+    "るっかるん Twitchクリップ",
+    "るっかるん 配信切り抜き",
+    "www.rukalun.mydns.jp",
+  ]);
   assert.equal(website.url, pageUrl);
   assert.equal(website.potentialAction["@type"], "SearchAction");
   assert.equal(website.potentialAction.target, `${pageUrl}?q={search_term_string}`);
@@ -293,12 +376,20 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.equal(page.mainEntity["@id"], `${pageUrl}#clipDataset`);
   assert.match(page.dateModified, /^\d{4}-\d{2}-\d{2}$/);
   assert.equal(page.dateModified, pageUpdatedOn);
+  assert.deepEqual(page.keywords, seoKeywordTerms);
+  assert.deepEqual(
+    page.about.map((item) => item.name),
+    ["Twitch Clip検索", "配信切り抜き", "ゲーム配信", "FF14", "LoL", "VALORANT"]
+  );
+  for (const keyword of page.keywords) {
+    assert.ok(keywordGuideText.includes(keyword), `${keyword} should be visible if used in CollectionPage keywords`);
+  }
 
   const dataset = getGraphNode(graph, "Dataset");
   assert.equal(dataset["@id"], `${pageUrl}#clipDataset`);
   assert.equal(dataset.name, "るっかるん Twitch Clip公開データ");
   assert.equal(dataset.url, pageUrl);
-  assert.match(dataset.description, /Twitch配信Clip/);
+  assert.match(dataset.description, /Twitch（ツイッチ）配信Clip/);
   assert.equal(dataset.publisher.name, structuredSiteName);
   assert.equal(dataset.distribution["@type"], "DataDownload");
   assert.equal(dataset.distribution.contentUrl, dataUrl);
@@ -306,6 +397,7 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.equal(dataset.dateModified, undefined);
   assert.equal(dataset.measurementTechnique, "twitchRaid clip export");
   assert.equal(dataset.variableMeasured, "title, creator, gameName, createdAt, views");
+  assert.deepEqual(dataset.keywords, seoKeywordTerms);
 });
 
 test("index.html installs the GA4 Google tag after critical hero discovery", () => {
@@ -440,6 +532,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, new RegExp(kofiUsername));
   assert.match(readme, /PC\/SPとも文字なし/);
   assert.match(readme, /カード内のゲーム名や作成者名/);
+  assert.match(readme, /SEOキーワード拡張/);
+  assert.match(readme, /人気検索リンク/);
+  assert.match(readme, /配信切り抜き/);
+  assert.match(readme, /\?q= URL/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -455,6 +551,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, new RegExp(kofiUsername));
   assert.match(agents, /PC\/SPとも文字なし/);
   assert.match(agents, /カード内のゲーム名や作成者名/);
+  assert.match(agents, /SEOキーワード拡張/);
+  assert.match(agents, /人気検索リンク/);
+  assert.match(agents, /配信切り抜き/);
+  assert.match(agents, /\?q= URL/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
