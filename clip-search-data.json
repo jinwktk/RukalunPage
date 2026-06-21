@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-06-21T06:56:16.585Z",
-  "total": 2767,
+  "generatedAt": "2026-06-21T15:39:44.739Z",
+  "total": 2768,
   "clipSync": {
-    "recentSyncedAt": "2026-06-21T06:56:15.494Z"
+    "recentSyncedAt": "2026-06-21T15:39:43.713Z"
   },
   "clips": [
+    {
+      "id": "IcyFunnyDonutMcaT-t2jlBRe9asgbq5nA",
+      "url": "https://www.twitch.tv/rukalun/clip/IcyFunnyDonutMcaT-t2jlBRe9asgbq5nA",
+      "title": "うわでっか///　でかいよこれ///♡",
+      "creator": "かのんのん",
+      "gameName": "FINAL FANTASY XIV ONLINE",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/4c0ac25b-cdb6-4102-b3fd-8fc20722f0ac/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-06-21T06:53:13.000Z",
+      "views": 3
+    },
     {
       "id": "LongBreakableTomatoGivePLZ-9FJYq2oi50YZrXSg",
       "url": "https://www.twitch.tv/rukalun/clip/LongBreakableTomatoGivePLZ-9FJYq2oi50YZrXSg",
@@ -33,7 +43,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e2d34a3a-c74d-45cd-a704-c7e5da81cf3e/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-20T06:33:58.000Z",
-      "views": 7
+      "views": 10
     },
     {
       "id": "RichDoubtfulWheelBCouch-J_UZn20aOxcb6GOI",
@@ -53,7 +63,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ce48cc26-e5c2-4f95-8c49-f393ffb0213f/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-16T10:33:16.000Z",
-      "views": 8
+      "views": 9
     },
     {
       "id": "DiligentAbstruseWoodcockCmonBruh-qayUC6cEGBTGvEFv",
@@ -73,7 +83,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/fdda7675-5677-4d5f-b116-8577b9d7c7ee/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-16T09:25:57.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "LachrymoseNeighborlyPlumShadyLulu-kuBe34YfgENa2yzY",
@@ -173,7 +183,7 @@
       "gameName": "Overwatch",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/2c8c4099-35e1-46c4-af2f-faf4e6352eff/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-13T15:26:04.000Z",
-      "views": 9
+      "views": 10
     },
     {
       "id": "CoweringRoundAardvarkDatSheffy-1OvdKEOpucvUtyI5",
@@ -873,7 +883,7 @@
       "gameName": "Overwatch",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/73142b12-36bb-4ea7-8730-357916c2e51f/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-04-09T04:33:00.000Z",
-      "views": 48
+      "views": 49
     },
     {
       "id": "BlindingAnimatedDragonfruitGOWSkull-dUcJMpQ_dbyEovC9",
@@ -1003,7 +1013,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/75fba07f-5ec7-4d8c-b295-e7b8a2c49c3c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-03-29T06:18:27.000Z",
-      "views": 20
+      "views": 21
     },
     {
       "id": "PlainBusyJaguarGOWSkull-0oWn_WvHu-nLNIgk",
@@ -1153,7 +1163,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7f1b2650-151b-4f76-8dba-03bbf5f039fd/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-03-19T17:46:22.000Z",
-      "views": 10
+      "views": 11
     },
     {
       "id": "IncredulousTangibleJellyfishCorgiDerp-p8ODdAv_yKniHk89",
@@ -10223,7 +10233,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f7073d01-0f9f-47ad-9022-e96e77ebe131/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2024-01-15T05:20:23.000Z",
-      "views": 3547
+      "views": 3548
     },
     {
       "id": "SwissVibrantWeaselLitFam-B1noz-sH2c4vpSl8",
@@ -19793,7 +19803,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/bdd7ac95-d2ed-4938-b964-8148a14973ad/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2020-08-15T18:55:40.000Z",
-      "views": 25
+      "views": 27
     },
     {
       "id": "CrypticCautiousGrouseEleGiggle",
@@ -26833,7 +26843,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/bd563b32-b2f4-4cf6-9a7e-9641be96cb9c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2017-12-13T11:59:55.000Z",
-      "views": 2352
+      "views": 2354
     },
     {
       "id": "HotApatheticNightingaleFeelsBadMan",
