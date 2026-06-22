@@ -67,7 +67,7 @@
             "url": "https://www.rukalun.mydns.jp/",
             "image": "https://www.rukalun.mydns.jp/assets/rukalun/clip-search-og.jpg",
             "inLanguage": "ja",
-            "dateModified": "2026-06-21",
+            "dateModified": "2026-06-23",
             "keywords": [
               "るっかるん",
               "Rukalun",
@@ -210,6 +210,10 @@
         font-family: var(--font-cute);
         letter-spacing: 0;
         line-height: 1.65;
+      }
+
+      body.has-clip-modal-open {
+        overflow: hidden;
       }
 
       a {
@@ -1071,6 +1075,86 @@
         box-shadow: 0 14px 30px rgba(232, 111, 159, 0.14);
       }
 
+      .clip-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: none;
+        place-items: center;
+        background: rgba(44, 38, 51, 0.62);
+        padding: 22px;
+      }
+
+      .clip-modal.is-open {
+        display: grid;
+      }
+
+      .clip-modal-dialog {
+        width: min(980px, calc(100vw - 44px));
+        max-height: calc(100vh - 44px);
+        border: 1px solid #f2b4ce;
+        border-radius: 8px;
+        background: #fffefe;
+        box-shadow: 0 22px 70px rgba(31, 22, 36, 0.28);
+        overflow: hidden;
+      }
+
+      .clip-modal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(135deg, #fff6fb 0%, #f7fbff 100%);
+        padding: 12px 14px;
+      }
+
+      .clip-modal-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1rem;
+        font-weight: 900;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+      }
+
+      .clip-modal-close {
+        display: inline-grid;
+        flex: 0 0 auto;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid #f2b4ce;
+        border-radius: 8px;
+        background: #fff;
+        color: #9f3364;
+        font-size: 1.35rem;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .clip-modal-close:hover {
+        background: #ffe8f0;
+      }
+
+      .clip-modal-close:focus-visible {
+        outline: 2px solid #e86f9f;
+        outline-offset: 2px;
+      }
+
+      .clip-modal-frame-wrap {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        background: #1f1724;
+      }
+
+      .clip-modal-frame {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
       .empty {
         display: none;
         border: 1px dashed #ddb8ce;
@@ -1559,6 +1643,25 @@
 
     </main>
 
+    <div
+      id="clipModal"
+      class="clip-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="clipModalTitle"
+      aria-hidden="true"
+    >
+      <div class="clip-modal-dialog" role="document">
+        <div class="clip-modal-head">
+          <h2 id="clipModalTitle" class="clip-modal-title">Twitch Clip</h2>
+          <button id="clipModalClose" class="clip-modal-close" type="button" aria-label="Clipモーダルを閉じる">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div id="clipModalFrameWrap" class="clip-modal-frame-wrap"></div>
+      </div>
+    </div>
+
     <script>
       const DATA_URL = "clip-search-data.json";
       const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
@@ -1566,6 +1669,8 @@
       const MORE_STEP = 24;
       const NEW_CLIP_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
       const SVG_NS = "http://www.w3.org/2000/svg";
+      const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "(max-width: 620px)";
+      const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -1594,6 +1699,10 @@
         heroVisibleCount: requireElement("#heroVisibleCount"),
         heroClipSyncedAt: requireElement("#heroClipSyncedAt"),
         notice: requireElement("#notice"),
+        clipModal: requireElement("#clipModal"),
+        clipModalTitle: requireElement("#clipModalTitle"),
+        clipModalFrameWrap: requireElement("#clipModalFrameWrap"),
+        clipModalClose: requireElement("#clipModalClose"),
       };
 
       const initialQuery = new URLSearchParams(window.location.search).get("q");
@@ -1608,6 +1717,7 @@
       let dataLoadState = "loading";
       let lastRandomSearchValue = "";
       let lastRandomClipId = "";
+      let lastClipModalTrigger = null;
 
       function normalizeText(value) {
         return String(value ?? "")
@@ -1714,6 +1824,118 @@
 
       function getSafeClipUrl(clip) {
         return isSafeTwitchClipUrl(clip?.url) ? clip.url : "https://www.twitch.tv/rukalun";
+      }
+
+      function isSmallViewport() {
+        return window.matchMedia(CLIP_MODAL_SMALL_VIEWPORT_QUERY).matches;
+      }
+
+      function getTwitchEmbedParents() {
+        const parents = new Set([TWITCH_EMBED_PARENT_HOST]);
+        if (window.location.hostname) {
+          parents.add(window.location.hostname);
+        }
+        return Array.from(parents);
+      }
+
+      function getTwitchClipSlug(url) {
+        try {
+          const parsed = new URL(url);
+          if (parsed.protocol !== "https:") return "";
+          const pathParts = parsed.pathname.split("/").filter(Boolean);
+          if (parsed.hostname === "clips.twitch.tv") {
+            return pathParts[0] ?? "";
+          }
+          if (parsed.hostname === "www.twitch.tv") {
+            const clipIndex = pathParts.indexOf("clip");
+            return clipIndex > 0 ? pathParts[clipIndex + 1] ?? "" : "";
+          }
+          return "";
+        } catch {
+          return "";
+        }
+      }
+
+      function toTwitchEmbedUrl(clip) {
+        const slug = getTwitchClipSlug(clip?.url);
+        if (!slug) return null;
+        const embedUrl = new URL("https://clips.twitch.tv/embed");
+        embedUrl.searchParams.set("clip", slug);
+        getTwitchEmbedParents().forEach((parent) => {
+          embedUrl.searchParams.append("parent", parent);
+        });
+        return embedUrl.toString();
+      }
+
+      function shouldUseNativeClipLink(event) {
+        return isSmallViewport() || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
+      }
+
+      function openClipModal(clip, embedUrl, trigger) {
+        lastClipModalTrigger =
+          trigger instanceof HTMLElement
+            ? trigger
+            : document.activeElement instanceof HTMLElement
+              ? document.activeElement
+              : null;
+        elements.clipModalTitle.textContent = clip.title || "Twitch Clip";
+        const iframe = document.createElement("iframe");
+        iframe.className = "clip-modal-frame";
+        iframe.title = clip.title ? `${clip.title}をTwitch埋め込みで見る` : "Twitch Clip埋め込み";
+        iframe.loading = "lazy";
+        iframe.allow = "autoplay; fullscreen; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.src = embedUrl;
+        elements.clipModalFrameWrap.replaceChildren(iframe);
+        elements.clipModal.classList.add("is-open");
+        elements.clipModal.removeAttribute("aria-hidden");
+        document.body.classList.add("has-clip-modal-open");
+        elements.clipModalClose.focus({ preventScroll: true });
+      }
+
+      function getClipModalFocusableElements() {
+        return Array.from(
+          elements.clipModal.querySelectorAll("a[href], button, iframe, input, select, textarea, [tabindex]:not([tabindex='-1'])")
+        ).filter((element) => !element.hasAttribute("disabled") && element.getAttribute("aria-hidden") !== "true");
+      }
+
+      function trapClipModalFocus(event) {
+        if (event.key !== "Tab" || !elements.clipModal.classList.contains("is-open")) return;
+        const focusableElements = getClipModalFocusableElements();
+        if (focusableElements.length === 0) {
+          event.preventDefault();
+          elements.clipModalClose.focus({ preventScroll: true });
+          return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus({ preventScroll: true });
+          return;
+        }
+        if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus({ preventScroll: true });
+        }
+      }
+
+      function closeClipModal() {
+        elements.clipModal.classList.remove("is-open");
+        elements.clipModal.setAttribute("aria-hidden", "true");
+        elements.clipModalFrameWrap.replaceChildren();
+        elements.clipModalTitle.textContent = "Twitch Clip";
+        document.body.classList.remove("has-clip-modal-open");
+        lastClipModalTrigger?.focus({ preventScroll: true });
+        lastClipModalTrigger = null;
+      }
+
+      function handleClipOpen(event, clip) {
+        const embedUrl = toTwitchEmbedUrl(clip);
+        if (!embedUrl || shouldUseNativeClipLink(event)) return;
+        event.preventDefault();
+        openClipModal(clip, embedUrl, event.currentTarget);
       }
 
       async function copyTextToClipboard(text) {
@@ -2078,11 +2300,12 @@
         const link = document.createElement("a");
         link.className = "clip-link";
         link.target = "_blank";
-        link.rel = "noreferrer";
+        link.rel = "noopener noreferrer";
         link.href = getSafeClipUrl(clip);
         link.title = "Twitchで見る";
         link.setAttribute("aria-label", "Twitchで見る");
         link.append(createVideoIcon());
+        link.addEventListener("click", (event) => handleClipOpen(event, clip));
 
         const copyButton = document.createElement("button");
         copyButton.className = "clip-copy-button";
@@ -2247,6 +2470,16 @@
       elements.loadMoreButton.addEventListener("click", () => {
         visibleLimit += MORE_STEP;
         render();
+      });
+      elements.clipModalClose.addEventListener("click", closeClipModal);
+      elements.clipModal.addEventListener("click", (event) => {
+        if (event.target === elements.clipModal) closeClipModal();
+      });
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && elements.clipModal.classList.contains("is-open")) {
+          closeClipModal();
+        }
+        trapClipModalFocus(event);
       });
 
       scheduleDataLoad();

@@ -19,7 +19,7 @@ const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-06-21";
+const pageUpdatedOn = "2026-06-23";
 const seoKeywordTerms = [
   "るっかるん",
   "Rukalun",
@@ -259,6 +259,9 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /function showCopyFeedback/);
   assert.match(html, /function createFavoriteIcon/);
   assert.match(html, /function createVideoIcon/);
+  assert.match(html, /function handleClipOpen\(event, clip\)/);
+  assert.match(html, /function isSmallViewport\(\)/);
+  assert.match(html, /function toTwitchEmbedUrl\(clip\)/);
   assert.match(html, /className = "clip-action-link-group"/);
   assert.match(html, /linkGroup\.append\(link, copyButton\)/);
   assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
@@ -278,7 +281,13 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /link\.append\(createVideoIcon\(\)\)/);
   assert.match(html, /\.button-svg-icon/);
   assert.match(html, /\.clip-favorite-button\[aria-pressed="true"\] \.favorite-heart/);
+  assert.match(html, /const link = document\.createElement\("a"\);/);
+  assert.match(html, /link\.target = "_blank";/);
+  assert.match(html, /link\.rel = "noopener noreferrer";/);
+  assert.match(html, /link\.href = getSafeClipUrl\(clip\);/);
   assert.match(html, /link\.setAttribute\("aria-label", "Twitchで見る"\)/);
+  assert.match(html, /link\.addEventListener\("click", \(event\) => handleClipOpen\(event, clip\)\);/);
+  assert.doesNotMatch(html, /const link = document\.createElement\("button"\);/);
   assert.match(html, /className = "clip-copy-button"/);
   assert.match(html, /className = "copy-icon"/);
   assert.match(html, /\.copy-icon::before,\s*\.copy-icon::after/);
@@ -536,6 +545,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /人気検索リンク/);
   assert.match(readme, /配信切り抜き/);
   assert.match(readme, /\?q= URL/);
+  assert.match(readme, /PC版ではClipカードからモーダル/);
+  assert.match(readme, /SP版ではTwitchリンク/);
+  assert.match(readme, /iframeはクリック時にだけ生成/);
+  assert.match(readme, /閉じるとiframeを破棄/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -555,6 +568,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /人気検索リンク/);
   assert.match(agents, /配信切り抜き/);
   assert.match(agents, /\?q= URL/);
+  assert.match(agents, /PC版ではClipカードからモーダル/);
+  assert.match(agents, /SP版ではTwitchリンク/);
+  assert.match(agents, /iframeはクリック時にだけ生成/);
+  assert.match(agents, /閉じるとiframeを破棄/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -652,6 +669,81 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.gameFilter\.addEventListener\("change", resetVisibleAndRender\);/);
   assert.match(html, /elements\.sortSelect\.addEventListener\("change", resetVisibleAndRender\);/);
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
+});
+
+test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
+  const html = readText("index.html");
+
+  assert.match(html, /id="clipModal"/);
+  assert.match(html, /class="clip-modal"/);
+  assert.match(html, /role="dialog"/);
+  assert.match(html, /aria-modal="true"/);
+  assert.match(html, /aria-labelledby="clipModalTitle"/);
+  assert.match(html, /id="clipModalFrameWrap"/);
+  assert.match(html, /id="clipModalClose"/);
+  assert.match(html, /\.clip-modal\s*\{[\s\S]*display: none;/);
+  assert.match(html, /\.clip-modal\.is-open\s*\{[\s\S]*display: grid;/);
+  assert.match(html, /body\.has-clip-modal-open/);
+  assert.doesNotMatch(html, /<iframe[^>]+clips\.twitch\.tv/i);
+
+  assert.match(html, /clipModal: requireElement\("#clipModal"\)/);
+  assert.match(html, /clipModalTitle: requireElement\("#clipModalTitle"\)/);
+  assert.match(html, /clipModalFrameWrap: requireElement\("#clipModalFrameWrap"\)/);
+  assert.match(html, /clipModalClose: requireElement\("#clipModalClose"\)/);
+  assert.match(html, /const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "\(max-width: 620px\)";/);
+  assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
+  assert.match(html, /function isSmallViewport\(\) \{[\s\S]*window\.matchMedia\(CLIP_MODAL_SMALL_VIEWPORT_QUERY\)\.matches/);
+  assert.match(html, /function getTwitchEmbedParents\(\) \{/);
+  assert.match(html, /new Set\(\[TWITCH_EMBED_PARENT_HOST\]\)/);
+  assert.match(html, /parents\.add\(window\.location\.hostname\);/);
+  assert.match(html, /function getTwitchClipSlug\(url\) \{/);
+  assert.match(html, /parsed\.hostname === "clips\.twitch\.tv"/);
+  assert.match(html, /parsed\.hostname === "www\.twitch\.tv"/);
+  assert.match(html, /parsed\.pathname\.split\("\/"\)\.filter\(Boolean\)/);
+  assert.match(html, /const clipIndex = pathParts\.indexOf\("clip"\);/);
+  assert.match(html, /return clipIndex > 0 \? pathParts\[clipIndex \+ 1\] \?\? "" : "";/);
+  assert.match(html, /function toTwitchEmbedUrl\(clip\) \{/);
+  assert.match(html, /const slug = getTwitchClipSlug\(clip\?\.url\);/);
+  assert.match(html, /if \(!slug\) return null;/);
+  assert.match(html, /new URL\("https:\/\/clips\.twitch\.tv\/embed"\)/);
+  assert.match(html, /embedUrl\.searchParams\.set\("clip", slug\);/);
+  assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
+  assert.match(html, /function shouldUseNativeClipLink\(event\) \{/);
+  assert.match(
+    html,
+    /return isSmallViewport\(\) \|\| event\.metaKey \|\| event\.ctrlKey \|\| event\.shiftKey \|\| event\.altKey \|\| event\.button !== 0;/
+  );
+  assert.doesNotMatch(html, /function openSafeClipLink\(clip\) \{/);
+  assert.doesNotMatch(html, /window\.open\(getSafeClipUrl\(clip\), "_blank", "noopener,noreferrer"\);/);
+  assert.match(html, /function openClipModal\(clip, embedUrl, trigger\) \{/);
+  assert.match(html, /const iframe = document\.createElement\("iframe"\);/);
+  assert.match(html, /iframe\.loading = "lazy";/);
+  assert.match(html, /iframe\.allowFullscreen = true;/);
+  assert.match(html, /iframe\.src = embedUrl;/);
+  assert.match(html, /elements\.clipModalFrameWrap\.replaceChildren\(iframe\);/);
+  assert.match(html, /elements\.clipModal\.classList\.add\("is-open"\);/);
+  assert.match(html, /document\.body\.classList\.add\("has-clip-modal-open"\);/);
+  assert.match(
+    html,
+    /lastClipModalTrigger =[\s\S]*trigger instanceof HTMLElement[\s\S]*\? trigger[\s\S]*: document\.activeElement instanceof HTMLElement[\s\S]*\? document\.activeElement[\s\S]*: null;/
+  );
+  assert.match(html, /function closeClipModal\(\) \{/);
+  assert.match(html, /elements\.clipModalFrameWrap\.replaceChildren\(\);/);
+  assert.match(html, /document\.body\.classList\.remove\("has-clip-modal-open"\);/);
+  assert.match(html, /lastClipModalTrigger\?\.focus\(\{ preventScroll: true \}\);/);
+  assert.match(html, /function getClipModalFocusableElements\(\) \{/);
+  assert.match(html, /elements\.clipModal\.querySelectorAll\("a\[href\], button, iframe, input, select, textarea, \[tabindex\]:not\(\[tabindex='-1'\]\)"\)/);
+  assert.match(html, /function trapClipModalFocus\(event\) \{/);
+  assert.match(html, /if \(event\.key !== "Tab" \|\| !elements\.clipModal\.classList\.contains\("is-open"\)\) return;/);
+  assert.match(html, /const focusableElements = getClipModalFocusableElements\(\);/);
+  assert.match(html, /event\.preventDefault\(\);/);
+  assert.match(html, /lastElement\.focus\(\{ preventScroll: true \}\);/);
+  assert.match(html, /firstElement\.focus\(\{ preventScroll: true \}\);/);
+  assert.match(html, /function handleClipOpen\(event, clip\) \{[\s\S]*const embedUrl = toTwitchEmbedUrl\(clip\);[\s\S]*if \(!embedUrl \|\| shouldUseNativeClipLink\(event\)\) return;[\s\S]*event\.preventDefault\(\);[\s\S]*openClipModal\(clip, embedUrl, event\.currentTarget\);[\s\S]*\}/);
+  assert.match(html, /elements\.clipModalClose\.addEventListener\("click", closeClipModal\);/);
+  assert.match(html, /elements\.clipModal\.addEventListener\("click", \(event\) => \{[\s\S]*if \(event\.target === elements\.clipModal\) closeClipModal\(\);[\s\S]*\}\);/);
+  assert.match(html, /window\.addEventListener\("keydown", \(event\) => \{[\s\S]*event\.key === "Escape"[\s\S]*closeClipModal\(\);[\s\S]*\}\);/);
+  assert.match(html, /trapClipModalFocus\(event\);/);
 });
 
 test("clip card meta chips can apply creator and game filters", () => {
