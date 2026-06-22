@@ -548,6 +548,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /PC版ではClipカードからモーダル/);
   assert.match(readme, /SP版ではTwitchリンク/);
   assert.match(readme, /iframeはクリック時にだけ生成/);
+  assert.match(readme, /autoplay=true/);
+  assert.match(readme, /タイトルバーを持たず/);
+  assert.match(readme, /右上に大きな閉じるボタン/);
   assert.match(readme, /閉じるとiframeを破棄/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
@@ -571,6 +574,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /PC版ではClipカードからモーダル/);
   assert.match(agents, /SP版ではTwitchリンク/);
   assert.match(agents, /iframeはクリック時にだけ生成/);
+  assert.match(agents, /autoplay=true/);
+  assert.match(agents, /タイトルバーを持たず/);
+  assert.match(agents, /右上に大きな閉じるボタン/);
   assert.match(agents, /閉じるとiframeを破棄/);
 });
 
@@ -678,16 +684,24 @@ test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
   assert.match(html, /class="clip-modal"/);
   assert.match(html, /role="dialog"/);
   assert.match(html, /aria-modal="true"/);
-  assert.match(html, /aria-labelledby="clipModalTitle"/);
+  assert.match(html, /aria-label="Twitch Clip"/);
   assert.match(html, /id="clipModalFrameWrap"/);
   assert.match(html, /id="clipModalClose"/);
+  assert.doesNotMatch(html, /class="clip-modal-head"/);
+  assert.doesNotMatch(html, /id="clipModalTitle"/);
+  assert.doesNotMatch(html, /\.clip-modal-head\s*\{/);
+  assert.doesNotMatch(html, /\.clip-modal-title\s*\{/);
+  assert.match(
+    html,
+    /\.clip-modal-close\s*\{[\s\S]*position: fixed;[\s\S]*top: max\(16px, env\(safe-area-inset-top\)\);[\s\S]*right: max\(16px, env\(safe-area-inset-right\)\);[\s\S]*width: 64px;[\s\S]*height: 64px;[\s\S]*font-size: 2\.3rem;/
+  );
   assert.match(html, /\.clip-modal\s*\{[\s\S]*display: none;/);
   assert.match(html, /\.clip-modal\.is-open\s*\{[\s\S]*display: grid;/);
   assert.match(html, /body\.has-clip-modal-open/);
   assert.doesNotMatch(html, /<iframe[^>]+clips\.twitch\.tv/i);
 
   assert.match(html, /clipModal: requireElement\("#clipModal"\)/);
-  assert.match(html, /clipModalTitle: requireElement\("#clipModalTitle"\)/);
+  assert.doesNotMatch(html, /clipModalTitle: requireElement\("#clipModalTitle"\)/);
   assert.match(html, /clipModalFrameWrap: requireElement\("#clipModalFrameWrap"\)/);
   assert.match(html, /clipModalClose: requireElement\("#clipModalClose"\)/);
   assert.match(html, /const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "\(max-width: 620px\)";/);
@@ -707,6 +721,7 @@ test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
   assert.match(html, /if \(!slug\) return null;/);
   assert.match(html, /new URL\("https:\/\/clips\.twitch\.tv\/embed"\)/);
   assert.match(html, /embedUrl\.searchParams\.set\("clip", slug\);/);
+  assert.match(html, /embedUrl\.searchParams\.set\("autoplay", "true"\);/);
   assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
   assert.match(html, /function shouldUseNativeClipLink\(event\) \{/);
   assert.match(
@@ -729,6 +744,7 @@ test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
   );
   assert.match(html, /function closeClipModal\(\) \{/);
   assert.match(html, /elements\.clipModalFrameWrap\.replaceChildren\(\);/);
+  assert.doesNotMatch(html, /elements\.clipModalTitle/);
   assert.match(html, /document\.body\.classList\.remove\("has-clip-modal-open"\);/);
   assert.match(html, /lastClipModalTrigger\?\.focus\(\{ preventScroll: true \}\);/);
   assert.match(html, /function getClipModalFocusableElements\(\) \{/);
