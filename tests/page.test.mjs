@@ -258,9 +258,9 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /function toTwitchEmbedUrl\(clip\)/);
   assert.match(html, /className = "clip-action-link-group"/);
   assert.match(html, /linkGroup\.append\(link, copyButton\)/);
-  assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
-  assert.match(html, /grid-template-columns: minmax\(0, 20fr\) minmax\(0, 80fr\);/);
-  assert.match(html, /grid-template-columns: minmax\(0, 60fr\) minmax\(0, 20fr\);/);
+  assert.match(html, /actions\.append\(favoriteButton, shortsButton, linkGroup\)/);
+  assert.match(html, /grid-template-columns: minmax\(0, 18fr\) minmax\(0, 18fr\) minmax\(0, 64fr\);/);
+  assert.match(html, /grid-template-columns: minmax\(0, 44fr\) minmax\(0, 20fr\);/);
   assert.match(html, /\.clip-actions\s*\{[\s\S]*?gap: 0;/);
   assert.match(html, /\.clip-actions\s*\{[\s\S]*?align-items: stretch;/);
   assert.match(html, /\.clip-actions\s*\{[\s\S]*?border: 1px solid #ead6e1;/);
@@ -269,6 +269,7 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /\.clip-action-link-group \.clip-link\s*\{[\s\S]*?border-left: 1px solid #ead6e1;/);
   assert.match(html, /\.clip-action-link-group \.clip-copy-button\s*\{[\s\S]*?border-left: 1px solid #ead6e1;/);
   assert.match(html, /\.clip-favorite-button\s*\{[\s\S]*?background: #fff6d9;/);
+  assert.match(html, /\.clip-shorts-button\s*\{[\s\S]*?background: #e8f5ff;/);
   assert.match(html, /\.clip-action-link-group \.clip-link\s*\{[\s\S]*?background: #f4efff;/);
   assert.match(html, /\.clip-action-link-group \.clip-copy-button\s*\{[\s\S]*?background: #e8f8f4;/);
   assert.match(html, /favoriteButton\.append\(createFavoriteIcon\(\)\)/);
@@ -577,6 +578,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /タイトルバーを持たず/);
   assert.match(readme, /右上に大きな閉じるボタン/);
   assert.match(readme, /閉じるとiframeを破棄/);
+  assert.match(readme, /ランダムClip視聴/);
+  assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
+  assert.match(readme, /検索ヒット集合/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -606,6 +610,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /タイトルバーを持たず/);
   assert.match(agents, /右上に大きな閉じるボタン/);
   assert.match(agents, /閉じるとiframeを破棄/);
+  assert.match(agents, /ランダムClip視聴/);
+  assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
+  assert.match(agents, /検索ヒット集合/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -703,6 +710,70 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.gameFilter\.addEventListener\("change", resetVisibleAndRender\);/);
   assert.match(html, /elements\.sortSelect\.addEventListener\("change", resetVisibleAndRender\);/);
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
+});
+
+test("random clip shorts view can open from top, search hits, and clip cards", () => {
+  const html = readText("index.html");
+
+  assert.match(html, /id="heroShortsLink" class="button primary shorts-entry-button" href="#clipShorts"/);
+  assert.match(html, /id="openShortsButton" class="button shorts-entry-button" type="button"/);
+  assert.match(html, /id="clipShorts"/);
+  assert.match(html, /class="clip-shorts"/);
+  assert.match(html, /aria-labelledby="clipShortsTitle"/);
+  assert.match(html, /id="clipShortsFrameWrap"/);
+  assert.match(html, /id="clipShortsPlaceholder"/);
+  assert.match(html, /id="clipShortsFallbackLink"/);
+  assert.match(html, /id="clipShortsPrev"/);
+  assert.match(html, /id="clipShortsShuffle"/);
+  assert.match(html, /id="clipShortsNext"/);
+  assert.match(html, /id="clipShortsClose"/);
+  assert.doesNotMatch(html, /<iframe[^>]+clip-shorts-frame/i);
+
+  assert.match(html, /\.clip-shorts\s*\{[\s\S]*scroll-margin-top: 90px;/);
+  assert.match(html, /\.clip-shorts-layout\s*\{[\s\S]*grid-template-columns: minmax\(280px, 390px\) minmax\(0, 1fr\);/);
+  assert.match(html, /\.clip-shorts-phone\s*\{[\s\S]*aspect-ratio: 9 \/ 16;/);
+  assert.match(html, /\.clip-shorts-frame-wrap\s*\{[\s\S]*aspect-ratio: 9 \/ 16;/);
+  assert.match(html, /\.clip-shorts-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
+  assert.match(html, /\.clip-shorts\.is-playing\s*\{[\s\S]*border-color: #f2b4ce;/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.clip-shorts-layout\s*\{[\s\S]*grid-template-columns: 1fr;/);
+
+  assert.match(html, /clipShorts: requireElement\("#clipShorts"\)/);
+  assert.match(html, /clipShortsFrameWrap: requireElement\("#clipShortsFrameWrap"\)/);
+  assert.match(html, /clipShortsFallbackLink: requireElement\("#clipShortsFallbackLink"\)/);
+  assert.match(html, /heroShortsLink: requireElement\("#heroShortsLink"\)/);
+  assert.match(html, /openShortsButton: requireElement\("#openShortsButton"\)/);
+  assert.match(html, /let shortsClipPool = \[\];/);
+  assert.match(html, /let currentShortsClipIndex = -1;/);
+  assert.match(html, /function getShortsClipPool\(\) \{/);
+  assert.match(html, /return hasActiveSearchCondition\(\) \? filteredClips : allClips;/);
+  assert.match(html, /function openRandomShortFromCurrentResults\(trigger\) \{/);
+  assert.match(html, /filterClips\(\);[\s\S]*const pool = getShortsClipPool\(\);/);
+  assert.match(html, /function openClipShorts\(clip, pool = getShortsClipPool\(\), trigger = null\) \{/);
+  assert.match(html, /shortsClipPool = normalizeShortsPool\(pool, clip\);/);
+  assert.match(html, /currentShortsClipIndex = Math\.max\(0, shortsClipPool\.findIndex\(\(candidate\) => candidate\.id === clip\.id\)\);/);
+  assert.match(html, /function renderShortsClip\(\) \{/);
+  assert.match(html, /const embedUrl = toTwitchEmbedUrl\(clip\);/);
+  assert.match(html, /elements\.clipShortsFrameWrap\.replaceChildren\(iframe\);/);
+  assert.match(html, /iframe\.className = "clip-shorts-frame";/);
+  assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
+  assert.match(html, /function moveShortsClip\(offset\) \{/);
+  assert.match(html, /currentShortsClipIndex = \(currentShortsClipIndex \+ offset \+ shortsClipPool\.length\) % shortsClipPool\.length;/);
+  assert.match(html, /function shuffleShortsClip\(\) \{/);
+  assert.match(html, /function closeClipShorts\(\) \{/);
+  assert.match(html, /elements\.clipShortsFrameWrap\.replaceChildren\(\);/);
+  assert.match(html, /lastShortsTrigger\?\.focus\(\{ preventScroll: true \}\);/);
+
+  assert.match(html, /const shortsButton = document\.createElement\("button"\);/);
+  assert.match(html, /shortsButton\.className = "clip-shorts-button";/);
+  assert.match(html, /shortsButton\.setAttribute\("aria-label", "このClipをランダム視聴で開く"\);/);
+  assert.match(html, /shortsButton\.addEventListener\("click", \(\) => openClipShorts\(clip, getShortsClipPool\(\), shortsButton\)\);/);
+  assert.match(html, /actions\.append\(favoriteButton, shortsButton, linkGroup\)/);
+  assert.match(html, /elements\.heroShortsLink\.addEventListener\("click", \(event\) => \{[\s\S]*openRandomShortFromCurrentResults\(elements\.heroShortsLink\);[\s\S]*\}\);/);
+  assert.match(html, /elements\.openShortsButton\.addEventListener\("click", \(\) => openRandomShortFromCurrentResults\(elements\.openShortsButton\)\);/);
+  assert.match(html, /elements\.clipShortsPrev\.addEventListener\("click", \(\) => moveShortsClip\(-1\)\);/);
+  assert.match(html, /elements\.clipShortsNext\.addEventListener\("click", \(\) => moveShortsClip\(1\)\);/);
+  assert.match(html, /elements\.clipShortsShuffle\.addEventListener\("click", shuffleShortsClip\);/);
+  assert.match(html, /elements\.clipShortsClose\.addEventListener\("click", closeClipShorts\);/);
 });
 
 test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
