@@ -646,9 +646,12 @@
         place-items: center;
         border: 1px solid #f2b4ce;
         border-radius: 8px;
-        background: var(--pink-soft);
+        background:
+          radial-gradient(circle, transparent 0 4px, #a43c70 4.5px 6px, transparent 6.5px) 5px 5px / 13px 13px no-repeat,
+          linear-gradient(45deg, transparent 0 42%, #a43c70 42% 58%, transparent 58%) 14px 14px / 7px 7px no-repeat,
+          var(--pink-soft);
         color: #a43c70;
-        content: "#";
+        content: "";
         font-size: 0.92rem;
         line-height: 1;
       }

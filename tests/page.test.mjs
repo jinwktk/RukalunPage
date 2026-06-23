@@ -346,7 +346,10 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.match(html, /\.keyword-guide\s*\{[\s\S]*?margin: 0 0 14px;/);
   assert.match(html, /\.keyword-guide\s*\{[\s\S]*?padding-top: 14px;/);
   assert.match(html, /\.keyword-guide h2\s*\{[\s\S]*?display: inline-flex;/);
-  assert.match(html, /\.keyword-guide h2::before\s*\{[\s\S]*?content: "#";/);
+  assert.match(html, /\.keyword-guide h2::before\s*\{[\s\S]*?content: "";/);
+  assert.match(html, /\.keyword-guide h2::before\s*\{[\s\S]*?radial-gradient/);
+  assert.match(html, /\.keyword-guide h2::before\s*\{[\s\S]*?linear-gradient\(45deg/);
+  assert.doesNotMatch(html, /content: "#";/);
   assert.match(html, /\.keyword-link-list\s*\{[\s\S]*?grid-column: 2;/);
   assert.match(html, /\.keyword-link-list a\s*\{[\s\S]*?display: inline-flex;/);
   assert.match(html, /\.keyword-link-list a\s*\{[\s\S]*?min-height: 32px;/);
