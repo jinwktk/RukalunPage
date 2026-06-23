@@ -66,8 +66,26 @@
         background: #000;
       }
 
+      .shorts-item::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        inset-inline: 0;
+        bottom: 0;
+        height: min(132px, 24svh);
+        pointer-events: none;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.58));
+        opacity: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .shorts-item.is-active::after {
+        opacity: 1;
+      }
+
       .shorts-video-shell {
         position: relative;
+        z-index: 0;
         width: 100vw;
         height: 100svh;
         overflow: hidden;
@@ -80,6 +98,69 @@
         height: 100%;
         border: 0;
         background: #000;
+      }
+
+      .shorts-next-cue {
+        position: absolute;
+        z-index: 2;
+        left: 50%;
+        pointer-events: none;
+        bottom: max(18px, env(safe-area-inset-bottom));
+        display: grid;
+        width: 44px;
+        height: 52px;
+        place-items: center;
+        opacity: 0;
+        transform: translateX(-50%);
+        transition: opacity 180ms ease;
+      }
+
+      .shorts-item.is-active .shorts-next-cue {
+        opacity: 0.92;
+      }
+
+      .shorts-next-cue::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.34);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+      }
+
+      .shorts-next-cue-mark {
+        position: relative;
+        width: 17px;
+        height: 17px;
+        border-right: 3px solid rgba(255, 255, 255, 0.92);
+        border-bottom: 3px solid rgba(255, 255, 255, 0.92);
+        transform: rotate(45deg);
+        animation: shortsNextCue 1450ms ease-in-out infinite;
+      }
+
+      .shorts-next-cue-mark + .shorts-next-cue-mark {
+        margin-top: -18px;
+        animation-delay: 160ms;
+      }
+
+      @keyframes shortsNextCue {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: translateY(-5px) rotate(45deg);
+        }
+
+        45% {
+          opacity: 1;
+          transform: translateY(4px) rotate(45deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .shorts-next-cue-mark {
+          animation: none;
+        }
       }
 
       .shorts-placeholder,
@@ -160,6 +241,13 @@
       const AUTO_ADVANCE_FALLBACK_MS = 30000;
       const AUTO_ADVANCE_BUFFER_MS = 800;
       const SWIPE_THRESHOLD = 48;
+      const TRUSTED_TWITCH_MESSAGE_ORIGINS = new Set([
+        "https://clips.twitch.tv",
+        "https://player.twitch.tv",
+        "https://www.twitch.tv",
+        "https://m.twitch.tv",
+        "https://embed.twitch.tv",
+      ]);
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -249,6 +337,18 @@
         return fallback;
       }
 
+      function createNextCue() {
+        const cue = document.createElement("div");
+        cue.className = "shorts-next-cue";
+        cue.setAttribute("aria-hidden", "true");
+        for (let index = 0; index < 2; index += 1) {
+          const mark = document.createElement("span");
+          mark.className = "shorts-next-cue-mark";
+          cue.append(mark);
+        }
+        return cue;
+      }
+
       function createShortsItem(clip, index) {
         const item = document.createElement("article");
         item.className = "shorts-item";
@@ -258,7 +358,7 @@
         shell.className = "shorts-video-shell";
         shell.replaceChildren(createPlaceholder(clip));
 
-        item.append(shell);
+        item.append(shell, createNextCue());
         observer.observe(item);
         return item;
       }
@@ -379,10 +479,59 @@
         }, 520);
       }
 
+      function isTrustedTwitchMessageOrigin(origin) {
+        return TRUSTED_TWITCH_MESSAGE_ORIGINS.has(origin);
+      }
+
+      function getEmbedMessageText(data) {
+        if (typeof data === "string") return data;
+        try {
+          return JSON.stringify(data ?? {});
+        } catch {
+          return String(data ?? "");
+        }
+      }
+
+      function normalizePayloadKey(key) {
+        return String(key).toLowerCase().replace(/[^a-z0-9]/g, "");
+      }
+
+      function getNumericPayloadValue(data, names) {
+        const wantedNames = new Set(names);
+        const seen = new Set();
+        const readValue = (value) => {
+          if (!value || typeof value !== "object" || seen.has(value)) return null;
+          seen.add(value);
+          for (const [key, childValue] of Object.entries(value)) {
+            const normalizedKey = normalizePayloadKey(key);
+            if (wantedNames.has(normalizedKey)) {
+              const numberValue = Number(childValue);
+              if (Number.isFinite(numberValue)) return numberValue;
+            }
+            const nestedValue = readValue(childValue);
+            if (nestedValue !== null) return nestedValue;
+          }
+          return null;
+        };
+        return readValue(data);
+      }
+
+      function isNearPlaybackEndMessage(data) {
+        const currentTime = getNumericPayloadValue(data, ["currenttime", "current", "position", "time"]);
+        const duration = getNumericPayloadValue(data, ["duration", "length", "totalduration"]);
+        if (currentTime === null || duration === null) return false;
+        return duration > 0 && currentTime >= Math.max(0, duration - 0.9);
+      }
+
+      function isTerminalEmbedMessage(data) {
+        const payload = getEmbedMessageText(data).toLowerCase();
+        if (/(^|[^a-z])(ended|complete|completed|finish|finished)([^a-z]|$)/.test(payload)) return true;
+        return isNearPlaybackEndMessage(data);
+      }
+
       function handleEmbedMessage(event) {
-        if (event.origin !== "https://clips.twitch.tv" && event.origin !== "https://player.twitch.tv") return;
-        const payload = typeof event.data === "string" ? event.data : JSON.stringify(event.data ?? {});
-        if (!payload.toLowerCase().includes("ended")) return;
+        if (!isTrustedTwitchMessageOrigin(event.origin)) return;
+        if (!isTerminalEmbedMessage(event.data)) return;
         scrollToClip(activeIndex + 1);
       }
 

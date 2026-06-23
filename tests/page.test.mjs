@@ -590,7 +590,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(readme, /導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
+  assert.match(readme, /下向きキュー/);
   assert.match(readme, /muted=false/);
+  assert.match(readme, /currentTime/);
+  assert.match(readme, /duration/);
   assert.match(readme, /30秒/);
   assert.match(readme, /noindex,follow/);
   assert.match(readme, /PC\/SPとも画面いっぱい/);
@@ -629,7 +632,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(agents, /導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
+  assert.match(agents, /下向きキュー/);
   assert.match(agents, /muted=false/);
+  assert.match(agents, /currentTime/);
+  assert.match(agents, /duration/);
   assert.match(agents, /30秒/);
   assert.match(agents, /noindex,follow/);
   assert.match(agents, /PC\/SPとも画面いっぱい/);
@@ -774,8 +780,17 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
 
   assert.match(html, /\.shorts-feed\s*\{[\s\S]*height: 100svh;[\s\S]*overflow-y: auto;[\s\S]*scroll-snap-type: y mandatory;[\s\S]*touch-action: pan-y;/);
   assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;[\s\S]*padding: 0;/);
+  assert.match(html, /\.shorts-item::after\s*\{[\s\S]*pointer-events: none;[\s\S]*linear-gradient\(180deg, transparent, rgba\(0, 0, 0, 0\.58\)\);/);
   assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: 100vw;[\s\S]*height: 100svh;/);
   assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
+  assert.match(html, /\.shorts-next-cue\s*\{[\s\S]*position: absolute;[\s\S]*pointer-events: none;[\s\S]*bottom: max\(18px, env\(safe-area-inset-bottom\)\);/);
+  assert.match(html, /\.shorts-next-cue-mark\s*\{[\s\S]*border-right: 3px solid rgba\(255, 255, 255, 0\.92\);[\s\S]*border-bottom: 3px solid rgba\(255, 255, 255, 0\.92\);/);
+  assert.match(html, /@keyframes shortsNextCue/);
+  assert.match(html, /function createNextCue\(\) \{/);
+  assert.match(html, /cue\.className = "shorts-next-cue";/);
+  assert.match(html, /cue\.setAttribute\("aria-hidden", "true"\);/);
+  assert.match(html, /mark\.className = "shorts-next-cue-mark";/);
+  assert.match(html, /item\.append\(shell, createNextCue\(\)\);/);
 
   assert.match(html, /const DATA_PATH = "\.\/clip-search-data\.json";/);
   assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
@@ -806,8 +821,19 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
   assert.match(html, /function scheduleAutoAdvance\(clip\) \{/);
   assert.match(html, /autoAdvanceTimerId = window\.setTimeout\(\(\) => scrollToClip\(activeIndex \+ 1\), getClipAutoAdvanceMs\(clip\)\);/);
+  assert.match(html, /const TRUSTED_TWITCH_MESSAGE_ORIGINS = new Set\(/);
+  assert.match(html, /"https:\/\/www\.twitch\.tv"/);
+  assert.match(html, /"https:\/\/embed\.twitch\.tv"/);
+  assert.match(html, /function isTrustedTwitchMessageOrigin\(origin\) \{/);
+  assert.match(html, /function getEmbedMessageText\(data\) \{/);
+  assert.match(html, /function isTerminalEmbedMessage\(data\) \{/);
+  assert.match(html, /function isNearPlaybackEndMessage\(data\) \{/);
+  assert.match(html, /const currentTime = getNumericPayloadValue\(data, \["currenttime", "current", "position", "time"\]\);/);
+  assert.match(html, /const duration = getNumericPayloadValue\(data, \["duration", "length", "totalduration"\]\);/);
+  assert.match(html, /return duration > 0 && currentTime >= Math\.max\(0, duration - 0\.9\);/);
   assert.match(html, /function handleEmbedMessage\(event\) \{/);
-  assert.match(html, /if \(!payload\.toLowerCase\(\)\.includes\("ended"\)\) return;/);
+  assert.match(html, /if \(!isTrustedTwitchMessageOrigin\(event\.origin\)\) return;/);
+  assert.match(html, /if \(!isTerminalEmbedMessage\(event\.data\)\) return;/);
   assert.match(html, /window\.addEventListener\("message", handleEmbedMessage\);/);
   assert.doesNotMatch(html, /thumbnailUrl[\s\S]*--shorts-thumb/);
   assert.match(html, /function activateShortsItem\(index\) \{/);
