@@ -85,7 +85,9 @@
               "雑談",
               "絶叫",
               "言質",
-              "迷子"
+              "迷子",
+              "とぅいっち",
+              "顔アイコン"
             ],
             "about": [
               {
@@ -146,7 +148,9 @@
               "雑談",
               "絶叫",
               "言質",
-              "迷子"
+              "迷子",
+              "とぅいっち",
+              "顔アイコン"
             ],
             "publisher": {
               "@type": "Organization",
@@ -631,7 +635,7 @@
       }
 
       .keyword-guide {
-        margin-top: 28px;
+        margin: 0 0 24px;
         border-top: 1px solid var(--line);
         padding-top: 20px;
         color: var(--muted);
@@ -648,6 +652,10 @@
         margin-top: 6px;
         font-size: 0.94rem;
         overflow-wrap: anywhere;
+      }
+
+      .keyword-guide-line {
+        display: block;
       }
 
       .keyword-link-list {
@@ -1318,6 +1326,16 @@
           grid-template-columns: 1fr;
         }
 
+        .keyword-link-list {
+          box-sizing: border-box;
+          gap: 6px 10px;
+          padding-right: 96px;
+        }
+
+        .keyword-link-list a {
+          font-size: 0.88rem;
+        }
+
         .filter-chip {
           display: none;
         }
@@ -1551,6 +1569,29 @@
 
     <main class="wrap">
       <div id="notice" class="notice" hidden></div>
+      <section id="keywordGuide" class="keyword-guide" aria-labelledby="keywordGuideTitle">
+        <h2 id="keywordGuideTitle">探せるキーワード</h2>
+        <p>
+          <span class="keyword-guide-line">るっかるん / Rukalun の Twitch / ツイッチ / とぅいっち Clip・クリップを探せます。</span>
+          <span class="keyword-guide-line">配信切り抜きも軽く回収できます。</span>
+          <span class="keyword-guide-line">FF14・FFXIV、LoL、VALORANT・VALO。</span>
+          <span class="keyword-guide-line">雑談、絶叫、言質、迷子も探せます。</span>
+          <span class="keyword-guide-line">顔アイコンやキャラクター画像を手がかりに来た人も、名場面をすぐ回収できます。</span>
+        </p>
+        <div class="keyword-link-list" aria-label="人気検索リンク">
+          <a href="./?q=FF14#searchPanel">FF14</a>
+          <a href="./?q=FINAL%20FANTASY%20XIV%20ONLINE#searchPanel">FFXIV</a>
+          <a href="./?q=LoL#searchPanel">LoL</a>
+          <a href="./?q=League%20of%20Legends#searchPanel">League of Legends</a>
+          <a href="./?q=VALORANT#searchPanel">VALORANT</a>
+          <a href="./?q=VALO#searchPanel">VALO</a>
+          <a href="./?q=%E9%9B%91%E8%AB%87#searchPanel">雑談</a>
+          <a href="./?q=%E7%B5%B6%E5%8F%AB#searchPanel">絶叫</a>
+          <a href="./?q=%E8%A8%80%E8%B3%AA#searchPanel">言質</a>
+          <a href="./?q=%E8%BF%B7%E5%AD%90#searchPanel">迷子</a>
+        </div>
+      </section>
+
       <section id="emptyState" class="empty">
         <h2>見つかりませんでした</h2>
         <p>検索語を短くするか、作成者の絞り込みを外してください。</p>
@@ -1607,25 +1648,6 @@
           もっと見る
         </button>
       </div>
-
-      <section id="keywordGuide" class="keyword-guide" aria-labelledby="keywordGuideTitle">
-        <h2 id="keywordGuideTitle">探せるキーワード</h2>
-        <p>
-          るっかるん / Rukalun の Twitch（ツイッチ）Clip・クリップや配信切り抜きを、FF14・FFXIV、LoL・League of Legends、VALORANT・VALO、雑談、絶叫、言質、迷子などから探せます。
-        </p>
-        <div class="keyword-link-list" aria-label="人気検索リンク">
-          <a href="./?q=FF14#searchPanel">FF14</a>
-          <a href="./?q=FINAL%20FANTASY%20XIV%20ONLINE#searchPanel">FFXIV</a>
-          <a href="./?q=LoL#searchPanel">LoL</a>
-          <a href="./?q=League%20of%20Legends#searchPanel">League of Legends</a>
-          <a href="./?q=VALORANT#searchPanel">VALORANT</a>
-          <a href="./?q=VALO#searchPanel">VALO</a>
-          <a href="./?q=%E9%9B%91%E8%AB%87#searchPanel">雑談</a>
-          <a href="./?q=%E7%B5%B6%E5%8F%AB#searchPanel">絶叫</a>
-          <a href="./?q=%E8%A8%80%E8%B3%AA#searchPanel">言質</a>
-          <a href="./?q=%E8%BF%B7%E5%AD%90#searchPanel">迷子</a>
-        </div>
-      </section>
 
     </main>
 

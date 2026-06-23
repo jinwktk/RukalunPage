@@ -38,6 +38,8 @@ const seoKeywordTerms = [
   "絶叫",
   "言質",
   "迷子",
+  "とぅいっち",
+  "顔アイコン",
 ];
 const popularSearches = [
   ["FF14", "FF14"],
@@ -346,6 +348,10 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.match(html, /class="keyword-link-list"/);
   assert.match(html, /\.keyword-guide\s*\{[\s\S]*?border-top: 1px solid var\(--line\);/);
   assert.doesNotMatch(keywordGuideStyle, /display:\s*none/);
+  assert.ok(
+    html.indexOf('id="keywordGuide"') < html.indexOf('id="results"'),
+    "keyword guide should be visible before clip results for mobile search discovery"
+  );
 
   for (const term of seoKeywordTerms) {
     assert.ok(keywordGuideText.includes(term), `${term} should be visible in the keyword guide`);
@@ -545,6 +551,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /人気検索リンク/);
   assert.match(readme, /配信切り抜き/);
   assert.match(readme, /\?q= URL/);
+  assert.match(readme, /GSC\/GA4/);
+  assert.match(readme, /とぅいっち/);
+  assert.match(readme, /顔アイコン/);
+  assert.match(readme, /モバイル/);
   assert.match(readme, /PC版ではClipカードからモーダル/);
   assert.match(readme, /SP版ではTwitchリンク/);
   assert.match(readme, /iframeはクリック時にだけ生成/);
@@ -571,6 +581,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /人気検索リンク/);
   assert.match(agents, /配信切り抜き/);
   assert.match(agents, /\?q= URL/);
+  assert.match(agents, /GSC\/GA4/);
+  assert.match(agents, /とぅいっち/);
+  assert.match(agents, /顔アイコン/);
+  assert.match(agents, /モバイル/);
   assert.match(agents, /PC版ではClipカードからモーダル/);
   assert.match(agents, /SP版ではTwitchリンク/);
   assert.match(agents, /iframeはクリック時にだけ生成/);
