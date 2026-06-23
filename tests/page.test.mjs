@@ -591,6 +591,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /スクロール \/ スワイプ/);
   assert.match(readme, /loop=true/);
   assert.match(readme, /noindex,follow/);
+  assert.match(readme, /PCでは16:9/);
+  assert.match(readme, /初期12件/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -627,6 +629,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /スクロール \/ スワイプ/);
   assert.match(agents, /loop=true/);
   assert.match(agents, /noindex,follow/);
+  assert.match(agents, /PCでは16:9/);
+  assert.match(agents, /初期12件/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -771,11 +775,14 @@ test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () =>
 
   assert.match(html, /\.shorts-feed\s*\{[\s\S]*height: 100svh;[\s\S]*overflow-y: auto;[\s\S]*scroll-snap-type: y mandatory;[\s\S]*touch-action: pan-y;/);
   assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;/);
-  assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*aspect-ratio: 9 \/ 16;/);
+  assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: min\(calc\(100vw - 148px\), calc\(\(100svh - 150px\) \* 16 \/ 9\), 1120px\);[\s\S]*aspect-ratio: 16 \/ 9;/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.shorts-video-shell\s*\{[\s\S]*width: min\(100vw, calc\(\(100svh - 98px\) \* 9 \/ 16\)\);[\s\S]*aspect-ratio: 9 \/ 16;/);
   assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
 
   assert.match(html, /const DATA_PATH = "\.\/clip-search-data\.json";/);
   assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
+  assert.match(html, /const SHORTS_INITIAL_RENDER_LIMIT = 12;/);
+  assert.match(html, /const SHORTS_RENDER_STEP = 8;/);
   assert.match(html, /const urlParams = new URLSearchParams\(window\.location\.search\);/);
   assert.match(html, /const query = urlParams\.get\("q"\) \?\? "";/);
   assert.match(html, /const creator = urlParams\.get\("creator"\) \?\? "";/);
@@ -786,12 +793,22 @@ test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () =>
   assert.match(html, /const selectedClip = startClipId[\s\S]*filtered\.find\(\(clip\) => clip\.id === startClipId\)/);
   assert.match(html, /return \[selectedClip, \.\.\.shuffleClips\(rest\)\];/);
   assert.match(html, /function shuffleClips\(clips\) \{/);
+  assert.match(html, /let renderedCount = 0;/);
+  assert.match(html, /function ensureRenderedThrough\(index\) \{/);
+  assert.match(html, /Math\.min\(shortsPool\.length, Math\.max\(index \+ 1, renderedCount \+ SHORTS_RENDER_STEP\)\)/);
+  assert.match(html, /function appendShortsItems\(fromIndex, toIndex\) \{/);
+  assert.match(html, /for \(let index = fromIndex; index < toIndex; index \+= 1\)/);
+  assert.match(html, /function maybeExtendShortsFeed\(index\) \{/);
+  assert.match(html, /if \(index >= renderedCount - 3\) ensureRenderedThrough\(index \+ SHORTS_RENDER_STEP\);/);
+  assert.match(html, /renderedCount = Math\.min\(shortsPool\.length, SHORTS_INITIAL_RENDER_LIMIT\);/);
+  assert.match(html, /appendShortsItems\(0, renderedCount\);/);
   assert.match(html, /function toTwitchEmbedUrl\(clip\) \{/);
   assert.match(html, /embedUrl\.searchParams\.set\("autoplay", "true"\);/);
   assert.match(html, /embedUrl\.searchParams\.set\("loop", "true"\);/);
   assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
   assert.doesNotMatch(html, /thumbnailUrl[\s\S]*--shorts-thumb/);
   assert.match(html, /function activateShortsItem\(index\) \{/);
+  assert.match(html, /maybeExtendShortsFeed\(index\);/);
   assert.match(html, /previousShell\?\.replaceChildren\(createPlaceholder\(shortsPool\[activeIndex\]\)\);/);
   assert.match(html, /iframe\.className = "shorts-embed-frame";/);
   assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
@@ -799,6 +816,7 @@ test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () =>
   assert.match(html, /const observer = new IntersectionObserver/);
   assert.match(html, /root: elements\.shortsFeed/);
   assert.match(html, /function scrollToClip\(index\) \{/);
+  assert.match(html, /ensureRenderedThrough\(targetIndex\);/);
   assert.match(html, /target\.scrollIntoView\(\{ block: "start", behavior: "smooth" \}\);/);
   assert.match(html, /function handleTouchStart\(event\) \{/);
   assert.match(html, /function handleTouchEnd\(event\) \{/);

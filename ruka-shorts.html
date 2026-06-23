@@ -159,8 +159,8 @@
 
       .shorts-video-shell {
         position: relative;
-        width: min(100%, 430px);
-        aspect-ratio: 9 / 16;
+        width: min(calc(100vw - 148px), calc((100svh - 150px) * 16 / 9), 1120px);
+        aspect-ratio: 16 / 9;
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
@@ -326,10 +326,6 @@
         .shorts-item {
           padding-inline: 74px;
         }
-
-        .shorts-video-shell {
-          width: min(62vh, 430px);
-        }
       }
 
       @media (max-width: 620px) {
@@ -357,6 +353,7 @@
 
         .shorts-video-shell {
           width: min(100vw, calc((100svh - 98px) * 9 / 16));
+          aspect-ratio: 9 / 16;
           border-radius: 0;
           border-left: 0;
           border-right: 0;
@@ -396,6 +393,8 @@
       const DATA_PATH = "./clip-search-data.json";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
       const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
+      const SHORTS_INITIAL_RENDER_LIMIT = 12;
+      const SHORTS_RENDER_STEP = 8;
       const SWIPE_THRESHOLD = 48;
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -421,6 +420,7 @@
       let allClips = [];
       let shortsPool = [];
       let activeIndex = -1;
+      let renderedCount = 0;
       let touchStartY = null;
       let favoriteClips = loadFavoriteClips();
 
@@ -627,6 +627,27 @@
         return item;
       }
 
+      function appendShortsItems(fromIndex, toIndex) {
+        const fragment = document.createDocumentFragment();
+        for (let index = fromIndex; index < toIndex; index += 1) {
+          fragment.append(createShortsItem(shortsPool[index], index));
+        }
+        elements.shortsFeed.append(fragment);
+      }
+
+      function ensureRenderedThrough(index) {
+        if (shortsPool.length === 0 || index < renderedCount) return;
+        const nextRenderedCount = Math.min(shortsPool.length, Math.max(index + 1, renderedCount + SHORTS_RENDER_STEP));
+        if (nextRenderedCount <= renderedCount) return;
+        const previousRenderedCount = renderedCount;
+        renderedCount = nextRenderedCount;
+        appendShortsItems(previousRenderedCount, renderedCount);
+      }
+
+      function maybeExtendShortsFeed(index) {
+        if (index >= renderedCount - 3) ensureRenderedThrough(index + SHORTS_RENDER_STEP);
+      }
+
       function updateStatus() {
         elements.shortsFilterSummary.textContent = `${getFilterSummary()} / ${shortsPool.length.toLocaleString("ja-JP")} clips`;
         elements.shortsStatus.textContent =
@@ -636,13 +657,19 @@
       }
 
       function renderShortsFeed() {
-        elements.shortsFeed.replaceChildren(...shortsPool.map(createShortsItem));
+        observer.disconnect();
+        activeIndex = -1;
+        renderedCount = Math.min(shortsPool.length, SHORTS_INITIAL_RENDER_LIMIT);
+        elements.shortsFeed.replaceChildren();
+        appendShortsItems(0, renderedCount);
         elements.shortsEmpty.hidden = shortsPool.length > 0;
         updateStatus();
       }
 
       function activateShortsItem(index) {
-        if (index < 0 || index >= shortsPool.length || index === activeIndex) return;
+        if (index < 0 || index >= shortsPool.length) return;
+        maybeExtendShortsFeed(index);
+        if (index === activeIndex) return;
         const previousItem =
           activeIndex >= 0 ? elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`) : null;
         const previousShell = previousItem?.querySelector(".shorts-video-shell");
@@ -673,6 +700,7 @@
 
       function scrollToClip(index) {
         const targetIndex = (index + shortsPool.length) % shortsPool.length;
+        ensureRenderedThrough(targetIndex);
         const target = elements.shortsFeed.querySelector(`[data-index="${targetIndex}"]`);
         if (!target) return;
         target.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -744,6 +772,9 @@
         },
         get iframeCount() {
           return document.querySelectorAll(".shorts-embed-frame").length;
+        },
+        get renderedCount() {
+          return renderedCount;
         },
         scrollToClip,
       };
