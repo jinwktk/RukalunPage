@@ -262,9 +262,9 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /function toTwitchEmbedUrl\(clip\)/);
   assert.match(html, /className = "clip-action-link-group"/);
   assert.match(html, /linkGroup\.append\(link, copyButton\)/);
-  assert.match(html, /actions\.append\(favoriteButton, shortsButton, linkGroup\)/);
-  assert.match(html, /grid-template-columns: minmax\(0, 18fr\) minmax\(0, 18fr\) minmax\(0, 64fr\);/);
-  assert.match(html, /grid-template-columns: minmax\(0, 44fr\) minmax\(0, 20fr\);/);
+  assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
+  assert.match(html, /grid-template-columns: minmax\(0, 20fr\) minmax\(0, 80fr\);/);
+  assert.match(html, /grid-template-columns: minmax\(0, 60fr\) minmax\(0, 20fr\);/);
   assert.match(html, /\.clip-actions\s*\{[\s\S]*?gap: 0;/);
   assert.match(html, /\.clip-actions\s*\{[\s\S]*?align-items: stretch;/);
   assert.match(html, /\.clip-actions\s*\{[\s\S]*?border: 1px solid #ead6e1;/);
@@ -273,7 +273,8 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /\.clip-action-link-group \.clip-link\s*\{[\s\S]*?border-left: 1px solid #ead6e1;/);
   assert.match(html, /\.clip-action-link-group \.clip-copy-button\s*\{[\s\S]*?border-left: 1px solid #ead6e1;/);
   assert.match(html, /\.clip-favorite-button\s*\{[\s\S]*?background: #fff6d9;/);
-  assert.match(html, /\.clip-shorts-button\s*\{[\s\S]*?background: #e8f5ff;/);
+  assert.doesNotMatch(html, /clip-shorts-button/);
+  assert.doesNotMatch(html, /function createShortsIcon/);
   assert.match(html, /\.clip-action-link-group \.clip-link\s*\{[\s\S]*?background: #f4efff;/);
   assert.match(html, /\.clip-action-link-group \.clip-copy-button\s*\{[\s\S]*?background: #e8f8f4;/);
   assert.match(html, /favoriteButton\.append\(createFavoriteIcon\(\)\)/);
@@ -587,11 +588,12 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /RukaShorts（るかしょーつ）/);
   assert.match(readme, /ruka-shorts\.html/);
   assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
-  assert.match(readme, /検索ヒット集合/);
+  assert.match(readme, /導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
-  assert.match(readme, /loop=true/);
+  assert.match(readme, /muted=false/);
+  assert.match(readme, /30秒/);
   assert.match(readme, /noindex,follow/);
-  assert.match(readme, /PCでは16:9/);
+  assert.match(readme, /PC\/SPとも画面いっぱい/);
   assert.match(readme, /初期12件/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
@@ -625,11 +627,12 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /RukaShorts（るかしょーつ）/);
   assert.match(agents, /ruka-shorts\.html/);
   assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
-  assert.match(agents, /検索ヒット集合/);
+  assert.match(agents, /導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
-  assert.match(agents, /loop=true/);
+  assert.match(agents, /muted=false/);
+  assert.match(agents, /30秒/);
   assert.match(agents, /noindex,follow/);
-  assert.match(agents, /PCでは16:9/);
+  assert.match(agents, /PC\/SPとも画面いっぱい/);
   assert.match(agents, /初期12件/);
 });
 
@@ -730,37 +733,30 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
 });
 
-test("RukaShorts opens as a separate page from top, search hits, and clip cards", () => {
+test("RukaShorts remains a direct page without top, search, or card entry buttons", () => {
   const html = readText("index.html");
 
-  assert.match(html, /id="heroShortsLink" class="button primary shorts-entry-button" href="\.\/ruka-shorts\.html"/);
-  assert.match(html, /id="openShortsButton" class="button shorts-entry-button" type="button"/);
+  assert.doesNotMatch(html, /id="heroShortsLink"/);
+  assert.doesNotMatch(html, /id="openShortsButton"/);
+  assert.doesNotMatch(html, /shorts-entry-button/);
   assert.doesNotMatch(html, /id="clipShorts"/);
   assert.doesNotMatch(html, /aria-labelledby="clipShortsTitle"/);
   assert.doesNotMatch(html, /clipShorts: requireElement\("#clipShorts"\)/);
   assert.doesNotMatch(html, /clipShortsFrameWrap/);
   assert.doesNotMatch(html, /<iframe[^>]+clip-shorts-frame/i);
 
-  assert.match(html, /heroShortsLink: requireElement\("#heroShortsLink"\)/);
-  assert.match(html, /openShortsButton: requireElement\("#openShortsButton"\)/);
-  assert.match(html, /const SHORTS_PAGE_PATH = "\.\/ruka-shorts\.html";/);
-  assert.match(html, /function getShortsSearchParams\(clip = null\) \{/);
-  assert.match(html, /const searchQuery = elements\.searchInput\.value\.trim\(\);/);
-  assert.match(html, /if \(clip\?\.id\) params\.set\("clip", clip\.id\);/);
-  assert.match(html, /function createShortsUrl\(clip = null\) \{/);
-  assert.match(html, /return `\$\{SHORTS_PAGE_PATH\}\$\{query \? `\?\$\{query\}` : ""\}`;/);
-  assert.match(html, /function openShortsPageFromCurrentResults\(\) \{/);
-  assert.match(html, /window\.location\.href = createShortsUrl\(\);/);
-
-  assert.match(html, /const shortsButton = document\.createElement\("button"\);/);
-  assert.match(html, /shortsButton\.className = "clip-shorts-button";/);
-  assert.match(html, /shortsButton\.setAttribute\("aria-label", "このClipをRukaShortsで開く"\);/);
-  assert.match(html, /shortsButton\.addEventListener\("click", \(\) => \{[\s\S]*window\.location\.href = createShortsUrl\(clip\);[\s\S]*\}\);/);
-  assert.match(html, /actions\.append\(favoriteButton, shortsButton, linkGroup\)/);
-  assert.match(html, /elements\.openShortsButton\.addEventListener\("click", openShortsPageFromCurrentResults\);/);
+  assert.doesNotMatch(html, /heroShortsLink: requireElement/);
+  assert.doesNotMatch(html, /openShortsButton: requireElement/);
+  assert.doesNotMatch(html, /SHORTS_PAGE_PATH/);
+  assert.doesNotMatch(html, /getShortsSearchParams/);
+  assert.doesNotMatch(html, /createShortsUrl/);
+  assert.doesNotMatch(html, /openShortsPageFromCurrentResults/);
+  assert.doesNotMatch(html, /const shortsButton = document\.createElement/);
+  assert.doesNotMatch(html, /clip-shorts-button/);
+  assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
 });
 
-test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () => {
+test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto advance", () => {
   const html = readText(shortsPagePath);
 
   assert.ok(html.includes(`<title>${shortsPageTitle}</title>`));
@@ -768,32 +764,33 @@ test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () =>
   assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
   assert.match(html, /<body data-page="ruka-shorts">/);
   assert.match(html, /id="shortsFeed" class="shorts-feed"/);
-  assert.match(html, /id="shortsStatus"/);
-  assert.match(html, /id="shortsFilterSummary"/);
   assert.match(html, /id="shortsEmpty"/);
+  assert.doesNotMatch(html, /class="shorts-bar"/);
+  assert.doesNotMatch(html, /class="shorts-side"/);
+  assert.doesNotMatch(html, /shorts-icon-button/);
+  assert.doesNotMatch(html, /shortsStatus/);
+  assert.doesNotMatch(html, /shortsFilterSummary/);
   assert.doesNotMatch(html, /<iframe[^>]+clips\.twitch\.tv/i);
 
   assert.match(html, /\.shorts-feed\s*\{[\s\S]*height: 100svh;[\s\S]*overflow-y: auto;[\s\S]*scroll-snap-type: y mandatory;[\s\S]*touch-action: pan-y;/);
-  assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;/);
-  assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: min\(calc\(100vw - 148px\), calc\(\(100svh - 150px\) \* 16 \/ 9\), 1120px\);[\s\S]*aspect-ratio: 16 \/ 9;/);
-  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.shorts-video-shell\s*\{[\s\S]*width: min\(100vw, calc\(\(100svh - 98px\) \* 9 \/ 16\)\);[\s\S]*aspect-ratio: 9 \/ 16;/);
+  assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;[\s\S]*padding: 0;/);
+  assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: 100vw;[\s\S]*height: 100svh;/);
   assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
 
   assert.match(html, /const DATA_PATH = "\.\/clip-search-data\.json";/);
   assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
   assert.match(html, /const SHORTS_INITIAL_RENDER_LIMIT = 12;/);
   assert.match(html, /const SHORTS_RENDER_STEP = 8;/);
-  assert.match(html, /const urlParams = new URLSearchParams\(window\.location\.search\);/);
-  assert.match(html, /const query = urlParams\.get\("q"\) \?\? "";/);
-  assert.match(html, /const creator = urlParams\.get\("creator"\) \?\? "";/);
-  assert.match(html, /const game = urlParams\.get\("game"\) \?\? "";/);
-  assert.match(html, /const sort = urlParams\.get\("sort"\) \?\? "newest";/);
-  assert.match(html, /const startClipId = urlParams\.get\("clip"\) \?\? "";/);
+  assert.match(html, /const AUTO_ADVANCE_FALLBACK_MS = 30000;/);
+  assert.doesNotMatch(html, /urlParams\.get\("q"\)/);
+  assert.doesNotMatch(html, /urlParams\.get\("creator"\)/);
+  assert.doesNotMatch(html, /urlParams\.get\("game"\)/);
+  assert.doesNotMatch(html, /urlParams\.get\("sort"\)/);
   assert.match(html, /function buildShortsPool\(clips\) \{/);
-  assert.match(html, /const selectedClip = startClipId[\s\S]*filtered\.find\(\(clip\) => clip\.id === startClipId\)/);
-  assert.match(html, /return \[selectedClip, \.\.\.shuffleClips\(rest\)\];/);
+  assert.match(html, /return shuffleClips\(clips\.filter\(\(clip\) => getTwitchClipSlug\(clip\?\.url\)\)\);/);
   assert.match(html, /function shuffleClips\(clips\) \{/);
   assert.match(html, /let renderedCount = 0;/);
+  assert.match(html, /let autoAdvanceTimerId = 0;/);
   assert.match(html, /function ensureRenderedThrough\(index\) \{/);
   assert.match(html, /Math\.min\(shortsPool\.length, Math\.max\(index \+ 1, renderedCount \+ SHORTS_RENDER_STEP\)\)/);
   assert.match(html, /function appendShortsItems\(fromIndex, toIndex\) \{/);
@@ -804,8 +801,14 @@ test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () =>
   assert.match(html, /appendShortsItems\(0, renderedCount\);/);
   assert.match(html, /function toTwitchEmbedUrl\(clip\) \{/);
   assert.match(html, /embedUrl\.searchParams\.set\("autoplay", "true"\);/);
-  assert.match(html, /embedUrl\.searchParams\.set\("loop", "true"\);/);
+  assert.match(html, /embedUrl\.searchParams\.set\("muted", "false"\);/);
+  assert.doesNotMatch(html, /embedUrl\.searchParams\.set\("loop"/);
   assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
+  assert.match(html, /function scheduleAutoAdvance\(clip\) \{/);
+  assert.match(html, /autoAdvanceTimerId = window\.setTimeout\(\(\) => scrollToClip\(activeIndex \+ 1\), getClipAutoAdvanceMs\(clip\)\);/);
+  assert.match(html, /function handleEmbedMessage\(event\) \{/);
+  assert.match(html, /if \(!payload\.toLowerCase\(\)\.includes\("ended"\)\) return;/);
+  assert.match(html, /window\.addEventListener\("message", handleEmbedMessage\);/);
   assert.doesNotMatch(html, /thumbnailUrl[\s\S]*--shorts-thumb/);
   assert.match(html, /function activateShortsItem\(index\) \{/);
   assert.match(html, /maybeExtendShortsFeed\(index\);/);
@@ -813,17 +816,22 @@ test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () =>
   assert.match(html, /iframe\.className = "shorts-embed-frame";/);
   assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
   assert.match(html, /shell\.replaceChildren\(iframe\);/);
+  assert.match(html, /scheduleAutoAdvance\(clip\);/);
   assert.match(html, /const observer = new IntersectionObserver/);
   assert.match(html, /root: elements\.shortsFeed/);
   assert.match(html, /function scrollToClip\(index\) \{/);
   assert.match(html, /ensureRenderedThrough\(targetIndex\);/);
+  assert.match(html, /activateShortsItem\(targetIndex\);/);
   assert.match(html, /target\.scrollIntoView\(\{ block: "start", behavior: "smooth" \}\);/);
   assert.match(html, /function handleTouchStart\(event\) \{/);
   assert.match(html, /function handleTouchEnd\(event\) \{/);
   assert.match(html, /Math\.abs\(deltaY\) < SWIPE_THRESHOLD/);
   assert.match(html, /scrollToClip\(activeIndex \+ \(deltaY > 0 \? 1 : -1\)\);/);
+  assert.match(html, /function handleWheel\(event\) \{/);
+  assert.match(html, /event\.preventDefault\(\);[\s\S]*scrollToClip\(activeIndex \+ \(event\.deltaY > 0 \? 1 : -1\)\);/);
   assert.match(html, /elements\.shortsFeed\.addEventListener\("touchstart", handleTouchStart, \{ passive: true \}\);/);
   assert.match(html, /elements\.shortsFeed\.addEventListener\("touchend", handleTouchEnd\);/);
+  assert.match(html, /elements\.shortsFeed\.addEventListener\("wheel", handleWheel, \{ passive: false \}\);/);
 });
 
 test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {

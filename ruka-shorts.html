@@ -17,18 +17,6 @@
       gtag("config", "G-TTVJN1V2LJ");
     </script>
     <style>
-      :root {
-        --ink: #fff7fb;
-        --muted: rgba(255, 247, 251, 0.72);
-        --panel: rgba(22, 20, 27, 0.78);
-        --line: rgba(255, 255, 255, 0.18);
-        --pink: #f28ab8;
-        --mint: #91ead8;
-        --amber: #ffd982;
-        --shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
-        --font-cute: "UD デジタル 教科書体 NP", "Yu Gothic", "Hiragino Maru Gothic ProN", "Meiryo", system-ui, sans-serif;
-      }
-
       * {
         box-sizing: border-box;
       }
@@ -37,11 +25,10 @@
       body {
         margin: 0;
         min-height: 100%;
-        background: #15131a;
-        color: var(--ink);
-        font-family: var(--font-cute);
+        background: #000;
+        color: #ffffff;
+        font-family: "Yu Gothic", "Hiragino Maru Gothic ProN", "Meiryo", system-ui, sans-serif;
         letter-spacing: 0;
-        line-height: 1.55;
         overscroll-behavior-y: contain;
       }
 
@@ -49,88 +36,9 @@
         overflow: hidden;
       }
 
-      a,
-      button {
-        font: inherit;
-      }
-
-      a {
-        color: inherit;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
       .shorts-app {
-        position: relative;
         min-height: 100svh;
-        background:
-          linear-gradient(180deg, rgba(242, 138, 184, 0.18), rgba(145, 234, 216, 0.08) 42%, rgba(21, 19, 26, 0.94)),
-          #15131a;
-      }
-
-      .shorts-bar {
-        position: fixed;
-        z-index: 10;
-        top: max(12px, env(safe-area-inset-top));
-        left: max(12px, env(safe-area-inset-left));
-        right: max(12px, env(safe-area-inset-right));
-        display: grid;
-        grid-template-columns: auto minmax(0, 1fr) auto;
-        gap: 10px;
-        align-items: center;
-        pointer-events: none;
-      }
-
-      .shorts-pill,
-      .shorts-icon-button {
-        pointer-events: auto;
-        border: 1px solid var(--line);
-        background: rgba(22, 20, 27, 0.66);
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(16px);
-      }
-
-      .shorts-icon-button {
-        display: grid;
-        width: 44px;
-        height: 44px;
-        place-items: center;
-        border-radius: 8px;
-        color: var(--ink);
-        text-decoration: none;
-        font-size: 1.35rem;
-        font-weight: 900;
-      }
-
-      .shorts-pill {
-        min-width: 0;
-        border-radius: 8px;
-        padding: 8px 12px;
-      }
-
-      .shorts-title {
-        display: block;
-        color: #ffffff;
-        font-size: 1rem;
-        font-weight: 900;
-        line-height: 1.2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .shorts-filter-summary {
-        display: block;
-        margin-top: 2px;
-        color: var(--muted);
-        font-size: 0.78rem;
-        font-weight: 800;
-        line-height: 1.25;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        background: #000;
       }
 
       .shorts-feed {
@@ -140,7 +48,7 @@
         touch-action: pan-y;
         scrollbar-width: none;
         overscroll-behavior-y: contain;
-        background: #15131a;
+        background: #000;
       }
 
       .shorts-feed::-webkit-scrollbar {
@@ -153,21 +61,17 @@
         min-height: 100svh;
         scroll-snap-align: start;
         scroll-snap-stop: always;
-        place-items: center;
-        padding: max(74px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom));
+        place-items: stretch;
+        padding: 0;
+        background: #000;
       }
 
       .shorts-video-shell {
         position: relative;
-        width: min(calc(100vw - 148px), calc((100svh - 150px) * 16 / 9), 1120px);
-        aspect-ratio: 16 / 9;
+        width: 100vw;
+        height: 100svh;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        background:
-          linear-gradient(180deg, rgba(255, 247, 251, 0.08), rgba(145, 234, 216, 0.08)),
-          #0f0d14;
-        box-shadow: var(--shadow);
+        background: #000;
       }
 
       .shorts-embed-frame {
@@ -175,7 +79,7 @@
         width: 100%;
         height: 100%;
         border: 0;
-        background: #0f0d14;
+        background: #000;
       }
 
       .shorts-placeholder,
@@ -183,94 +87,22 @@
         position: absolute;
         inset: 0;
         display: grid;
-        align-content: end;
-        gap: 10px;
-        padding: 20px;
+        place-items: center;
         background:
-          linear-gradient(180deg, rgba(15, 13, 20, 0.18), rgba(15, 13, 20, 0.88)),
-          var(--shorts-thumb, linear-gradient(135deg, #3a2837, #16362f));
-        background-position: center;
-        background-size: cover;
-      }
-
-      .shorts-placeholder strong,
-      .shorts-fallback strong {
-        display: block;
-        color: #ffffff;
-        font-size: 1.15rem;
-        font-weight: 900;
-        line-height: 1.35;
-        overflow-wrap: anywhere;
+          linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.72)),
+          #000;
+        padding: 24px;
+        text-align: center;
       }
 
       .shorts-placeholder span,
       .shorts-fallback span {
-        color: var(--muted);
-        font-size: 0.88rem;
+        max-width: min(520px, calc(100vw - 36px));
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 0.95rem;
         font-weight: 800;
-        line-height: 1.4;
+        line-height: 1.5;
         overflow-wrap: anywhere;
-      }
-
-      .shorts-fallback a {
-        justify-self: start;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        border-radius: 8px;
-        background: rgba(255, 247, 251, 0.12);
-        color: #ffffff;
-        padding: 8px 10px;
-        text-decoration: none;
-        font-size: 0.88rem;
-        font-weight: 900;
-      }
-
-      .shorts-side {
-        position: absolute;
-        right: max(14px, env(safe-area-inset-right));
-        bottom: max(92px, calc(env(safe-area-inset-bottom) + 82px));
-        display: grid;
-        gap: 10px;
-      }
-
-      .shorts-side a,
-      .shorts-side button {
-        display: grid;
-        width: 46px;
-        height: 46px;
-        place-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 8px;
-        background: rgba(22, 20, 27, 0.72);
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 1.05rem;
-        font-weight: 900;
-        backdrop-filter: blur(14px);
-      }
-
-      .shorts-side a:nth-child(1) {
-        color: var(--mint);
-      }
-
-      .shorts-side button {
-        color: var(--amber);
-      }
-
-      .shorts-status {
-        position: fixed;
-        z-index: 9;
-        left: max(14px, env(safe-area-inset-left));
-        bottom: max(14px, env(safe-area-inset-bottom));
-        max-width: calc(100vw - 28px);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(22, 20, 27, 0.72);
-        color: var(--muted);
-        padding: 8px 10px;
-        font-size: 0.78rem;
-        font-weight: 800;
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(16px);
       }
 
       .shorts-empty[hidden] {
@@ -279,23 +111,17 @@
 
       .shorts-empty {
         position: fixed;
-        z-index: 11;
+        z-index: 2;
         inset: 0;
         display: grid;
         place-items: center;
-        padding: 18px;
-        background: rgba(21, 19, 26, 0.88);
+        padding: 20px;
+        background: #000;
+        text-align: center;
       }
 
       .shorts-empty-inner {
-        display: grid;
-        gap: 10px;
-        width: min(420px, 100%);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--panel);
-        padding: 18px;
-        box-shadow: var(--shadow);
+        width: min(440px, 100%);
       }
 
       .shorts-empty h2,
@@ -304,87 +130,24 @@
       }
 
       .shorts-empty h2 {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
       }
 
       .shorts-empty p {
-        color: var(--muted);
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.72);
         font-weight: 800;
-      }
-
-      .shorts-empty a {
-        justify-self: start;
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 8px;
-        background: rgba(255, 247, 251, 0.12);
-        padding: 8px 10px;
-        text-decoration: none;
-        font-weight: 900;
-      }
-
-      @media (min-width: 760px) {
-        .shorts-item {
-          padding-inline: 74px;
-        }
-      }
-
-      @media (max-width: 620px) {
-        .shorts-bar {
-          grid-template-columns: auto minmax(0, 1fr) auto;
-          gap: 8px;
-        }
-
-        .shorts-pill {
-          padding: 7px 9px;
-        }
-
-        .shorts-title {
-          font-size: 0.94rem;
-        }
-
-        .shorts-icon-button {
-          width: 40px;
-          height: 40px;
-        }
-
-        .shorts-item {
-          padding-inline: 0;
-        }
-
-        .shorts-video-shell {
-          width: min(100vw, calc((100svh - 98px) * 9 / 16));
-          aspect-ratio: 9 / 16;
-          border-radius: 0;
-          border-left: 0;
-          border-right: 0;
-        }
-
-        .shorts-status {
-          display: none;
-        }
       }
     </style>
   </head>
   <body data-page="ruka-shorts">
     <div class="shorts-app">
-      <header class="shorts-bar" aria-label="RukaShorts">
-        <a class="shorts-icon-button" href="./" aria-label="Clip検索へ戻る">‹</a>
-        <div class="shorts-pill">
-          <span class="shorts-title">RukaShorts（るかしょーつ）</span>
-          <span id="shortsFilterSummary" class="shorts-filter-summary">読み込み中</span>
-        </div>
-        <a class="shorts-icon-button" href="./#searchPanel" aria-label="検索を開く">⌕</a>
-      </header>
-
-      <main id="shortsFeed" class="shorts-feed" tabindex="0" aria-live="polite"></main>
-
-      <p id="shortsStatus" class="shorts-status">Clipデータを読み込み中</p>
+      <main id="shortsFeed" class="shorts-feed" aria-live="polite"></main>
 
       <section id="shortsEmpty" class="shorts-empty" hidden>
         <div class="shorts-empty-inner">
           <h2>Clipが見つかりません</h2>
-          <p>条件を変えると表示できるClipが増えます。</p>
-          <a href="./#searchPanel">検索へ戻る</a>
+          <p>表示できるClipを読み込めませんでした。</p>
         </div>
       </section>
     </div>
@@ -392,17 +155,11 @@
     <script>
       const DATA_PATH = "./clip-search-data.json";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
-      const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
       const SHORTS_INITIAL_RENDER_LIMIT = 12;
       const SHORTS_RENDER_STEP = 8;
+      const AUTO_ADVANCE_FALLBACK_MS = 30000;
+      const AUTO_ADVANCE_BUFFER_MS = 800;
       const SWIPE_THRESHOLD = 48;
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const query = urlParams.get("q") ?? "";
-      const creator = urlParams.get("creator") ?? "";
-      const game = urlParams.get("game") ?? "";
-      const sort = urlParams.get("sort") ?? "newest";
-      const startClipId = urlParams.get("clip") ?? "";
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -412,8 +169,6 @@
 
       const elements = {
         shortsFeed: requireElement("#shortsFeed"),
-        shortsStatus: requireElement("#shortsStatus"),
-        shortsFilterSummary: requireElement("#shortsFilterSummary"),
         shortsEmpty: requireElement("#shortsEmpty"),
       };
 
@@ -421,46 +176,9 @@
       let shortsPool = [];
       let activeIndex = -1;
       let renderedCount = 0;
+      let autoAdvanceTimerId = 0;
       let touchStartY = null;
-      let favoriteClips = loadFavoriteClips();
-
-      function normalizeText(value) {
-        return String(value ?? "")
-          .normalize("NFKC")
-          .toLocaleLowerCase("ja-JP")
-          .trim()
-          .replace(/\s+/g, " ");
-      }
-
-      function formatViews(value) {
-        if (typeof value !== "number" || !Number.isFinite(value)) return "再生数不明";
-        return `${value.toLocaleString("ja-JP")} views`;
-      }
-
-      function loadFavoriteClips() {
-        try {
-          const raw = localStorage.getItem(CLIP_FAVORITES_STORAGE_KEY);
-          const parsed = raw ? JSON.parse(raw) : {};
-          return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
-        } catch {
-          return {};
-        }
-      }
-
-      function getSafeClipUrl(clip) {
-        try {
-          const parsed = new URL(clip?.url ?? "");
-          if (
-            parsed.protocol === "https:" &&
-            (parsed.hostname === "www.twitch.tv" || parsed.hostname === "clips.twitch.tv")
-          ) {
-            return parsed.href;
-          }
-        } catch {
-          return "https://www.twitch.tv/rukalun";
-        }
-        return "https://www.twitch.tv/rukalun";
-      }
+      let wheelLocked = false;
 
       function getTwitchEmbedParents() {
         const parents = new Set([TWITCH_EMBED_PARENT_HOST]);
@@ -493,49 +211,11 @@
         const embedUrl = new URL("https://clips.twitch.tv/embed");
         embedUrl.searchParams.set("clip", slug);
         embedUrl.searchParams.set("autoplay", "true");
-        embedUrl.searchParams.set("loop", "true");
+        embedUrl.searchParams.set("muted", "false");
         for (const parent of getTwitchEmbedParents()) {
           embedUrl.searchParams.append("parent", parent);
         }
         return embedUrl.href;
-      }
-
-      function getSearchText(clip) {
-        return normalizeText(`${clip.title} ${clip.creator} ${clip.gameName}`);
-      }
-
-      function sortClips(clips) {
-        const sorted = [...clips];
-        if (sort === "oldest") {
-          sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-          return sorted;
-        }
-        if (sort === "views") {
-          sorted.sort((a, b) => (b.views ?? -1) - (a.views ?? -1));
-          return sorted;
-        }
-        if (sort === "title") {
-          sorted.sort((a, b) => String(a.title ?? "").localeCompare(String(b.title ?? ""), "ja-JP"));
-          return sorted;
-        }
-        if (sort === "favorites") {
-          sorted.sort((a, b) => (favoriteClips[b.id] ?? 0) - (favoriteClips[a.id] ?? 0));
-          return sorted;
-        }
-        sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        return sorted;
-      }
-
-      function filterClips(clips) {
-        const terms = normalizeText(query).split(" ").filter(Boolean);
-        return sortClips(
-          clips.filter((clip) => {
-            const matchesQuery = terms.length === 0 || terms.every((term) => getSearchText(clip).includes(term));
-            const matchesCreator = !creator || clip.creator === creator;
-            const matchesGame = !game || clip.gameName === game;
-            return matchesQuery && matchesCreator && matchesGame;
-          })
-        );
       }
 
       function shuffleClips(clips) {
@@ -548,53 +228,24 @@
       }
 
       function buildShortsPool(clips) {
-        const filtered = filterClips(clips);
-        if (filtered.length === 0 && !startClipId) return [];
-        const selectedClip = startClipId
-          ? filtered.find((clip) => clip.id === startClipId) ?? clips.find((clip) => clip.id === startClipId)
-          : filtered[Math.floor(Math.random() * filtered.length)];
-        if (!selectedClip) return [];
-        const rest = filtered.filter((clip) => clip.id !== selectedClip.id);
-        return [selectedClip, ...shuffleClips(rest)];
-      }
-
-      function getFilterSummary() {
-        const parts = [];
-        if (query) parts.push(`キーワード: ${query}`);
-        if (creator) parts.push(`作成: ${creator}`);
-        if (game) parts.push(`ゲーム: ${game}`);
-        if (sort && sort !== "newest") parts.push(`並び: ${sort}`);
-        return parts.length > 0 ? parts.join(" / ") : "全Clip";
+        return shuffleClips(clips.filter((clip) => getTwitchClipSlug(clip?.url)));
       }
 
       function createPlaceholder(clip) {
         const placeholder = document.createElement("div");
         placeholder.className = "shorts-placeholder";
-        const title = document.createElement("strong");
-        title.textContent = clip?.title || "RukaShorts";
-        const meta = document.createElement("span");
-        meta.textContent = [
-          clip?.gameName || "ゲーム不明",
-          clip?.creator ? `作成: ${clip.creator}` : "作成者不明",
-          formatViews(clip?.views),
-        ].join(" / ");
-        placeholder.append(title, meta);
+        const label = document.createElement("span");
+        label.textContent = clip?.title || "RukaShorts";
+        placeholder.append(label);
         return placeholder;
       }
 
       function createFallback(clip) {
         const fallback = document.createElement("div");
         fallback.className = "shorts-fallback";
-        const title = document.createElement("strong");
-        title.textContent = clip?.title || "埋め込みで開けないClipです";
-        const meta = document.createElement("span");
-        meta.textContent = "Twitchで開けます。";
-        const link = document.createElement("a");
-        link.href = getSafeClipUrl(clip);
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "Twitchで開く";
-        fallback.append(title, meta, link);
+        const label = document.createElement("span");
+        label.textContent = clip?.title ? `${clip.title}を埋め込みで開けませんでした。` : "埋め込みで開けないClipです。";
+        fallback.append(label);
         return fallback;
       }
 
@@ -607,22 +258,7 @@
         shell.className = "shorts-video-shell";
         shell.replaceChildren(createPlaceholder(clip));
 
-        const side = document.createElement("div");
-        side.className = "shorts-side";
-        const twitchLink = document.createElement("a");
-        twitchLink.href = getSafeClipUrl(clip);
-        twitchLink.target = "_blank";
-        twitchLink.rel = "noopener noreferrer";
-        twitchLink.setAttribute("aria-label", "Twitchで開く");
-        twitchLink.textContent = "▶";
-        const nextButton = document.createElement("button");
-        nextButton.type = "button";
-        nextButton.setAttribute("aria-label", "次のClipへ");
-        nextButton.textContent = "⌄";
-        nextButton.addEventListener("click", () => scrollToClip(index + 1));
-        side.append(twitchLink, nextButton);
-
-        item.append(shell, side);
+        item.append(shell);
         observer.observe(item);
         return item;
       }
@@ -648,28 +284,40 @@
         if (index >= renderedCount - 3) ensureRenderedThrough(index + SHORTS_RENDER_STEP);
       }
 
-      function updateStatus() {
-        elements.shortsFilterSummary.textContent = `${getFilterSummary()} / ${shortsPool.length.toLocaleString("ja-JP")} clips`;
-        elements.shortsStatus.textContent =
-          activeIndex >= 0 && shortsPool.length > 0
-            ? `${activeIndex + 1} / ${shortsPool.length} clips`
-            : "Clipデータを読み込み中";
+      function clearAutoAdvance() {
+        if (!autoAdvanceTimerId) return;
+        window.clearTimeout(autoAdvanceTimerId);
+        autoAdvanceTimerId = 0;
+      }
+
+      function getClipAutoAdvanceMs(clip) {
+        const durationSeconds = Number(clip?.duration ?? clip?.durationSeconds);
+        if (Number.isFinite(durationSeconds) && durationSeconds > 0) {
+          return Math.max(5000, Math.round(durationSeconds * 1000) + AUTO_ADVANCE_BUFFER_MS);
+        }
+        return AUTO_ADVANCE_FALLBACK_MS;
+      }
+
+      function scheduleAutoAdvance(clip) {
+        clearAutoAdvance();
+        autoAdvanceTimerId = window.setTimeout(() => scrollToClip(activeIndex + 1), getClipAutoAdvanceMs(clip));
       }
 
       function renderShortsFeed() {
         observer.disconnect();
+        clearAutoAdvance();
         activeIndex = -1;
         renderedCount = Math.min(shortsPool.length, SHORTS_INITIAL_RENDER_LIMIT);
         elements.shortsFeed.replaceChildren();
         appendShortsItems(0, renderedCount);
         elements.shortsEmpty.hidden = shortsPool.length > 0;
-        updateStatus();
       }
 
       function activateShortsItem(index) {
         if (index < 0 || index >= shortsPool.length) return;
         maybeExtendShortsFeed(index);
         if (index === activeIndex) return;
+        clearAutoAdvance();
         const previousItem =
           activeIndex >= 0 ? elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`) : null;
         const previousShell = previousItem?.querySelector(".shorts-video-shell");
@@ -685,7 +333,7 @@
         const embedUrl = toTwitchEmbedUrl(clip);
         if (!embedUrl) {
           shell.replaceChildren(createFallback(clip));
-          updateStatus();
+          scheduleAutoAdvance(clip);
           return;
         }
         const iframe = document.createElement("iframe");
@@ -695,14 +343,16 @@
         iframe.allowFullscreen = true;
         iframe.src = embedUrl;
         shell.replaceChildren(iframe);
-        updateStatus();
+        scheduleAutoAdvance(clip);
       }
 
       function scrollToClip(index) {
-        const targetIndex = (index + shortsPool.length) % shortsPool.length;
+        if (shortsPool.length === 0) return;
+        const targetIndex = ((index % shortsPool.length) + shortsPool.length) % shortsPool.length;
         ensureRenderedThrough(targetIndex);
         const target = elements.shortsFeed.querySelector(`[data-index="${targetIndex}"]`);
         if (!target) return;
+        activateShortsItem(targetIndex);
         target.scrollIntoView({ block: "start", behavior: "smooth" });
       }
 
@@ -717,6 +367,23 @@
         touchStartY = null;
         if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
         scrollToClip(activeIndex + (deltaY > 0 ? 1 : -1));
+      }
+
+      function handleWheel(event) {
+        if (Math.abs(event.deltaY) < 18 || wheelLocked) return;
+        event.preventDefault();
+        wheelLocked = true;
+        scrollToClip(activeIndex + (event.deltaY > 0 ? 1 : -1));
+        window.setTimeout(() => {
+          wheelLocked = false;
+        }, 520);
+      }
+
+      function handleEmbedMessage(event) {
+        if (event.origin !== "https://clips.twitch.tv" && event.origin !== "https://player.twitch.tv") return;
+        const payload = typeof event.data === "string" ? event.data : JSON.stringify(event.data ?? {});
+        if (!payload.toLowerCase().includes("ended")) return;
+        scrollToClip(activeIndex + 1);
       }
 
       const observer = new IntersectionObserver(
@@ -747,14 +414,15 @@
         } catch {
           allClips = [];
           shortsPool = [];
+          clearAutoAdvance();
           elements.shortsEmpty.hidden = false;
-          elements.shortsFilterSummary.textContent = "読み込み失敗";
-          elements.shortsStatus.textContent = "Clipデータを読み込めませんでした";
         }
       }
 
       elements.shortsFeed.addEventListener("touchstart", handleTouchStart, { passive: true });
       elements.shortsFeed.addEventListener("touchend", handleTouchEnd);
+      elements.shortsFeed.addEventListener("wheel", handleWheel, { passive: false });
+      window.addEventListener("message", handleEmbedMessage);
       window.addEventListener("keydown", (event) => {
         if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
           event.preventDefault();
@@ -775,6 +443,12 @@
         },
         get renderedCount() {
           return renderedCount;
+        },
+        get autoAdvanceTimerActive() {
+          return autoAdvanceTimerId > 0;
+        },
+        get currentEmbedSrc() {
+          return document.querySelector(".shorts-embed-frame")?.src ?? "";
         },
         scrollToClip,
       };

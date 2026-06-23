@@ -715,7 +715,7 @@
       .clip-actions {
         display: grid;
         align-items: stretch;
-        grid-template-columns: minmax(0, 18fr) minmax(0, 18fr) minmax(0, 64fr);
+        grid-template-columns: minmax(0, 20fr) minmax(0, 80fr);
         gap: 0;
         min-height: 44px;
         border: 1px solid #ead6e1;
@@ -730,7 +730,7 @@
 
       .clip-action-link-group {
         display: grid;
-        grid-template-columns: minmax(0, 44fr) minmax(0, 20fr);
+        grid-template-columns: minmax(0, 60fr) minmax(0, 20fr);
         min-width: 0;
       }
 
@@ -960,7 +960,6 @@
 
       .clip-link,
       .clip-favorite-button,
-      .clip-shorts-button,
       .clip-copy-button {
         display: inline-flex;
         align-items: center;
@@ -987,14 +986,6 @@
         color: #8a5a05;
       }
 
-      .clip-shorts-button {
-        width: 100%;
-        border-left: 1px solid #ead6e1;
-        border-radius: 0;
-        background: #e8f5ff;
-        color: var(--sky-ink);
-      }
-
       .clip-action-link-group .clip-link {
         background: #f4efff;
         color: #6f46c7;
@@ -1010,11 +1001,6 @@
         color: #7c4b00;
       }
 
-      .clip-shorts-button:hover {
-        background: #d7ecff;
-        color: #244f86;
-      }
-
       .clip-action-link-group .clip-link:hover {
         background: #eadfff;
         color: #5f35b2;
@@ -1027,7 +1013,6 @@
 
       .clip-link:focus-visible,
       .clip-favorite-button:focus-visible,
-      .clip-shorts-button:focus-visible,
       .clip-copy-button:focus-visible {
         outline: 2px solid #e86f9f;
         outline-offset: 2px;
@@ -1554,7 +1539,6 @@
             <span class="lead-line">おもちかえりできます。</span>
           </p>
           <div class="hero-actions" aria-label="主要操作">
-            <a id="heroShortsLink" class="button primary shorts-entry-button" href="./ruka-shorts.html">RukaShorts</a>
             <a class="button primary" href="#searchPanel">検索する</a>
             <a class="button" href="https://www.twitch.tv/rukalun" target="_blank" rel="noreferrer">Twitchへ</a>
           </div>
@@ -1625,10 +1609,6 @@
               </select>
             </div>
             <div class="button-row">
-              <button id="openShortsButton" class="button shorts-entry-button" type="button">
-                <img class="button-icon" src="./assets/rukalun/bikkuri-56px.webp" width="24" height="24" alt="" decoding="async" />
-                ヒットを視聴
-              </button>
               <button id="randomButton" class="button primary" type="button">
                 <img class="button-icon" src="./assets/rukalun/bikkuri-56px.webp" width="24" height="24" alt="" decoding="async" />
                 おまかせ
@@ -1748,7 +1728,6 @@
       const SVG_NS = "http://www.w3.org/2000/svg";
       const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "(max-width: 620px)";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
-      const SHORTS_PAGE_PATH = "./ruka-shorts.html";
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -1766,8 +1745,6 @@
         creatorFilter: requireElement("#creatorFilter"),
         gameFilter: requireElement("#gameFilter"),
         sortSelect: requireElement("#sortSelect"),
-        heroShortsLink: requireElement("#heroShortsLink"),
-        openShortsButton: requireElement("#openShortsButton"),
         randomButton: requireElement("#randomButton"),
         clearButton: requireElement("#clearButton"),
         closeSearchButton: requireElement("#closeSearchButton"),
@@ -2028,30 +2005,6 @@
         return link;
       }
 
-      function getShortsSearchParams(clip = null) {
-        const params = new URLSearchParams();
-        const searchQuery = elements.searchInput.value.trim();
-        const creator = elements.creatorFilter.value;
-        const game = elements.gameFilter.value;
-        const sort = elements.sortSelect.value;
-        if (searchQuery) params.set("q", searchQuery);
-        if (creator) params.set("creator", creator);
-        if (game) params.set("game", game);
-        if (sort && sort !== "newest") params.set("sort", sort);
-        if (clip?.id) params.set("clip", clip.id);
-        return params;
-      }
-
-      function createShortsUrl(clip = null) {
-        const params = getShortsSearchParams(clip);
-        const query = params.toString();
-        return `${SHORTS_PAGE_PATH}${query ? `?${query}` : ""}`;
-      }
-
-      function openShortsPageFromCurrentResults() {
-        window.location.href = createShortsUrl();
-      }
-
       async function copyTextToClipboard(text) {
         if (navigator.clipboard?.writeText && window.isSecureContext) {
           await navigator.clipboard.writeText(text);
@@ -2147,15 +2100,6 @@
         icon.append(
           createSvgPath("video-icon-path", "M4.8 7h9.4c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2H4.8c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2Z"),
           createSvgPath("video-icon-path", "M16.2 10.2 21 7.8v8.4l-4.8-2.4v-3.6Z")
-        );
-        return icon;
-      }
-
-      function createShortsIcon() {
-        const icon = createSvgIcon("shorts-icon");
-        icon.append(
-          createSvgPath("video-icon-path", "M8 4.5 17.5 10 8 15.5v-11Z"),
-          createSvgPath("video-icon-path", "M5 3.5h14v17H5v-17Z")
         );
         return icon;
       }
@@ -2419,16 +2363,6 @@
         favoriteButton.append(createFavoriteIcon());
         favoriteButton.addEventListener("click", () => toggleFavoriteClip(clip));
 
-        const shortsButton = document.createElement("button");
-        shortsButton.className = "clip-shorts-button";
-        shortsButton.type = "button";
-        shortsButton.title = "RukaShortsで開く";
-        shortsButton.setAttribute("aria-label", "このClipをRukaShortsで開く");
-        shortsButton.append(createShortsIcon());
-        shortsButton.addEventListener("click", () => {
-          window.location.href = createShortsUrl(clip);
-        });
-
         const link = createClipAnchor(clip, "clip-link", "Twitchで見る");
         link.title = "Twitchで見る";
         link.append(createVideoIcon());
@@ -2448,7 +2382,7 @@
         linkGroup.className = "clip-action-link-group";
         linkGroup.append(link, copyButton);
 
-        actions.append(favoriteButton, shortsButton, linkGroup);
+        actions.append(favoriteButton, linkGroup);
         body.append(title, meta, actions);
         card.append(ribbon, thumbnail, body);
         return card;
@@ -2591,7 +2525,6 @@
         clearRandomSelectionState();
         resetVisibleAndRender();
       });
-      elements.openShortsButton.addEventListener("click", openShortsPageFromCurrentResults);
       elements.randomButton.addEventListener("click", pickRandomClip);
       elements.closeSearchButton.addEventListener("click", () => setSearchPanelExpanded(false));
       elements.loadMoreButton.addEventListener("click", () => {
