@@ -56,6 +56,9 @@
       }
 
       .shorts-item {
+        --shorts-cue-right: max(34px, env(safe-area-inset-right));
+        --shorts-cue-bottom: max(96px, calc(env(safe-area-inset-bottom) + 88px));
+
         position: relative;
         display: grid;
         min-height: 100svh;
@@ -66,15 +69,23 @@
         background: #000;
       }
 
+      @media (max-width: 620px) {
+        .shorts-item {
+          --shorts-cue-right: max(16px, env(safe-area-inset-right));
+          --shorts-cue-bottom: max(118px, calc(env(safe-area-inset-bottom) + 108px));
+        }
+      }
+
       .shorts-item::after {
         content: "";
         position: absolute;
         z-index: 1;
-        inset-inline: 0;
-        bottom: 0;
-        height: min(132px, 24svh);
+        right: var(--shorts-cue-right);
+        bottom: var(--shorts-cue-bottom);
+        width: 66px;
+        height: 76px;
         pointer-events: none;
-        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.58));
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 70%);
         opacity: 0;
         transition: opacity 180ms ease;
       }
@@ -103,15 +114,14 @@
       .shorts-next-cue {
         position: absolute;
         z-index: 2;
-        left: 50%;
+        right: var(--shorts-cue-right);
         pointer-events: none;
-        bottom: max(18px, env(safe-area-inset-bottom));
+        bottom: var(--shorts-cue-bottom);
         display: grid;
         width: 44px;
         height: 52px;
         place-items: center;
         opacity: 0;
-        transform: translateX(-50%);
         transition: opacity 180ms ease;
       }
 

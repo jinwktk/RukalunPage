@@ -591,6 +591,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
   assert.match(readme, /下向きキュー/);
+  assert.match(readme, /シークバーより上/);
   assert.match(readme, /muted=false/);
   assert.match(readme, /currentTime/);
   assert.match(readme, /duration/);
@@ -633,6 +634,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
   assert.match(agents, /下向きキュー/);
+  assert.match(agents, /シークバーより上/);
   assert.match(agents, /muted=false/);
   assert.match(agents, /currentTime/);
   assert.match(agents, /duration/);
@@ -779,11 +781,12 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.doesNotMatch(html, /<iframe[^>]+clips\.twitch\.tv/i);
 
   assert.match(html, /\.shorts-feed\s*\{[\s\S]*height: 100svh;[\s\S]*overflow-y: auto;[\s\S]*scroll-snap-type: y mandatory;[\s\S]*touch-action: pan-y;/);
-  assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;[\s\S]*padding: 0;/);
-  assert.match(html, /\.shorts-item::after\s*\{[\s\S]*pointer-events: none;[\s\S]*linear-gradient\(180deg, transparent, rgba\(0, 0, 0, 0\.58\)\);/);
+  assert.match(html, /\.shorts-item\s*\{[\s\S]*--shorts-cue-right: max\(34px, env\(safe-area-inset-right\)\);[\s\S]*--shorts-cue-bottom: max\(96px, calc\(env\(safe-area-inset-bottom\) \+ 88px\)\);[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;[\s\S]*padding: 0;/);
+  assert.match(html, /@media \(max-width: 620px\)\s*\{[\s\S]*--shorts-cue-right: max\(16px, env\(safe-area-inset-right\)\);[\s\S]*--shorts-cue-bottom: max\(118px, calc\(env\(safe-area-inset-bottom\) \+ 108px\)\);/);
+  assert.match(html, /\.shorts-item::after\s*\{[\s\S]*right: var\(--shorts-cue-right\);[\s\S]*bottom: var\(--shorts-cue-bottom\);[\s\S]*pointer-events: none;[\s\S]*radial-gradient\(ellipse at center, rgba\(0, 0, 0, 0\.5\), transparent 70%\);/);
   assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: 100vw;[\s\S]*height: 100svh;/);
   assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
-  assert.match(html, /\.shorts-next-cue\s*\{[\s\S]*position: absolute;[\s\S]*pointer-events: none;[\s\S]*bottom: max\(18px, env\(safe-area-inset-bottom\)\);/);
+  assert.match(html, /\.shorts-next-cue\s*\{[\s\S]*position: absolute;[\s\S]*right: var\(--shorts-cue-right\);[\s\S]*pointer-events: none;[\s\S]*bottom: var\(--shorts-cue-bottom\);/);
   assert.match(html, /\.shorts-next-cue-mark\s*\{[\s\S]*border-right: 3px solid rgba\(255, 255, 255, 0\.92\);[\s\S]*border-bottom: 3px solid rgba\(255, 255, 255, 0\.92\);/);
   assert.match(html, /@keyframes shortsNextCue/);
   assert.match(html, /function createNextCue\(\) \{/);
