@@ -588,7 +588,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /RukaShorts（るかしょーつ）/);
   assert.match(readme, /ruka-shorts\.html/);
   assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
-  assert.match(readme, /導線は置かない/);
+  assert.match(readme, /ファーストビュー/);
+  assert.match(readme, /iframe/);
+  assert.match(readme, /Clipカードからの導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
   assert.match(readme, /下向きキュー/);
   assert.match(readme, /シークバーより上/);
@@ -631,7 +633,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /RukaShorts（るかしょーつ）/);
   assert.match(agents, /ruka-shorts\.html/);
   assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
-  assert.match(agents, /導線は置かない/);
+  assert.match(agents, /ファーストビュー/);
+  assert.match(agents, /iframe/);
+  assert.match(agents, /Clipカードからの導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
   assert.match(agents, /下向きキュー/);
   assert.match(agents, /シークバーより上/);
@@ -741,21 +745,44 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
 });
 
-test("RukaShorts remains a direct page without top, search, or card entry buttons", () => {
+test("RukaShorts has a first-view iframe entry while cards stay unchanged", () => {
   const html = readText("index.html");
 
-  assert.doesNotMatch(html, /id="heroShortsLink"/);
-  assert.doesNotMatch(html, /id="openShortsButton"/);
-  assert.doesNotMatch(html, /shorts-entry-button/);
+  assert.match(html, /id="heroSearchLink" class="button primary" href="#searchPanel">検索する<\/a>/);
+  assert.match(html, /id="openShortsButton" class="button hero-shorts-button" type="button" aria-controls="shortsEmbedPanel" aria-expanded="false">るかしょーつ<\/button>/);
+  assert.match(html, /id="heroTwitchLink" class="button" href="https:\/\/www\.twitch\.tv\/rukalun" target="_blank" rel="noreferrer">Twitchへ<\/a>/);
+  assert.match(
+    html,
+    /id="shortsEmbedPanel"[\s\S]*class="shorts-embed-panel"[\s\S]*hidden[\s\S]*aria-label="RukaShortsをページ内で見る"/
+  );
+  assert.match(html, /id="shortsEmbedFrameWrap" class="shorts-embed-frame-wrap"/);
+  assert.match(html, /id="closeShortsEmbedButton" class="shorts-embed-close" type="button" aria-label="RukaShortsを閉じる"/);
+  assert.doesNotMatch(html, /<iframe[^>]+ruka-shorts\.html/i);
+  assert.match(html, /\.hero-actions\s*\{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, auto\)\);/);
+  assert.match(html, /\.hero-shorts-button\s*\{[\s\S]*background: #e8f8f4;[\s\S]*color: #236b66;/);
+  assert.match(html, /\.shorts-embed-panel\s*\{[\s\S]*position: fixed;[\s\S]*inset: 0;[\s\S]*display: none;/);
+  assert.match(html, /\.shorts-embed-panel\.is-open\s*\{[\s\S]*display: grid;/);
+  assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
+  assert.match(html, /body\.has-shorts-embed-open/);
   assert.doesNotMatch(html, /id="clipShorts"/);
   assert.doesNotMatch(html, /aria-labelledby="clipShortsTitle"/);
   assert.doesNotMatch(html, /clipShorts: requireElement\("#clipShorts"\)/);
-  assert.doesNotMatch(html, /clipShortsFrameWrap/);
   assert.doesNotMatch(html, /<iframe[^>]+clip-shorts-frame/i);
 
-  assert.doesNotMatch(html, /heroShortsLink: requireElement/);
-  assert.doesNotMatch(html, /openShortsButton: requireElement/);
-  assert.doesNotMatch(html, /SHORTS_PAGE_PATH/);
+  assert.match(html, /const SHORTS_EMBED_SRC = "\.\/ruka-shorts\.html";/);
+  assert.match(html, /openShortsEmbedButton: requireElement\("#openShortsButton"\)/);
+  assert.match(html, /shortsEmbedPanel: requireElement\("#shortsEmbedPanel"\)/);
+  assert.match(html, /shortsEmbedFrameWrap: requireElement\("#shortsEmbedFrameWrap"\)/);
+  assert.match(html, /closeShortsEmbedButton: requireElement\("#closeShortsEmbedButton"\)/);
+  assert.match(html, /function openShortsEmbed\(\) \{/);
+  assert.match(html, /const iframe = document\.createElement\("iframe"\);/);
+  assert.match(html, /iframe\.className = "shorts-embed-frame";/);
+  assert.match(html, /iframe\.src = SHORTS_EMBED_SRC;/);
+  assert.match(html, /elements\.shortsEmbedFrameWrap\.replaceChildren\(iframe\);/);
+  assert.match(html, /function closeShortsEmbed\(\) \{/);
+  assert.match(html, /elements\.shortsEmbedFrameWrap\.replaceChildren\(\);/);
+  assert.match(html, /elements\.openShortsEmbedButton\.addEventListener\("click", openShortsEmbed\);/);
+  assert.match(html, /elements\.closeShortsEmbedButton\.addEventListener\("click", closeShortsEmbed\);/);
   assert.doesNotMatch(html, /getShortsSearchParams/);
   assert.doesNotMatch(html, /createShortsUrl/);
   assert.doesNotMatch(html, /openShortsPageFromCurrentResults/);
