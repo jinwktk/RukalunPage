@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RukaShorts（るかしょーつ） | 🖇るっかるんくりっぷ🖇</title>
     <meta name="robots" content="noindex,follow" />
-    <link rel="canonical" href="https://www.rukalun.mydns.jp/shorts/index.html" />
+    <link rel="canonical" href="https://www.rukalun.mydns.jp/shorts/" />
     <link rel="icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-favicon.ico" sizes="any" />
     <link rel="icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-apple-touch-icon.png" />
@@ -56,9 +56,6 @@
       }
 
       .shorts-item {
-        --shorts-cue-right: max(34px, env(safe-area-inset-right));
-        --shorts-cue-bottom: max(96px, calc(env(safe-area-inset-bottom) + 88px));
-
         position: relative;
         display: grid;
         min-height: 100svh;
@@ -67,31 +64,6 @@
         place-items: stretch;
         padding: 0;
         background: #000;
-      }
-
-      @media (max-width: 620px) {
-        .shorts-item {
-          --shorts-cue-right: max(16px, env(safe-area-inset-right));
-          --shorts-cue-bottom: max(118px, calc(env(safe-area-inset-bottom) + 108px));
-        }
-      }
-
-      .shorts-item::after {
-        content: "";
-        position: absolute;
-        z-index: 1;
-        right: var(--shorts-cue-right);
-        bottom: var(--shorts-cue-bottom);
-        width: 66px;
-        height: 76px;
-        pointer-events: none;
-        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 70%);
-        opacity: 0;
-        transition: opacity 180ms ease;
-      }
-
-      .shorts-item.is-active::after {
-        opacity: 1;
       }
 
       .shorts-video-shell {
@@ -109,68 +81,6 @@
         height: 100%;
         border: 0;
         background: #000;
-      }
-
-      .shorts-next-cue {
-        position: absolute;
-        z-index: 2;
-        right: var(--shorts-cue-right);
-        pointer-events: none;
-        bottom: var(--shorts-cue-bottom);
-        display: grid;
-        width: 44px;
-        height: 52px;
-        place-items: center;
-        opacity: 0;
-        transition: opacity 180ms ease;
-      }
-
-      .shorts-item.is-active .shorts-next-cue {
-        opacity: 0.92;
-      }
-
-      .shorts-next-cue::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border: 1px solid rgba(255, 255, 255, 0.26);
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.34);
-        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
-      }
-
-      .shorts-next-cue-mark {
-        position: relative;
-        width: 17px;
-        height: 17px;
-        border-right: 3px solid rgba(255, 255, 255, 0.92);
-        border-bottom: 3px solid rgba(255, 255, 255, 0.92);
-        transform: rotate(45deg);
-        animation: shortsNextCue 1450ms ease-in-out infinite;
-      }
-
-      .shorts-next-cue-mark + .shorts-next-cue-mark {
-        margin-top: -18px;
-        animation-delay: 160ms;
-      }
-
-      @keyframes shortsNextCue {
-        0%,
-        100% {
-          opacity: 0.25;
-          transform: translateY(-5px) rotate(45deg);
-        }
-
-        45% {
-          opacity: 1;
-          transform: translateY(4px) rotate(45deg);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .shorts-next-cue-mark {
-          animation: none;
-        }
       }
 
       .shorts-swipe-hint {
@@ -306,11 +216,17 @@
       let touchStartY = null;
       let wheelLocked = false;
       let hasDismissedSwipeHint = false;
+      let pendingActivationIndex = 0;
 
       function dismissSwipeHint() {
         if (hasDismissedSwipeHint) return;
         hasDismissedSwipeHint = true;
         elements.shortsSwipeHint.hidden = true;
+        const targetIndex = pendingActivationIndex >= 0 ? pendingActivationIndex : Math.max(activeIndex, 0);
+        pendingActivationIndex = -1;
+        if (shortsPool.length > 0) {
+          activateShortsItem(targetIndex);
+        }
       }
 
       function isSwipeHintVisible() {
@@ -386,18 +302,6 @@
         return fallback;
       }
 
-      function createNextCue() {
-        const cue = document.createElement("div");
-        cue.className = "shorts-next-cue";
-        cue.setAttribute("aria-hidden", "true");
-        for (let index = 0; index < 2; index += 1) {
-          const mark = document.createElement("span");
-          mark.className = "shorts-next-cue-mark";
-          cue.append(mark);
-        }
-        return cue;
-      }
-
       function createShortsItem(clip, index) {
         const item = document.createElement("article");
         item.className = "shorts-item";
@@ -407,7 +311,7 @@
         shell.className = "shorts-video-shell";
         shell.replaceChildren(createPlaceholder(clip));
 
-        item.append(shell, createNextCue());
+        item.append(shell);
         observer.observe(item);
         return item;
       }
@@ -464,6 +368,10 @@
 
       function activateShortsItem(index) {
         if (index < 0 || index >= shortsPool.length) return;
+        if (isSwipeHintVisible()) {
+          pendingActivationIndex = index;
+          return;
+        }
         maybeExtendShortsFeed(index);
         if (index === activeIndex) return;
         clearAutoAdvance();
@@ -607,7 +515,11 @@
           shortsPool = buildShortsPool(allClips);
           renderShortsFeed();
           if (shortsPool.length > 0) {
-            activateShortsItem(0);
+            if (isSwipeHintVisible()) {
+              pendingActivationIndex = 0;
+            } else {
+              activateShortsItem(0);
+            }
           }
         } catch {
           allClips = [];

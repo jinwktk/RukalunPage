@@ -9,8 +9,9 @@ const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://www.rukalun.mydns.jp/";
 const pageTitle = `${displaySiteName} | Twitch Clip・配信切り抜き検索`;
 const shortsPagePath = "shorts/index.html";
+const shortsRoutePath = "shorts/";
 const legacyShortsPagePath = "ruka-shorts.html";
-const shortsPageUrl = `${pageUrl}${shortsPagePath}`;
+const shortsPageUrl = `${pageUrl}${shortsRoutePath}`;
 const shortsPageTitle = `RukaShorts（るかしょーつ） | ${displaySiteName}`;
 const gaMeasurementId = "G-TTVJN1V2LJ";
 const gaScriptUrl = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
@@ -206,13 +207,13 @@ test("clip-search.html keeps old new-repo paths working", () => {
   assert.match(html, new RegExp(`<link rel="canonical" href="${pageUrl}" />`));
 });
 
-test("ruka-shorts.html redirects to shorts/index.html", () => {
+test("ruka-shorts.html redirects to shorts directory route", () => {
   const html = readText(legacyShortsPagePath);
 
   assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
   assert.match(html, new RegExp(`<link rel="canonical" href="${escapeRegExp(shortsPageUrl)}" />`));
-  assert.match(html, /<meta http-equiv="refresh" content="0; url=\.\/shorts\/index\.html" \/>/);
-  assert.match(html, /new URL\("\.\/shorts\/index\.html", window\.location\.href\)/);
+  assert.match(html, /<meta http-equiv="refresh" content="0; url=\.\/shorts\/" \/>/);
+  assert.match(html, /new URL\("\.\/shorts\/", window\.location\.href\)/);
   assert.match(html, /target\.search = window\.location\.search;/);
   assert.match(html, /target\.hash = window\.location\.hash;/);
   assert.match(html, /window\.location\.replace\(target\);/);
@@ -609,15 +610,15 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /ruka-shorts\.html/);
   assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(readme, /ファーストビュー/);
-  assert.match(readme, /shorts\/index\.htmlへ移動/);
+  assert.match(readme, /\.\/shorts\/へ移動/);
   assert.match(readme, /赤ボタン/);
   assert.match(readme, /紫ボタン/);
   assert.match(readme, /bikkuri-56px\.webp/);
   assert.match(readme, /Hi-56px\.webp/);
   assert.match(readme, /Clipカードからの導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
-  assert.match(readme, /下向きキュー/);
-  assert.match(readme, /シークバーより上/);
+  assert.match(readme, /常時キューは置きません/);
+  assert.match(readme, /初回案内を閉じるまではTwitch iframeを生成せず/);
   assert.match(readme, /muted=false/);
   assert.match(readme, /currentTime/);
   assert.match(readme, /duration/);
@@ -659,15 +660,15 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /ruka-shorts\.html/);
   assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(agents, /ファーストビュー/);
-  assert.match(agents, /shorts\/index\.htmlへ移動/);
+  assert.match(agents, /\.\/shorts\/へ移動/);
   assert.match(agents, /赤ボタン/);
   assert.match(agents, /紫ボタン/);
   assert.match(agents, /bikkuri-56px\.webp/);
   assert.match(agents, /Hi-56px\.webp/);
   assert.match(agents, /Clipカードからの導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
-  assert.match(agents, /下向きキュー/);
-  assert.match(agents, /シークバーより上/);
+  assert.match(agents, /常時キューは置かない/);
+  assert.match(agents, /初回案内を閉じるまではiframeを生成しない/);
   assert.match(agents, /muted=false/);
   assert.match(agents, /currentTime/);
   assert.match(agents, /duration/);
@@ -780,7 +781,7 @@ test("RukaShorts has a first-view page link while cards stay unchanged", () => {
   assert.match(html, /id="heroSearchLink" class="button primary" href="#searchPanel">検索する<\/a>/);
   assert.match(
     html,
-    /id="heroShortsLink" class="button hero-shorts-button" href="\.\/shorts\/index\.html">[\s\S]*class="hero-button-stamp" src="\.\/assets\/rukalun\/bikkuri-56px\.webp"[\s\S]*るかしょーつ[\s\S]*<\/a>/
+    /id="heroShortsLink" class="button hero-shorts-button" href="\.\/shorts\/">[\s\S]*class="hero-button-stamp" src="\.\/assets\/rukalun\/bikkuri-56px\.webp"[\s\S]*るかしょーつ[\s\S]*<\/a>/
   );
   assert.match(
     html,
@@ -839,22 +840,17 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.doesNotMatch(html, /<iframe[^>]+clips\.twitch\.tv/i);
 
   assert.match(html, /\.shorts-feed\s*\{[\s\S]*height: 100svh;[\s\S]*overflow-y: auto;[\s\S]*scroll-snap-type: y mandatory;[\s\S]*touch-action: pan-y;/);
-  assert.match(html, /\.shorts-item\s*\{[\s\S]*--shorts-cue-right: max\(34px, env\(safe-area-inset-right\)\);[\s\S]*--shorts-cue-bottom: max\(96px, calc\(env\(safe-area-inset-bottom\) \+ 88px\)\);[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;[\s\S]*padding: 0;/);
-  assert.match(html, /@media \(max-width: 620px\)\s*\{[\s\S]*--shorts-cue-right: max\(16px, env\(safe-area-inset-right\)\);[\s\S]*--shorts-cue-bottom: max\(118px, calc\(env\(safe-area-inset-bottom\) \+ 108px\)\);/);
-  assert.match(html, /\.shorts-item::after\s*\{[\s\S]*right: var\(--shorts-cue-right\);[\s\S]*bottom: var\(--shorts-cue-bottom\);[\s\S]*pointer-events: none;[\s\S]*radial-gradient\(ellipse at center, rgba\(0, 0, 0, 0\.5\), transparent 70%\);/);
+  assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;[\s\S]*padding: 0;/);
+  assert.doesNotMatch(html, /--shorts-cue-right|--shorts-cue-bottom/);
+  assert.doesNotMatch(html, /\.shorts-item::after|\.shorts-item\.is-active::after/);
   assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: 100vw;[\s\S]*height: 100svh;/);
   assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
-  assert.match(html, /\.shorts-next-cue\s*\{[\s\S]*position: absolute;[\s\S]*right: var\(--shorts-cue-right\);[\s\S]*pointer-events: none;[\s\S]*bottom: var\(--shorts-cue-bottom\);/);
-  assert.match(html, /\.shorts-next-cue-mark\s*\{[\s\S]*border-right: 3px solid rgba\(255, 255, 255, 0\.92\);[\s\S]*border-bottom: 3px solid rgba\(255, 255, 255, 0\.92\);/);
+  assert.doesNotMatch(html, /shorts-next-cue|shorts-next-cue-mark|shortsNextCue/);
   assert.match(html, /\.shorts-swipe-hint\s*\{[\s\S]*position: fixed;[\s\S]*inset: 0;[\s\S]*z-index: 4;[\s\S]*display: grid;[\s\S]*place-items: center;[\s\S]*background: rgba\(0, 0, 0, 0\.42\);/);
   assert.match(html, /\.shorts-swipe-hint\[hidden\]\s*\{[\s\S]*display: none;/);
   assert.match(html, /\.shorts-swipe-hint img\s*\{[\s\S]*width: min\(180px, 48vw\);[\s\S]*height: auto;/);
-  assert.match(html, /@keyframes shortsNextCue/);
-  assert.match(html, /function createNextCue\(\) \{/);
-  assert.match(html, /cue\.className = "shorts-next-cue";/);
-  assert.match(html, /cue\.setAttribute\("aria-hidden", "true"\);/);
-  assert.match(html, /mark\.className = "shorts-next-cue-mark";/);
-  assert.match(html, /item\.append\(shell, createNextCue\(\)\);/);
+  assert.doesNotMatch(html, /function createNextCue\(\)/);
+  assert.match(html, /item\.append\(shell\);/);
 
   assert.match(html, /const DATA_PATH = "\.\.\/clip-search-data\.json";/);
   assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
@@ -863,9 +859,13 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /const AUTO_ADVANCE_FALLBACK_MS = 30000;/);
   assert.match(html, /shortsSwipeHint: requireElement\("#shortsSwipeHint"\)/);
   assert.match(html, /let hasDismissedSwipeHint = false;/);
+  assert.match(html, /let pendingActivationIndex = 0;/);
   assert.match(html, /function dismissSwipeHint\(\) \{/);
   assert.match(html, /hasDismissedSwipeHint = true;/);
   assert.match(html, /elements\.shortsSwipeHint\.hidden = true;/);
+  assert.match(html, /const targetIndex = pendingActivationIndex >= 0 \? pendingActivationIndex : Math\.max\(activeIndex, 0\);/);
+  assert.match(html, /pendingActivationIndex = -1;/);
+  assert.match(html, /if \(shortsPool\.length > 0\) \{[\s\S]*activateShortsItem\(targetIndex\);[\s\S]*\}/);
   assert.match(html, /function isSwipeHintVisible\(\) \{/);
   assert.match(html, /elements\.shortsSwipeHint\.addEventListener\("click", dismissSwipeHint\);/);
   assert.match(html, /if \(isSwipeHintVisible\(\)\) \{[\s\S]*if \(event\.key === "Enter" \|\| event\.key === " "\) \{[\s\S]*dismissSwipeHint\(\);[\s\S]*return;/);
@@ -910,6 +910,7 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /window\.addEventListener\("message", handleEmbedMessage\);/);
   assert.doesNotMatch(html, /thumbnailUrl[\s\S]*--shorts-thumb/);
   assert.match(html, /function activateShortsItem\(index\) \{/);
+  assert.match(html, /if \(isSwipeHintVisible\(\)\) \{[\s\S]*pendingActivationIndex = index;[\s\S]*return;[\s\S]*\}/);
   assert.match(html, /maybeExtendShortsFeed\(index\);/);
   assert.match(html, /previousShell\?\.replaceChildren\(createPlaceholder\(shortsPool\[activeIndex\]\)\);/);
   assert.match(html, /iframe\.className = "shorts-embed-frame";/);
@@ -931,6 +932,7 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /elements\.shortsFeed\.addEventListener\("touchstart", handleTouchStart, \{ passive: true \}\);/);
   assert.match(html, /elements\.shortsFeed\.addEventListener\("touchend", handleTouchEnd\);/);
   assert.match(html, /elements\.shortsFeed\.addEventListener\("wheel", handleWheel, \{ passive: false \}\);/);
+  assert.match(html, /if \(shortsPool\.length > 0\) \{[\s\S]*if \(isSwipeHintVisible\(\)\) \{[\s\S]*pendingActivationIndex = 0;[\s\S]*\} else \{[\s\S]*activateShortsItem\(0\);[\s\S]*\}/);
 });
 
 test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
