@@ -8,6 +8,9 @@ const displaySiteName = "🖇るっかるんくりっぷ🖇";
 const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://www.rukalun.mydns.jp/";
 const pageTitle = `${displaySiteName} | Twitch Clip・配信切り抜き検索`;
+const shortsPagePath = "ruka-shorts.html";
+const shortsPageUrl = `${pageUrl}${shortsPagePath}`;
+const shortsPageTitle = `RukaShorts（るかしょーつ） | ${displaySiteName}`;
 const gaMeasurementId = "G-TTVJN1V2LJ";
 const gaScriptUrl = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
 const kofiUsername = "jinnymeia";
@@ -145,6 +148,7 @@ test("index.html is the public clip search page for RukalunPage", () => {
 
 test("required page assets and data are present", () => {
   const requiredFiles = [
+    shortsPagePath,
     "clip-search-data.json",
     googleVerificationFile,
     "assets/rukalun/clip-search-hero.png",
@@ -536,6 +540,7 @@ test("sitemap lists only the canonical public URL", () => {
   assert.match(sitemap, new RegExp(`<lastmod>${pageUpdatedOn}</lastmod>`));
   assert.doesNotMatch(sitemap, /<changefreq>|<priority>/);
   assert.doesNotMatch(sitemap, /clip-search\.html/);
+  assert.doesNotMatch(sitemap, /ruka-shorts\.html/);
 });
 
 test("text sitemap lists only the canonical public URL", () => {
@@ -543,6 +548,7 @@ test("text sitemap lists only the canonical public URL", () => {
 
   assert.equal(sitemap.trim(), pageUrl);
   assert.doesNotMatch(sitemap, /clip-search\.html/);
+  assert.doesNotMatch(sitemap, /ruka-shorts\.html/);
 });
 
 test("documentation records SEO operation constraints", () => {
@@ -578,9 +584,13 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /タイトルバーを持たず/);
   assert.match(readme, /右上に大きな閉じるボタン/);
   assert.match(readme, /閉じるとiframeを破棄/);
-  assert.match(readme, /ランダムClip視聴/);
+  assert.match(readme, /RukaShorts（るかしょーつ）/);
+  assert.match(readme, /ruka-shorts\.html/);
   assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(readme, /検索ヒット集合/);
+  assert.match(readme, /スクロール \/ スワイプ/);
+  assert.match(readme, /loop=true/);
+  assert.match(readme, /noindex,follow/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -610,9 +620,13 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /タイトルバーを持たず/);
   assert.match(agents, /右上に大きな閉じるボタン/);
   assert.match(agents, /閉じるとiframeを破棄/);
-  assert.match(agents, /ランダムClip視聴/);
+  assert.match(agents, /RukaShorts（るかしょーつ）/);
+  assert.match(agents, /ruka-shorts\.html/);
   assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(agents, /検索ヒット集合/);
+  assert.match(agents, /スクロール \/ スワイプ/);
+  assert.match(agents, /loop=true/);
+  assert.match(agents, /noindex,follow/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -712,68 +726,86 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
 });
 
-test("random clip shorts view can open from top, search hits, and clip cards", () => {
+test("RukaShorts opens as a separate page from top, search hits, and clip cards", () => {
   const html = readText("index.html");
 
-  assert.match(html, /id="heroShortsLink" class="button primary shorts-entry-button" href="#clipShorts"/);
+  assert.match(html, /id="heroShortsLink" class="button primary shorts-entry-button" href="\.\/ruka-shorts\.html"/);
   assert.match(html, /id="openShortsButton" class="button shorts-entry-button" type="button"/);
-  assert.match(html, /id="clipShorts"/);
-  assert.match(html, /class="clip-shorts"/);
-  assert.match(html, /aria-labelledby="clipShortsTitle"/);
-  assert.match(html, /id="clipShortsFrameWrap"/);
-  assert.match(html, /id="clipShortsPlaceholder"/);
-  assert.match(html, /id="clipShortsFallbackLink"/);
-  assert.match(html, /id="clipShortsPrev"/);
-  assert.match(html, /id="clipShortsShuffle"/);
-  assert.match(html, /id="clipShortsNext"/);
-  assert.match(html, /id="clipShortsClose"/);
+  assert.doesNotMatch(html, /id="clipShorts"/);
+  assert.doesNotMatch(html, /aria-labelledby="clipShortsTitle"/);
+  assert.doesNotMatch(html, /clipShorts: requireElement\("#clipShorts"\)/);
+  assert.doesNotMatch(html, /clipShortsFrameWrap/);
   assert.doesNotMatch(html, /<iframe[^>]+clip-shorts-frame/i);
 
-  assert.match(html, /\.clip-shorts\s*\{[\s\S]*scroll-margin-top: 90px;/);
-  assert.match(html, /\.clip-shorts-layout\s*\{[\s\S]*grid-template-columns: minmax\(280px, 390px\) minmax\(0, 1fr\);/);
-  assert.match(html, /\.clip-shorts-phone\s*\{[\s\S]*aspect-ratio: 9 \/ 16;/);
-  assert.match(html, /\.clip-shorts-frame-wrap\s*\{[\s\S]*aspect-ratio: 9 \/ 16;/);
-  assert.match(html, /\.clip-shorts-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
-  assert.match(html, /\.clip-shorts\.is-playing\s*\{[\s\S]*border-color: #f2b4ce;/);
-  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.clip-shorts-layout\s*\{[\s\S]*grid-template-columns: 1fr;/);
-
-  assert.match(html, /clipShorts: requireElement\("#clipShorts"\)/);
-  assert.match(html, /clipShortsFrameWrap: requireElement\("#clipShortsFrameWrap"\)/);
-  assert.match(html, /clipShortsFallbackLink: requireElement\("#clipShortsFallbackLink"\)/);
   assert.match(html, /heroShortsLink: requireElement\("#heroShortsLink"\)/);
   assert.match(html, /openShortsButton: requireElement\("#openShortsButton"\)/);
-  assert.match(html, /let shortsClipPool = \[\];/);
-  assert.match(html, /let currentShortsClipIndex = -1;/);
-  assert.match(html, /function getShortsClipPool\(\) \{/);
-  assert.match(html, /return hasActiveSearchCondition\(\) \? filteredClips : allClips;/);
-  assert.match(html, /function openRandomShortFromCurrentResults\(trigger\) \{/);
-  assert.match(html, /filterClips\(\);[\s\S]*const pool = getShortsClipPool\(\);/);
-  assert.match(html, /function openClipShorts\(clip, pool = getShortsClipPool\(\), trigger = null\) \{/);
-  assert.match(html, /shortsClipPool = normalizeShortsPool\(pool, clip\);/);
-  assert.match(html, /currentShortsClipIndex = Math\.max\(0, shortsClipPool\.findIndex\(\(candidate\) => candidate\.id === clip\.id\)\);/);
-  assert.match(html, /function renderShortsClip\(\) \{/);
-  assert.match(html, /const embedUrl = toTwitchEmbedUrl\(clip\);/);
-  assert.match(html, /elements\.clipShortsFrameWrap\.replaceChildren\(iframe\);/);
-  assert.match(html, /iframe\.className = "clip-shorts-frame";/);
-  assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
-  assert.match(html, /function moveShortsClip\(offset\) \{/);
-  assert.match(html, /currentShortsClipIndex = \(currentShortsClipIndex \+ offset \+ shortsClipPool\.length\) % shortsClipPool\.length;/);
-  assert.match(html, /function shuffleShortsClip\(\) \{/);
-  assert.match(html, /function closeClipShorts\(\) \{/);
-  assert.match(html, /elements\.clipShortsFrameWrap\.replaceChildren\(\);/);
-  assert.match(html, /lastShortsTrigger\?\.focus\(\{ preventScroll: true \}\);/);
+  assert.match(html, /const SHORTS_PAGE_PATH = "\.\/ruka-shorts\.html";/);
+  assert.match(html, /function getShortsSearchParams\(clip = null\) \{/);
+  assert.match(html, /const searchQuery = elements\.searchInput\.value\.trim\(\);/);
+  assert.match(html, /if \(clip\?\.id\) params\.set\("clip", clip\.id\);/);
+  assert.match(html, /function createShortsUrl\(clip = null\) \{/);
+  assert.match(html, /return `\$\{SHORTS_PAGE_PATH\}\$\{query \? `\?\$\{query\}` : ""\}`;/);
+  assert.match(html, /function openShortsPageFromCurrentResults\(\) \{/);
+  assert.match(html, /window\.location\.href = createShortsUrl\(\);/);
 
   assert.match(html, /const shortsButton = document\.createElement\("button"\);/);
   assert.match(html, /shortsButton\.className = "clip-shorts-button";/);
-  assert.match(html, /shortsButton\.setAttribute\("aria-label", "このClipをランダム視聴で開く"\);/);
-  assert.match(html, /shortsButton\.addEventListener\("click", \(\) => openClipShorts\(clip, getShortsClipPool\(\), shortsButton\)\);/);
+  assert.match(html, /shortsButton\.setAttribute\("aria-label", "このClipをRukaShortsで開く"\);/);
+  assert.match(html, /shortsButton\.addEventListener\("click", \(\) => \{[\s\S]*window\.location\.href = createShortsUrl\(clip\);[\s\S]*\}\);/);
   assert.match(html, /actions\.append\(favoriteButton, shortsButton, linkGroup\)/);
-  assert.match(html, /elements\.heroShortsLink\.addEventListener\("click", \(event\) => \{[\s\S]*openRandomShortFromCurrentResults\(elements\.heroShortsLink\);[\s\S]*\}\);/);
-  assert.match(html, /elements\.openShortsButton\.addEventListener\("click", \(\) => openRandomShortFromCurrentResults\(elements\.openShortsButton\)\);/);
-  assert.match(html, /elements\.clipShortsPrev\.addEventListener\("click", \(\) => moveShortsClip\(-1\)\);/);
-  assert.match(html, /elements\.clipShortsNext\.addEventListener\("click", \(\) => moveShortsClip\(1\)\);/);
-  assert.match(html, /elements\.clipShortsShuffle\.addEventListener\("click", shuffleShortsClip\);/);
-  assert.match(html, /elements\.clipShortsClose\.addEventListener\("click", closeClipShorts\);/);
+  assert.match(html, /elements\.openShortsButton\.addEventListener\("click", openShortsPageFromCurrentResults\);/);
+});
+
+test("RukaShorts page provides a YouTube Shorts style autoplay loop feed", () => {
+  const html = readText(shortsPagePath);
+
+  assert.ok(html.includes(`<title>${shortsPageTitle}</title>`));
+  assert.match(html, new RegExp(`<link rel="canonical" href="${shortsPageUrl}" />`));
+  assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
+  assert.match(html, /<body data-page="ruka-shorts">/);
+  assert.match(html, /id="shortsFeed" class="shorts-feed"/);
+  assert.match(html, /id="shortsStatus"/);
+  assert.match(html, /id="shortsFilterSummary"/);
+  assert.match(html, /id="shortsEmpty"/);
+  assert.doesNotMatch(html, /<iframe[^>]+clips\.twitch\.tv/i);
+
+  assert.match(html, /\.shorts-feed\s*\{[\s\S]*height: 100svh;[\s\S]*overflow-y: auto;[\s\S]*scroll-snap-type: y mandatory;[\s\S]*touch-action: pan-y;/);
+  assert.match(html, /\.shorts-item\s*\{[\s\S]*min-height: 100svh;[\s\S]*scroll-snap-align: start;[\s\S]*scroll-snap-stop: always;/);
+  assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*aspect-ratio: 9 \/ 16;/);
+  assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
+
+  assert.match(html, /const DATA_PATH = "\.\/clip-search-data\.json";/);
+  assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
+  assert.match(html, /const urlParams = new URLSearchParams\(window\.location\.search\);/);
+  assert.match(html, /const query = urlParams\.get\("q"\) \?\? "";/);
+  assert.match(html, /const creator = urlParams\.get\("creator"\) \?\? "";/);
+  assert.match(html, /const game = urlParams\.get\("game"\) \?\? "";/);
+  assert.match(html, /const sort = urlParams\.get\("sort"\) \?\? "newest";/);
+  assert.match(html, /const startClipId = urlParams\.get\("clip"\) \?\? "";/);
+  assert.match(html, /function buildShortsPool\(clips\) \{/);
+  assert.match(html, /const selectedClip = startClipId[\s\S]*filtered\.find\(\(clip\) => clip\.id === startClipId\)/);
+  assert.match(html, /return \[selectedClip, \.\.\.shuffleClips\(rest\)\];/);
+  assert.match(html, /function shuffleClips\(clips\) \{/);
+  assert.match(html, /function toTwitchEmbedUrl\(clip\) \{/);
+  assert.match(html, /embedUrl\.searchParams\.set\("autoplay", "true"\);/);
+  assert.match(html, /embedUrl\.searchParams\.set\("loop", "true"\);/);
+  assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
+  assert.doesNotMatch(html, /thumbnailUrl[\s\S]*--shorts-thumb/);
+  assert.match(html, /function activateShortsItem\(index\) \{/);
+  assert.match(html, /previousShell\?\.replaceChildren\(createPlaceholder\(shortsPool\[activeIndex\]\)\);/);
+  assert.match(html, /iframe\.className = "shorts-embed-frame";/);
+  assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
+  assert.match(html, /shell\.replaceChildren\(iframe\);/);
+  assert.match(html, /const observer = new IntersectionObserver/);
+  assert.match(html, /root: elements\.shortsFeed/);
+  assert.match(html, /function scrollToClip\(index\) \{/);
+  assert.match(html, /target\.scrollIntoView\(\{ block: "start", behavior: "smooth" \}\);/);
+  assert.match(html, /function handleTouchStart\(event\) \{/);
+  assert.match(html, /function handleTouchEnd\(event\) \{/);
+  assert.match(html, /Math\.abs\(deltaY\) < SWIPE_THRESHOLD/);
+  assert.match(html, /scrollToClip\(activeIndex \+ \(deltaY > 0 \? 1 : -1\)\);/);
+  assert.match(html, /elements\.shortsFeed\.addEventListener\("touchstart", handleTouchStart, \{ passive: true \}\);/);
+  assert.match(html, /elements\.shortsFeed\.addEventListener\("touchend", handleTouchEnd\);/);
 });
 
 test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {

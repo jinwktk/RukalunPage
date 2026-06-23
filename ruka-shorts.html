@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RukaShorts（るかしょーつ） | 🖇るっかるんくりっぷ🖇</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="https://www.rukalun.mydns.jp/ruka-shorts.html" />
+    <link rel="icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-favicon.ico" sizes="any" />
+    <link rel="icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-apple-touch-icon.png" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTVJN1V2LJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-TTVJN1V2LJ");
+    </script>
+    <style>
+      :root {
+        --ink: #fff7fb;
+        --muted: rgba(255, 247, 251, 0.72);
+        --panel: rgba(22, 20, 27, 0.78);
+        --line: rgba(255, 255, 255, 0.18);
+        --pink: #f28ab8;
+        --mint: #91ead8;
+        --amber: #ffd982;
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+        --font-cute: "UD デジタル 教科書体 NP", "Yu Gothic", "Hiragino Maru Gothic ProN", "Meiryo", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #15131a;
+        color: var(--ink);
+        font-family: var(--font-cute);
+        letter-spacing: 0;
+        line-height: 1.55;
+        overscroll-behavior-y: contain;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      a,
+      button {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .shorts-app {
+        position: relative;
+        min-height: 100svh;
+        background:
+          linear-gradient(180deg, rgba(242, 138, 184, 0.18), rgba(145, 234, 216, 0.08) 42%, rgba(21, 19, 26, 0.94)),
+          #15131a;
+      }
+
+      .shorts-bar {
+        position: fixed;
+        z-index: 10;
+        top: max(12px, env(safe-area-inset-top));
+        left: max(12px, env(safe-area-inset-left));
+        right: max(12px, env(safe-area-inset-right));
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+        pointer-events: none;
+      }
+
+      .shorts-pill,
+      .shorts-icon-button {
+        pointer-events: auto;
+        border: 1px solid var(--line);
+        background: rgba(22, 20, 27, 0.66);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+      }
+
+      .shorts-icon-button {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border-radius: 8px;
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 1.35rem;
+        font-weight: 900;
+      }
+
+      .shorts-pill {
+        min-width: 0;
+        border-radius: 8px;
+        padding: 8px 12px;
+      }
+
+      .shorts-title {
+        display: block;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 900;
+        line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .shorts-filter-summary {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
+        line-height: 1.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .shorts-feed {
+        height: 100svh;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        touch-action: pan-y;
+        scrollbar-width: none;
+        overscroll-behavior-y: contain;
+        background: #15131a;
+      }
+
+      .shorts-feed::-webkit-scrollbar {
+        display: none;
+      }
+
+      .shorts-item {
+        position: relative;
+        display: grid;
+        min-height: 100svh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        place-items: center;
+        padding: max(74px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom));
+      }
+
+      .shorts-video-shell {
+        position: relative;
+        width: min(100%, 430px);
+        aspect-ratio: 9 / 16;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(255, 247, 251, 0.08), rgba(145, 234, 216, 0.08)),
+          #0f0d14;
+        box-shadow: var(--shadow);
+      }
+
+      .shorts-embed-frame {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #0f0d14;
+      }
+
+      .shorts-placeholder,
+      .shorts-fallback {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        align-content: end;
+        gap: 10px;
+        padding: 20px;
+        background:
+          linear-gradient(180deg, rgba(15, 13, 20, 0.18), rgba(15, 13, 20, 0.88)),
+          var(--shorts-thumb, linear-gradient(135deg, #3a2837, #16362f));
+        background-position: center;
+        background-size: cover;
+      }
+
+      .shorts-placeholder strong,
+      .shorts-fallback strong {
+        display: block;
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 900;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+      }
+
+      .shorts-placeholder span,
+      .shorts-fallback span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 800;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+      }
+
+      .shorts-fallback a {
+        justify-self: start;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 8px;
+        background: rgba(255, 247, 251, 0.12);
+        color: #ffffff;
+        padding: 8px 10px;
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 900;
+      }
+
+      .shorts-side {
+        position: absolute;
+        right: max(14px, env(safe-area-inset-right));
+        bottom: max(92px, calc(env(safe-area-inset-bottom) + 82px));
+        display: grid;
+        gap: 10px;
+      }
+
+      .shorts-side a,
+      .shorts-side button {
+        display: grid;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background: rgba(22, 20, 27, 0.72);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 900;
+        backdrop-filter: blur(14px);
+      }
+
+      .shorts-side a:nth-child(1) {
+        color: var(--mint);
+      }
+
+      .shorts-side button {
+        color: var(--amber);
+      }
+
+      .shorts-status {
+        position: fixed;
+        z-index: 9;
+        left: max(14px, env(safe-area-inset-left));
+        bottom: max(14px, env(safe-area-inset-bottom));
+        max-width: calc(100vw - 28px);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(22, 20, 27, 0.72);
+        color: var(--muted);
+        padding: 8px 10px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+      }
+
+      .shorts-empty[hidden] {
+        display: none;
+      }
+
+      .shorts-empty {
+        position: fixed;
+        z-index: 11;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        background: rgba(21, 19, 26, 0.88);
+      }
+
+      .shorts-empty-inner {
+        display: grid;
+        gap: 10px;
+        width: min(420px, 100%);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .shorts-empty h2,
+      .shorts-empty p {
+        margin: 0;
+      }
+
+      .shorts-empty h2 {
+        font-size: 1.2rem;
+      }
+
+      .shorts-empty p {
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .shorts-empty a {
+        justify-self: start;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background: rgba(255, 247, 251, 0.12);
+        padding: 8px 10px;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      @media (min-width: 760px) {
+        .shorts-item {
+          padding-inline: 74px;
+        }
+
+        .shorts-video-shell {
+          width: min(62vh, 430px);
+        }
+      }
+
+      @media (max-width: 620px) {
+        .shorts-bar {
+          grid-template-columns: auto minmax(0, 1fr) auto;
+          gap: 8px;
+        }
+
+        .shorts-pill {
+          padding: 7px 9px;
+        }
+
+        .shorts-title {
+          font-size: 0.94rem;
+        }
+
+        .shorts-icon-button {
+          width: 40px;
+          height: 40px;
+        }
+
+        .shorts-item {
+          padding-inline: 0;
+        }
+
+        .shorts-video-shell {
+          width: min(100vw, calc((100svh - 98px) * 9 / 16));
+          border-radius: 0;
+          border-left: 0;
+          border-right: 0;
+        }
+
+        .shorts-status {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-page="ruka-shorts">
+    <div class="shorts-app">
+      <header class="shorts-bar" aria-label="RukaShorts">
+        <a class="shorts-icon-button" href="./" aria-label="Clip検索へ戻る">‹</a>
+        <div class="shorts-pill">
+          <span class="shorts-title">RukaShorts（るかしょーつ）</span>
+          <span id="shortsFilterSummary" class="shorts-filter-summary">読み込み中</span>
+        </div>
+        <a class="shorts-icon-button" href="./#searchPanel" aria-label="検索を開く">⌕</a>
+      </header>
+
+      <main id="shortsFeed" class="shorts-feed" tabindex="0" aria-live="polite"></main>
+
+      <p id="shortsStatus" class="shorts-status">Clipデータを読み込み中</p>
+
+      <section id="shortsEmpty" class="shorts-empty" hidden>
+        <div class="shorts-empty-inner">
+          <h2>Clipが見つかりません</h2>
+          <p>条件を変えると表示できるClipが増えます。</p>
+          <a href="./#searchPanel">検索へ戻る</a>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const DATA_PATH = "./clip-search-data.json";
+      const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
+      const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
+      const SWIPE_THRESHOLD = 48;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get("q") ?? "";
+      const creator = urlParams.get("creator") ?? "";
+      const game = urlParams.get("game") ?? "";
+      const sort = urlParams.get("sort") ?? "newest";
+      const startClipId = urlParams.get("clip") ?? "";
+
+      function requireElement(selector) {
+        const element = document.querySelector(selector);
+        if (!element) throw new Error(`Missing required element: ${selector}`);
+        return element;
+      }
+
+      const elements = {
+        shortsFeed: requireElement("#shortsFeed"),
+        shortsStatus: requireElement("#shortsStatus"),
+        shortsFilterSummary: requireElement("#shortsFilterSummary"),
+        shortsEmpty: requireElement("#shortsEmpty"),
+      };
+
+      let allClips = [];
+      let shortsPool = [];
+      let activeIndex = -1;
+      let touchStartY = null;
+      let favoriteClips = loadFavoriteClips();
+
+      function normalizeText(value) {
+        return String(value ?? "")
+          .normalize("NFKC")
+          .toLocaleLowerCase("ja-JP")
+          .trim()
+          .replace(/\s+/g, " ");
+      }
+
+      function formatViews(value) {
+        if (typeof value !== "number" || !Number.isFinite(value)) return "再生数不明";
+        return `${value.toLocaleString("ja-JP")} views`;
+      }
+
+      function loadFavoriteClips() {
+        try {
+          const raw = localStorage.getItem(CLIP_FAVORITES_STORAGE_KEY);
+          const parsed = raw ? JSON.parse(raw) : {};
+          return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+        } catch {
+          return {};
+        }
+      }
+
+      function getSafeClipUrl(clip) {
+        try {
+          const parsed = new URL(clip?.url ?? "");
+          if (
+            parsed.protocol === "https:" &&
+            (parsed.hostname === "www.twitch.tv" || parsed.hostname === "clips.twitch.tv")
+          ) {
+            return parsed.href;
+          }
+        } catch {
+          return "https://www.twitch.tv/rukalun";
+        }
+        return "https://www.twitch.tv/rukalun";
+      }
+
+      function getTwitchEmbedParents() {
+        const parents = new Set([TWITCH_EMBED_PARENT_HOST]);
+        if (window.location.hostname) {
+          parents.add(window.location.hostname);
+        }
+        return Array.from(parents);
+      }
+
+      function getTwitchClipSlug(url) {
+        try {
+          const parsed = new URL(url);
+          if (parsed.hostname === "clips.twitch.tv") {
+            return parsed.pathname.split("/").filter(Boolean)[0] ?? "";
+          }
+          if (parsed.hostname === "www.twitch.tv") {
+            const segments = parsed.pathname.split("/").filter(Boolean);
+            const clipIndex = segments.indexOf("clip");
+            return clipIndex >= 0 ? segments[clipIndex + 1] ?? "" : "";
+          }
+        } catch {
+          return "";
+        }
+        return "";
+      }
+
+      function toTwitchEmbedUrl(clip) {
+        const slug = getTwitchClipSlug(clip?.url);
+        if (!slug) return "";
+        const embedUrl = new URL("https://clips.twitch.tv/embed");
+        embedUrl.searchParams.set("clip", slug);
+        embedUrl.searchParams.set("autoplay", "true");
+        embedUrl.searchParams.set("loop", "true");
+        for (const parent of getTwitchEmbedParents()) {
+          embedUrl.searchParams.append("parent", parent);
+        }
+        return embedUrl.href;
+      }
+
+      function getSearchText(clip) {
+        return normalizeText(`${clip.title} ${clip.creator} ${clip.gameName}`);
+      }
+
+      function sortClips(clips) {
+        const sorted = [...clips];
+        if (sort === "oldest") {
+          sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          return sorted;
+        }
+        if (sort === "views") {
+          sorted.sort((a, b) => (b.views ?? -1) - (a.views ?? -1));
+          return sorted;
+        }
+        if (sort === "title") {
+          sorted.sort((a, b) => String(a.title ?? "").localeCompare(String(b.title ?? ""), "ja-JP"));
+          return sorted;
+        }
+        if (sort === "favorites") {
+          sorted.sort((a, b) => (favoriteClips[b.id] ?? 0) - (favoriteClips[a.id] ?? 0));
+          return sorted;
+        }
+        sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        return sorted;
+      }
+
+      function filterClips(clips) {
+        const terms = normalizeText(query).split(" ").filter(Boolean);
+        return sortClips(
+          clips.filter((clip) => {
+            const matchesQuery = terms.length === 0 || terms.every((term) => getSearchText(clip).includes(term));
+            const matchesCreator = !creator || clip.creator === creator;
+            const matchesGame = !game || clip.gameName === game;
+            return matchesQuery && matchesCreator && matchesGame;
+          })
+        );
+      }
+
+      function shuffleClips(clips) {
+        const shuffled = [...clips];
+        for (let index = shuffled.length - 1; index > 0; index -= 1) {
+          const nextIndex = Math.floor(Math.random() * (index + 1));
+          [shuffled[index], shuffled[nextIndex]] = [shuffled[nextIndex], shuffled[index]];
+        }
+        return shuffled;
+      }
+
+      function buildShortsPool(clips) {
+        const filtered = filterClips(clips);
+        if (filtered.length === 0 && !startClipId) return [];
+        const selectedClip = startClipId
+          ? filtered.find((clip) => clip.id === startClipId) ?? clips.find((clip) => clip.id === startClipId)
+          : filtered[Math.floor(Math.random() * filtered.length)];
+        if (!selectedClip) return [];
+        const rest = filtered.filter((clip) => clip.id !== selectedClip.id);
+        return [selectedClip, ...shuffleClips(rest)];
+      }
+
+      function getFilterSummary() {
+        const parts = [];
+        if (query) parts.push(`キーワード: ${query}`);
+        if (creator) parts.push(`作成: ${creator}`);
+        if (game) parts.push(`ゲーム: ${game}`);
+        if (sort && sort !== "newest") parts.push(`並び: ${sort}`);
+        return parts.length > 0 ? parts.join(" / ") : "全Clip";
+      }
+
+      function createPlaceholder(clip) {
+        const placeholder = document.createElement("div");
+        placeholder.className = "shorts-placeholder";
+        const title = document.createElement("strong");
+        title.textContent = clip?.title || "RukaShorts";
+        const meta = document.createElement("span");
+        meta.textContent = [
+          clip?.gameName || "ゲーム不明",
+          clip?.creator ? `作成: ${clip.creator}` : "作成者不明",
+          formatViews(clip?.views),
+        ].join(" / ");
+        placeholder.append(title, meta);
+        return placeholder;
+      }
+
+      function createFallback(clip) {
+        const fallback = document.createElement("div");
+        fallback.className = "shorts-fallback";
+        const title = document.createElement("strong");
+        title.textContent = clip?.title || "埋め込みで開けないClipです";
+        const meta = document.createElement("span");
+        meta.textContent = "Twitchで開けます。";
+        const link = document.createElement("a");
+        link.href = getSafeClipUrl(clip);
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Twitchで開く";
+        fallback.append(title, meta, link);
+        return fallback;
+      }
+
+      function createShortsItem(clip, index) {
+        const item = document.createElement("article");
+        item.className = "shorts-item";
+        item.dataset.index = String(index);
+
+        const shell = document.createElement("div");
+        shell.className = "shorts-video-shell";
+        shell.replaceChildren(createPlaceholder(clip));
+
+        const side = document.createElement("div");
+        side.className = "shorts-side";
+        const twitchLink = document.createElement("a");
+        twitchLink.href = getSafeClipUrl(clip);
+        twitchLink.target = "_blank";
+        twitchLink.rel = "noopener noreferrer";
+        twitchLink.setAttribute("aria-label", "Twitchで開く");
+        twitchLink.textContent = "▶";
+        const nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.setAttribute("aria-label", "次のClipへ");
+        nextButton.textContent = "⌄";
+        nextButton.addEventListener("click", () => scrollToClip(index + 1));
+        side.append(twitchLink, nextButton);
+
+        item.append(shell, side);
+        observer.observe(item);
+        return item;
+      }
+
+      function updateStatus() {
+        elements.shortsFilterSummary.textContent = `${getFilterSummary()} / ${shortsPool.length.toLocaleString("ja-JP")} clips`;
+        elements.shortsStatus.textContent =
+          activeIndex >= 0 && shortsPool.length > 0
+            ? `${activeIndex + 1} / ${shortsPool.length} clips`
+            : "Clipデータを読み込み中";
+      }
+
+      function renderShortsFeed() {
+        elements.shortsFeed.replaceChildren(...shortsPool.map(createShortsItem));
+        elements.shortsEmpty.hidden = shortsPool.length > 0;
+        updateStatus();
+      }
+
+      function activateShortsItem(index) {
+        if (index < 0 || index >= shortsPool.length || index === activeIndex) return;
+        const previousItem =
+          activeIndex >= 0 ? elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`) : null;
+        const previousShell = previousItem?.querySelector(".shorts-video-shell");
+        previousShell?.replaceChildren(createPlaceholder(shortsPool[activeIndex]));
+        previousItem?.classList.remove("is-active");
+
+        activeIndex = index;
+        const clip = shortsPool[activeIndex];
+        const item = elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`);
+        const shell = item?.querySelector(".shorts-video-shell");
+        if (!item || !shell) return;
+        item.classList.add("is-active");
+        const embedUrl = toTwitchEmbedUrl(clip);
+        if (!embedUrl) {
+          shell.replaceChildren(createFallback(clip));
+          updateStatus();
+          return;
+        }
+        const iframe = document.createElement("iframe");
+        iframe.className = "shorts-embed-frame";
+        iframe.title = clip.title ? `${clip.title}をRukaShortsで見る` : "Twitch Clip";
+        iframe.allow = "autoplay; fullscreen; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.src = embedUrl;
+        shell.replaceChildren(iframe);
+        updateStatus();
+      }
+
+      function scrollToClip(index) {
+        const targetIndex = (index + shortsPool.length) % shortsPool.length;
+        const target = elements.shortsFeed.querySelector(`[data-index="${targetIndex}"]`);
+        if (!target) return;
+        target.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+
+      function handleTouchStart(event) {
+        touchStartY = event.changedTouches[0]?.clientY ?? null;
+      }
+
+      function handleTouchEnd(event) {
+        if (touchStartY === null) return;
+        const endY = event.changedTouches[0]?.clientY ?? touchStartY;
+        const deltaY = touchStartY - endY;
+        touchStartY = null;
+        if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
+        scrollToClip(activeIndex + (deltaY > 0 ? 1 : -1));
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visibleEntry = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visibleEntry || visibleEntry.intersectionRatio < 0.58) return;
+          activateShortsItem(Number(visibleEntry.target.dataset.index));
+        },
+        {
+          root: elements.shortsFeed,
+          threshold: [0.58, 0.72, 0.9],
+        }
+      );
+
+      async function loadShortsData() {
+        try {
+          const response = await fetch(DATA_PATH);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          allClips = Array.isArray(data.clips) ? data.clips : [];
+          shortsPool = buildShortsPool(allClips);
+          renderShortsFeed();
+          if (shortsPool.length > 0) {
+            activateShortsItem(0);
+          }
+        } catch {
+          allClips = [];
+          shortsPool = [];
+          elements.shortsEmpty.hidden = false;
+          elements.shortsFilterSummary.textContent = "読み込み失敗";
+          elements.shortsStatus.textContent = "Clipデータを読み込めませんでした";
+        }
+      }
+
+      elements.shortsFeed.addEventListener("touchstart", handleTouchStart, { passive: true });
+      elements.shortsFeed.addEventListener("touchend", handleTouchEnd);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
+          event.preventDefault();
+          scrollToClip(activeIndex + 1);
+        }
+        if (event.key === "ArrowUp" || event.key === "PageUp") {
+          event.preventDefault();
+          scrollToClip(activeIndex - 1);
+        }
+      });
+
+      window.rukaShortsDebug = {
+        get activeIndex() {
+          return activeIndex;
+        },
+        get iframeCount() {
+          return document.querySelectorAll(".shorts-embed-frame").length;
+        },
+        scrollToClip,
+      };
+
+      loadShortsData();
+    </script>
+  </body>
+</html>

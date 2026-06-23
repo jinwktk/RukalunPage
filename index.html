@@ -202,10 +202,6 @@
         overflow: hidden;
       }
 
-      body.has-clip-shorts-open {
-        scroll-padding-top: 90px;
-      }
-
       a {
         color: var(--sky-ink);
       }
@@ -715,132 +711,6 @@
         outline-offset: 2px;
       }
 
-      .clip-shorts {
-        scroll-margin-top: 90px;
-        margin: 0 0 18px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 253, 0.9)),
-          var(--paper);
-        padding: 16px;
-        box-shadow: 0 12px 28px rgba(88, 55, 88, 0.08);
-      }
-
-      .clip-shorts.is-playing {
-        border-color: #f2b4ce;
-      }
-
-      .clip-shorts-layout {
-        display: grid;
-        grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
-        gap: 16px;
-        align-items: stretch;
-      }
-
-      .clip-shorts-phone {
-        display: grid;
-        aspect-ratio: 9 / 16;
-        min-height: 0;
-        border: 1px solid rgba(31, 23, 36, 0.16);
-        border-radius: 8px;
-        background: #1f1724;
-        overflow: hidden;
-        box-shadow: 0 16px 36px rgba(31, 22, 36, 0.18);
-      }
-
-      .clip-shorts-frame-wrap {
-        position: relative;
-        display: grid;
-        aspect-ratio: 9 / 16;
-        width: 100%;
-        place-items: center;
-        background:
-          linear-gradient(160deg, rgba(255, 232, 240, 0.16), rgba(232, 245, 255, 0.14)),
-          #1f1724;
-        color: #fff;
-        overflow: hidden;
-      }
-
-      .clip-shorts-frame {
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      .clip-shorts-placeholder {
-        display: grid;
-        gap: 10px;
-        padding: 22px;
-        text-align: center;
-      }
-
-      .clip-shorts-placeholder strong {
-        font-size: 1.15rem;
-        line-height: 1.35;
-      }
-
-      .clip-shorts-placeholder span {
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 0.9rem;
-        font-weight: 800;
-      }
-
-      .clip-shorts-panel {
-        display: grid;
-        align-content: space-between;
-        gap: 16px;
-        min-width: 0;
-      }
-
-      .clip-shorts-kicker {
-        color: #a43c70;
-        font-size: 0.82rem;
-        font-weight: 900;
-      }
-
-      .clip-shorts h2 {
-        font-size: 1.65rem;
-        line-height: 1.25;
-        overflow-wrap: anywhere;
-      }
-
-      .clip-shorts-status {
-        margin-top: 6px;
-        color: var(--muted);
-        font-size: 0.92rem;
-        font-weight: 800;
-      }
-
-      .clip-shorts-now {
-        display: grid;
-        gap: 8px;
-        min-width: 0;
-      }
-
-      .clip-shorts-now h3 {
-        font-size: 1.12rem;
-        line-height: 1.45;
-        overflow-wrap: anywhere;
-      }
-
-      .clip-shorts-meta {
-        color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 800;
-        overflow-wrap: anywhere;
-      }
-
-      .clip-shorts-controls {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .clip-shorts-fallback[hidden] {
-        display: none;
-      }
 
       .clip-actions {
         display: grid;
@@ -1538,18 +1408,6 @@
           font-size: 0.88rem;
         }
 
-        .clip-shorts {
-          padding: 12px;
-        }
-
-        .clip-shorts-layout {
-          grid-template-columns: 1fr;
-        }
-
-        .clip-shorts h2 {
-          font-size: 1.35rem;
-        }
-
         .filter-chip {
           display: none;
         }
@@ -1696,7 +1554,7 @@
             <span class="lead-line">おもちかえりできます。</span>
           </p>
           <div class="hero-actions" aria-label="主要操作">
-            <a id="heroShortsLink" class="button primary shorts-entry-button" href="#clipShorts">ランダム視聴</a>
+            <a id="heroShortsLink" class="button primary shorts-entry-button" href="./ruka-shorts.html">RukaShorts</a>
             <a class="button primary" href="#searchPanel">検索する</a>
             <a class="button" href="https://www.twitch.tv/rukalun" target="_blank" rel="noreferrer">Twitchへ</a>
           </div>
@@ -1790,43 +1648,6 @@
 
     <main class="wrap">
       <div id="notice" class="notice" hidden></div>
-      <section id="clipShorts" class="clip-shorts" aria-labelledby="clipShortsTitle">
-        <div class="clip-shorts-layout">
-          <div class="clip-shorts-phone" aria-live="polite">
-            <div id="clipShortsFrameWrap" class="clip-shorts-frame-wrap">
-              <div id="clipShortsPlaceholder" class="clip-shorts-placeholder">
-                <strong>ランダムClipを流し見</strong>
-                <span>Topや検索結果から、縦型ビューで1本ずつ開けます。</span>
-              </div>
-            </div>
-          </div>
-          <div class="clip-shorts-panel">
-            <div>
-              <p class="clip-shorts-kicker">Rukalun Clip Shorts</p>
-              <h2 id="clipShortsTitle">ランダムClip視聴</h2>
-              <p id="clipShortsStatus" class="clip-shorts-status">Clipデータ読み込み後に視聴できます。</p>
-            </div>
-            <div class="clip-shorts-now">
-              <h3 id="clipShortsClipTitle">まだClipを選んでいません</h3>
-              <p id="clipShortsMeta" class="clip-shorts-meta">検索条件を入れてから開くと、ヒットしたClipだけを回れます。</p>
-              <a
-                id="clipShortsFallbackLink"
-                class="button clip-shorts-fallback"
-                href="https://www.twitch.tv/rukalun"
-                target="_blank"
-                rel="noopener noreferrer"
-                hidden
-              >Twitchで開く</a>
-            </div>
-            <div class="clip-shorts-controls" aria-label="ランダムClip視聴操作">
-              <button id="clipShortsPrev" class="button" type="button">前へ</button>
-              <button id="clipShortsShuffle" class="button primary" type="button">シャッフル</button>
-              <button id="clipShortsNext" class="button" type="button">次へ</button>
-              <button id="clipShortsClose" class="button" type="button">閉じる</button>
-            </div>
-          </div>
-        </div>
-      </section>
       <section id="keywordGuide" class="keyword-guide" aria-labelledby="keywordGuideTitle">
         <h2 id="keywordGuideTitle">探せるキーワード</h2>
         <div class="keyword-link-list" aria-label="人気検索リンク">
@@ -1927,6 +1748,7 @@
       const SVG_NS = "http://www.w3.org/2000/svg";
       const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "(max-width: 620px)";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
+      const SHORTS_PAGE_PATH = "./ruka-shorts.html";
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -1960,17 +1782,6 @@
         clipModal: requireElement("#clipModal"),
         clipModalFrameWrap: requireElement("#clipModalFrameWrap"),
         clipModalClose: requireElement("#clipModalClose"),
-        clipShorts: requireElement("#clipShorts"),
-        clipShortsFrameWrap: requireElement("#clipShortsFrameWrap"),
-        clipShortsPlaceholder: requireElement("#clipShortsPlaceholder"),
-        clipShortsFallbackLink: requireElement("#clipShortsFallbackLink"),
-        clipShortsStatus: requireElement("#clipShortsStatus"),
-        clipShortsClipTitle: requireElement("#clipShortsClipTitle"),
-        clipShortsMeta: requireElement("#clipShortsMeta"),
-        clipShortsPrev: requireElement("#clipShortsPrev"),
-        clipShortsShuffle: requireElement("#clipShortsShuffle"),
-        clipShortsNext: requireElement("#clipShortsNext"),
-        clipShortsClose: requireElement("#clipShortsClose"),
       };
 
       const initialQuery = new URLSearchParams(window.location.search).get("q");
@@ -1986,9 +1797,6 @@
       let lastRandomSearchValue = "";
       let lastRandomClipId = "";
       let lastClipModalTrigger = null;
-      let shortsClipPool = [];
-      let currentShortsClipIndex = -1;
-      let lastShortsTrigger = null;
 
       function normalizeText(value) {
         return String(value ?? "")
@@ -2220,147 +2028,28 @@
         return link;
       }
 
-      function getShortsClipPool() {
-        return hasActiveSearchCondition() ? filteredClips : allClips;
+      function getShortsSearchParams(clip = null) {
+        const params = new URLSearchParams();
+        const searchQuery = elements.searchInput.value.trim();
+        const creator = elements.creatorFilter.value;
+        const game = elements.gameFilter.value;
+        const sort = elements.sortSelect.value;
+        if (searchQuery) params.set("q", searchQuery);
+        if (creator) params.set("creator", creator);
+        if (game) params.set("game", game);
+        if (sort && sort !== "newest") params.set("sort", sort);
+        if (clip?.id) params.set("clip", clip.id);
+        return params;
       }
 
-      function normalizeShortsPool(pool, clip) {
-        const seen = new Set();
-        const normalized = [];
-        const candidates = Array.isArray(pool) ? pool : [];
-        for (const candidate of candidates) {
-          const id = candidate?.id;
-          if (!id || seen.has(id)) continue;
-          seen.add(id);
-          normalized.push(candidate);
-        }
-        if (clip?.id && !seen.has(clip.id)) {
-          normalized.unshift(clip);
-        }
-        return normalized;
+      function createShortsUrl(clip = null) {
+        const params = getShortsSearchParams(clip);
+        const query = params.toString();
+        return `${SHORTS_PAGE_PATH}${query ? `?${query}` : ""}`;
       }
 
-      function updateShortsFallbackLink(clip, embedUrl) {
-        elements.clipShortsFallbackLink.href = getSafeClipUrl(clip);
-        elements.clipShortsFallbackLink.hidden = Boolean(embedUrl);
-      }
-
-      function renderShortsClip() {
-        const clip = shortsClipPool[currentShortsClipIndex];
-        if (!clip) {
-          elements.clipShorts.classList.remove("is-playing");
-          elements.clipShortsFrameWrap.replaceChildren(elements.clipShortsPlaceholder);
-          elements.clipShortsPlaceholder.hidden = false;
-          elements.clipShortsFallbackLink.hidden = true;
-          elements.clipShortsStatus.textContent = "Clipを選ぶとここで再生します。";
-          elements.clipShortsClipTitle.textContent = "まだClipを選んでいません";
-          elements.clipShortsMeta.textContent = "検索条件を入れてから開くと、ヒットしたClipだけを回れます。";
-          return;
-        }
-
-        const embedUrl = toTwitchEmbedUrl(clip);
-        elements.clipShorts.classList.add("is-playing");
-        elements.clipShortsStatus.textContent = `${currentShortsClipIndex + 1} / ${shortsClipPool.length} clips`;
-        elements.clipShortsClipTitle.textContent = clip.title || "無題のClip";
-        elements.clipShortsMeta.textContent = [
-          clip.gameName ? `ゲーム: ${clip.gameName}` : "ゲーム不明",
-          clip.creator ? `作成: ${clip.creator}` : "作成者不明",
-          formatViews(clip.views),
-        ].join(" / ");
-        updateShortsFallbackLink(clip, embedUrl);
-
-        if (!embedUrl) {
-          elements.clipShortsPlaceholder.hidden = false;
-          elements.clipShortsPlaceholder.querySelector("strong").textContent = "埋め込みで開けないClipです";
-          elements.clipShortsPlaceholder.querySelector("span").textContent = "Twitchで開くボタンから確認できます。";
-          elements.clipShortsFrameWrap.replaceChildren(elements.clipShortsPlaceholder);
-          return;
-        }
-
-        const iframe = document.createElement("iframe");
-        iframe.className = "clip-shorts-frame";
-        iframe.title = clip.title ? `${clip.title}をランダムClip視聴で見る` : "Twitch Clip Shorts埋め込み";
-        iframe.loading = "lazy";
-        iframe.allow = "autoplay; fullscreen; picture-in-picture";
-        iframe.allowFullscreen = true;
-        iframe.src = embedUrl;
-        elements.clipShortsPlaceholder.hidden = true;
-        elements.clipShortsFrameWrap.replaceChildren(iframe);
-      }
-
-      function openClipShorts(clip, pool = getShortsClipPool(), trigger = null) {
-        if (!clip) {
-          setNotice("ランダム視聴できるClipがありません。検索条件を変えてください。");
-          return;
-        }
-        shortsClipPool = normalizeShortsPool(pool, clip);
-        currentShortsClipIndex = Math.max(0, shortsClipPool.findIndex((candidate) => candidate.id === clip.id));
-        lastShortsTrigger =
-          trigger instanceof HTMLElement
-            ? trigger
-            : document.activeElement instanceof HTMLElement
-              ? document.activeElement
-              : null;
-        renderShortsClip();
-        document.body.classList.add("has-clip-shorts-open");
-        elements.clipShorts.scrollIntoView({ block: "start" });
-      }
-
-      function openRandomShortFromCurrentResults(trigger) {
-        if (dataLoadState !== "loaded") {
-          setNotice("Clipデータ読み込み後にランダム視聴できます。");
-          elements.clipShorts.scrollIntoView({ block: "start" });
-          return;
-        }
-        filterClips();
-        const pool = getShortsClipPool();
-        if (pool.length === 0) {
-          setNotice("検索ヒットがありません。条件を変えてからランダム視聴を開いてください。");
-          render();
-          return;
-        }
-        const clip = pool[Math.floor(Math.random() * pool.length)];
-        openClipShorts(clip, pool, trigger);
-      }
-
-      function moveShortsClip(offset) {
-        if (shortsClipPool.length === 0) return;
-        currentShortsClipIndex = (currentShortsClipIndex + offset + shortsClipPool.length) % shortsClipPool.length;
-        renderShortsClip();
-      }
-
-      function shuffleShortsClip() {
-        if (shortsClipPool.length === 0) {
-          openRandomShortFromCurrentResults(elements.clipShortsShuffle);
-          return;
-        }
-        if (shortsClipPool.length === 1) {
-          renderShortsClip();
-          return;
-        }
-        let nextIndex = currentShortsClipIndex;
-        while (nextIndex === currentShortsClipIndex) {
-          nextIndex = Math.floor(Math.random() * shortsClipPool.length);
-        }
-        currentShortsClipIndex = nextIndex;
-        renderShortsClip();
-      }
-
-      function closeClipShorts() {
-        elements.clipShorts.classList.remove("is-playing");
-        document.body.classList.remove("has-clip-shorts-open");
-        elements.clipShortsFrameWrap.replaceChildren();
-        elements.clipShortsPlaceholder.hidden = false;
-        elements.clipShortsPlaceholder.querySelector("strong").textContent = "ランダムClipを流し見";
-        elements.clipShortsPlaceholder.querySelector("span").textContent = "Topや検索結果から、縦型ビューで1本ずつ開けます。";
-        elements.clipShortsFrameWrap.append(elements.clipShortsPlaceholder);
-        elements.clipShortsFallbackLink.hidden = true;
-        elements.clipShortsStatus.textContent = "Clipデータ読み込み後に視聴できます。";
-        elements.clipShortsClipTitle.textContent = "まだClipを選んでいません";
-        elements.clipShortsMeta.textContent = "検索条件を入れてから開くと、ヒットしたClipだけを回れます。";
-        currentShortsClipIndex = -1;
-        lastShortsTrigger?.focus({ preventScroll: true });
-        lastShortsTrigger = null;
+      function openShortsPageFromCurrentResults() {
+        window.location.href = createShortsUrl();
       }
 
       async function copyTextToClipboard(text) {
@@ -2733,10 +2422,12 @@
         const shortsButton = document.createElement("button");
         shortsButton.className = "clip-shorts-button";
         shortsButton.type = "button";
-        shortsButton.title = "ランダム視聴で開く";
-        shortsButton.setAttribute("aria-label", "このClipをランダム視聴で開く");
+        shortsButton.title = "RukaShortsで開く";
+        shortsButton.setAttribute("aria-label", "このClipをRukaShortsで開く");
         shortsButton.append(createShortsIcon());
-        shortsButton.addEventListener("click", () => openClipShorts(clip, getShortsClipPool(), shortsButton));
+        shortsButton.addEventListener("click", () => {
+          window.location.href = createShortsUrl(clip);
+        });
 
         const link = createClipAnchor(clip, "clip-link", "Twitchで見る");
         link.title = "Twitchで見る";
@@ -2900,21 +2591,13 @@
         clearRandomSelectionState();
         resetVisibleAndRender();
       });
-      elements.heroShortsLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        openRandomShortFromCurrentResults(elements.heroShortsLink);
-      });
-      elements.openShortsButton.addEventListener("click", () => openRandomShortFromCurrentResults(elements.openShortsButton));
+      elements.openShortsButton.addEventListener("click", openShortsPageFromCurrentResults);
       elements.randomButton.addEventListener("click", pickRandomClip);
       elements.closeSearchButton.addEventListener("click", () => setSearchPanelExpanded(false));
       elements.loadMoreButton.addEventListener("click", () => {
         visibleLimit += MORE_STEP;
         render();
       });
-      elements.clipShortsPrev.addEventListener("click", () => moveShortsClip(-1));
-      elements.clipShortsNext.addEventListener("click", () => moveShortsClip(1));
-      elements.clipShortsShuffle.addEventListener("click", shuffleShortsClip);
-      elements.clipShortsClose.addEventListener("click", closeClipShorts);
       elements.clipModalClose.addEventListener("click", closeClipModal);
       elements.clipModal.addEventListener("click", (event) => {
         if (event.target === elements.clipModal) closeClipModal();
