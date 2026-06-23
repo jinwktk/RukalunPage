@@ -69,13 +69,6 @@
             "inLanguage": "ja",
             "dateModified": "2026-06-23",
             "keywords": [
-              "るっかるん",
-              "Rukalun",
-              "Twitch",
-              "ツイッチ",
-              "Clip",
-              "クリップ",
-              "配信切り抜き",
               "FF14",
               "FFXIV",
               "LoL",
@@ -85,9 +78,7 @@
               "雑談",
               "絶叫",
               "言質",
-              "迷子",
-              "とぅいっち",
-              "顔アイコン"
+              "迷子"
             ],
             "about": [
               {
@@ -132,13 +123,6 @@
             "measurementTechnique": "twitchRaid clip export",
             "variableMeasured": "title, creator, gameName, createdAt, views",
             "keywords": [
-              "るっかるん",
-              "Rukalun",
-              "Twitch",
-              "ツイッチ",
-              "Clip",
-              "クリップ",
-              "配信切り抜き",
               "FF14",
               "FFXIV",
               "LoL",
@@ -148,9 +132,7 @@
               "雑談",
               "絶叫",
               "言質",
-              "迷子",
-              "とぅいっち",
-              "顔アイコン"
+              "迷子"
             ],
             "publisher": {
               "@type": "Organization",
@@ -635,42 +617,95 @@
       }
 
       .keyword-guide {
-        margin: 0 0 24px;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: 18px;
+        row-gap: 4px;
+        align-items: start;
+        margin: 0 0 14px;
         border-top: 1px solid var(--line);
-        padding-top: 20px;
+        padding-top: 14px;
         color: var(--muted);
       }
 
       .keyword-guide h2 {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
         color: var(--ink);
         font-size: 1rem;
         font-weight: 900;
+        white-space: nowrap;
       }
 
-      .keyword-guide p {
-        max-width: 900px;
-        margin-top: 6px;
-        font-size: 0.94rem;
-        overflow-wrap: anywhere;
-      }
-
-      .keyword-guide-line {
-        display: block;
+      .keyword-guide h2::before {
+        display: inline-grid;
+        width: 24px;
+        height: 24px;
+        place-items: center;
+        border: 1px solid #f2b4ce;
+        border-radius: 8px;
+        background: var(--pink-soft);
+        color: #a43c70;
+        content: "#";
+        font-size: 0.92rem;
+        line-height: 1;
       }
 
       .keyword-link-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px 14px;
-        margin-top: 10px;
+        grid-column: 2;
+        gap: 8px;
+        margin-top: 0;
       }
 
       .keyword-link-list a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        max-width: 100%;
+        border: 1px solid #d8e7f8;
+        border-radius: 8px;
+        background: linear-gradient(180deg, #ffffff 0%, #f4faff 100%);
+        padding: 5px 10px;
         color: var(--sky-ink);
         font-size: 0.9rem;
         font-weight: 900;
-        text-decoration-thickness: 2px;
-        text-underline-offset: 3px;
+        line-height: 1.25;
+        text-decoration: none;
+        box-shadow: 0 5px 12px rgba(62, 42, 67, 0.06);
+        overflow-wrap: anywhere;
+        transition:
+          border-color 0.16s ease,
+          background-color 0.16s ease,
+          box-shadow 0.16s ease,
+          transform 0.16s ease;
+      }
+
+      .keyword-link-list a:nth-child(3n + 1) {
+        border-color: #f2c3d8;
+        background: linear-gradient(180deg, #fff 0%, #fff0f6 100%);
+        color: #a43c70;
+      }
+
+      .keyword-link-list a:nth-child(3n + 2) {
+        border-color: #bfe8dc;
+        background: linear-gradient(180deg, #fff 0%, #effbf7 100%);
+        color: var(--mint-ink);
+      }
+
+      .keyword-link-list a:hover {
+        border-color: #c2487d;
+        background: #ffffff;
+        box-shadow: 0 8px 18px rgba(88, 55, 88, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .keyword-link-list a:focus-visible {
+        outline: 3px solid rgba(194, 72, 125, 0.28);
+        outline-offset: 2px;
       }
 
       .clip-actions {
@@ -746,6 +781,17 @@
         font-size: 0.9rem;
         font-weight: 900;
         overflow: hidden;
+      }
+
+      .clip-thumbnail-link {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .clip-thumbnail-link:focus-visible {
+        outline: 3px solid rgba(194, 72, 125, 0.42);
+        outline-offset: -3px;
       }
 
       .clip-thumbnail::after {
@@ -1326,9 +1372,16 @@
           grid-template-columns: 1fr;
         }
 
+        .keyword-guide {
+          display: block;
+          margin-bottom: 18px;
+          padding-top: 16px;
+        }
+
         .keyword-link-list {
           box-sizing: border-box;
           gap: 6px 10px;
+          margin-top: 10px;
           padding-right: 96px;
         }
 
@@ -1428,13 +1481,15 @@
 
         .button,
         .clip-card,
+        .keyword-link-list a,
         .clip-thumbnail img,
         .search-toggle-icon {
           transition: none;
         }
 
         .button:hover,
-        .clip-card:hover {
+        .clip-card:hover,
+        .keyword-link-list a:hover {
           transform: none;
         }
       }
@@ -1571,13 +1626,6 @@
       <div id="notice" class="notice" hidden></div>
       <section id="keywordGuide" class="keyword-guide" aria-labelledby="keywordGuideTitle">
         <h2 id="keywordGuideTitle">探せるキーワード</h2>
-        <p>
-          <span class="keyword-guide-line">るっかるん / Rukalun の Twitch / ツイッチ / とぅいっち Clip・クリップを探せます。</span>
-          <span class="keyword-guide-line">配信切り抜きも軽く回収できます。</span>
-          <span class="keyword-guide-line">FF14・FFXIV、LoL、VALORANT・VALO。</span>
-          <span class="keyword-guide-line">雑談、絶叫、言質、迷子も探せます。</span>
-          <span class="keyword-guide-line">顔アイコンやキャラクター画像を手がかりに来た人も、名場面をすぐ回収できます。</span>
-        </p>
         <div class="keyword-link-list" aria-label="人気検索リンク">
           <a href="./?q=FF14#searchPanel">FF14</a>
           <a href="./?q=FINAL%20FANTASY%20XIV%20ONLINE#searchPanel">FFXIV</a>
@@ -1941,6 +1989,18 @@
         openClipModal(clip, embedUrl, event.currentTarget);
       }
 
+      function createClipAnchor(clip, className, label) {
+        const link = document.createElement("a");
+        link.className = className;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.href = getSafeClipUrl(clip);
+        link.title = label;
+        link.setAttribute("aria-label", label);
+        link.addEventListener("click", (event) => handleClipOpen(event, clip));
+        return link;
+      }
+
       async function copyTextToClipboard(text) {
         if (navigator.clipboard?.writeText && window.isSecureContext) {
           await navigator.clipboard.writeText(text);
@@ -2236,8 +2296,7 @@
         views.textContent = formatViews(clip.views);
         ribbon.append(ribbonMain, views);
 
-        const thumbnail = document.createElement("div");
-        thumbnail.className = "clip-thumbnail";
+        const thumbnail = createClipAnchor(clip, "clip-thumbnail clip-thumbnail-link", "TwitchでClipを開く");
         thumbnail.setAttribute("data-light-thumbnail", "true");
         const loader = document.createElement("span");
         loader.className = "thumbnail-loader";
@@ -2300,15 +2359,9 @@
         favoriteButton.append(createFavoriteIcon());
         favoriteButton.addEventListener("click", () => toggleFavoriteClip(clip));
 
-        const link = document.createElement("a");
-        link.className = "clip-link";
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.href = getSafeClipUrl(clip);
+        const link = createClipAnchor(clip, "clip-link", "Twitchで見る");
         link.title = "Twitchで見る";
-        link.setAttribute("aria-label", "Twitchで見る");
         link.append(createVideoIcon());
-        link.addEventListener("click", (event) => handleClipOpen(event, clip));
 
         const copyButton = document.createElement("button");
         copyButton.className = "clip-copy-button";

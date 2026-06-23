@@ -21,13 +21,6 @@ const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
 const pageUpdatedOn = "2026-06-23";
 const seoKeywordTerms = [
-  "るっかるん",
-  "Rukalun",
-  "Twitch",
-  "ツイッチ",
-  "Clip",
-  "クリップ",
-  "配信切り抜き",
   "FF14",
   "FFXIV",
   "LoL",
@@ -38,8 +31,6 @@ const seoKeywordTerms = [
   "絶叫",
   "言質",
   "迷子",
-  "とぅいっち",
-  "顔アイコン",
 ];
 const popularSearches = [
   ["FF14", "FF14"],
@@ -262,6 +253,7 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /function createFavoriteIcon/);
   assert.match(html, /function createVideoIcon/);
   assert.match(html, /function handleClipOpen\(event, clip\)/);
+  assert.match(html, /function createClipAnchor\(clip, className, label\)/);
   assert.match(html, /function isSmallViewport\(\)/);
   assert.match(html, /function toTwitchEmbedUrl\(clip\)/);
   assert.match(html, /className = "clip-action-link-group"/);
@@ -283,12 +275,14 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /link\.append\(createVideoIcon\(\)\)/);
   assert.match(html, /\.button-svg-icon/);
   assert.match(html, /\.clip-favorite-button\[aria-pressed="true"\] \.favorite-heart/);
-  assert.match(html, /const link = document\.createElement\("a"\);/);
-  assert.match(html, /link\.target = "_blank";/);
-  assert.match(html, /link\.rel = "noopener noreferrer";/);
-  assert.match(html, /link\.href = getSafeClipUrl\(clip\);/);
-  assert.match(html, /link\.setAttribute\("aria-label", "Twitchで見る"\)/);
-  assert.match(html, /link\.addEventListener\("click", \(event\) => handleClipOpen\(event, clip\)\);/);
+  assert.match(html, /const thumbnail = createClipAnchor\(clip, "clip-thumbnail clip-thumbnail-link", "TwitchでClipを開く"\);/);
+  assert.match(html, /const link = createClipAnchor\(clip, "clip-link", "Twitchで見る"\);/);
+  assert.match(html, /link\.append\(createVideoIcon\(\)\)/);
+  assert.match(html, /link\.title = "Twitchで見る";/);
+  assert.match(html, /thumbnail\.setAttribute\("data-light-thumbnail", "true"\);/);
+  assert.match(html, /\.clip-thumbnail-link\s*\{[\s\S]*?cursor: pointer;/);
+  assert.match(html, /\.clip-thumbnail-link:focus-visible\s*\{[\s\S]*?outline:/);
+  assert.match(html, /const link = document\.createElement\("a"\);[\s\S]*link\.target = "_blank";[\s\S]*link\.rel = "noopener noreferrer";[\s\S]*link\.href = getSafeClipUrl\(clip\);[\s\S]*link\.setAttribute\("aria-label", label\);[\s\S]*link\.addEventListener\("click", \(event\) => handleClipOpen\(event, clip\)\);/);
   assert.doesNotMatch(html, /const link = document\.createElement\("button"\);/);
   assert.match(html, /className = "clip-copy-button"/);
   assert.match(html, /className = "copy-icon"/);
@@ -347,6 +341,25 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.match(html, /id="keywordGuideTitle"/);
   assert.match(html, /class="keyword-link-list"/);
   assert.match(html, /\.keyword-guide\s*\{[\s\S]*?border-top: 1px solid var\(--line\);/);
+  assert.match(html, /\.keyword-guide\s*\{[\s\S]*?display: grid;/);
+  assert.match(html, /\.keyword-guide\s*\{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\);/);
+  assert.match(html, /\.keyword-guide\s*\{[\s\S]*?margin: 0 0 14px;/);
+  assert.match(html, /\.keyword-guide\s*\{[\s\S]*?padding-top: 14px;/);
+  assert.match(html, /\.keyword-guide h2\s*\{[\s\S]*?display: inline-flex;/);
+  assert.match(html, /\.keyword-guide h2::before\s*\{[\s\S]*?content: "#";/);
+  assert.match(html, /\.keyword-link-list\s*\{[\s\S]*?grid-column: 2;/);
+  assert.match(html, /\.keyword-link-list a\s*\{[\s\S]*?display: inline-flex;/);
+  assert.match(html, /\.keyword-link-list a\s*\{[\s\S]*?min-height: 32px;/);
+  assert.match(html, /\.keyword-link-list a\s*\{[\s\S]*?border-radius: 8px;/);
+  assert.match(html, /\.keyword-link-list a\s*\{[\s\S]*?text-decoration: none;/);
+  assert.match(html, /\.keyword-link-list a:nth-child\(3n \+ 1\)/);
+  assert.match(html, /\.keyword-link-list a:nth-child\(3n \+ 2\)/);
+  assert.match(html, /\.keyword-link-list a:hover/);
+  assert.match(html, /\.keyword-link-list a:focus-visible/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*?\.keyword-guide\s*\{[\s\S]*?display: block;/);
+  assert.doesNotMatch(keywordGuide, /<p>/);
+  assert.doesNotMatch(keywordGuide, /keyword-guide-line/);
+  assert.doesNotMatch(keywordGuideText, /顔アイコン|キャラクター画像|とぅいっち/);
   assert.doesNotMatch(keywordGuideStyle, /display:\s*none/);
   assert.ok(
     html.indexOf('id="keywordGuide"') < html.indexOf('id="results"'),
@@ -552,8 +565,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /配信切り抜き/);
   assert.match(readme, /\?q= URL/);
   assert.match(readme, /GSC\/GA4/);
-  assert.match(readme, /とぅいっち/);
-  assert.match(readme, /顔アイコン/);
+  assert.match(readme, /検索結果が返る語彙/);
   assert.match(readme, /モバイル/);
   assert.match(readme, /PC版ではClipカードからモーダル/);
   assert.match(readme, /SP版ではTwitchリンク/);
@@ -582,8 +594,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /配信切り抜き/);
   assert.match(agents, /\?q= URL/);
   assert.match(agents, /GSC\/GA4/);
-  assert.match(agents, /とぅいっち/);
-  assert.match(agents, /顔アイコン/);
+  assert.match(agents, /検索結果が返る語彙/);
   assert.match(agents, /モバイル/);
   assert.match(agents, /PC版ではClipカードからモーダル/);
   assert.match(agents, /SP版ではTwitchリンク/);
@@ -770,6 +781,9 @@ test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
   assert.match(html, /lastElement\.focus\(\{ preventScroll: true \}\);/);
   assert.match(html, /firstElement\.focus\(\{ preventScroll: true \}\);/);
   assert.match(html, /function handleClipOpen\(event, clip\) \{[\s\S]*const embedUrl = toTwitchEmbedUrl\(clip\);[\s\S]*if \(!embedUrl \|\| shouldUseNativeClipLink\(event\)\) return;[\s\S]*event\.preventDefault\(\);[\s\S]*openClipModal\(clip, embedUrl, event\.currentTarget\);[\s\S]*\}/);
+  assert.match(html, /function createClipAnchor\(clip, className, label\) \{[\s\S]*link\.addEventListener\("click", \(event\) => handleClipOpen\(event, clip\)\);[\s\S]*return link;[\s\S]*\}/);
+  assert.match(html, /const thumbnail = createClipAnchor\(clip, "clip-thumbnail clip-thumbnail-link", "TwitchでClipを開く"\);/);
+  assert.match(html, /const link = createClipAnchor\(clip, "clip-link", "Twitchで見る"\);/);
   assert.match(html, /elements\.clipModalClose\.addEventListener\("click", closeClipModal\);/);
   assert.match(html, /elements\.clipModal\.addEventListener\("click", \(event\) => \{[\s\S]*if \(event\.target === elements\.clipModal\) closeClipModal\(\);[\s\S]*\}\);/);
   assert.match(html, /window\.addEventListener\("keydown", \(event\) => \{[\s\S]*event\.key === "Escape"[\s\S]*closeClipModal\(\);[\s\S]*\}\);/);
