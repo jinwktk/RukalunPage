@@ -166,7 +166,7 @@
   </head>
   <body data-page="ruka-shorts">
     <div class="shorts-app">
-      <button id="shortsSwipeHint" class="shorts-swipe-hint" type="button" aria-label="上にスワイプして次のClipへ移動">
+      <button id="shortsSwipeHint" class="shorts-swipe-hint" type="button" aria-label="上にスワイプして次のClipへ移動" hidden>
         <img src="../assets/rukalun/shorts-swipe-hint.png" width="300" height="300" alt="" decoding="async" />
       </button>
 
@@ -183,6 +183,7 @@
     <script>
       const DATA_PATH = "../clip-search-data.json";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
+      const SWIPE_HINT_STORAGE_KEY = "rukalun.rukaShorts.swipeHintDismissed.v1";
       const SHORTS_INITIAL_RENDER_LIMIT = 12;
       const SHORTS_RENDER_STEP = 8;
       const AUTO_ADVANCE_FALLBACK_MS = 30000;
@@ -218,9 +219,31 @@
       let hasDismissedSwipeHint = false;
       let pendingActivationIndex = 0;
 
+      function hasStoredSwipeHintDismissal() {
+        try {
+          return window.localStorage.getItem(SWIPE_HINT_STORAGE_KEY) === "1";
+        } catch {
+          return false;
+        }
+      }
+
+      function persistSwipeHintDismissal() {
+        try {
+          window.localStorage.setItem(SWIPE_HINT_STORAGE_KEY, "1");
+        } catch {
+          // Storage can be unavailable in private or restricted browser modes.
+        }
+      }
+
+      function initializeSwipeHint() {
+        hasDismissedSwipeHint = hasStoredSwipeHintDismissal();
+        elements.shortsSwipeHint.hidden = hasDismissedSwipeHint;
+      }
+
       function dismissSwipeHint() {
         if (hasDismissedSwipeHint) return;
         hasDismissedSwipeHint = true;
+        persistSwipeHintDismissal();
         elements.shortsSwipeHint.hidden = true;
         const targetIndex = pendingActivationIndex >= 0 ? pendingActivationIndex : Math.max(activeIndex, 0);
         pendingActivationIndex = -1;
@@ -575,6 +598,7 @@
         scrollToClip,
       };
 
+      initializeSwipeHint();
       loadShortsData();
     </script>
   </body>

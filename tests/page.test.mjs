@@ -618,6 +618,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /Clipカードからの導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
   assert.match(readme, /常時キューは置きません/);
+  assert.match(readme, /localStorageに記録/);
+  assert.match(readme, /次回以降は表示しません/);
   assert.match(readme, /初回案内を閉じるまではTwitch iframeを生成せず/);
   assert.match(readme, /muted=false/);
   assert.match(readme, /currentTime/);
@@ -668,6 +670,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /Clipカードからの導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
   assert.match(agents, /常時キューは置かない/);
+  assert.match(agents, /localStorageに記録/);
+  assert.match(agents, /次回以降は表示しない/);
   assert.match(agents, /初回案内を閉じるまではiframeを生成しない/);
   assert.match(agents, /muted=false/);
   assert.match(agents, /currentTime/);
@@ -828,7 +832,7 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /<body data-page="ruka-shorts">/);
   assert.match(
     html,
-    /<button id="shortsSwipeHint" class="shorts-swipe-hint" type="button" aria-label="上にスワイプして次のClipへ移動">[\s\S]*<img src="\.\.\/assets\/rukalun\/shorts-swipe-hint\.png" width="300" height="300" alt="" decoding="async" \/>[\s\S]*<\/button>/
+    /<button id="shortsSwipeHint" class="shorts-swipe-hint" type="button" aria-label="上にスワイプして次のClipへ移動" hidden>[\s\S]*<img src="\.\.\/assets\/rukalun\/shorts-swipe-hint\.png" width="300" height="300" alt="" decoding="async" \/>[\s\S]*<\/button>/
   );
   assert.match(html, /id="shortsFeed" class="shorts-feed"/);
   assert.match(html, /id="shortsEmpty"/);
@@ -854,14 +858,23 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
 
   assert.match(html, /const DATA_PATH = "\.\.\/clip-search-data\.json";/);
   assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
+  assert.match(html, /const SWIPE_HINT_STORAGE_KEY = "rukalun\.rukaShorts\.swipeHintDismissed\.v1";/);
   assert.match(html, /const SHORTS_INITIAL_RENDER_LIMIT = 12;/);
   assert.match(html, /const SHORTS_RENDER_STEP = 8;/);
   assert.match(html, /const AUTO_ADVANCE_FALLBACK_MS = 30000;/);
   assert.match(html, /shortsSwipeHint: requireElement\("#shortsSwipeHint"\)/);
   assert.match(html, /let hasDismissedSwipeHint = false;/);
   assert.match(html, /let pendingActivationIndex = 0;/);
+  assert.match(html, /function hasStoredSwipeHintDismissal\(\) \{/);
+  assert.match(html, /window\.localStorage\.getItem\(SWIPE_HINT_STORAGE_KEY\) === "1"/);
+  assert.match(html, /function persistSwipeHintDismissal\(\) \{/);
+  assert.match(html, /window\.localStorage\.setItem\(SWIPE_HINT_STORAGE_KEY, "1"\);/);
+  assert.match(html, /function initializeSwipeHint\(\) \{/);
+  assert.match(html, /hasDismissedSwipeHint = hasStoredSwipeHintDismissal\(\);/);
+  assert.match(html, /elements\.shortsSwipeHint\.hidden = hasDismissedSwipeHint;/);
   assert.match(html, /function dismissSwipeHint\(\) \{/);
   assert.match(html, /hasDismissedSwipeHint = true;/);
+  assert.match(html, /persistSwipeHintDismissal\(\);/);
   assert.match(html, /elements\.shortsSwipeHint\.hidden = true;/);
   assert.match(html, /const targetIndex = pendingActivationIndex >= 0 \? pendingActivationIndex : Math\.max\(activeIndex, 0\);/);
   assert.match(html, /pendingActivationIndex = -1;/);
@@ -869,7 +882,8 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /function isSwipeHintVisible\(\) \{/);
   assert.match(html, /elements\.shortsSwipeHint\.addEventListener\("click", dismissSwipeHint\);/);
   assert.match(html, /if \(isSwipeHintVisible\(\)\) \{[\s\S]*if \(event\.key === "Enter" \|\| event\.key === " "\) \{[\s\S]*dismissSwipeHint\(\);[\s\S]*return;/);
-  assert.doesNotMatch(html, /localStorage|sessionStorage/);
+  assert.match(html, /initializeSwipeHint\(\);[\s\S]*loadShortsData\(\);/);
+  assert.doesNotMatch(html, /sessionStorage/);
   assert.doesNotMatch(html, /urlParams\.get\("q"\)/);
   assert.doesNotMatch(html, /urlParams\.get\("creator"\)/);
   assert.doesNotMatch(html, /urlParams\.get\("game"\)/);
