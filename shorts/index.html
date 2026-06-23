@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RukaShorts（るかしょーつ） | 🖇るっかるんくりっぷ🖇</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="https://www.rukalun.mydns.jp/shorts/index.html" />
+    <link rel="icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-favicon.ico" sizes="any" />
+    <link rel="icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="https://www.rukalun.mydns.jp/assets/rukalun/clip-search-apple-touch-icon.png" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTVJN1V2LJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-TTVJN1V2LJ");
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #000;
+        color: #ffffff;
+        font-family: "Yu Gothic", "Hiragino Maru Gothic ProN", "Meiryo", system-ui, sans-serif;
+        letter-spacing: 0;
+        overscroll-behavior-y: contain;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .shorts-app {
+        min-height: 100svh;
+        background: #000;
+      }
+
+      .shorts-feed {
+        height: 100svh;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        touch-action: pan-y;
+        scrollbar-width: none;
+        overscroll-behavior-y: contain;
+        background: #000;
+      }
+
+      .shorts-feed::-webkit-scrollbar {
+        display: none;
+      }
+
+      .shorts-item {
+        --shorts-cue-right: max(34px, env(safe-area-inset-right));
+        --shorts-cue-bottom: max(96px, calc(env(safe-area-inset-bottom) + 88px));
+
+        position: relative;
+        display: grid;
+        min-height: 100svh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        place-items: stretch;
+        padding: 0;
+        background: #000;
+      }
+
+      @media (max-width: 620px) {
+        .shorts-item {
+          --shorts-cue-right: max(16px, env(safe-area-inset-right));
+          --shorts-cue-bottom: max(118px, calc(env(safe-area-inset-bottom) + 108px));
+        }
+      }
+
+      .shorts-item::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        right: var(--shorts-cue-right);
+        bottom: var(--shorts-cue-bottom);
+        width: 66px;
+        height: 76px;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 70%);
+        opacity: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .shorts-item.is-active::after {
+        opacity: 1;
+      }
+
+      .shorts-video-shell {
+        position: relative;
+        z-index: 0;
+        width: 100vw;
+        height: 100svh;
+        overflow: hidden;
+        background: #000;
+      }
+
+      .shorts-embed-frame {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #000;
+      }
+
+      .shorts-next-cue {
+        position: absolute;
+        z-index: 2;
+        right: var(--shorts-cue-right);
+        pointer-events: none;
+        bottom: var(--shorts-cue-bottom);
+        display: grid;
+        width: 44px;
+        height: 52px;
+        place-items: center;
+        opacity: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .shorts-item.is-active .shorts-next-cue {
+        opacity: 0.92;
+      }
+
+      .shorts-next-cue::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.34);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+      }
+
+      .shorts-next-cue-mark {
+        position: relative;
+        width: 17px;
+        height: 17px;
+        border-right: 3px solid rgba(255, 255, 255, 0.92);
+        border-bottom: 3px solid rgba(255, 255, 255, 0.92);
+        transform: rotate(45deg);
+        animation: shortsNextCue 1450ms ease-in-out infinite;
+      }
+
+      .shorts-next-cue-mark + .shorts-next-cue-mark {
+        margin-top: -18px;
+        animation-delay: 160ms;
+      }
+
+      @keyframes shortsNextCue {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: translateY(-5px) rotate(45deg);
+        }
+
+        45% {
+          opacity: 1;
+          transform: translateY(4px) rotate(45deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .shorts-next-cue-mark {
+          animation: none;
+        }
+      }
+
+      .shorts-swipe-hint {
+        position: fixed;
+        inset: 0;
+        z-index: 4;
+        display: grid;
+        place-items: center;
+        border: 0;
+        background: rgba(0, 0, 0, 0.42);
+        padding: 0;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+
+      .shorts-swipe-hint[hidden] {
+        display: none;
+      }
+
+      .shorts-swipe-hint img {
+        width: min(180px, 48vw);
+        height: auto;
+        opacity: 0.9;
+      }
+
+      .shorts-placeholder,
+      .shorts-fallback {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.72)),
+          #000;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .shorts-placeholder span,
+      .shorts-fallback span {
+        max-width: min(520px, calc(100vw - 36px));
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 0.95rem;
+        font-weight: 800;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+      }
+
+      .shorts-empty[hidden] {
+        display: none;
+      }
+
+      .shorts-empty {
+        position: fixed;
+        z-index: 2;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background: #000;
+        text-align: center;
+      }
+
+      .shorts-empty-inner {
+        width: min(440px, 100%);
+      }
+
+      .shorts-empty h2,
+      .shorts-empty p {
+        margin: 0;
+      }
+
+      .shorts-empty h2 {
+        font-size: 1.15rem;
+      }
+
+      .shorts-empty p {
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.72);
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body data-page="ruka-shorts">
+    <div class="shorts-app">
+      <button id="shortsSwipeHint" class="shorts-swipe-hint" type="button" aria-label="上にスワイプして次のClipへ移動">
+        <img src="../assets/rukalun/shorts-swipe-hint.png" width="300" height="300" alt="" decoding="async" />
+      </button>
+
+      <main id="shortsFeed" class="shorts-feed" aria-live="polite"></main>
+
+      <section id="shortsEmpty" class="shorts-empty" hidden>
+        <div class="shorts-empty-inner">
+          <h2>Clipが見つかりません</h2>
+          <p>表示できるClipを読み込めませんでした。</p>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const DATA_PATH = "../clip-search-data.json";
+      const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
+      const SHORTS_INITIAL_RENDER_LIMIT = 12;
+      const SHORTS_RENDER_STEP = 8;
+      const AUTO_ADVANCE_FALLBACK_MS = 30000;
+      const AUTO_ADVANCE_BUFFER_MS = 800;
+      const SWIPE_THRESHOLD = 48;
+      const TRUSTED_TWITCH_MESSAGE_ORIGINS = new Set([
+        "https://clips.twitch.tv",
+        "https://player.twitch.tv",
+        "https://www.twitch.tv",
+        "https://m.twitch.tv",
+        "https://embed.twitch.tv",
+      ]);
+
+      function requireElement(selector) {
+        const element = document.querySelector(selector);
+        if (!element) throw new Error(`Missing required element: ${selector}`);
+        return element;
+      }
+
+      const elements = {
+        shortsSwipeHint: requireElement("#shortsSwipeHint"),
+        shortsFeed: requireElement("#shortsFeed"),
+        shortsEmpty: requireElement("#shortsEmpty"),
+      };
+
+      let allClips = [];
+      let shortsPool = [];
+      let activeIndex = -1;
+      let renderedCount = 0;
+      let autoAdvanceTimerId = 0;
+      let touchStartY = null;
+      let wheelLocked = false;
+      let hasDismissedSwipeHint = false;
+
+      function dismissSwipeHint() {
+        if (hasDismissedSwipeHint) return;
+        hasDismissedSwipeHint = true;
+        elements.shortsSwipeHint.hidden = true;
+      }
+
+      function isSwipeHintVisible() {
+        return !elements.shortsSwipeHint.hidden;
+      }
+
+      function getTwitchEmbedParents() {
+        const parents = new Set([TWITCH_EMBED_PARENT_HOST]);
+        if (window.location.hostname) {
+          parents.add(window.location.hostname);
+        }
+        return Array.from(parents);
+      }
+
+      function getTwitchClipSlug(url) {
+        try {
+          const parsed = new URL(url);
+          if (parsed.hostname === "clips.twitch.tv") {
+            return parsed.pathname.split("/").filter(Boolean)[0] ?? "";
+          }
+          if (parsed.hostname === "www.twitch.tv") {
+            const segments = parsed.pathname.split("/").filter(Boolean);
+            const clipIndex = segments.indexOf("clip");
+            return clipIndex >= 0 ? segments[clipIndex + 1] ?? "" : "";
+          }
+        } catch {
+          return "";
+        }
+        return "";
+      }
+
+      function toTwitchEmbedUrl(clip) {
+        const slug = getTwitchClipSlug(clip?.url);
+        if (!slug) return "";
+        const embedUrl = new URL("https://clips.twitch.tv/embed");
+        embedUrl.searchParams.set("clip", slug);
+        embedUrl.searchParams.set("autoplay", "true");
+        embedUrl.searchParams.set("muted", "false");
+        for (const parent of getTwitchEmbedParents()) {
+          embedUrl.searchParams.append("parent", parent);
+        }
+        return embedUrl.href;
+      }
+
+      function shuffleClips(clips) {
+        const shuffled = [...clips];
+        for (let index = shuffled.length - 1; index > 0; index -= 1) {
+          const nextIndex = Math.floor(Math.random() * (index + 1));
+          [shuffled[index], shuffled[nextIndex]] = [shuffled[nextIndex], shuffled[index]];
+        }
+        return shuffled;
+      }
+
+      function buildShortsPool(clips) {
+        return shuffleClips(clips.filter((clip) => getTwitchClipSlug(clip?.url)));
+      }
+
+      function createPlaceholder(clip) {
+        const placeholder = document.createElement("div");
+        placeholder.className = "shorts-placeholder";
+        const label = document.createElement("span");
+        label.textContent = clip?.title || "RukaShorts";
+        placeholder.append(label);
+        return placeholder;
+      }
+
+      function createFallback(clip) {
+        const fallback = document.createElement("div");
+        fallback.className = "shorts-fallback";
+        const label = document.createElement("span");
+        label.textContent = clip?.title ? `${clip.title}を埋め込みで開けませんでした。` : "埋め込みで開けないClipです。";
+        fallback.append(label);
+        return fallback;
+      }
+
+      function createNextCue() {
+        const cue = document.createElement("div");
+        cue.className = "shorts-next-cue";
+        cue.setAttribute("aria-hidden", "true");
+        for (let index = 0; index < 2; index += 1) {
+          const mark = document.createElement("span");
+          mark.className = "shorts-next-cue-mark";
+          cue.append(mark);
+        }
+        return cue;
+      }
+
+      function createShortsItem(clip, index) {
+        const item = document.createElement("article");
+        item.className = "shorts-item";
+        item.dataset.index = String(index);
+
+        const shell = document.createElement("div");
+        shell.className = "shorts-video-shell";
+        shell.replaceChildren(createPlaceholder(clip));
+
+        item.append(shell, createNextCue());
+        observer.observe(item);
+        return item;
+      }
+
+      function appendShortsItems(fromIndex, toIndex) {
+        const fragment = document.createDocumentFragment();
+        for (let index = fromIndex; index < toIndex; index += 1) {
+          fragment.append(createShortsItem(shortsPool[index], index));
+        }
+        elements.shortsFeed.append(fragment);
+      }
+
+      function ensureRenderedThrough(index) {
+        if (shortsPool.length === 0 || index < renderedCount) return;
+        const nextRenderedCount = Math.min(shortsPool.length, Math.max(index + 1, renderedCount + SHORTS_RENDER_STEP));
+        if (nextRenderedCount <= renderedCount) return;
+        const previousRenderedCount = renderedCount;
+        renderedCount = nextRenderedCount;
+        appendShortsItems(previousRenderedCount, renderedCount);
+      }
+
+      function maybeExtendShortsFeed(index) {
+        if (index >= renderedCount - 3) ensureRenderedThrough(index + SHORTS_RENDER_STEP);
+      }
+
+      function clearAutoAdvance() {
+        if (!autoAdvanceTimerId) return;
+        window.clearTimeout(autoAdvanceTimerId);
+        autoAdvanceTimerId = 0;
+      }
+
+      function getClipAutoAdvanceMs(clip) {
+        const durationSeconds = Number(clip?.duration ?? clip?.durationSeconds);
+        if (Number.isFinite(durationSeconds) && durationSeconds > 0) {
+          return Math.max(5000, Math.round(durationSeconds * 1000) + AUTO_ADVANCE_BUFFER_MS);
+        }
+        return AUTO_ADVANCE_FALLBACK_MS;
+      }
+
+      function scheduleAutoAdvance(clip) {
+        clearAutoAdvance();
+        autoAdvanceTimerId = window.setTimeout(() => scrollToClip(activeIndex + 1), getClipAutoAdvanceMs(clip));
+      }
+
+      function renderShortsFeed() {
+        observer.disconnect();
+        clearAutoAdvance();
+        activeIndex = -1;
+        renderedCount = Math.min(shortsPool.length, SHORTS_INITIAL_RENDER_LIMIT);
+        elements.shortsFeed.replaceChildren();
+        appendShortsItems(0, renderedCount);
+        elements.shortsEmpty.hidden = shortsPool.length > 0;
+      }
+
+      function activateShortsItem(index) {
+        if (index < 0 || index >= shortsPool.length) return;
+        maybeExtendShortsFeed(index);
+        if (index === activeIndex) return;
+        clearAutoAdvance();
+        const previousItem =
+          activeIndex >= 0 ? elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`) : null;
+        const previousShell = previousItem?.querySelector(".shorts-video-shell");
+        previousShell?.replaceChildren(createPlaceholder(shortsPool[activeIndex]));
+        previousItem?.classList.remove("is-active");
+
+        activeIndex = index;
+        const clip = shortsPool[activeIndex];
+        const item = elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`);
+        const shell = item?.querySelector(".shorts-video-shell");
+        if (!item || !shell) return;
+        item.classList.add("is-active");
+        const embedUrl = toTwitchEmbedUrl(clip);
+        if (!embedUrl) {
+          shell.replaceChildren(createFallback(clip));
+          scheduleAutoAdvance(clip);
+          return;
+        }
+        const iframe = document.createElement("iframe");
+        iframe.className = "shorts-embed-frame";
+        iframe.title = clip.title ? `${clip.title}をRukaShortsで見る` : "Twitch Clip";
+        iframe.allow = "autoplay; fullscreen; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.src = embedUrl;
+        shell.replaceChildren(iframe);
+        scheduleAutoAdvance(clip);
+      }
+
+      function scrollToClip(index) {
+        if (shortsPool.length === 0) return;
+        const targetIndex = ((index % shortsPool.length) + shortsPool.length) % shortsPool.length;
+        ensureRenderedThrough(targetIndex);
+        const target = elements.shortsFeed.querySelector(`[data-index="${targetIndex}"]`);
+        if (!target) return;
+        activateShortsItem(targetIndex);
+        target.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+
+      function handleTouchStart(event) {
+        touchStartY = event.changedTouches[0]?.clientY ?? null;
+      }
+
+      function handleTouchEnd(event) {
+        if (touchStartY === null) return;
+        const endY = event.changedTouches[0]?.clientY ?? touchStartY;
+        const deltaY = touchStartY - endY;
+        touchStartY = null;
+        if (Math.abs(deltaY) < SWIPE_THRESHOLD) return;
+        scrollToClip(activeIndex + (deltaY > 0 ? 1 : -1));
+      }
+
+      function handleWheel(event) {
+        if (Math.abs(event.deltaY) < 18 || wheelLocked) return;
+        event.preventDefault();
+        wheelLocked = true;
+        scrollToClip(activeIndex + (event.deltaY > 0 ? 1 : -1));
+        window.setTimeout(() => {
+          wheelLocked = false;
+        }, 520);
+      }
+
+      function isTrustedTwitchMessageOrigin(origin) {
+        return TRUSTED_TWITCH_MESSAGE_ORIGINS.has(origin);
+      }
+
+      function getEmbedMessageText(data) {
+        if (typeof data === "string") return data;
+        try {
+          return JSON.stringify(data ?? {});
+        } catch {
+          return String(data ?? "");
+        }
+      }
+
+      function normalizePayloadKey(key) {
+        return String(key).toLowerCase().replace(/[^a-z0-9]/g, "");
+      }
+
+      function getNumericPayloadValue(data, names) {
+        const wantedNames = new Set(names);
+        const seen = new Set();
+        const readValue = (value) => {
+          if (!value || typeof value !== "object" || seen.has(value)) return null;
+          seen.add(value);
+          for (const [key, childValue] of Object.entries(value)) {
+            const normalizedKey = normalizePayloadKey(key);
+            if (wantedNames.has(normalizedKey)) {
+              const numberValue = Number(childValue);
+              if (Number.isFinite(numberValue)) return numberValue;
+            }
+            const nestedValue = readValue(childValue);
+            if (nestedValue !== null) return nestedValue;
+          }
+          return null;
+        };
+        return readValue(data);
+      }
+
+      function isNearPlaybackEndMessage(data) {
+        const currentTime = getNumericPayloadValue(data, ["currenttime", "current", "position", "time"]);
+        const duration = getNumericPayloadValue(data, ["duration", "length", "totalduration"]);
+        if (currentTime === null || duration === null) return false;
+        return duration > 0 && currentTime >= Math.max(0, duration - 0.9);
+      }
+
+      function isTerminalEmbedMessage(data) {
+        const payload = getEmbedMessageText(data).toLowerCase();
+        if (/(^|[^a-z])(ended|complete|completed|finish|finished)([^a-z]|$)/.test(payload)) return true;
+        return isNearPlaybackEndMessage(data);
+      }
+
+      function handleEmbedMessage(event) {
+        if (!isTrustedTwitchMessageOrigin(event.origin)) return;
+        if (!isTerminalEmbedMessage(event.data)) return;
+        scrollToClip(activeIndex + 1);
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visibleEntry = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visibleEntry || visibleEntry.intersectionRatio < 0.58) return;
+          activateShortsItem(Number(visibleEntry.target.dataset.index));
+        },
+        {
+          root: elements.shortsFeed,
+          threshold: [0.58, 0.72, 0.9],
+        }
+      );
+
+      async function loadShortsData() {
+        try {
+          const response = await fetch(DATA_PATH);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          allClips = Array.isArray(data.clips) ? data.clips : [];
+          shortsPool = buildShortsPool(allClips);
+          renderShortsFeed();
+          if (shortsPool.length > 0) {
+            activateShortsItem(0);
+          }
+        } catch {
+          allClips = [];
+          shortsPool = [];
+          clearAutoAdvance();
+          elements.shortsEmpty.hidden = false;
+        }
+      }
+
+      elements.shortsFeed.addEventListener("touchstart", handleTouchStart, { passive: true });
+      elements.shortsFeed.addEventListener("touchend", handleTouchEnd);
+      elements.shortsFeed.addEventListener("wheel", handleWheel, { passive: false });
+      elements.shortsSwipeHint.addEventListener("click", dismissSwipeHint);
+      window.addEventListener("message", handleEmbedMessage);
+      window.addEventListener("keydown", (event) => {
+        if (isSwipeHintVisible()) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            dismissSwipeHint();
+          }
+          return;
+        }
+        if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
+          event.preventDefault();
+          scrollToClip(activeIndex + 1);
+        }
+        if (event.key === "ArrowUp" || event.key === "PageUp") {
+          event.preventDefault();
+          scrollToClip(activeIndex - 1);
+        }
+      });
+
+      window.rukaShortsDebug = {
+        get activeIndex() {
+          return activeIndex;
+        },
+        get iframeCount() {
+          return document.querySelectorAll(".shorts-embed-frame").length;
+        },
+        get renderedCount() {
+          return renderedCount;
+        },
+        get autoAdvanceTimerActive() {
+          return autoAdvanceTimerId > 0;
+        },
+        get currentEmbedSrc() {
+          return document.querySelector(".shorts-embed-frame")?.src ?? "";
+        },
+        get swipeHintVisible() {
+          return isSwipeHintVisible();
+        },
+        dismissSwipeHint,
+        scrollToClip,
+      };
+
+      loadShortsData();
+    </script>
+  </body>
+</html>

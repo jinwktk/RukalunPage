@@ -8,7 +8,8 @@ const displaySiteName = "🖇るっかるんくりっぷ🖇";
 const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://www.rukalun.mydns.jp/";
 const pageTitle = `${displaySiteName} | Twitch Clip・配信切り抜き検索`;
-const shortsPagePath = "ruka-shorts.html";
+const shortsPagePath = "shorts/index.html";
+const legacyShortsPagePath = "ruka-shorts.html";
 const shortsPageUrl = `${pageUrl}${shortsPagePath}`;
 const shortsPageTitle = `RukaShorts（るかしょーつ） | ${displaySiteName}`;
 const gaMeasurementId = "G-TTVJN1V2LJ";
@@ -149,6 +150,7 @@ test("index.html is the public clip search page for RukalunPage", () => {
 test("required page assets and data are present", () => {
   const requiredFiles = [
     shortsPagePath,
+    legacyShortsPagePath,
     "clip-search-data.json",
     googleVerificationFile,
     "assets/rukalun/clip-search-hero.png",
@@ -163,6 +165,7 @@ test("required page assets and data are present", () => {
     "assets/rukalun/present-56px.webp",
     "assets/rukalun/bikkuri-112px.png",
     "assets/rukalun/bikkuri-56px.webp",
+    "assets/rukalun/shorts-swipe-hint.png",
   ];
 
   for (const relativePath of requiredFiles) {
@@ -203,6 +206,18 @@ test("clip-search.html keeps old new-repo paths working", () => {
   assert.match(html, new RegExp(`<link rel="canonical" href="${pageUrl}" />`));
 });
 
+test("ruka-shorts.html redirects to shorts/index.html", () => {
+  const html = readText(legacyShortsPagePath);
+
+  assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
+  assert.match(html, new RegExp(`<link rel="canonical" href="${escapeRegExp(shortsPageUrl)}" />`));
+  assert.match(html, /<meta http-equiv="refresh" content="0; url=\.\/shorts\/index\.html" \/>/);
+  assert.match(html, /new URL\("\.\/shorts\/index\.html", window\.location\.href\)/);
+  assert.match(html, /target\.search = window\.location\.search;/);
+  assert.match(html, /target\.hash = window\.location\.hash;/);
+  assert.match(html, /window\.location\.replace\(target\);/);
+});
+
 test("index.html exposes the modern search-first design surface", () => {
   const html = readText("index.html");
 
@@ -218,6 +233,8 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /class="button-icon" src="\.\/assets\/rukalun\/bikkuri-56px\.webp"/);
   assert.match(html, /class="button-icon" src="\.\/assets\/rukalun\/Hi-56px\.webp"/);
   assert.match(html, /class="button-icon" src="\.\/assets\/rukalun\/present-56px\.webp"/);
+  assert.match(html, /class="hero-button-stamp" src="\.\/assets\/rukalun\/bikkuri-56px\.webp"/);
+  assert.match(html, /class="hero-button-stamp" src="\.\/assets\/rukalun\/Hi-56px\.webp"/);
   assert.match(html, /--font-cute:[\s\S]*?UD デジタル 教科書体 NP/);
   assert.match(html, /font-family: var\(--font-cute\);/);
   assert.match(html, /class="brand-name"/);
@@ -542,6 +559,7 @@ test("sitemap lists only the canonical public URL", () => {
   assert.doesNotMatch(sitemap, /<changefreq>|<priority>/);
   assert.doesNotMatch(sitemap, /clip-search\.html/);
   assert.doesNotMatch(sitemap, /ruka-shorts\.html/);
+  assert.doesNotMatch(sitemap, /shorts\/index\.html/);
 });
 
 test("text sitemap lists only the canonical public URL", () => {
@@ -550,6 +568,7 @@ test("text sitemap lists only the canonical public URL", () => {
   assert.equal(sitemap.trim(), pageUrl);
   assert.doesNotMatch(sitemap, /clip-search\.html/);
   assert.doesNotMatch(sitemap, /ruka-shorts\.html/);
+  assert.doesNotMatch(sitemap, /shorts\/index\.html/);
 });
 
 test("documentation records SEO operation constraints", () => {
@@ -586,10 +605,15 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /右上に大きな閉じるボタン/);
   assert.match(readme, /閉じるとiframeを破棄/);
   assert.match(readme, /RukaShorts（るかしょーつ）/);
+  assert.match(readme, /shorts\/index\.html/);
   assert.match(readme, /ruka-shorts\.html/);
   assert.match(readme, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(readme, /ファーストビュー/);
-  assert.match(readme, /iframe/);
+  assert.match(readme, /shorts\/index\.htmlへ移動/);
+  assert.match(readme, /赤ボタン/);
+  assert.match(readme, /紫ボタン/);
+  assert.match(readme, /bikkuri-56px\.webp/);
+  assert.match(readme, /Hi-56px\.webp/);
   assert.match(readme, /Clipカードからの導線は置かない/);
   assert.match(readme, /スクロール \/ スワイプ/);
   assert.match(readme, /下向きキュー/);
@@ -631,10 +655,15 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /右上に大きな閉じるボタン/);
   assert.match(agents, /閉じるとiframeを破棄/);
   assert.match(agents, /RukaShorts（るかしょーつ）/);
+  assert.match(agents, /shorts\/index\.html/);
   assert.match(agents, /ruka-shorts\.html/);
   assert.match(agents, /TikTok \/ YouTube Shorts \/ Reels/);
   assert.match(agents, /ファーストビュー/);
-  assert.match(agents, /iframe/);
+  assert.match(agents, /shorts\/index\.htmlへ移動/);
+  assert.match(agents, /赤ボタン/);
+  assert.match(agents, /紫ボタン/);
+  assert.match(agents, /bikkuri-56px\.webp/);
+  assert.match(agents, /Hi-56px\.webp/);
   assert.match(agents, /Clipカードからの導線は置かない/);
   assert.match(agents, /スクロール \/ スワイプ/);
   assert.match(agents, /下向きキュー/);
@@ -745,44 +774,42 @@ test("random button remains usable across repeated clicks", () => {
   assert.match(html, /elements\.clearButton\.addEventListener\("click", \(\) => \{[\s\S]*clearRandomSelectionState\(\);/);
 });
 
-test("RukaShorts has a first-view iframe entry while cards stay unchanged", () => {
+test("RukaShorts has a first-view page link while cards stay unchanged", () => {
   const html = readText("index.html");
 
   assert.match(html, /id="heroSearchLink" class="button primary" href="#searchPanel">検索する<\/a>/);
-  assert.match(html, /id="openShortsButton" class="button hero-shorts-button" type="button" aria-controls="shortsEmbedPanel" aria-expanded="false">るかしょーつ<\/button>/);
-  assert.match(html, /id="heroTwitchLink" class="button" href="https:\/\/www\.twitch\.tv\/rukalun" target="_blank" rel="noreferrer">Twitchへ<\/a>/);
   assert.match(
     html,
-    /id="shortsEmbedPanel"[\s\S]*class="shorts-embed-panel"[\s\S]*hidden[\s\S]*aria-label="RukaShortsをページ内で見る"/
+    /id="heroShortsLink" class="button hero-shorts-button" href="\.\/shorts\/index\.html">[\s\S]*class="hero-button-stamp" src="\.\/assets\/rukalun\/bikkuri-56px\.webp"[\s\S]*るかしょーつ[\s\S]*<\/a>/
   );
-  assert.match(html, /id="shortsEmbedFrameWrap" class="shorts-embed-frame-wrap"/);
-  assert.match(html, /id="closeShortsEmbedButton" class="shorts-embed-close" type="button" aria-label="RukaShortsを閉じる"/);
-  assert.doesNotMatch(html, /<iframe[^>]+ruka-shorts\.html/i);
+  assert.match(
+    html,
+    /id="heroTwitchLink" class="button hero-twitch-button" href="https:\/\/www\.twitch\.tv\/rukalun" target="_blank" rel="noreferrer">[\s\S]*class="hero-button-stamp" src="\.\/assets\/rukalun\/Hi-56px\.webp"[\s\S]*Twitchへ[\s\S]*<\/a>/
+  );
+  assert.doesNotMatch(html, /id="openShortsButton"/);
+  assert.doesNotMatch(html, /id="shortsEmbedPanel"/);
+  assert.doesNotMatch(html, /id="shortsEmbedFrameWrap"/);
+  assert.doesNotMatch(html, /id="closeShortsEmbedButton"/);
+  assert.doesNotMatch(html, /<iframe[^>]+shorts\/index\.html/i);
   assert.match(html, /\.hero-actions\s*\{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, auto\)\);/);
-  assert.match(html, /\.hero-shorts-button\s*\{[\s\S]*background: #e8f8f4;[\s\S]*color: #236b66;/);
-  assert.match(html, /\.shorts-embed-panel\s*\{[\s\S]*position: fixed;[\s\S]*inset: 0;[\s\S]*display: none;/);
-  assert.match(html, /\.shorts-embed-panel\.is-open\s*\{[\s\S]*display: grid;/);
-  assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
-  assert.match(html, /body\.has-shorts-embed-open/);
+  assert.match(html, /\.hero-shorts-button\s*\{[\s\S]*background: #d83455;[\s\S]*color: #fff;/);
+  assert.match(html, /\.hero-twitch-button\s*\{[\s\S]*background: #9146ff;[\s\S]*color: #fff;/);
+  assert.match(html, /\.hero-button-stamp\s*\{[\s\S]*width: 28px;[\s\S]*height: 28px;[\s\S]*object-fit: contain;/);
+  assert.doesNotMatch(html, /\.shorts-embed-panel/);
+  assert.doesNotMatch(html, /\.shorts-embed-frame/);
+  assert.doesNotMatch(html, /body\.has-shorts-embed-open/);
   assert.doesNotMatch(html, /id="clipShorts"/);
   assert.doesNotMatch(html, /aria-labelledby="clipShortsTitle"/);
   assert.doesNotMatch(html, /clipShorts: requireElement\("#clipShorts"\)/);
   assert.doesNotMatch(html, /<iframe[^>]+clip-shorts-frame/i);
 
-  assert.match(html, /const SHORTS_EMBED_SRC = "\.\/ruka-shorts\.html";/);
-  assert.match(html, /openShortsEmbedButton: requireElement\("#openShortsButton"\)/);
-  assert.match(html, /shortsEmbedPanel: requireElement\("#shortsEmbedPanel"\)/);
-  assert.match(html, /shortsEmbedFrameWrap: requireElement\("#shortsEmbedFrameWrap"\)/);
-  assert.match(html, /closeShortsEmbedButton: requireElement\("#closeShortsEmbedButton"\)/);
-  assert.match(html, /function openShortsEmbed\(\) \{/);
-  assert.match(html, /const iframe = document\.createElement\("iframe"\);/);
-  assert.match(html, /iframe\.className = "shorts-embed-frame";/);
-  assert.match(html, /iframe\.src = SHORTS_EMBED_SRC;/);
-  assert.match(html, /elements\.shortsEmbedFrameWrap\.replaceChildren\(iframe\);/);
-  assert.match(html, /function closeShortsEmbed\(\) \{/);
-  assert.match(html, /elements\.shortsEmbedFrameWrap\.replaceChildren\(\);/);
-  assert.match(html, /elements\.openShortsEmbedButton\.addEventListener\("click", openShortsEmbed\);/);
-  assert.match(html, /elements\.closeShortsEmbedButton\.addEventListener\("click", closeShortsEmbed\);/);
+  assert.doesNotMatch(html, /SHORTS_EMBED_SRC/);
+  assert.doesNotMatch(html, /openShortsEmbedButton/);
+  assert.doesNotMatch(html, /shortsEmbedPanel/);
+  assert.doesNotMatch(html, /shortsEmbedFrameWrap/);
+  assert.doesNotMatch(html, /closeShortsEmbedButton/);
+  assert.doesNotMatch(html, /function openShortsEmbed/);
+  assert.doesNotMatch(html, /function closeShortsEmbed/);
   assert.doesNotMatch(html, /getShortsSearchParams/);
   assert.doesNotMatch(html, /createShortsUrl/);
   assert.doesNotMatch(html, /openShortsPageFromCurrentResults/);
@@ -798,6 +825,10 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, new RegExp(`<link rel="canonical" href="${shortsPageUrl}" />`));
   assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
   assert.match(html, /<body data-page="ruka-shorts">/);
+  assert.match(
+    html,
+    /<button id="shortsSwipeHint" class="shorts-swipe-hint" type="button" aria-label="上にスワイプして次のClipへ移動">[\s\S]*<img src="\.\.\/assets\/rukalun\/shorts-swipe-hint\.png" width="300" height="300" alt="" decoding="async" \/>[\s\S]*<\/button>/
+  );
   assert.match(html, /id="shortsFeed" class="shorts-feed"/);
   assert.match(html, /id="shortsEmpty"/);
   assert.doesNotMatch(html, /class="shorts-bar"/);
@@ -815,6 +846,9 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;/);
   assert.match(html, /\.shorts-next-cue\s*\{[\s\S]*position: absolute;[\s\S]*right: var\(--shorts-cue-right\);[\s\S]*pointer-events: none;[\s\S]*bottom: var\(--shorts-cue-bottom\);/);
   assert.match(html, /\.shorts-next-cue-mark\s*\{[\s\S]*border-right: 3px solid rgba\(255, 255, 255, 0\.92\);[\s\S]*border-bottom: 3px solid rgba\(255, 255, 255, 0\.92\);/);
+  assert.match(html, /\.shorts-swipe-hint\s*\{[\s\S]*position: fixed;[\s\S]*inset: 0;[\s\S]*z-index: 4;[\s\S]*display: grid;[\s\S]*place-items: center;[\s\S]*background: rgba\(0, 0, 0, 0\.42\);/);
+  assert.match(html, /\.shorts-swipe-hint\[hidden\]\s*\{[\s\S]*display: none;/);
+  assert.match(html, /\.shorts-swipe-hint img\s*\{[\s\S]*width: min\(180px, 48vw\);[\s\S]*height: auto;/);
   assert.match(html, /@keyframes shortsNextCue/);
   assert.match(html, /function createNextCue\(\) \{/);
   assert.match(html, /cue\.className = "shorts-next-cue";/);
@@ -822,11 +856,20 @@ test("RukaShorts page is a fullscreen random feed with unmuted autoplay and auto
   assert.match(html, /mark\.className = "shorts-next-cue-mark";/);
   assert.match(html, /item\.append\(shell, createNextCue\(\)\);/);
 
-  assert.match(html, /const DATA_PATH = "\.\/clip-search-data\.json";/);
+  assert.match(html, /const DATA_PATH = "\.\.\/clip-search-data\.json";/);
   assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
   assert.match(html, /const SHORTS_INITIAL_RENDER_LIMIT = 12;/);
   assert.match(html, /const SHORTS_RENDER_STEP = 8;/);
   assert.match(html, /const AUTO_ADVANCE_FALLBACK_MS = 30000;/);
+  assert.match(html, /shortsSwipeHint: requireElement\("#shortsSwipeHint"\)/);
+  assert.match(html, /let hasDismissedSwipeHint = false;/);
+  assert.match(html, /function dismissSwipeHint\(\) \{/);
+  assert.match(html, /hasDismissedSwipeHint = true;/);
+  assert.match(html, /elements\.shortsSwipeHint\.hidden = true;/);
+  assert.match(html, /function isSwipeHintVisible\(\) \{/);
+  assert.match(html, /elements\.shortsSwipeHint\.addEventListener\("click", dismissSwipeHint\);/);
+  assert.match(html, /if \(isSwipeHintVisible\(\)\) \{[\s\S]*if \(event\.key === "Enter" \|\| event\.key === " "\) \{[\s\S]*dismissSwipeHint\(\);[\s\S]*return;/);
+  assert.doesNotMatch(html, /localStorage|sessionStorage/);
   assert.doesNotMatch(html, /urlParams\.get\("q"\)/);
   assert.doesNotMatch(html, /urlParams\.get\("creator"\)/);
   assert.doesNotMatch(html, /urlParams\.get\("game"\)/);

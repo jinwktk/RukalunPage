@@ -198,8 +198,7 @@
         line-height: 1.65;
       }
 
-      body.has-clip-modal-open,
-      body.has-shorts-embed-open {
+      body.has-clip-modal-open {
         overflow: hidden;
       }
 
@@ -381,10 +380,24 @@
         min-width: 112px;
       }
 
-      .hero-shorts-button {
-        border-color: #9edbd2;
-        background: #e8f8f4;
-        color: #236b66;
+      .hero-actions .hero-shorts-button {
+        border-color: #ab1738;
+        background: #d83455;
+        color: #fff;
+      }
+
+      .hero-actions .hero-twitch-button {
+        border-color: #6b32c9;
+        background: #9146ff;
+        color: #fff;
+      }
+
+      .hero-button-stamp {
+        flex: 0 0 auto;
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        object-fit: contain;
       }
 
       .hero-metrics {
@@ -1211,69 +1224,6 @@
         border: 0;
       }
 
-      .shorts-embed-panel {
-        position: fixed;
-        inset: 0;
-        z-index: 90;
-        display: none;
-        place-items: center;
-        background: #000;
-        padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
-          max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
-      }
-
-      .shorts-embed-panel.is-open {
-        display: grid;
-      }
-
-      .shorts-embed-shell {
-        width: min(1180px, 100%);
-        height: min(760px, calc(100dvh - 28px));
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 8px;
-        background: #000;
-        box-shadow: 0 22px 70px rgba(0, 0, 0, 0.48);
-        overflow: hidden;
-      }
-
-      .shorts-embed-frame-wrap {
-        width: 100%;
-        height: 100%;
-        background: #000;
-      }
-
-      .shorts-embed-frame {
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        background: #000;
-      }
-
-      .shorts-embed-close {
-        position: fixed;
-        top: max(16px, env(safe-area-inset-top));
-        right: max(16px, env(safe-area-inset-right));
-        z-index: 92;
-        display: inline-grid;
-        width: 52px;
-        height: 52px;
-        place-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.84);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.92);
-        color: #236b66;
-        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.26);
-        font-size: 1.9rem;
-        font-weight: 900;
-        line-height: 1;
-        backdrop-filter: blur(8px);
-      }
-
-      .shorts-embed-close:hover {
-        background: #e8f8f4;
-      }
-
       .empty {
         display: none;
         border: 1px dashed #ddb8ce;
@@ -1532,23 +1482,6 @@
           grid-template-columns: 1fr 1fr;
         }
 
-        .shorts-embed-panel {
-          padding: 0;
-        }
-
-        .shorts-embed-shell {
-          width: 100%;
-          height: 100dvh;
-          border: 0;
-          border-radius: 0;
-        }
-
-        .shorts-embed-close {
-          width: 48px;
-          height: 48px;
-          font-size: 1.7rem;
-        }
-
         .floatingchat-container-wrap,
         .floatingchat-container,
         .floatingchat-container-wrap-mobi {
@@ -1642,8 +1575,14 @@
           </p>
           <div class="hero-actions" aria-label="主要操作">
             <a id="heroSearchLink" class="button primary" href="#searchPanel">検索する</a>
-            <button id="openShortsButton" class="button hero-shorts-button" type="button" aria-controls="shortsEmbedPanel" aria-expanded="false">るかしょーつ</button>
-            <a id="heroTwitchLink" class="button" href="https://www.twitch.tv/rukalun" target="_blank" rel="noreferrer">Twitchへ</a>
+            <a id="heroShortsLink" class="button hero-shorts-button" href="./shorts/index.html">
+              <img class="hero-button-stamp" src="./assets/rukalun/bikkuri-56px.webp" width="28" height="28" alt="" decoding="async" />
+              るかしょーつ
+            </a>
+            <a id="heroTwitchLink" class="button hero-twitch-button" href="https://www.twitch.tv/rukalun" target="_blank" rel="noreferrer">
+              <img class="hero-button-stamp" src="./assets/rukalun/Hi-56px.webp" width="28" height="28" alt="" decoding="async" />
+              Twitchへ
+            </a>
           </div>
         </div>
         <div class="hero-metrics" aria-label="Clipライブラリの状態">
@@ -1660,20 +1599,6 @@
             <span id="heroClipSyncedAt" class="metric-value">確認中</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section
-      id="shortsEmbedPanel"
-      class="shorts-embed-panel"
-      hidden
-      aria-label="RukaShortsをページ内で見る"
-      aria-modal="true"
-      role="dialog"
-    >
-      <button id="closeShortsEmbedButton" class="shorts-embed-close" type="button" aria-label="RukaShortsを閉じる">×</button>
-      <div class="shorts-embed-shell" role="document">
-        <div id="shortsEmbedFrameWrap" class="shorts-embed-frame-wrap"></div>
       </div>
     </section>
 
@@ -1845,7 +1770,6 @@
       const SVG_NS = "http://www.w3.org/2000/svg";
       const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "(max-width: 620px)";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
-      const SHORTS_EMBED_SRC = "./ruka-shorts.html";
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -1855,10 +1779,6 @@
 
       const elements = {
         heroSearchLink: requireElement("#heroSearchLink"),
-        openShortsEmbedButton: requireElement("#openShortsButton"),
-        shortsEmbedPanel: requireElement("#shortsEmbedPanel"),
-        shortsEmbedFrameWrap: requireElement("#shortsEmbedFrameWrap"),
-        closeShortsEmbedButton: requireElement("#closeShortsEmbedButton"),
         searchPanel: requireElement("#searchPanel"),
         searchPanelToggle: requireElement("#searchPanelToggle"),
         searchPanelToggleLabel: requireElement("#searchPanelToggleLabel"),
@@ -1897,7 +1817,6 @@
       let lastRandomSearchValue = "";
       let lastRandomClipId = "";
       let lastClipModalTrigger = null;
-      let lastShortsEmbedTrigger = null;
 
       function normalizeText(value) {
         return String(value ?? "")
@@ -2108,65 +2027,6 @@
         document.body.classList.remove("has-clip-modal-open");
         lastClipModalTrigger?.focus({ preventScroll: true });
         lastClipModalTrigger = null;
-      }
-
-      function openShortsEmbed() {
-        lastShortsEmbedTrigger =
-          elements.openShortsEmbedButton instanceof HTMLElement
-            ? elements.openShortsEmbedButton
-            : document.activeElement instanceof HTMLElement
-              ? document.activeElement
-              : null;
-        const iframe = document.createElement("iframe");
-        iframe.className = "shorts-embed-frame";
-        iframe.title = "RukaShorts（るかしょーつ）";
-        iframe.allow = "autoplay; fullscreen; picture-in-picture";
-        iframe.allowFullscreen = true;
-        iframe.src = SHORTS_EMBED_SRC;
-        elements.shortsEmbedFrameWrap.replaceChildren(iframe);
-        elements.shortsEmbedPanel.hidden = false;
-        elements.shortsEmbedPanel.classList.add("is-open");
-        elements.openShortsEmbedButton.setAttribute("aria-expanded", "true");
-        document.body.classList.add("has-shorts-embed-open");
-        elements.closeShortsEmbedButton.focus({ preventScroll: true });
-      }
-
-      function getShortsEmbedFocusableElements() {
-        return Array.from(
-          elements.shortsEmbedPanel.querySelectorAll("a[href], button, iframe, input, select, textarea, [tabindex]:not([tabindex='-1'])")
-        ).filter((element) => !element.hasAttribute("disabled") && element.getAttribute("aria-hidden") !== "true");
-      }
-
-      function trapShortsEmbedFocus(event) {
-        if (event.key !== "Tab" || !elements.shortsEmbedPanel.classList.contains("is-open")) return;
-        const focusableElements = getShortsEmbedFocusableElements();
-        if (focusableElements.length === 0) {
-          event.preventDefault();
-          elements.closeShortsEmbedButton.focus({ preventScroll: true });
-          return;
-        }
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-        if (event.shiftKey && document.activeElement === firstElement) {
-          event.preventDefault();
-          lastElement.focus({ preventScroll: true });
-          return;
-        }
-        if (!event.shiftKey && document.activeElement === lastElement) {
-          event.preventDefault();
-          firstElement.focus({ preventScroll: true });
-        }
-      }
-
-      function closeShortsEmbed() {
-        elements.shortsEmbedPanel.classList.remove("is-open");
-        elements.shortsEmbedPanel.hidden = true;
-        elements.shortsEmbedFrameWrap.replaceChildren();
-        elements.openShortsEmbedButton.setAttribute("aria-expanded", "false");
-        document.body.classList.remove("has-shorts-embed-open");
-        lastShortsEmbedTrigger?.focus({ preventScroll: true });
-        lastShortsEmbedTrigger = null;
       }
 
       function handleClipOpen(event, clip) {
@@ -2694,11 +2554,6 @@
 
       elements.searchInput.addEventListener("input", handleSearchInputChange);
       elements.heroSearchLink.addEventListener("click", () => setSearchPanelExpanded(true));
-      elements.openShortsEmbedButton.addEventListener("click", openShortsEmbed);
-      elements.closeShortsEmbedButton.addEventListener("click", closeShortsEmbed);
-      elements.shortsEmbedPanel.addEventListener("click", (event) => {
-        if (event.target === elements.shortsEmbedPanel) closeShortsEmbed();
-      });
       elements.creatorFilter.addEventListener("change", resetVisibleAndRender);
       elements.gameFilter.addEventListener("change", resetVisibleAndRender);
       elements.sortSelect.addEventListener("change", resetVisibleAndRender);
@@ -2728,11 +2583,7 @@
         if (event.key === "Escape" && elements.clipModal.classList.contains("is-open")) {
           closeClipModal();
         }
-        if (event.key === "Escape" && elements.shortsEmbedPanel.classList.contains("is-open")) {
-          closeShortsEmbed();
-        }
         trapClipModalFocus(event);
-        trapShortsEmbedFocus(event);
       });
 
       scheduleDataLoad();
