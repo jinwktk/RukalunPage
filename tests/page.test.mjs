@@ -622,7 +622,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /次回以降は表示しません/);
   assert.match(readme, /初回案内を閉じるまではTwitch iframeを生成せず/);
   assert.match(readme, /muted=true/);
-  assert.match(readme, /クリックしてミュート解除/);
+  assert.match(readme, /音量/);
+  assert.match(readme, /プレイヤー操作/);
+  assert.doesNotMatch(readme, /クリックしてミュート解除やプレイヤー操作を無効化/);
   assert.match(readme, /自動スワイプ/);
   assert.match(readme, /全Clip/);
   assert.match(readme, /crypto\.getRandomValues/);
@@ -678,7 +680,9 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /次回以降は表示しない/);
   assert.match(agents, /初回案内を閉じるまではiframeを生成しない/);
   assert.match(agents, /muted=true/);
-  assert.match(agents, /クリックしてミュート解除/);
+  assert.match(agents, /音量/);
+  assert.match(agents, /プレイヤー操作/);
+  assert.doesNotMatch(agents, /クリックしてミュート解除やプレイヤー操作を無効化/);
   assert.match(agents, /自動スワイプ/);
   assert.match(agents, /全Clip/);
   assert.match(agents, /crypto\.getRandomValues/);
@@ -831,7 +835,7 @@ test("RukaShorts has a first-view page link while cards stay unchanged", () => {
   assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
 });
 
-test("RukaShorts page is a fullscreen random feed with muted autoplay and auto swipe", () => {
+test("RukaShorts page is a fullscreen random feed with muted autoplay, player controls, and auto swipe", () => {
   const html = readText(shortsPagePath);
 
   assert.ok(html.includes(`<title>${shortsPageTitle}</title>`));
@@ -856,7 +860,8 @@ test("RukaShorts page is a fullscreen random feed with muted autoplay and auto s
   assert.doesNotMatch(html, /--shorts-cue-right|--shorts-cue-bottom/);
   assert.doesNotMatch(html, /\.shorts-item::after|\.shorts-item\.is-active::after/);
   assert.match(html, /\.shorts-video-shell\s*\{[\s\S]*width: 100vw;[\s\S]*height: 100svh;/);
-  assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;[\s\S]*pointer-events: none;/);
+  assert.match(html, /\.shorts-embed-frame\s*\{[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*border: 0;[\s\S]*background: #000;/);
+  assert.doesNotMatch(html, /\.shorts-embed-frame\s*\{[\s\S]*pointer-events: none;[\s\S]*\}/);
   assert.doesNotMatch(html, /shorts-next-cue|shorts-next-cue-mark|shortsNextCue/);
   assert.match(html, /\.shorts-swipe-hint\s*\{[\s\S]*position: fixed;[\s\S]*inset: 0;[\s\S]*z-index: 4;[\s\S]*display: grid;[\s\S]*place-items: center;[\s\S]*background: rgba\(0, 0, 0, 0\.42\);/);
   assert.match(html, /\.shorts-swipe-hint\[hidden\]\s*\{[\s\S]*display: none;/);
@@ -946,7 +951,7 @@ test("RukaShorts page is a fullscreen random feed with muted autoplay and auto s
   assert.match(html, /previousShell\?\.replaceChildren\(createPlaceholder\(shortsPool\[activeIndex\]\)\);/);
   assert.match(html, /iframe\.className = "shorts-embed-frame";/);
   assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
-  assert.match(html, /iframe\.tabIndex = -1;/);
+  assert.doesNotMatch(html, /iframe\.tabIndex = -1;/);
   assert.match(html, /shell\.replaceChildren\(iframe\);/);
   assert.match(html, /scheduleAutoAdvance\(clip\);/);
   assert.match(html, /const observer = new IntersectionObserver/);
