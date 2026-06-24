@@ -631,7 +631,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /crypto\.getRandomValues/);
   assert.match(readme, /currentTime/);
   assert.match(readme, /duration/);
-  assert.match(readme, /30秒/);
+  assert.match(readme, /60秒/);
   assert.match(readme, /noindex,follow/);
   assert.match(readme, /PC\/SPとも画面いっぱい/);
   assert.match(readme, /初期12件/);
@@ -690,7 +690,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /crypto\.getRandomValues/);
   assert.match(agents, /currentTime/);
   assert.match(agents, /duration/);
-  assert.match(agents, /30秒/);
+  assert.match(agents, /60秒/);
   assert.match(agents, /noindex,follow/);
   assert.match(agents, /PC\/SPとも画面いっぱい/);
   assert.match(agents, /初期12件/);
@@ -876,7 +876,7 @@ test("RukaShorts page is a fullscreen random feed with audible autoplay, player 
   assert.match(html, /const SWIPE_HINT_STORAGE_KEY = "rukalun\.rukaShorts\.swipeHintDismissed\.v1";/);
   assert.match(html, /const SHORTS_INITIAL_RENDER_LIMIT = 12;/);
   assert.match(html, /const SHORTS_RENDER_STEP = 8;/);
-  assert.match(html, /const AUTO_ADVANCE_FALLBACK_MS = 30000;/);
+  assert.match(html, /const AUTO_ADVANCE_FALLBACK_MS = 60000;/);
   assert.match(html, /const RANDOM_UINT32_RANGE = 0x100000000;/);
   assert.match(html, /shortsSwipeHint: requireElement\("#shortsSwipeHint"\)/);
   assert.match(html, /let hasDismissedSwipeHint = false;/);
