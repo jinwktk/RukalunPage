@@ -98,6 +98,8 @@ CLIP_SEARCH_PUBLISH_BRANCH=main
 
 Bot の直近Clip同期完了後、`clip-search-data.json` に差分があればこのリポジトリの `main` へ commit/push します。PageSpeed向けに、公開前のJSONはminify済みの1行形式を維持します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしているため、同期時刻だけの更新や整形戻りでGitHub上の差分表示を肥大化させない運用にします。履歴整理を行う場合は、件名が `Clip検索JSONを同期時刻更新` のコミットだけを対象にし、公開ページの開発コミットは残します。
 
+2026-06-24時点でもBot同期直後に公開JSONが整形済みへ戻る場合があります。公開前の確認で複数行JSONになっていた場合は、最新データ内容を保ったまま `JSON.stringify(JSON.parse(raw))` 相当で1行minifyへ戻してからテストとpushを行います。
+
 ## 検証
 
 ```powershell
