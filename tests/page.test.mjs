@@ -621,7 +621,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /localStorageに記録/);
   assert.match(readme, /次回以降は表示しません/);
   assert.match(readme, /初回案内を閉じるまではTwitch iframeを生成せず/);
-  assert.match(readme, /muted=true/);
+  assert.match(readme, /muted=false/);
+  assert.match(readme, /音付き自動再生/);
   assert.match(readme, /音量/);
   assert.match(readme, /プレイヤー操作/);
   assert.doesNotMatch(readme, /クリックしてミュート解除やプレイヤー操作を無効化/);
@@ -679,7 +680,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /localStorageに記録/);
   assert.match(agents, /次回以降は表示しない/);
   assert.match(agents, /初回案内を閉じるまではiframeを生成しない/);
-  assert.match(agents, /muted=true/);
+  assert.match(agents, /muted=false/);
+  assert.match(agents, /音付き自動再生/);
   assert.match(agents, /音量/);
   assert.match(agents, /プレイヤー操作/);
   assert.doesNotMatch(agents, /クリックしてミュート解除やプレイヤー操作を無効化/);
@@ -835,7 +837,7 @@ test("RukaShorts has a first-view page link while cards stay unchanged", () => {
   assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
 });
 
-test("RukaShorts page is a fullscreen random feed with muted autoplay, player controls, and auto swipe", () => {
+test("RukaShorts page is a fullscreen random feed with audible autoplay, player controls, and auto swipe", () => {
   const html = readText(shortsPagePath);
 
   assert.ok(html.includes(`<title>${shortsPageTitle}</title>`));
@@ -924,8 +926,8 @@ test("RukaShorts page is a fullscreen random feed with muted autoplay, player co
   assert.match(html, /appendShortsItems\(0, renderedCount\);/);
   assert.match(html, /function toTwitchEmbedUrl\(clip\) \{/);
   assert.match(html, /embedUrl\.searchParams\.set\("autoplay", "true"\);/);
-  assert.match(html, /embedUrl\.searchParams\.set\("muted", "true"\);/);
-  assert.doesNotMatch(html, /muted", "false"|muted=false/);
+  assert.match(html, /embedUrl\.searchParams\.set\("muted", "false"\);/);
+  assert.doesNotMatch(html, /muted", "true"|muted=true/);
   assert.doesNotMatch(html, /embedUrl\.searchParams\.set\("loop"/);
   assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
   assert.match(html, /function scheduleAutoAdvance\(clip\) \{/);

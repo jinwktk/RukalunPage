@@ -288,7 +288,7 @@
         const embedUrl = new URL("https://clips.twitch.tv/embed");
         embedUrl.searchParams.set("clip", slug);
         embedUrl.searchParams.set("autoplay", "true");
-        embedUrl.searchParams.set("muted", "true");
+        embedUrl.searchParams.set("muted", "false");
         for (const parent of getTwitchEmbedParents()) {
           embedUrl.searchParams.append("parent", parent);
         }
