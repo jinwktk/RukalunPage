@@ -632,6 +632,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /currentTime/);
   assert.match(readme, /duration/);
   assert.match(readme, /60秒/);
+  assert.match(readme, /一時停止/);
+  assert.match(readme, /フォールバックを止め/);
   assert.match(readme, /noindex,follow/);
   assert.match(readme, /PC\/SPとも画面いっぱい/);
   assert.match(readme, /初期12件/);
@@ -691,6 +693,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /currentTime/);
   assert.match(agents, /duration/);
   assert.match(agents, /60秒/);
+  assert.match(agents, /一時停止/);
+  assert.match(agents, /フォールバックを止め/);
   assert.match(agents, /noindex,follow/);
   assert.match(agents, /PC\/SPとも画面いっぱい/);
   assert.match(agents, /初期12件/);
@@ -916,6 +920,7 @@ test("RukaShorts page is a fullscreen random feed with audible autoplay, player 
   assert.doesNotMatch(html, /Math\.random\(\) \* \(index \+ 1\)/);
   assert.match(html, /let renderedCount = 0;/);
   assert.match(html, /let autoAdvanceTimerId = 0;/);
+  assert.match(html, /let autoAdvanceSuspendedIndex = -1;/);
   assert.match(html, /function ensureRenderedThrough\(index\) \{/);
   assert.match(html, /Math\.min\(shortsPool\.length, Math\.max\(index \+ 1, renderedCount \+ SHORTS_RENDER_STEP\)\)/);
   assert.match(html, /function appendShortsItems\(fromIndex, toIndex\) \{/);
@@ -931,7 +936,13 @@ test("RukaShorts page is a fullscreen random feed with audible autoplay, player 
   assert.doesNotMatch(html, /embedUrl\.searchParams\.set\("loop"/);
   assert.match(html, /embedUrl\.searchParams\.append\("parent", parent\);/);
   assert.match(html, /function scheduleAutoAdvance\(clip\) \{/);
+  assert.match(html, /if \(autoAdvanceSuspendedIndex === activeIndex\) return;/);
   assert.match(html, /autoAdvanceTimerId = window\.setTimeout\(\(\) => scrollToClip\(activeIndex \+ 1\), getClipAutoAdvanceMs\(clip\)\);/);
+  assert.match(html, /function suspendAutoAdvanceForPlayerControl\(\) \{/);
+  assert.match(html, /autoAdvanceSuspendedIndex = activeIndex;/);
+  assert.match(html, /clearAutoAdvance\(\);/);
+  assert.match(html, /function handleWindowBlur\(\) \{/);
+  assert.match(html, /document\.activeElement\?\.classList\?\.contains\("shorts-embed-frame"\)/);
   assert.match(html, /const TRUSTED_TWITCH_MESSAGE_ORIGINS = new Set\(/);
   assert.match(html, /"https:\/\/www\.twitch\.tv"/);
   assert.match(html, /"https:\/\/embed\.twitch\.tv"/);
@@ -954,6 +965,8 @@ test("RukaShorts page is a fullscreen random feed with audible autoplay, player 
   assert.match(html, /iframe\.className = "shorts-embed-frame";/);
   assert.match(html, /iframe\.allow = "autoplay; fullscreen; picture-in-picture";/);
   assert.doesNotMatch(html, /iframe\.tabIndex = -1;/);
+  assert.match(html, /iframe\.addEventListener\("focus", suspendAutoAdvanceForPlayerControl\);/);
+  assert.match(html, /iframe\.addEventListener\("pointerdown", suspendAutoAdvanceForPlayerControl\);/);
   assert.match(html, /shell\.replaceChildren\(iframe\);/);
   assert.match(html, /scheduleAutoAdvance\(clip\);/);
   assert.match(html, /const observer = new IntersectionObserver/);
@@ -971,6 +984,7 @@ test("RukaShorts page is a fullscreen random feed with audible autoplay, player 
   assert.match(html, /elements\.shortsFeed\.addEventListener\("touchstart", handleTouchStart, \{ passive: true \}\);/);
   assert.match(html, /elements\.shortsFeed\.addEventListener\("touchend", handleTouchEnd\);/);
   assert.match(html, /elements\.shortsFeed\.addEventListener\("wheel", handleWheel, \{ passive: false \}\);/);
+  assert.match(html, /window\.addEventListener\("blur", handleWindowBlur\);/);
   assert.match(html, /if \(shortsPool\.length > 0\) \{[\s\S]*if \(isSwipeHintVisible\(\)\) \{[\s\S]*pendingActivationIndex = 0;[\s\S]*\} else \{[\s\S]*activateShortsItem\(0\);[\s\S]*\}/);
 });
 

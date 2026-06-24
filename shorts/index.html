@@ -215,6 +215,7 @@
       let activeIndex = -1;
       let renderedCount = 0;
       let autoAdvanceTimerId = 0;
+      let autoAdvanceSuspendedIndex = -1;
       let touchStartY = null;
       let wheelLocked = false;
       let hasDismissedSwipeHint = false;
@@ -391,12 +392,28 @@
 
       function scheduleAutoAdvance(clip) {
         clearAutoAdvance();
+        if (autoAdvanceSuspendedIndex === activeIndex) return;
         autoAdvanceTimerId = window.setTimeout(() => scrollToClip(activeIndex + 1), getClipAutoAdvanceMs(clip));
+      }
+
+      function suspendAutoAdvanceForPlayerControl() {
+        if (activeIndex < 0) return;
+        autoAdvanceSuspendedIndex = activeIndex;
+        clearAutoAdvance();
+      }
+
+      function handleWindowBlur() {
+        window.setTimeout(() => {
+          if (document.activeElement?.classList?.contains("shorts-embed-frame")) {
+            suspendAutoAdvanceForPlayerControl();
+          }
+        }, 0);
       }
 
       function renderShortsFeed() {
         observer.disconnect();
         clearAutoAdvance();
+        autoAdvanceSuspendedIndex = -1;
         activeIndex = -1;
         renderedCount = Math.min(shortsPool.length, SHORTS_INITIAL_RENDER_LIMIT);
         elements.shortsFeed.replaceChildren();
@@ -419,6 +436,7 @@
         previousShell?.replaceChildren(createPlaceholder(shortsPool[activeIndex]));
         previousItem?.classList.remove("is-active");
 
+        autoAdvanceSuspendedIndex = -1;
         activeIndex = index;
         const clip = shortsPool[activeIndex];
         const item = elements.shortsFeed.querySelector(`[data-index="${activeIndex}"]`);
@@ -437,6 +455,8 @@
         iframe.allow = "autoplay; fullscreen; picture-in-picture";
         iframe.allowFullscreen = true;
         iframe.src = embedUrl;
+        iframe.addEventListener("focus", suspendAutoAdvanceForPlayerControl);
+        iframe.addEventListener("pointerdown", suspendAutoAdvanceForPlayerControl);
         shell.replaceChildren(iframe);
         scheduleAutoAdvance(clip);
       }
@@ -572,6 +592,7 @@
       elements.shortsFeed.addEventListener("wheel", handleWheel, { passive: false });
       elements.shortsSwipeHint.addEventListener("click", dismissSwipeHint);
       window.addEventListener("message", handleEmbedMessage);
+      window.addEventListener("blur", handleWindowBlur);
       window.addEventListener("keydown", (event) => {
         if (isSwipeHintVisible()) {
           if (event.key === "Enter" || event.key === " ") {
