@@ -3,3 +3,12 @@ node_modules/
 Thumbs.db
 *.log
 /rukalun/
+AGENTS.md
+**/AGENTS.md
+.agents/
+.codex/
+.omx/
+.omc/
+.env
+.env.*
+!.env.example
