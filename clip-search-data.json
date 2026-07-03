@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-03T17:04:44.378Z",
-  "total": 2765,
+  "generatedAt": "2026-07-03T18:35:08.634Z",
+  "total": 2766,
   "clipSync": {
-    "recentSyncedAt": "2026-07-03T17:04:43.087Z"
+    "recentSyncedAt": "2026-07-03T18:35:07.243Z"
   },
   "clips": [
+    {
+      "id": "EphemeralResoluteOrcaJebaited-V6CFmWHa3EV_xRaG",
+      "url": "https://www.twitch.tv/rukalun/clip/EphemeralResoluteOrcaJebaited-V6CFmWHa3EV_xRaG",
+      "title": "今日のおすすめ漫画",
+      "creator": "Whellie",
+      "gameName": "7 Days to Die",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/12b9272b-db9d-4d32-9f65-a66a21b27218/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-03T17:04:52.000Z",
+      "views": 2
+    },
     {
       "id": "ProtectiveGiantOryxNomNom-FL-453t7dgstGn2I",
       "url": "https://www.twitch.tv/rukalun/clip/ProtectiveGiantOryxNomNom-FL-453t7dgstGn2I",
