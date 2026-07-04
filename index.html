@@ -2454,6 +2454,26 @@
         updateHeroMetrics();
       }
 
+      function hasMoreClips() {
+        return dataLoadState === "loaded" && filteredClips.length > visibleLimit;
+      }
+
+      function loadMoreClips() {
+        if (!hasMoreClips()) return;
+        visibleLimit += MORE_STEP;
+        render();
+      }
+
+      function handleAutoLoadMore(entries) {
+        if (entries.some((entry) => entry.isIntersecting)) loadMoreClips();
+      }
+
+      function setupAutoLoadMore() {
+        if (!("IntersectionObserver" in window)) return;
+        const observer = new IntersectionObserver(handleAutoLoadMore);
+        observer.observe(elements.loadMoreWrap);
+      }
+
       function resetVisibleAndRender() {
         visibleLimit = INITIAL_LIMIT;
         render();
@@ -2571,10 +2591,7 @@
       });
       elements.randomButton.addEventListener("click", pickRandomClip);
       elements.closeSearchButton.addEventListener("click", () => setSearchPanelExpanded(false));
-      elements.loadMoreButton.addEventListener("click", () => {
-        visibleLimit += MORE_STEP;
-        render();
-      });
+      elements.loadMoreButton.addEventListener("click", loadMoreClips);
       elements.clipModalClose.addEventListener("click", closeClipModal);
       elements.clipModal.addEventListener("click", (event) => {
         if (event.target === elements.clipModal) closeClipModal();
@@ -2586,6 +2603,7 @@
         trapClipModalFocus(event);
       });
 
+      setupAutoLoadMore();
       scheduleDataLoad();
     </script>
     <script>
