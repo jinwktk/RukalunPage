@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-04T09:06:26.498Z",
-  "total": 2768,
+  "generatedAt": "2026-07-04T09:56:25.021Z",
+  "total": 2769,
   "clipSync": {
-    "recentSyncedAt": "2026-07-04T09:06:24.824Z"
+    "recentSyncedAt": "2026-07-04T09:56:23.579Z"
   },
   "clips": [
+    {
+      "id": "FastSarcasticHedgehogRedCoat-z_7gb15F4LnbV9BN",
+      "url": "https://www.twitch.tv/rukalun/clip/FastSarcasticHedgehogRedCoat-z_7gb15F4LnbV9BN",
+      "title": "きんたまさいたろ",
+      "creator": "かのんのん",
+      "gameName": "7 Days to Die",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/edde017b-d9e6-431c-8a20-85a2be8a7415/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-04T09:03:43.000Z",
+      "views": 3
+    },
     {
       "id": "AlertTameWrenchMikeHogu-_hD2IWGoqhllUOrQ",
       "url": "https://www.twitch.tv/rukalun/clip/AlertTameWrenchMikeHogu-_hD2IWGoqhllUOrQ",
@@ -13,7 +23,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a9667a55-b87b-4c6a-9062-1ba666f184be/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-04T08:52:04.000Z",
-      "views": 2
+      "views": 8
     },
     {
       "id": "TacitSlipperyTurtleANELE-1SE_lY_f5YiP3l1b",
