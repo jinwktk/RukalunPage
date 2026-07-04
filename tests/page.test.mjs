@@ -13,9 +13,11 @@ const shortsRoutePath = "shorts/";
 const legacyShortsPagePath = "ruka-shorts.html";
 const shortsPageUrl = `${pageUrl}${shortsRoutePath}`;
 const shortsPageTitle = `RukaShorts（るかしょーつ） | ${displaySiteName}`;
+const kofiRedirectPath = "jinnymeia/index.html";
 const gaMeasurementId = "G-TTVJN1V2LJ";
 const gaScriptUrl = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
 const kofiUsername = "jinnymeia";
+const kofiPageUrl = `https://ko-fi.com/${kofiUsername}`;
 const kofiWidgetScriptUrl = "https://storage.ko-fi.com/cdn/scripts/overlay-widget.js";
 const faviconIcoUrl = `${pageUrl}assets/rukalun/clip-search-favicon.ico`;
 const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
@@ -24,7 +26,7 @@ const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-06-23";
+const pageUpdatedOn = "2026-07-04";
 const seoKeywordTerms = [
   "FF14",
   "FFXIV",
@@ -152,6 +154,7 @@ test("required page assets and data are present", () => {
   const requiredFiles = [
     shortsPagePath,
     legacyShortsPagePath,
+    kofiRedirectPath,
     "clip-search-data.json",
     googleVerificationFile,
     "assets/rukalun/clip-search-hero.png",
@@ -217,6 +220,20 @@ test("ruka-shorts.html redirects to shorts directory route", () => {
   assert.match(html, /target\.search = window\.location\.search;/);
   assert.match(html, /target\.hash = window\.location\.hash;/);
   assert.match(html, /window\.location\.replace\(target\);/);
+});
+
+test("jinnymeia route redirects mistaken support-link traffic to Ko-fi", () => {
+  const html = readText(kofiRedirectPath);
+
+  assert.match(html, /<meta name="robots" content="noindex,follow" \/>/);
+  assert.match(html, new RegExp(`<link rel="canonical" href="${escapeRegExp(kofiPageUrl)}" />`));
+  assert.match(
+    html,
+    new RegExp(`<meta http-equiv="refresh" content="0; url=${escapeRegExp(kofiPageUrl)}" />`)
+  );
+  assert.match(html, new RegExp(`new URL\\("${escapeRegExp(kofiPageUrl)}"\\)`));
+  assert.match(html, /window\.location\.replace\(target\.href\);/);
+  assert.match(html, new RegExp(`<a href="${escapeRegExp(kofiPageUrl)}"`));
 });
 
 test("index.html exposes the modern search-first design surface", () => {
@@ -589,6 +606,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /カスタムイベントは未導入/);
   assert.match(readme, /Ko-fi/);
   assert.match(readme, new RegExp(kofiUsername));
+  assert.match(readme, /\/jinnymeia\//);
   assert.match(readme, /PC\/SPとも文字なし/);
   assert.match(readme, /カード内のゲーム名や作成者名/);
   assert.match(readme, /SEOキーワード拡張/);
@@ -652,6 +670,7 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /カスタムイベントは未導入/);
   assert.match(agents, /Ko-fi/);
   assert.match(agents, new RegExp(kofiUsername));
+  assert.match(agents, /\/jinnymeia\//);
   assert.match(agents, /PC\/SPとも文字なし/);
   assert.match(agents, /カード内のゲーム名や作成者名/);
   assert.match(agents, /SEOキーワード拡張/);
