@@ -637,6 +637,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /noindex,follow/);
   assert.match(readme, /PC\/SPとも画面いっぱい/);
   assert.match(readme, /初期12件/);
+  assert.match(readme, /ページ下端/);
+  assert.match(readme, /もっと見る/);
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
@@ -698,6 +700,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /noindex,follow/);
   assert.match(agents, /PC\/SPとも画面いっぱい/);
   assert.match(agents, /初期12件/);
+  assert.match(agents, /ページ下端/);
+  assert.match(agents, /もっと見る/);
 });
 
 test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
@@ -735,6 +739,28 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
   assert.doesNotMatch(html, /cache:\s*"no-store"/);
   assert.match(html, /const INITIAL_LIMIT = 24;/);
   assert.match(html, /const MORE_STEP = 24;/);
+  assert.match(
+    html,
+    /function hasMoreClips\(\) \{[\s\S]*return dataLoadState === "loaded" && filteredClips\.length > visibleLimit;[\s\S]*\}/
+  );
+  assert.match(
+    html,
+    /function loadMoreClips\(\) \{[\s\S]*if \(!hasMoreClips\(\)\) return;[\s\S]*visibleLimit \+= MORE_STEP;[\s\S]*render\(\);[\s\S]*\}/
+  );
+  assert.match(
+    html,
+    /function handleAutoLoadMore\(entries\) \{[\s\S]*if \(entries\.some\(\(entry\) => entry\.isIntersecting\)\) loadMoreClips\(\);[\s\S]*\}/
+  );
+  assert.match(
+    html,
+    /function setupAutoLoadMore\(\) \{[\s\S]*if \(!\("IntersectionObserver" in window\)\) return;[\s\S]*const observer = new IntersectionObserver\(handleAutoLoadMore\);[\s\S]*observer\.observe\(elements\.loadMoreWrap\);[\s\S]*\}/
+  );
+  assert.match(html, /elements\.loadMoreButton\.addEventListener\("click", loadMoreClips\);/);
+  assert.match(html, /setupAutoLoadMore\(\);[\s\S]*scheduleDataLoad\(\);/);
+  assert.doesNotMatch(
+    html,
+    /elements\.loadMoreButton\.addEventListener\("click", \(\) => \{[\s\S]*visibleLimit \+= MORE_STEP;[\s\S]*render\(\);[\s\S]*\}\);/
+  );
   assert.match(html, /function scheduleDataLoad\(\)/);
   assert.match(
     html,
