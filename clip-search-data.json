@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-05T14:27:01.418Z",
-  "total": 2771,
+  "generatedAt": "2026-07-05T23:05:45.951Z",
+  "total": 2772,
   "clipSync": {
-    "recentSyncedAt": "2026-07-05T14:27:00.371Z"
+    "recentSyncedAt": "2026-07-05T23:05:44.683Z"
   },
   "clips": [
+    {
+      "id": "BombasticCloudyBurritoBudBlast-8SB5WRdbwfpJ9ifs",
+      "url": "https://www.twitch.tv/rukalun/clip/BombasticCloudyBurritoBudBlast-8SB5WRdbwfpJ9ifs",
+      "title": "あひるっか",
+      "creator": "勇者みすちぬす4世",
+      "gameName": "Overwatch",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3d3d111b-4dac-40bb-8a05-eceba971fe09/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-05T14:26:07.000Z",
+      "views": 1
+    },
     {
       "id": "GoodIgnorantNikudonCoolStoryBob-ncouVxpLRwUBnsOS",
       "url": "https://www.twitch.tv/rukalun/clip/GoodIgnorantNikudonCoolStoryBob-ncouVxpLRwUBnsOS",
