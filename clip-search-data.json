@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-06T11:28:09.191Z",
-  "total": 2773,
+  "generatedAt": "2026-07-06T14:56:14.722Z",
+  "total": 2774,
   "clipSync": {
-    "recentSyncedAt": "2026-07-06T11:28:07.955Z"
+    "recentSyncedAt": "2026-07-06T14:56:13.264Z"
   },
   "clips": [
+    {
+      "id": "TastyResourcefulParrotDatBoi-6CxwAm37kB8WqLbt",
+      "url": "https://www.twitch.tv/rukalun/clip/TastyResourcefulParrotDatBoi-6CxwAm37kB8WqLbt",
+      "title": "とんちゃんとの出会い",
+      "creator": "かのんのん",
+      "gameName": "7 Days to Die",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9d264fce-1d24-4673-9005-994bfcac5eec/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-06T11:26:05.000Z",
+      "views": 3
+    },
     {
       "id": "TangentialDepressedSparrowJebaited-08Viuy-aSXfqTkl-",
       "url": "https://www.twitch.tv/rukalun/clip/TangentialDepressedSparrowJebaited-08Viuy-aSXfqTkl-",
