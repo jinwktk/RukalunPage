@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-07T02:28:10.588Z",
-  "total": 2775,
+  "generatedAt": "2026-07-07T09:27:48.004Z",
+  "total": 2776,
   "clipSync": {
-    "recentSyncedAt": "2026-07-07T02:28:09.314Z"
+    "recentSyncedAt": "2026-07-07T09:27:46.700Z"
   },
   "clips": [
+    {
+      "id": "SpinelessDeafCamel4Head-xGAEB0EKiMYGMZO8",
+      "url": "https://www.twitch.tv/rukalun/clip/SpinelessDeafCamel4Head-xGAEB0EKiMYGMZO8",
+      "title": "ガチイキ♡オホ声るっかるん♡あ゛っ♡お゛っ♡",
+      "creator": "にめいや",
+      "gameName": "League of Legends",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f6907aec-1922-4c50-8ba1-bd26965197f4/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-07T02:24:59.000Z",
+      "views": 25
+    },
     {
       "id": "BumblingSaltyAubergineDoubleRainbow-VGhJ0NUEXomLbB1V",
       "url": "https://www.twitch.tv/rukalun/clip/BumblingSaltyAubergineDoubleRainbow-VGhJ0NUEXomLbB1V",
@@ -13,7 +23,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/30b7dd2f-975f-45aa-b440-e9ad2cd61585/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-06T14:58:48.000Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "TastyResourcefulParrotDatBoi-6CxwAm37kB8WqLbt",
@@ -33,7 +43,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f8a3c60f-25c7-4ab1-b973-c7554adc97ea/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-05T23:02:08.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "BombasticCloudyBurritoBudBlast-8SB5WRdbwfpJ9ifs",
