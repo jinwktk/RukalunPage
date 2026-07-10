@@ -26,7 +26,7 @@ const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-07-04";
+const pageUpdatedOn = "2026-07-10";
 const seoKeywordTerms = [
   "FF14",
   "FFXIV",
@@ -62,6 +62,14 @@ function escapeRegExp(value) {
 
 function stripTags(htmlFragment) {
   return htmlFragment.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function getScriptFunctionBlock(html, signature) {
+  const marker = `function ${signature}`;
+  const start = html.indexOf(marker);
+  assert.notEqual(start, -1, `${marker} should exist`);
+  const nextFunction = html.indexOf("\n      function ", start + marker.length);
+  return html.slice(start, nextFunction === -1 ? html.length : nextFunction);
 }
 
 function normalizeSearchText(value) {
@@ -463,6 +471,8 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.equal(dataset.url, pageUrl);
   assert.match(dataset.description, /Twitch（ツイッチ）配信Clip/);
   assert.equal(dataset.publisher.name, structuredSiteName);
+  assert.deepEqual(dataset.creator, dataset.publisher);
+  assert.equal(dataset.license, undefined, "do not invent a distribution license that has not been declared");
   assert.equal(dataset.distribution["@type"], "DataDownload");
   assert.equal(dataset.distribution.contentUrl, dataUrl);
   assert.equal(dataset.distribution.encodingFormat, "application/json");
@@ -496,74 +506,60 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
     html.indexOf(gaScriptTag) < html.indexOf(jsonLdScript),
     "GA4 should be declared before JSON-LD so head analytics stays grouped with metadata"
   );
+  const trackerBlock = getScriptFunctionBlock(html, "trackAnalyticsEvent(eventName, parameters = {})");
+  const searchParametersBlock = getScriptFunctionBlock(html, "getSearchAnalyticsParameters(source)");
+  const emitSearchBlock = getScriptFunctionBlock(html, "emitSearchAnalytics(source)");
+  const scheduleSearchBlock = getScriptFunctionBlock(html, "scheduleSearchAnalytics(source)");
+  const contentSelectionBlock = getScriptFunctionBlock(html, "trackContentSelection(itemId, source)");
+
+  assert.match(html, /const SEARCH_SOURCES = new Set\(\[/);
+  assert.match(html, /const LOAD_MORE_SOURCES = new Set\(\["button", "auto"\]\);/);
+  assert.match(html, /const CONTENT_IDS = new Set\(\["clip", "search", "shorts", "twitch", "kofi"\]\);/);
+  assert.match(html, /const CONTENT_SOURCES = new Set\(\["thumbnail", "clip_action", "hero", "floating"\]\);/);
+  assert.match(trackerBlock, /typeof window\.gtag !== "function"/);
+  assert.match(trackerBlock, /try \{/);
+  assert.match(trackerBlock, /window\.gtag\("event", eventName, parameters\);/);
+  assert.match(trackerBlock, /catch \{/);
+  assert.match(html, /function getResultCountBucket\(count\)/);
+  assert.match(searchParametersBlock, /SEARCH_SOURCES\.has\(source\)/);
+  assert.match(searchParametersBlock, /has_query:/);
+  assert.match(searchParametersBlock, /result_bucket: getResultCountBucket\(filteredClips\.length\)/);
+  assert.doesNotMatch(searchParametersBlock, /result_count:/);
+  assert.doesNotMatch(searchParametersBlock, /\b(?:search_term|query|item_name|clip_id):/);
+  assert.match(emitSearchBlock, /if \(signature === lastSearchAnalyticsSignature\) return;/);
+  assert.match(emitSearchBlock, /trackAnalyticsEvent\("clip_search", parameters\);/);
+  assert.match(html, /const SEARCH_ANALYTICS_DELAY_MS = 500;/);
+  assert.match(scheduleSearchBlock, /window\.clearTimeout\(searchAnalyticsTimer\);/);
+  assert.match(scheduleSearchBlock, /window\.setTimeout\(/);
+  assert.match(scheduleSearchBlock, /SEARCH_ANALYTICS_DELAY_MS/);
+  assert.match(contentSelectionBlock, /CONTENT_IDS\.has\(itemId\)/);
+  assert.match(contentSelectionBlock, /CONTENT_SOURCES\.has\(source\)/);
+  assert.match(contentSelectionBlock, /trackAnalyticsEvent\("select_content", \{/);
+  assert.doesNotMatch(contentSelectionBlock, /clip\.(?:id|title|creator)|elements\.searchInput\.value/);
+  assert.match(html, /trackAnalyticsEvent\("clip_load_more", \{/);
+  assert.match(html, /elements\.heroSearchLink\.addEventListener\("click", \(\) => trackContentSelection\("search", "hero"\)\);/);
+  assert.match(html, /elements\.heroShortsLink\.addEventListener\("click", \(\) => trackContentSelection\("shorts", "hero"\)\);/);
+  assert.match(html, /elements\.heroTwitchLink\.addEventListener\("click", \(\) => trackContentSelection\("twitch", "hero"\)\);/);
+  assert.match(html, /elements\.kofiSupportLink\.addEventListener\("click", \(\) => trackContentSelection\("kofi", "floating"\)\);/);
+  assert.doesNotMatch(html, /search_term:\s*elements\.searchInput\.value/);
+  assert.doesNotMatch(html, /item_name:\s*clip\.(?:title|creator)|item_id:\s*clip\.id/);
 });
 
-test("index.html installs a small non-blocking Ko-fi support widget", () => {
+test("index.html exposes a static non-blocking Ko-fi support link", () => {
   const html = readText("index.html");
-  const dynamicKofiCss = html.match(/const KOFI_WIDGET_POSITION_CSS = `([\s\S]*?)`;/)?.[1] ?? "";
-  const kofiScriptTags =
-    html.match(/<script[^>]+src="https:\/\/storage\.ko-fi\.com\/cdn\/scripts\/overlay-widget\.js"[^>]*><\/script>/g) ??
-    [];
 
-  assert.deepEqual(kofiScriptTags, [], "Ko-fi must not be a static third-party script that can delay window load");
-  assert.match(html, new RegExp(`const KOFI_WIDGET_SCRIPT_URL = "${kofiWidgetScriptUrl}";`));
-  assert.match(html, /function drawKofiWidget\(\)/);
-  assert.match(html, /function scheduleKofiWidget\(\)/);
-  assert.match(html, /function installKofiWidgetStyles\(\)/);
-  assert.match(html, /id = "kofi-widget-position-style"/);
-  assert.match(html, /const script = document\.createElement\("script"\);/);
-  assert.match(html, /script\.src = KOFI_WIDGET_SCRIPT_URL;/);
-  assert.match(html, /script\.async = true;/);
-  assert.match(html, /script\.addEventListener\("load", drawKofiWidget, \{ once: true \}\);/);
-  assert.match(html, /script\.addEventListener\("error", installKofiWidgetStyles, \{ once: true \}\);/);
-  assert.match(html, /document\.body\.append\(script\);/);
   assert.match(
     html,
-    /window\.requestIdleCallback\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, \{ timeout: 1200 \}\);/
+    new RegExp(
+      `<a id="kofiSupportLink" class="kofi-support-link" href="${escapeRegExp(kofiPageUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Ko-fiで${kofiUsername}を支援する">`
+    )
   );
-  assert.match(
-    html,
-    /window\.setTimeout\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, 160\);/
-  );
-  assert.match(html, /catch \(error\) \{[\s\S]*\} finally \{[\s\S]*window\.setTimeout\(installKofiWidgetStyles, 0\);/);
-  assert.match(html, /window\.setTimeout\(installKofiWidgetStyles, 0\);/);
-  assert.match(html, new RegExp(`window\\.kofiWidgetOverlay\\?\\.draw\\?\\.\\("${kofiUsername}", \\{`));
-  assert.match(html, /"type": "floating-chat"/);
-  assert.match(html, /"floating-chat\.donateButton\.text": " "/);
-  assert.match(html, /"floating-chat\.donateButton\.background-color": "#ffe8f0"/);
-  assert.match(html, /"floating-chat\.donateButton\.text-color": "#2c2633"/);
-  assert.match(
-    html,
-    /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*position: fixed !important;[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*z-index: 30 !important;[\s\S]*width: 88px !important;[\s\S]*height: 56px !important;[\s\S]*overflow: hidden !important;/
-  );
-  assert.match(
-    dynamicKofiCss,
-    /\.floatingchat-container-wrap,\s*\.floatingchat-container\s*\{[\s\S]*right: 18px !important;[\s\S]*bottom: 18px !important;[\s\S]*width: 88px !important;[\s\S]*height: 56px !important;[\s\S]*overflow: hidden !important;/
-  );
-  assert.match(
-    html,
-    /\.floating-chat-kofi-popup-iframe,\s*\.floating-chat-kofi-popup-iframe-mobi,\s*\.floatingchat-container-wrap iframe\s*\{[\s\S]*max-width: calc\(100vw - 28px\) !important;/
-  );
-  assert.match(
-    html,
-    /\.floatingchat-container-wrap-mobi\s*\{[\s\S]*left: auto !important;[\s\S]*right: 18px !important;[\s\S]*width: 88px !important;[\s\S]*overflow: hidden !important;/
-  );
-  assert.match(
-    html,
-    /\.floatingchat-container-wrap \[class\*="donateButton"\],[\s\S]*\.floatingchat-container \[class\*="donateButton"\],[\s\S]*\.floatingchat-container-wrap-mobi \[class\*="donateButton"\]\s*\{[\s\S]*border: 1px solid #f2b4ce !important;[\s\S]*border-radius: 8px !important;[\s\S]*background: linear-gradient\(135deg, #fff6fb 0%, var\(--pink-soft\) 52%, var\(--mint\) 100%\) !important;[\s\S]*color: var\(--ink\) !important;[\s\S]*box-shadow: var\(--shadow\) !important;/
-  );
-  assert.match(
-    html,
-    /\.floatingchat-container-wrap \[class\*="donateButton"\]:hover,[\s\S]*\.floatingchat-container \[class\*="donateButton"\]:hover,[\s\S]*\.floatingchat-container-wrap-mobi \[class\*="donateButton"\]:hover\s*\{[\s\S]*border-color: #e86f9f !important;[\s\S]*background: linear-gradient\(135deg, #fff 0%, #ffe7f0 48%, #d4f1ea 100%\) !important;/
-  );
-  assert.match(
-    html,
-    /\.floatingchat-container-wrap \[class\*="donateButton"\] img,[\s\S]*\.floatingchat-container \[class\*="donateButton"\] img,[\s\S]*\.floatingchat-container-wrap-mobi \[class\*="donateButton"\] img\s*\{[\s\S]*width: 22px !important;[\s\S]*height: 22px !important;[\s\S]*border-radius: 6px !important;/
-  );
-  assert.match(
-    html,
-    /@media \(max-width: 620px\) \{[\s\S]*--kofi-mobile-right: max\(10px, calc\(100vw - 390px\)\);[\s\S]*\.floatingchat-container-wrap,\s*\.floatingchat-container,\s*\.floatingchat-container-wrap-mobi\s*\{[\s\S]*right: var\(--kofi-mobile-right\) !important;[\s\S]*bottom: 10px !important;[\s\S]*transform: scale\(0\.86\);[\s\S]*\.floatingchat-container-wrap \.kofi-button-text,[\s\S]*display: none !important;/
-  );
+  assert.match(html, /<img src="\.\/assets\/rukalun\/present-56px\.webp" alt="" width="40" height="40" \/>/);
+  assert.match(html, /\.kofi-support-link\s*\{[\s\S]*position: fixed;[\s\S]*right: 18px;[\s\S]*bottom: 18px;[\s\S]*width: 56px;[\s\S]*height: 56px;/);
+  assert.match(html, /\.kofi-support-link:focus-visible/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.kofi-support-link\s*\{[\s\S]*right: 10px;[\s\S]*bottom: 10px;/);
+  assert.doesNotMatch(html, new RegExp(escapeRegExp(kofiWidgetScriptUrl)));
+  assert.doesNotMatch(html, /kofiWidgetOverlay|floatingchat-container|floating-chat-kofi/);
 });
 
 test("sitemap lists only the canonical public URL", () => {
@@ -603,11 +599,19 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /robots\.txt/);
   assert.match(readme, /Google Analytics 4/);
   assert.match(readme, new RegExp(gaMeasurementId));
-  assert.match(readme, /カスタムイベントは未導入/);
+  assert.match(readme, /clip_search/);
+  assert.match(readme, /select_content/);
+  assert.match(readme, /clip_load_more/);
+  assert.match(readme, /検索語そのものは送信しない/);
+  assert.match(readme, /カスタムディメンション/);
   assert.match(readme, /Ko-fi/);
   assert.match(readme, new RegExp(kofiUsername));
   assert.match(readme, /\/jinnymeia\//);
   assert.match(readme, /PC\/SPとも文字なし/);
+  assert.match(readme, /外部scriptを読み込まない/);
+  assert.match(readme, /作成者候補は操作時に初めて生成/);
+  assert.match(readme, /表示範囲へ近づいた時だけ/);
+  assert.match(readme, /既存カードを再生成せず/);
   assert.match(readme, /カード内のゲーム名や作成者名/);
   assert.match(readme, /SEOキーワード拡張/);
   assert.match(readme, /人気検索リンク/);
@@ -667,11 +671,19 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /robots\.txt/);
   assert.match(agents, /Google Analytics 4/);
   assert.match(agents, new RegExp(gaMeasurementId));
-  assert.match(agents, /カスタムイベントは未導入/);
+  assert.match(agents, /clip_search/);
+  assert.match(agents, /select_content/);
+  assert.match(agents, /clip_load_more/);
+  assert.match(agents, /検索語そのものは送信しない/);
+  assert.match(agents, /カスタムディメンション/);
   assert.match(agents, /Ko-fi/);
   assert.match(agents, new RegExp(kofiUsername));
   assert.match(agents, /\/jinnymeia\//);
   assert.match(agents, /PC\/SPとも文字なし/);
+  assert.match(agents, /外部scriptを読み込まない/);
+  assert.match(agents, /作成者候補は操作時に初めて生成/);
+  assert.match(agents, /表示範囲へ近づいた時だけ/);
+  assert.match(agents, /既存カードを再生成せず/);
   assert.match(agents, /カード内のゲーム名や作成者名/);
   assert.match(agents, /SEOキーワード拡張/);
   assert.match(agents, /人気検索リンク/);
@@ -723,8 +735,16 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /もっと見る/);
 });
 
-test("modern design keeps mobile search collapsible and thumbnail loading lightweight", () => {
+test("modern design keeps mobile search compact and expensive rendering incremental", () => {
   const html = readText("index.html");
+  const buildCreatorBlock = getScriptFunctionBlock(html, "buildCreatorOptions(clips)");
+  const ensureCreatorBlock = getScriptFunctionBlock(html, "ensureCreatorOptions()");
+  const renderCardBlock = getScriptFunctionBlock(html, "renderCard(clip)");
+  const loadThumbnailBlock = getScriptFunctionBlock(html, "loadThumbnailImage(image)");
+  const observeThumbnailBlock = getScriptFunctionBlock(html, "observeThumbnailImage(image)");
+  const renderBlock = getScriptFunctionBlock(html, "render()");
+  const appendBlock = getScriptFunctionBlock(html, "appendVisibleCards(startIndex, endIndex)");
+  const inputBlock = getScriptFunctionBlock(html, "handleSearchInputChange()");
 
   assert.match(html, /<body data-design-version="2026-search-first">/);
   assert.match(html, /id="searchPanelToggle"[\s\S]*aria-controls="searchControls"/);
@@ -741,15 +761,52 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
     "keyword search input should appear before the detailed controls when the panel is expanded"
   );
   assert.match(html, /return String\(url\)\.replace\("-480x272\.", "-320x180\."\);/);
-  assert.match(html, /const countDiff = creatorCounts\.get\(b\) - creatorCounts\.get\(a\);/);
-  assert.match(html, /return countDiff \|\| a\.localeCompare\(b, "ja-JP"\);/);
+  assert.match(html, /--radius-card: 16px;/);
+  assert.match(html, /--radius-panel: 20px;/);
+  assert.match(html, /\.clip-card\s*\{[\s\S]*content-visibility: auto;[\s\S]*contain-intrinsic-size: auto 420px;/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*\.hero-actions\s*\{[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(html, /@media \(max-width: 620px\) \{[\s\S]*#heroSearchLink\s*\{[\s\S]*grid-column: 1 \/ -1;/);
+  assert.match(buildCreatorBlock, /creatorOptionSource = clips;/);
+  assert.match(buildCreatorBlock, /creatorOptionsBuilt = false;/);
+  assert.match(buildCreatorBlock, /elements\.creatorFilter\.replaceChildren\(defaultOption\);/);
+  assert.doesNotMatch(buildCreatorBlock, /\.reduce\(|creatorCounts|for \(const creator|\.append\(/);
+  assert.match(ensureCreatorBlock, /if \(creatorOptionsBuilt\) return;/);
+  assert.match(ensureCreatorBlock, /creatorOptionSource\.reduce\(/);
+  assert.match(ensureCreatorBlock, /const fragment = document\.createDocumentFragment\(\);/);
+  assert.match(ensureCreatorBlock, /const countDiff = creatorCounts\.get\(b\) - creatorCounts\.get\(a\);/);
+  assert.match(ensureCreatorBlock, /return countDiff \|\| a\.localeCompare\(b, "ja-JP"\);/);
+  assert.match(ensureCreatorBlock, /fragment\.append\(option\);/);
+  assert.match(ensureCreatorBlock, /elements\.creatorFilter\.append\(fragment\);/);
+  assert.match(ensureCreatorBlock, /creatorOptionsBuilt = true;/);
+  assert.match(html, /elements\.creatorFilter\.addEventListener\("focus", ensureCreatorOptions\);/);
+  assert.match(html, /elements\.creatorFilter\.addEventListener\("pointerdown", ensureCreatorOptions\);/);
+  assert.match(html, /const CREATOR_OPTION_KEYS = new Set\(\["Enter", " ", "ArrowDown", "ArrowUp"\]\);/);
+  assert.match(
+    html,
+    /elements\.creatorFilter\.addEventListener\("keydown", \(event\) => \{[\s\S]*CREATOR_OPTION_KEYS\.has\(event\.key\)[\s\S]*ensureCreatorOptions\(\);[\s\S]*\}\);/
+  );
   assert.match(html, /function getActiveFilterChipLabel\(\)/);
   assert.match(html, /return `\$\{visibleLabel\} \/ \$\{totalLabel\} clips \/ 条件あり`;/);
   assert.match(html, /elements\.searchPanelSummary\.textContent = `\$\{resultLabel\} \/ \$\{summary\}`;/);
   assert.match(html, /elements\.activeFilterChip\.textContent = getActiveFilterChipLabel\(\);/);
   assert.doesNotMatch(html, /elements\.activeFilterChip\.textContent = `\$\{resultLabel\} \/ \$\{summary\}`;/);
-  assert.match(html, /image\.loading = "lazy";/);
-  assert.match(html, /image\.decoding = "async";/);
+  assert.match(renderCardBlock, /image\.loading = "lazy";/);
+  assert.match(renderCardBlock, /image\.decoding = "async";/);
+  assert.match(renderCardBlock, /image\.width = 320;/);
+  assert.match(renderCardBlock, /image\.height = 180;/);
+  assert.match(renderCardBlock, /image\.dataset\.src = lightThumbnailUrl;/);
+  assert.match(renderCardBlock, /observeThumbnailImage\(image\);/);
+  assert.doesNotMatch(renderCardBlock, /image\.src\s*=/);
+  assert.match(html, /const THUMBNAIL_ROOT_MARGIN = "160px 0px";/);
+  assert.match(html, /rootMargin: THUMBNAIL_ROOT_MARGIN/);
+  assert.match(loadThumbnailBlock, /const source = image\.dataset\.src;/);
+  assert.match(loadThumbnailBlock, /thumbnailObserver\?\.unobserve\(image\);/);
+  assert.match(loadThumbnailBlock, /delete image\.dataset\.src;/);
+  assert.match(loadThumbnailBlock, /image\.src = source;/);
+  assert.match(observeThumbnailBlock, /thumbnailObserver\.observe\(image\);/);
+  assert.match(observeThumbnailBlock, /loadThumbnailImage\(image\);/);
+  assert.match(renderBlock, /cancelPendingSearchRender\(\);/);
+  assert.match(renderBlock, /thumbnailObserver\?\.disconnect\(\);/);
   assert.match(
     html,
     /if \(dataLoadState === "loading"\) \{[\s\S]*updateSearchPanelSummary\(\);[\s\S]*return;[\s\S]*\}/
@@ -762,19 +819,29 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
     html,
     /function hasMoreClips\(\) \{[\s\S]*return dataLoadState === "loaded" && filteredClips\.length > visibleLimit;[\s\S]*\}/
   );
+  const loadMoreStart = html.indexOf('function loadMoreClips(source = "button")');
+  const loadMoreEnd = html.indexOf("function handleAutoLoadMore", loadMoreStart);
+  assert.notEqual(loadMoreStart, -1, "loadMoreClips should expose a low-cardinality source");
+  assert.ok(loadMoreEnd > loadMoreStart, "loadMoreClips should precede auto-load handling");
+  const loadMoreBlock = html.slice(loadMoreStart, loadMoreEnd);
+  assert.match(loadMoreBlock, /const previousVisibleLimit = visibleLimit;/);
+  assert.match(loadMoreBlock, /visibleLimit = Math\.min\(visibleLimit \+ MORE_STEP, filteredClips\.length\);/);
+  assert.match(loadMoreBlock, /appendVisibleCards\(previousVisibleLimit, visibleLimit\);/);
+  assert.match(loadMoreBlock, /updateResultState\(\);/);
+  assert.match(loadMoreBlock, /trackAnalyticsEvent\("clip_load_more", \{/);
+  assert.doesNotMatch(loadMoreBlock, /render\(\)|filterClips\(\)|replaceChildren\(/);
+  assert.match(appendBlock, /filteredClips\.slice\(startIndex, endIndex\)/);
+  assert.match(appendBlock, /fragment\.append\(renderCard\(clip\)\);/);
+  assert.match(appendBlock, /elements\.results\.append\(fragment\);/);
   assert.match(
     html,
-    /function loadMoreClips\(\) \{[\s\S]*if \(!hasMoreClips\(\)\) return;[\s\S]*visibleLimit \+= MORE_STEP;[\s\S]*render\(\);[\s\S]*\}/
-  );
-  assert.match(
-    html,
-    /function handleAutoLoadMore\(entries\) \{[\s\S]*if \(entries\.some\(\(entry\) => entry\.isIntersecting\)\) loadMoreClips\(\);[\s\S]*\}/
+    /function handleAutoLoadMore\(entries\) \{[\s\S]*if \(entries\.some\(\(entry\) => entry\.isIntersecting\)\) loadMoreClips\("auto"\);[\s\S]*\}/
   );
   assert.match(
     html,
     /function setupAutoLoadMore\(\) \{[\s\S]*if \(!\("IntersectionObserver" in window\)\) return;[\s\S]*const observer = new IntersectionObserver\(handleAutoLoadMore\);[\s\S]*observer\.observe\(elements\.loadMoreWrap\);[\s\S]*\}/
   );
-  assert.match(html, /elements\.loadMoreButton\.addEventListener\("click", loadMoreClips\);/);
+  assert.match(html, /elements\.loadMoreButton\.addEventListener\("click", \(\) => loadMoreClips\("button"\)\);/);
   assert.match(html, /setupAutoLoadMore\(\);[\s\S]*scheduleDataLoad\(\);/);
   assert.doesNotMatch(
     html,
@@ -783,11 +850,22 @@ test("modern design keeps mobile search collapsible and thumbnail loading lightw
   assert.match(html, /function scheduleDataLoad\(\)/);
   assert.match(
     html,
-    /window\.requestIdleCallback\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, \{ timeout: 1200 \}\);/
+    /window\.requestIdleCallback\(loadData, \{ timeout: 1200 \}\);/
   );
   assert.match(
     html,
-    /window\.setTimeout\(\(\) => \{[\s\S]*loadData\(\);[\s\S]*scheduleKofiWidget\(\);[\s\S]*\}, 160\);/
+    /window\.setTimeout\(loadData, 160\);/
+  );
+  assert.doesNotMatch(html, /scheduleKofiWidget|drawKofiWidget|installKofiWidgetStyles/);
+  assert.match(html, /function cancelPendingSearchRender\(\)/);
+  assert.match(inputBlock, /cancelPendingSearchRender\(\);/);
+  assert.match(inputBlock, /const revision = \+\+searchRenderRevision;/);
+  assert.match(inputBlock, /searchRenderFrame = window\.requestAnimationFrame\(\(\) => \{/);
+  assert.match(inputBlock, /if \(revision !== searchRenderRevision\) return;/);
+  assert.match(inputBlock, /resetVisibleAndRender\(\);/);
+  assert.ok(
+    inputBlock.indexOf("cancelPendingSearchRender();") < inputBlock.indexOf("const revision = ++searchRenderRevision;"),
+    "input rendering should cancel stale work before assigning a new revision"
   );
   assert.match(html, /window\.addEventListener\("load", runLoadData, \{ once: true \}\);/);
   assert.doesNotMatch(html, /\n\s*loadData\(\);\s*\n\s*<\/script>/);
@@ -1139,6 +1217,7 @@ test("clip card meta chips can apply creator and game filters", () => {
   assert.match(html, /\.meta-chip\.is-static/);
 
   assert.match(applyBlock, /const filter = type === "creator" \? elements\.creatorFilter : elements\.gameFilter;/);
+  assert.match(applyBlock, /if \(type === "creator"\) ensureCreatorOptions\(\);/);
   assert.match(applyBlock, /filter\.value = value;/);
   assert.match(applyBlock, /clearRandomSelectionState\(\);/);
   assert.match(applyBlock, /setSearchPanelExpanded\(true\);/);
