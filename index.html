@@ -33,8 +33,25 @@
       function gtag() {
         dataLayer.push(arguments);
       }
+      function getAnalyticsPageUrl(value) {
+        try {
+          const url = new URL(value, window.location.origin);
+          return `${url.origin}${url.pathname}`;
+        } catch {
+          return `${window.location.origin}${window.location.pathname}`;
+        }
+      }
+      const analyticsPageLocation = getAnalyticsPageUrl(window.location.href);
+      const analyticsPageReferrer = document.referrer ? getAnalyticsPageUrl(document.referrer) : "";
       gtag("js", new Date());
-      gtag("config", "G-TTVJN1V2LJ");
+      gtag("set", "page_location", analyticsPageLocation);
+      gtag("set", "page_referrer", analyticsPageReferrer);
+      gtag("config", "G-TTVJN1V2LJ", { send_page_view: false });
+      gtag("event", "page_view", {
+        page_title: document.title,
+        page_location: analyticsPageLocation,
+        page_referrer: analyticsPageReferrer,
+      });
     </script>
     <script type="application/ld+json">
       {
@@ -1801,6 +1818,7 @@
       let searchRenderRevision = 0;
       let searchAnalyticsTimer = null;
       let lastSearchAnalyticsSignature = "";
+      let pendingSearchAnalyticsSource = "";
       const thumbnailObserver =
         "IntersectionObserver" in window
           ? new IntersectionObserver(
@@ -1855,7 +1873,10 @@
 
       function emitSearchAnalytics(source) {
         const parameters = getSearchAnalyticsParameters(source);
-        const signature = JSON.stringify(parameters);
+        const signature = JSON.stringify([
+          normalizeText(elements.searchInput.value),
+          parameters,
+        ]);
         if (signature === lastSearchAnalyticsSignature) return;
         const wasTracked = trackAnalyticsEvent("clip_search", parameters);
         if (wasTracked) {
@@ -1865,11 +1886,21 @@
 
       function scheduleSearchAnalytics(source) {
         if (!SEARCH_SOURCES.has(source)) return;
+        if (dataLoadState !== "loaded") {
+          pendingSearchAnalyticsSource = source;
+          return;
+        }
         window.clearTimeout(searchAnalyticsTimer);
         searchAnalyticsTimer = window.setTimeout(
           () => emitSearchAnalytics(source),
           SEARCH_ANALYTICS_DELAY_MS
         );
+      }
+
+      function flushPendingSearchAnalytics() {
+        const source = pendingSearchAnalyticsSource || (initialQuery ? "url" : "");
+        pendingSearchAnalyticsSource = "";
+        if (source) scheduleSearchAnalytics(source);
       }
 
       function trackContentSelection(itemId, source) {
@@ -2669,11 +2700,12 @@
             : "未記録";
           setNotice(allClips.length === 0 ? "Clipデータがまだありません。しばらくしてから再読み込みしてください。" : "");
           render();
-          if (initialQuery) scheduleSearchAnalytics("url");
+          flushPendingSearchAnalytics();
         } catch (error) {
           allClips = [];
           filteredClips = [];
           dataLoadState = "failed";
+          pendingSearchAnalyticsSource = "";
           elements.heroClipCount.textContent = "失敗";
           elements.heroVisibleCount.textContent = "失敗";
           elements.heroClipSyncedAt.textContent = "未記録";
