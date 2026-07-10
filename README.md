@@ -120,3 +120,5 @@ npm test
 テストでは、PageSpeed Insightsで指摘されやすいLCP画像の優先読み込み、公開JSONのminify、主要ボタンの色コントラスト、Google Analytics 4 タグと低カーディナリティイベント、静的Ko-fiリンク、Dataset `creator`、作成者候補の操作時生成、サムネイルの表示範囲連動読み込み、既存カードを再生成しない追加表示、SEOキーワード拡張の人気検索リンク・JSON-LD語彙、Clip検索のページ下端スクロールによる自動 `もっと見る`、PC版Clipモーダルの遅延iframe生成とSP版Twitchリンク維持、RukaShorts（るかしょーつ）のTopファーストビュー導線、`./shorts/へ移動` する通常リンク、`ruka-shorts.html` の互換リダイレクト、検索パネル/Clipカード導線なし、PC/SPとも画面いっぱい、初回スワイプ案内、初回案内中のiframe生成保留、初期12件の段階描画、縦スクロール、常時キューなし、`muted=false`付き遅延iframe生成、音付き自動再生のブラウザポリシー注記、Twitchプレイヤーの音量変更を含むプレイヤー操作、Twitch終了通知、`currentTime` / `duration` による終端付近通知、60秒フォールバック、一時停止中のフォールバック停止も検証します。
 
 GitHub Pages の公開URLは `https://www.rukalun.mydns.jp/` です。
+
+`AGENTS.md` はローカル運用メモとしてGitIgnoreを維持します。公開CIでは追跡済みの `README.md` をドキュメント契約として検証し、ローカルでは `AGENTS.md` が存在する場合に同じ契約も確認します。

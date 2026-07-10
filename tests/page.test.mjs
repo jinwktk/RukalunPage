@@ -613,7 +613,8 @@ test("text sitemap lists only the canonical public URL", () => {
 
 test("documentation records SEO operation constraints", () => {
   const readme = readText("README.md");
-  const agents = readText("AGENTS.md");
+  const agentsPath = path.join(repoDir, "AGENTS.md");
+  const agents = fs.existsSync(agentsPath) ? readText("AGENTS.md") : null;
 
   assert.match(readme, /sitemap\.xml/);
   assert.match(readme, /sitemap\.txt/);
@@ -687,6 +688,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /初期12件/);
   assert.match(readme, /ページ下端/);
   assert.match(readme, /もっと見る/);
+  if (agents === null) return;
+
   assert.match(agents, /sitemap\.xml/);
   assert.match(agents, /sitemap\.txt/);
   assert.match(agents, /hostname単位/);
