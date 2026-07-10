@@ -79,7 +79,7 @@ GSC/GA4の確認では、GSCプロパティ `sc-domain:rukalun.mydns.jp` と GA4
 
 ## アクセス解析運用
 
-Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める公開識別子として扱います。自動 `page_view` は無効にし、クエリとハッシュを除いた `origin + pathname` を `page_location` に使う手動 `page_view` を送ります。`page_referrer` も同じ規則で匿名化し、GA4の拡張計測が `?q=` を `search_term` として収集する経路を避けます。ページ側では `clip_search`、`select_content`、`clip_load_more` を失敗してもUIを止めない形で送り、検索語そのものは送信しません。タイトル、作成者名、入力値などの高カーディナリティ値や個人情報になり得る文字列をイベントパラメータへ入れず、検索データの読み込み中はイベントを保留して、読込完了後の件数帯で送ります。`filter_type`、`result_bucket`、`source` などをGA4レポートで直接使う場合は、管理画面側で同名のイベントスコープのカスタムディメンション登録が必要です。GA管理画面での登録、権限管理、リアルタイム計測確認は外部アカウント操作のため、このリポジトリの自動作業範囲には含めません。
+Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める公開識別子として扱います。自動 `page_view` は無効にし、クエリとハッシュを除いた `origin + pathname` を `page_location` に使う手動 `page_view` を送ります。`page_referrer` も同じ規則で匿名化し、GA4の拡張計測が `?q=` を `search_term` として収集する経路を避けます。ページ側では `clip_search`、`select_content`、`clip_load_more` を失敗してもUIを止めない形で送り、検索語そのものは送信しません。タイトル、作成者名、入力値などの高カーディナリティ値や個人情報になり得る文字列をイベントパラメータへ入れず、検索データの読み込み中はイベントを保留して、読込完了後の件数帯で送ります。検索語・選択中の作成者・ゲームは、別条件を同じイベントとして落とさないためのブラウザ内重複判定にだけ使い、GA4へ渡しません。`filter_type`、`result_bucket`、`source` などをGA4レポートで直接使う場合は、管理画面側で同名のイベントスコープのカスタムディメンション登録が必要です。GA管理画面での登録、権限管理、リアルタイム計測確認は外部アカウント操作のため、このリポジトリの自動作業範囲には含めません。
 
 ## 支援導線運用
 

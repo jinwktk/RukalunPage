@@ -539,7 +539,7 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.doesNotMatch(searchParametersBlock, /\b(?:search_term|query|item_name|clip_id):/);
   assert.match(
     emitSearchBlock,
-    /const signature = JSON\.stringify\(\[\s*normalizeText\(elements\.searchInput\.value\),\s*parameters,\s*\]\);/
+    /const signature = JSON\.stringify\(\[\s*normalizeText\(elements\.searchInput\.value\),\s*elements\.creatorFilter\.value,\s*elements\.gameFilter\.value,\s*parameters,\s*\]\);/
   );
   assert.match(emitSearchBlock, /if \(signature === lastSearchAnalyticsSignature\) return;/);
   assert.match(emitSearchBlock, /trackAnalyticsEvent\("clip_search", parameters\);/);
