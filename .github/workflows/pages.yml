@@ -24,6 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Minify clip data
+        run: npm run minify:data
+
+      - name: Verify page
+        run: npm test
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
