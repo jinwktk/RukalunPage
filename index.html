@@ -67,7 +67,7 @@
             "url": "https://www.rukalun.mydns.jp/",
             "image": "https://www.rukalun.mydns.jp/assets/rukalun/clip-search-og.jpg",
             "inLanguage": "ja",
-            "dateModified": "2026-07-04",
+            "dateModified": "2026-07-10",
             "keywords": [
               "FF14",
               "FFXIV",
@@ -139,6 +139,11 @@
               "name": "るっかるんくりっぷ",
               "url": "https://www.rukalun.mydns.jp/"
             },
+            "creator": {
+              "@type": "Organization",
+              "name": "るっかるんくりっぷ",
+              "url": "https://www.rukalun.mydns.jp/"
+            },
             "distribution": {
               "@type": "DataDownload",
               "encodingFormat": "application/json",
@@ -166,6 +171,8 @@
         --lemon: #fff3c4;
         --lavender: #eee9ff;
         --shadow: 0 10px 24px rgba(62, 42, 67, 0.08);
+        --radius-card: 16px;
+        --radius-panel: 20px;
         --font-cute:
           "UD デジタル 教科書体 NP",
           "UD デジタル 教科書体 N",
@@ -409,7 +416,7 @@
       .metric-card {
         min-height: 92px;
         border: 1px solid rgba(234, 221, 232, 0.9);
-        border-radius: 8px;
+        border-radius: var(--radius-card);
         background: rgba(255, 255, 255, 0.88);
         padding: 12px;
         box-shadow: var(--shadow);
@@ -780,11 +787,13 @@
         display: grid;
         min-height: 214px;
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: var(--radius-card);
         background:
           linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.86)),
           var(--paper);
         box-shadow: 0 12px 28px rgba(88, 55, 88, 0.08);
+        content-visibility: auto;
+        contain-intrinsic-size: auto 420px;
         overflow: hidden;
         transition:
           border-color 0.16s ease,
@@ -1176,7 +1185,7 @@
         width: min(980px, calc(100vw - 44px));
         max-height: calc(100vh - 44px);
         border: 1px solid #f2b4ce;
-        border-radius: 8px;
+        border-radius: var(--radius-panel);
         background: #fffefe;
         box-shadow: 0 22px 70px rgba(31, 22, 36, 0.28);
         overflow: hidden;
@@ -1268,84 +1277,41 @@
         font-size: 0.92rem;
       }
 
-      .floatingchat-container-wrap,
-      .floatingchat-container {
-        position: fixed !important;
-        left: auto !important;
-        right: 18px !important;
-        bottom: 18px !important;
-        z-index: 30 !important;
-        width: 88px !important;
-        height: 56px !important;
-        max-width: calc(100vw - 28px) !important;
-        border-radius: 999px;
-        overflow: hidden !important;
-        font-family: var(--font-cute) !important;
-        transform-origin: right bottom;
+      .kofi-support-link {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 30;
+        display: grid;
+        width: 56px;
+        height: 56px;
+        place-items: center;
+        border: 1px solid #f2b4ce;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #fff6fb 0%, var(--pink-soft) 52%, var(--mint) 100%);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition:
+          border-color 0.16s ease,
+          transform 0.16s ease,
+          box-shadow 0.16s ease;
       }
 
-      .floatingchat-container-wrap {
-        filter: drop-shadow(0 10px 20px rgba(62, 42, 67, 0.12));
+      .kofi-support-link:hover {
+        border-color: #e86f9f;
+        box-shadow: 0 14px 30px rgba(88, 55, 88, 0.14);
+        transform: translateY(-2px);
       }
 
-      .floatingchat-container-wrap [class*="donateButton"],
-      .floatingchat-container [class*="donateButton"],
-      .floatingchat-container-wrap-mobi [class*="donateButton"] {
-        min-height: 44px !important;
-        border: 1px solid #f2b4ce !important;
-        border-radius: 8px !important;
-        background: linear-gradient(135deg, #fff6fb 0%, var(--pink-soft) 52%, var(--mint) 100%) !important;
-        color: var(--ink) !important;
-        box-shadow: var(--shadow) !important;
-        font-family: var(--font-cute) !important;
-        font-weight: 900 !important;
-        letter-spacing: 0 !important;
+      .kofi-support-link:focus-visible {
+        outline: 3px solid rgba(232, 111, 159, 0.42);
+        outline-offset: 3px;
       }
 
-      .floatingchat-container-wrap [class*="donateButton"]:hover,
-      .floatingchat-container [class*="donateButton"]:hover,
-      .floatingchat-container-wrap-mobi [class*="donateButton"]:hover {
-        border-color: #e86f9f !important;
-        background: linear-gradient(135deg, #fff 0%, #ffe7f0 48%, #d4f1ea 100%) !important;
-      }
-
-      .floatingchat-container-wrap [class*="donateButton"] img,
-      .floatingchat-container [class*="donateButton"] img,
-      .floatingchat-container-wrap-mobi [class*="donateButton"] img {
-        width: 22px !important;
-        height: 22px !important;
-        border-radius: 6px !important;
-      }
-
-      .floatingchat-container-wrap-mobi {
-        position: fixed !important;
-        left: auto !important;
-        right: 18px !important;
-        bottom: 18px !important;
-        z-index: 30 !important;
-        width: 88px !important;
-        height: 56px !important;
-        border-radius: 999px;
-        overflow: hidden !important;
-        transform-origin: right bottom;
-      }
-
-      .floatingchat-container-mobi {
-        width: 88px !important;
-        height: 56px !important;
-      }
-
-      .floating-chat-kofi-popup-iframe,
-      .floating-chat-kofi-popup-iframe-mobi,
-      .floatingchat-container-wrap iframe {
-        max-width: calc(100vw - 28px) !important;
-      }
-
-      .floating-chat-kofi-popup-iframe,
-      .floating-chat-kofi-popup-iframe-mobi {
-        left: auto !important;
-        right: 18px !important;
-        bottom: 86px !important;
+      .kofi-support-link img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
       }
 
       @media (max-width: 900px) {
@@ -1386,10 +1352,6 @@
       }
 
       @media (max-width: 620px) {
-        body {
-          --kofi-mobile-right: max(10px, calc(100vw - 390px));
-        }
-
         .topbar-inner {
           align-items: flex-start;
           grid-template-columns: 1fr;
@@ -1474,42 +1436,32 @@
         }
 
         .hero-actions {
-          grid-template-columns: 1fr;
-          width: min(260px, 100%);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          width: 100%;
+        }
+
+        #heroSearchLink {
+          grid-column: 1 / -1;
+        }
+
+        .hero-actions .button {
+          min-width: 0;
+          padding-inline: 8px;
+          font-size: 0.86rem;
+        }
+
+        .hero-actions .hero-button-stamp {
+          width: 24px;
+          height: 24px;
         }
 
         .hero-metrics {
           grid-template-columns: 1fr 1fr;
         }
 
-        .floatingchat-container-wrap,
-        .floatingchat-container,
-        .floatingchat-container-wrap-mobi {
-          left: auto !important;
-          right: var(--kofi-mobile-right) !important;
-          bottom: 10px !important;
-          transform: scale(0.86);
-        }
-
-        .floatingchat-container-mobi {
-          width: 88px !important;
-          height: 56px !important;
-        }
-
-        .floating-chat-kofi-popup-iframe,
-        .floating-chat-kofi-popup-iframe-mobi {
-          left: auto !important;
-          right: var(--kofi-mobile-right) !important;
-          bottom: 74px !important;
-        }
-
-        .floatingchat-container-wrap .kofi-button-text,
-        .floatingchat-container-wrap-mobi .kofi-button-text,
-        .floatingchat-container .kofi-button-text,
-        .floatingchat-container-wrap [class*="donateButton"] span,
-        .floatingchat-container-wrap-mobi [class*="donateButton"] span,
-        .floatingchat-container [class*="donateButton"] span {
-          display: none !important;
+        .kofi-support-link {
+          right: 10px;
+          bottom: 10px;
         }
       }
 
@@ -1520,6 +1472,7 @@
 
         .button,
         .clip-card,
+        .kofi-support-link,
         .keyword-link-list a,
         .clip-thumbnail img,
         .search-toggle-icon {
@@ -1528,6 +1481,7 @@
 
         .button:hover,
         .clip-card:hover,
+        .kofi-support-link:hover,
         .keyword-link-list a:hover {
           transform: none;
         }
@@ -1745,6 +1699,10 @@
 
     </main>
 
+    <a id="kofiSupportLink" class="kofi-support-link" href="https://ko-fi.com/jinnymeia" target="_blank" rel="noopener noreferrer" aria-label="Ko-fiでjinnymeiaを支援する">
+      <img src="./assets/rukalun/present-56px.webp" alt="" width="40" height="40" />
+    </a>
+
     <div
       id="clipModal"
       class="clip-modal"
@@ -1770,6 +1728,23 @@
       const SVG_NS = "http://www.w3.org/2000/svg";
       const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "(max-width: 620px)";
       const TWITCH_EMBED_PARENT_HOST = "www.rukalun.mydns.jp";
+      const THUMBNAIL_ROOT_MARGIN = "160px 0px";
+      const CREATOR_OPTION_KEYS = new Set(["Enter", " ", "ArrowDown", "ArrowUp"]);
+      const SEARCH_ANALYTICS_DELAY_MS = 500;
+      const SEARCH_SOURCES = new Set([
+        "input",
+        "creator",
+        "game",
+        "sort",
+        "clear",
+        "meta_creator",
+        "meta_game",
+        "random",
+        "url",
+      ]);
+      const LOAD_MORE_SOURCES = new Set(["button", "auto"]);
+      const CONTENT_IDS = new Set(["clip", "search", "shorts", "twitch", "kofi"]);
+      const CONTENT_SOURCES = new Set(["thumbnail", "clip_action", "hero", "floating"]);
 
       function requireElement(selector) {
         const element = document.querySelector(selector);
@@ -1779,6 +1754,9 @@
 
       const elements = {
         heroSearchLink: requireElement("#heroSearchLink"),
+        heroShortsLink: requireElement("#heroShortsLink"),
+        heroTwitchLink: requireElement("#heroTwitchLink"),
+        kofiSupportLink: requireElement("#kofiSupportLink"),
         searchPanel: requireElement("#searchPanel"),
         searchPanelToggle: requireElement("#searchPanelToggle"),
         searchPanelToggleLabel: requireElement("#searchPanelToggleLabel"),
@@ -1817,6 +1795,91 @@
       let lastRandomSearchValue = "";
       let lastRandomClipId = "";
       let lastClipModalTrigger = null;
+      let creatorOptionSource = [];
+      let creatorOptionsBuilt = false;
+      let searchRenderFrame = null;
+      let searchRenderRevision = 0;
+      let searchAnalyticsTimer = null;
+      let lastSearchAnalyticsSignature = "";
+      const thumbnailObserver =
+        "IntersectionObserver" in window
+          ? new IntersectionObserver(
+              (entries) => {
+                for (const entry of entries) {
+                  if (entry.isIntersecting && entry.target instanceof HTMLImageElement) {
+                    loadThumbnailImage(entry.target);
+                  }
+                }
+              },
+              { rootMargin: THUMBNAIL_ROOT_MARGIN }
+            )
+          : null;
+
+      function trackAnalyticsEvent(eventName, parameters = {}) {
+        if (typeof window.gtag !== "function") return false;
+
+        try {
+          window.gtag("event", eventName, parameters);
+          return true;
+        } catch {
+          // Analytics is optional; a blocked tag must not interrupt search.
+          return false;
+        }
+      }
+
+      function getResultCountBucket(count) {
+        if (count === 0) return "0";
+        if (count <= 5) return "1-5";
+        if (count <= 24) return "6-24";
+        if (count <= 99) return "25-99";
+        return "100+";
+      }
+
+      function getSearchAnalyticsParameters(source) {
+        const safeSource = SEARCH_SOURCES.has(source) ? source : "input";
+        const safeSort = ["newest", "oldest", "favorites", "views", "title"].includes(
+          elements.sortSelect.value
+        )
+          ? elements.sortSelect.value
+          : "newest";
+
+        return {
+          source: safeSource,
+          has_query: normalizeText(elements.searchInput.value) ? "yes" : "no",
+          has_creator_filter: elements.creatorFilter.value ? "yes" : "no",
+          has_game_filter: elements.gameFilter.value ? "yes" : "no",
+          sort_type: safeSort,
+          result_bucket: getResultCountBucket(filteredClips.length),
+        };
+      }
+
+      function emitSearchAnalytics(source) {
+        const parameters = getSearchAnalyticsParameters(source);
+        const signature = JSON.stringify(parameters);
+        if (signature === lastSearchAnalyticsSignature) return;
+        const wasTracked = trackAnalyticsEvent("clip_search", parameters);
+        if (wasTracked) {
+          lastSearchAnalyticsSignature = signature;
+        }
+      }
+
+      function scheduleSearchAnalytics(source) {
+        if (!SEARCH_SOURCES.has(source)) return;
+        window.clearTimeout(searchAnalyticsTimer);
+        searchAnalyticsTimer = window.setTimeout(
+          () => emitSearchAnalytics(source),
+          SEARCH_ANALYTICS_DELAY_MS
+        );
+      }
+
+      function trackContentSelection(itemId, source) {
+        if (!CONTENT_IDS.has(itemId) || !CONTENT_SOURCES.has(source)) return;
+        trackAnalyticsEvent("select_content", {
+          content_type: itemId === "clip" ? "clip" : "navigation",
+          item_id: itemId,
+          source,
+        });
+      }
 
       function normalizeText(value) {
         return String(value ?? "")
@@ -2044,6 +2107,8 @@
         link.href = getSafeClipUrl(clip);
         link.title = label;
         link.setAttribute("aria-label", label);
+        const contentSource = className.includes("clip-thumbnail") ? "thumbnail" : "clip_action";
+        link.addEventListener("click", () => trackContentSelection("clip", contentSource));
         link.addEventListener("click", (event) => handleClipOpen(event, clip));
         return link;
       }
@@ -2147,8 +2212,34 @@
         return icon;
       }
 
+      function loadThumbnailImage(image) {
+        const source = image.dataset.src;
+        if (!source) return;
+        thumbnailObserver?.unobserve(image);
+        delete image.dataset.src;
+        image.src = source;
+      }
+
+      function observeThumbnailImage(image) {
+        if (thumbnailObserver) {
+          thumbnailObserver.observe(image);
+          return;
+        }
+        loadThumbnailImage(image);
+      }
+
       function buildCreatorOptions(clips) {
-        const creatorCounts = clips.reduce((counts, clip) => {
+        creatorOptionSource = clips;
+        creatorOptionsBuilt = false;
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = `すべて (${clips.length.toLocaleString("ja-JP")})`;
+        elements.creatorFilter.replaceChildren(defaultOption);
+      }
+
+      function ensureCreatorOptions() {
+        if (creatorOptionsBuilt) return;
+        const creatorCounts = creatorOptionSource.reduce((counts, clip) => {
           if (clip.creator) counts.set(clip.creator, (counts.get(clip.creator) ?? 0) + 1);
           return counts;
         }, new Map());
@@ -2156,16 +2247,15 @@
           const countDiff = creatorCounts.get(b) - creatorCounts.get(a);
           return countDiff || a.localeCompare(b, "ja-JP");
         });
-        const defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.textContent = `すべて (${clips.length.toLocaleString("ja-JP")})`;
-        elements.creatorFilter.replaceChildren(defaultOption);
+        const fragment = document.createDocumentFragment();
         for (const creator of creators) {
           const option = document.createElement("option");
           option.value = creator;
           option.textContent = `${creator} (${creatorCounts.get(creator).toLocaleString("ja-JP")})`;
-          elements.creatorFilter.append(option);
+          fragment.append(option);
         }
+        elements.creatorFilter.append(fragment);
+        creatorOptionsBuilt = true;
       }
 
       function buildGameOptions(clips) {
@@ -2296,10 +2386,12 @@
       function applyMetaFilter(type, value) {
         if (!value) return;
         const filter = type === "creator" ? elements.creatorFilter : elements.gameFilter;
+        if (type === "creator") ensureCreatorOptions();
         filter.value = value;
         clearRandomSelectionState();
         setSearchPanelExpanded(true);
         resetVisibleAndRender();
+        scheduleSearchAnalytics(`meta_${type}`);
       }
 
       function createMetaFilterButton(type, value, label) {
@@ -2355,6 +2447,9 @@
           image.alt = clip.title ? `${clip.title}のサムネイル` : "Clipサムネイル";
           image.loading = "lazy";
           image.decoding = "async";
+          image.width = 320;
+          image.height = 180;
+          image.dataset.src = lightThumbnailUrl;
           image.addEventListener("load", () => {
             thumbnail.classList.add("is-loaded");
           });
@@ -2364,10 +2459,10 @@
             const placeholder = document.createElement("span");
             placeholder.className = "clip-thumbnail-placeholder";
             placeholder.textContent = clip.title ? `${clip.title} / サムネイル準備中` : "サムネイル準備中";
-            thumbnail.append(placeholder);
-          });
-          image.src = lightThumbnailUrl;
+              thumbnail.append(placeholder);
+            });
           thumbnail.append(image);
+          observeThumbnailImage(image);
         } else {
           thumbnail.classList.add("has-placeholder");
           const placeholder = document.createElement("span");
@@ -2431,7 +2526,26 @@
         return card;
       }
 
+      function updateResultState() {
+        elements.emptyState.classList.toggle(
+          "is-visible",
+          dataLoadState === "loaded" && filteredClips.length === 0
+        );
+        elements.loadMoreWrap.classList.toggle("is-visible", filteredClips.length > visibleLimit);
+        updateSearchPanelSummary();
+        updateHeroMetrics();
+      }
+
+      function appendVisibleCards(startIndex, endIndex) {
+        const fragment = document.createDocumentFragment();
+        for (const clip of filteredClips.slice(startIndex, endIndex)) {
+          fragment.append(renderCard(clip));
+        }
+        elements.results.append(fragment);
+      }
+
       function render() {
+        cancelPendingSearchRender();
         filterClips();
 
         if (dataLoadState === "loading") {
@@ -2442,30 +2556,33 @@
           return;
         }
 
-        const visible = filteredClips.slice(0, visibleLimit);
-
-        elements.results.replaceChildren(...visible.map(renderCard));
-        elements.emptyState.classList.toggle(
-          "is-visible",
-          dataLoadState === "loaded" && filteredClips.length === 0
-        );
-        elements.loadMoreWrap.classList.toggle("is-visible", filteredClips.length > visibleLimit);
-        updateSearchPanelSummary();
-        updateHeroMetrics();
+        thumbnailObserver?.disconnect();
+        elements.results.replaceChildren();
+        appendVisibleCards(0, Math.min(visibleLimit, filteredClips.length));
+        updateResultState();
       }
 
       function hasMoreClips() {
         return dataLoadState === "loaded" && filteredClips.length > visibleLimit;
       }
 
-      function loadMoreClips() {
+      function loadMoreClips(source = "button") {
         if (!hasMoreClips()) return;
-        visibleLimit += MORE_STEP;
-        render();
+        const previousVisibleLimit = visibleLimit;
+        visibleLimit = Math.min(visibleLimit + MORE_STEP, filteredClips.length);
+        appendVisibleCards(previousVisibleLimit, visibleLimit);
+        updateResultState();
+        if (LOAD_MORE_SOURCES.has(source)) {
+          trackAnalyticsEvent("clip_load_more", {
+            source,
+            items_added: visibleLimit - previousVisibleLimit,
+            visible_bucket: getResultCountBucket(visibleLimit),
+          });
+        }
       }
 
       function handleAutoLoadMore(entries) {
-        if (entries.some((entry) => entry.isIntersecting)) loadMoreClips();
+        if (entries.some((entry) => entry.isIntersecting)) loadMoreClips("auto");
       }
 
       function setupAutoLoadMore() {
@@ -2479,6 +2596,13 @@
         render();
       }
 
+      function cancelPendingSearchRender() {
+        searchRenderRevision += 1;
+        if (searchRenderFrame === null) return;
+        window.cancelAnimationFrame(searchRenderFrame);
+        searchRenderFrame = null;
+      }
+
       function clearRandomSelectionState() {
         lastRandomSearchValue = "";
         lastRandomClipId = "";
@@ -2486,7 +2610,14 @@
 
       function handleSearchInputChange() {
         clearRandomSelectionState();
-        resetVisibleAndRender();
+        cancelPendingSearchRender();
+        const revision = ++searchRenderRevision;
+        searchRenderFrame = window.requestAnimationFrame(() => {
+          searchRenderFrame = null;
+          if (revision !== searchRenderRevision) return;
+          resetVisibleAndRender();
+          scheduleSearchAnalytics("input");
+        });
       }
 
       function pickRandomClip() {
@@ -2501,6 +2632,7 @@
         if (filteredClips.length === 0) {
           clearRandomSelectionState();
           render();
+          scheduleSearchAnalytics("random");
           return;
         }
         const randomPool =
@@ -2514,6 +2646,7 @@
         lastRandomClipId = clip.id ?? "";
         visibleLimit = INITIAL_LIMIT;
         render();
+        scheduleSearchAnalytics("random");
       }
 
       async function loadData() {
@@ -2536,6 +2669,7 @@
             : "未記録";
           setNotice(allClips.length === 0 ? "Clipデータがまだありません。しばらくしてから再読み込みしてください。" : "");
           render();
+          if (initialQuery) scheduleSearchAnalytics("url");
         } catch (error) {
           allClips = [];
           filteredClips = [];
@@ -2552,16 +2686,10 @@
       function scheduleDataLoad() {
         const runLoadData = () => {
           if ("requestIdleCallback" in window) {
-            window.requestIdleCallback(() => {
-              loadData();
-              scheduleKofiWidget();
-            }, { timeout: 1200 });
+            window.requestIdleCallback(loadData, { timeout: 1200 });
             return;
           }
-          window.setTimeout(() => {
-            loadData();
-            scheduleKofiWidget();
-          }, 160);
+          window.setTimeout(loadData, 160);
         };
 
         if (document.readyState === "complete") {
@@ -2574,9 +2702,21 @@
 
       elements.searchInput.addEventListener("input", handleSearchInputChange);
       elements.heroSearchLink.addEventListener("click", () => setSearchPanelExpanded(true));
+      elements.heroSearchLink.addEventListener("click", () => trackContentSelection("search", "hero"));
+      elements.heroShortsLink.addEventListener("click", () => trackContentSelection("shorts", "hero"));
+      elements.heroTwitchLink.addEventListener("click", () => trackContentSelection("twitch", "hero"));
+      elements.kofiSupportLink.addEventListener("click", () => trackContentSelection("kofi", "floating"));
+      elements.creatorFilter.addEventListener("focus", ensureCreatorOptions);
+      elements.creatorFilter.addEventListener("pointerdown", ensureCreatorOptions);
+      elements.creatorFilter.addEventListener("keydown", (event) => {
+        if (CREATOR_OPTION_KEYS.has(event.key)) ensureCreatorOptions();
+      });
       elements.creatorFilter.addEventListener("change", resetVisibleAndRender);
       elements.gameFilter.addEventListener("change", resetVisibleAndRender);
       elements.sortSelect.addEventListener("change", resetVisibleAndRender);
+      elements.creatorFilter.addEventListener("change", () => scheduleSearchAnalytics("creator"));
+      elements.gameFilter.addEventListener("change", () => scheduleSearchAnalytics("game"));
+      elements.sortSelect.addEventListener("change", () => scheduleSearchAnalytics("sort"));
       elements.searchPanelToggle.addEventListener("click", () => {
         const isExpanded = elements.searchPanelToggle.getAttribute("aria-expanded") === "true";
         setSearchPanelExpanded(!isExpanded);
@@ -2588,10 +2728,11 @@
         elements.sortSelect.value = "newest";
         clearRandomSelectionState();
         resetVisibleAndRender();
+        scheduleSearchAnalytics("clear");
       });
       elements.randomButton.addEventListener("click", pickRandomClip);
       elements.closeSearchButton.addEventListener("click", () => setSearchPanelExpanded(false));
-      elements.loadMoreButton.addEventListener("click", loadMoreClips);
+      elements.loadMoreButton.addEventListener("click", () => loadMoreClips("button"));
       elements.clipModalClose.addEventListener("click", closeClipModal);
       elements.clipModal.addEventListener("click", (event) => {
         if (event.target === elements.clipModal) closeClipModal();
@@ -2605,140 +2746,6 @@
 
       setupAutoLoadMore();
       scheduleDataLoad();
-    </script>
-    <script>
-      const KOFI_WIDGET_SCRIPT_URL = "https://storage.ko-fi.com/cdn/scripts/overlay-widget.js";
-      const KOFI_WIDGET_POSITION_CSS = `
-        .floatingchat-container-wrap,
-        .floatingchat-container {
-          left: auto !important;
-          right: 18px !important;
-          bottom: 18px !important;
-          width: 88px !important;
-          height: 56px !important;
-          max-width: calc(100vw - 28px) !important;
-          border-radius: 999px;
-          overflow: hidden !important;
-          transform-origin: right bottom;
-        }
-
-        .floatingchat-container-wrap [class*="donateButton"],
-        .floatingchat-container [class*="donateButton"],
-        .floatingchat-container-wrap-mobi [class*="donateButton"] {
-          min-height: 44px !important;
-          border: 1px solid #f2b4ce !important;
-          border-radius: 8px !important;
-          background: linear-gradient(135deg, #fff6fb 0%, var(--pink-soft) 52%, var(--mint) 100%) !important;
-          color: var(--ink) !important;
-          box-shadow: var(--shadow) !important;
-          font-family: var(--font-cute) !important;
-          font-weight: 900 !important;
-          letter-spacing: 0 !important;
-        }
-
-        .floatingchat-container-wrap [class*="donateButton"]:hover,
-        .floatingchat-container [class*="donateButton"]:hover,
-        .floatingchat-container-wrap-mobi [class*="donateButton"]:hover {
-          border-color: #e86f9f !important;
-          background: linear-gradient(135deg, #fff 0%, #ffe7f0 48%, #d4f1ea 100%) !important;
-        }
-
-        .floatingchat-container-wrap [class*="donateButton"] img,
-        .floatingchat-container [class*="donateButton"] img,
-        .floatingchat-container-wrap-mobi [class*="donateButton"] img {
-          width: 22px !important;
-          height: 22px !important;
-          border-radius: 6px !important;
-        }
-
-        .floatingchat-container-wrap-mobi {
-          left: auto !important;
-          right: 18px !important;
-          bottom: 18px !important;
-          width: 88px !important;
-          height: 56px !important;
-          border-radius: 999px;
-          overflow: hidden !important;
-          transform-origin: right bottom;
-        }
-
-        .floatingchat-container-mobi {
-          width: 88px !important;
-          height: 56px !important;
-        }
-
-        .floating-chat-kofi-popup-iframe,
-        .floating-chat-kofi-popup-iframe-mobi {
-          left: auto !important;
-          right: 18px !important;
-          bottom: 86px !important;
-          max-width: calc(100vw - 28px) !important;
-        }
-
-        @media (max-width: 620px) {
-          body {
-            --kofi-mobile-right: max(10px, calc(100vw - 390px));
-          }
-
-          .floatingchat-container-wrap,
-          .floatingchat-container,
-          .floatingchat-container-wrap-mobi {
-            left: auto !important;
-            right: var(--kofi-mobile-right) !important;
-            bottom: 10px !important;
-            transform: scale(0.86);
-          }
-
-          .floating-chat-kofi-popup-iframe,
-          .floating-chat-kofi-popup-iframe-mobi {
-            left: auto !important;
-            right: var(--kofi-mobile-right) !important;
-            bottom: 74px !important;
-          }
-
-          .floatingchat-container-wrap .kofi-button-text,
-          .floatingchat-container-wrap-mobi .kofi-button-text,
-          .floatingchat-container .kofi-button-text,
-          .floatingchat-container-wrap [class*="donateButton"] span,
-          .floatingchat-container-wrap-mobi [class*="donateButton"] span,
-          .floatingchat-container [class*="donateButton"] span {
-            display: none !important;
-          }
-        }
-      `;
-
-      function installKofiWidgetStyles() {
-        const style = document.getElementById("kofi-widget-position-style") || document.createElement("style");
-        style.id = "kofi-widget-position-style";
-        style.textContent = KOFI_WIDGET_POSITION_CSS;
-        document.head.append(style);
-      }
-
-      function drawKofiWidget() {
-        try {
-          window.kofiWidgetOverlay?.draw?.("jinnymeia", {
-            "type": "floating-chat",
-            "floating-chat.donateButton.text": " ",
-            "floating-chat.donateButton.background-color": "#ffe8f0",
-            "floating-chat.donateButton.text-color": "#2c2633",
-          });
-        } catch (error) {
-          // Keep the support widget isolated from the clip search experience.
-        } finally {
-          window.setTimeout(installKofiWidgetStyles, 0);
-        }
-      }
-
-      function scheduleKofiWidget() {
-        if (document.querySelector(`script[src="${KOFI_WIDGET_SCRIPT_URL}"]`)) return;
-        installKofiWidgetStyles();
-        const script = document.createElement("script");
-        script.src = KOFI_WIDGET_SCRIPT_URL;
-        script.async = true;
-        script.addEventListener("load", drawKofiWidget, { once: true });
-        script.addEventListener("error", installKofiWidgetStyles, { once: true });
-        document.body.append(script);
-      }
     </script>
   </body>
 </html>
