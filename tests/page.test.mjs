@@ -487,17 +487,28 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   const gaScriptTag = `<script async src="${gaScriptUrl}"></script>`;
   const gaScriptTags =
     html.match(/<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+"><\/script>/g) ?? [];
-  const gaConfigCalls = html.match(/gtag\("config", "G-[A-Z0-9]+"\);/g) ?? [];
+  const gaConfigCalls = html.match(/gtag\("config", "G-[A-Z0-9]+", \{\s*send_page_view: false,?\s*\}\);/g) ?? [];
   const heroPreload =
     '<link rel="preload" as="image" href="./assets/rukalun/clip-search-hero.webp" type="image/webp" fetchpriority="high" />';
   const jsonLdScript = '<script type="application/ld+json">';
 
   assert.match(gaMeasurementId, /^G-[A-Z0-9]+$/);
   assert.deepEqual(gaScriptTags, [gaScriptTag]);
-  assert.deepEqual(gaConfigCalls, [`gtag("config", "${gaMeasurementId}");`]);
+  assert.deepEqual(gaConfigCalls, [`gtag("config", "${gaMeasurementId}", { send_page_view: false });`]);
   assert.match(html, /window\.dataLayer = window\.dataLayer \|\| \[\];/);
   assert.match(html, /function gtag\(\) \{\s*dataLayer\.push\(arguments\);\s*\}/);
+  assert.match(html, /function getAnalyticsPageUrl\(value\)/);
+  assert.match(html, /return `\$\{url\.origin\}\$\{url\.pathname\}`;/);
+  assert.match(html, /const analyticsPageLocation = getAnalyticsPageUrl\(window\.location\.href\);/);
+  assert.match(html, /const analyticsPageReferrer = document\.referrer \? getAnalyticsPageUrl\(document\.referrer\) : "";/);
   assert.match(html, /gtag\("js", new Date\(\)\);/);
+  assert.match(html, /gtag\("set", "page_location", analyticsPageLocation\);/);
+  assert.match(html, /gtag\("set", "page_referrer", analyticsPageReferrer\);/);
+  assert.match(
+    html,
+    /gtag\("event", "page_view", \{\s*page_title: document\.title,\s*page_location: analyticsPageLocation,\s*page_referrer: analyticsPageReferrer,?\s*\}\);/
+  );
+  assert.doesNotMatch(html, /page_location:\s*window\.location\.(?:href|search)/);
   assert.ok(
     html.indexOf(heroPreload) < html.indexOf(gaScriptTag),
     "GA4 should not be inserted before the LCP hero preload"
@@ -526,12 +537,25 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.match(searchParametersBlock, /result_bucket: getResultCountBucket\(filteredClips\.length\)/);
   assert.doesNotMatch(searchParametersBlock, /result_count:/);
   assert.doesNotMatch(searchParametersBlock, /\b(?:search_term|query|item_name|clip_id):/);
+  assert.match(
+    emitSearchBlock,
+    /const signature = JSON\.stringify\(\[\s*normalizeText\(elements\.searchInput\.value\),\s*parameters,\s*\]\);/
+  );
   assert.match(emitSearchBlock, /if \(signature === lastSearchAnalyticsSignature\) return;/);
   assert.match(emitSearchBlock, /trackAnalyticsEvent\("clip_search", parameters\);/);
   assert.match(html, /const SEARCH_ANALYTICS_DELAY_MS = 500;/);
   assert.match(scheduleSearchBlock, /window\.clearTimeout\(searchAnalyticsTimer\);/);
+  assert.match(
+    scheduleSearchBlock,
+    /if \(dataLoadState !== "loaded"\) \{[\s\S]*pendingSearchAnalyticsSource = source;[\s\S]*return;[\s\S]*\}/
+  );
   assert.match(scheduleSearchBlock, /window\.setTimeout\(/);
   assert.match(scheduleSearchBlock, /SEARCH_ANALYTICS_DELAY_MS/);
+  assert.match(html, /let pendingSearchAnalyticsSource = "";/);
+  assert.match(html, /function flushPendingSearchAnalytics\(\)/);
+  assert.match(html, /const source = pendingSearchAnalyticsSource \|\| \(initialQuery \? "url" : ""\);/);
+  assert.match(html, /pendingSearchAnalyticsSource = "";/);
+  assert.match(html, /render\(\);\s*flushPendingSearchAnalytics\(\);/);
   assert.match(contentSelectionBlock, /CONTENT_IDS\.has\(itemId\)/);
   assert.match(contentSelectionBlock, /CONTENT_SOURCES\.has\(source\)/);
   assert.match(contentSelectionBlock, /trackAnalyticsEvent\("select_content", \{/);
