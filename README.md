@@ -106,13 +106,14 @@ CLIP_SEARCH_PUBLISH_REMOTE=origin
 CLIP_SEARCH_PUBLISH_BRANCH=main
 ```
 
-Bot の直近Clip同期完了後、`clip-search-data.json` に差分があればこのリポジトリの `main` へ commit/push します。PageSpeed向けに、公開前のJSONはminify済みの1行形式を維持します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしているため、同期時刻だけの更新や整形戻りでGitHub上の差分表示を肥大化させない運用にします。履歴整理を行う場合は、件名が `Clip検索JSONを同期時刻更新` のコミットだけを対象にし、公開ページの開発コミットは残します。
+Bot の直近Clip同期完了後、`clip-search-data.json` に差分があればこのリポジトリの `main` へ commit/push します。Botが読みやすい複数行JSONをcommitしても、GitHub Pagesはartifact作成前に `npm run minify:data` で最新データを1行化し、その状態で `npm test` を通してから公開します。これにより、Botの同期形式と公開時のネットワーク重量を分離します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしているため、同期時刻だけの更新や整形戻りでGitHub上の差分表示を肥大化させない運用にします。履歴整理を行う場合は、件名が `Clip検索JSONを同期時刻更新` のコミットだけを対象にし、公開ページの開発コミットは残します。
 
-2026-06-24時点でもBot同期直後に公開JSONが整形済みへ戻る場合があります。公開前の確認で複数行JSONになっていた場合は、最新データ内容を保ったまま `JSON.stringify(JSON.parse(raw))` 相当で1行minifyへ戻してからテストとpushを行います。
+手元で公開artifact相当の状態を確認する場合は、`npm run minify:data` の後に `npm test` を実行します。`npm run minify:data -- <JSONパス>` の代わりに、スクリプトへ任意パスを直接渡して一時ファイルの正規化も検証できます。通常運用では既定の `clip-search-data.json` だけを対象にします。
 
 ## 検証
 
 ```powershell
+npm run minify:data
 npm test
 ```
 

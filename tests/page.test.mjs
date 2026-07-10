@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 
@@ -1273,6 +1275,37 @@ test("clip search data is minified to reduce network payload", () => {
   const minifiedData = JSON.stringify(JSON.parse(rawData));
 
   assert.equal(rawData.trim(), minifiedData);
+});
+
+test("Pages deployment minifies bot-formatted clip data before verification", () => {
+  const packageJson = JSON.parse(readText("package.json"));
+  const workflow = readText(".github/workflows/pages.yml");
+  const scriptPath = path.join(repoDir, "scripts/minify-clip-data.mjs");
+  const minifyStepIndex = workflow.indexOf("- name: Minify clip data");
+  const verifyStepIndex = workflow.indexOf("- name: Verify page");
+  const uploadStepIndex = workflow.indexOf("actions/upload-pages-artifact@v3");
+
+  assert.equal(
+    packageJson.scripts?.["minify:data"],
+    "node scripts/minify-clip-data.mjs"
+  );
+  assert.equal(fs.existsSync(scriptPath), true);
+  assert.match(workflow, /- name: Minify clip data\s+run: npm run minify:data/);
+  assert.match(workflow, /- name: Verify page\s+run: npm test/);
+  assert.ok(minifyStepIndex >= 0 && minifyStepIndex < verifyStepIndex);
+  assert.ok(verifyStepIndex < uploadStepIndex);
+
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "rukalun-page-"));
+  const tempDataPath = path.join(tempDir, "clip-search-data.json");
+  const sampleData = { generatedAt: "2026-07-10T00:00:00.000Z", clips: [{ id: "sample" }] };
+
+  try {
+    fs.writeFileSync(tempDataPath, JSON.stringify(sampleData, null, 2));
+    execFileSync(process.execPath, [scriptPath, tempDataPath]);
+    assert.equal(fs.readFileSync(tempDataPath, "utf8"), JSON.stringify(sampleData));
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
 });
 
 test("generated clip search data is hidden from noisy GitHub diffs", () => {
