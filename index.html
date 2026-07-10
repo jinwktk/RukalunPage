@@ -1875,6 +1875,8 @@
         const parameters = getSearchAnalyticsParameters(source);
         const signature = JSON.stringify([
           normalizeText(elements.searchInput.value),
+          elements.creatorFilter.value,
+          elements.gameFilter.value,
           parameters,
         ]);
         if (signature === lastSearchAnalyticsSignature) return;
