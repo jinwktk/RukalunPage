@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-11T23:29:29.407Z",
-  "total": 2778,
+  "generatedAt": "2026-07-12T01:27:31.078Z",
+  "total": 2779,
   "clipSync": {
-    "recentSyncedAt": "2026-07-11T23:29:28.145Z"
+    "recentSyncedAt": "2026-07-12T01:27:29.639Z"
   },
   "clips": [
+    {
+      "id": "TallSilkyCasetteTheThing-FjU_6XICtCkXKouq",
+      "url": "https://www.twitch.tv/rukalun/clip/TallSilkyCasetteTheThing-FjU_6XICtCkXKouq",
+      "title": "ラグビーの事ラグビィ⤴とか言ってんの？まなD",
+      "creator": "かじまる",
+      "gameName": "League of Legends",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/eb9af5d9-8625-439c-9268-9fe0066c53fa/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-11T23:26:31.000Z",
+      "views": 1
+    },
     {
       "id": "SpoopySmoggyPassionfruitKreygasm-ogdppoH_-izzWvV5",
       "url": "https://www.twitch.tv/rukalun/clip/SpoopySmoggyPassionfruitKreygasm-ogdppoH_-izzWvV5",
