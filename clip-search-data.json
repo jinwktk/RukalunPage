@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-12T22:19:43.409Z",
-  "total": 2781,
+  "generatedAt": "2026-07-13T08:19:06.390Z",
+  "total": 2782,
   "clipSync": {
-    "recentSyncedAt": "2026-07-12T22:19:42.051Z"
+    "recentSyncedAt": "2026-07-13T08:19:05.093Z"
   },
   "clips": [
+    {
+      "id": "YawningAnimatedLionDxCat-rCzyuC8QtReXu6pK",
+      "url": "https://www.twitch.tv/rukalun/clip/YawningAnimatedLionDxCat-rCzyuC8QtReXu6pK",
+      "title": "救っちまった",
+      "creator": "くしゃこら",
+      "gameName": "League of Legends",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/320ffe49-a8a1-4d21-9580-49512116570f/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-12T22:18:41.000Z",
+      "views": 5
+    },
     {
       "id": "ExuberantBusyNeanderthalBleedPurple-GU2i3HtJsHZn787Z",
       "url": "https://www.twitch.tv/rukalun/clip/ExuberantBusyNeanderthalBleedPurple-GU2i3HtJsHZn787Z",
@@ -13,7 +23,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3c027a54-9712-4fcb-8f44-bcd21ffaeca2/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-12T15:40:25.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "ShinyWittyMageWholeWheat-zHZjMScMp6yPCuMn",
@@ -33,7 +43,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/eb9af5d9-8625-439c-9268-9fe0066c53fa/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-11T23:26:31.000Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "SpoopySmoggyPassionfruitKreygasm-ogdppoH_-izzWvV5",
@@ -43,7 +53,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/098ee727-aa15-4555-a6c0-5e1628c66b13/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-11T03:31:58.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "GeniusThoughtfulAxeStrawBeary-7j7LXZYDyx7e8Y-b",
@@ -63,7 +73,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f6907aec-1922-4c50-8ba1-bd26965197f4/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-07T02:24:59.000Z",
-      "views": 61
+      "views": 63
     },
     {
       "id": "BumblingSaltyAubergineDoubleRainbow-VGhJ0NUEXomLbB1V",
@@ -83,7 +93,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9d264fce-1d24-4673-9005-994bfcac5eec/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-06T11:26:05.000Z",
-      "views": 16
+      "views": 17
     },
     {
       "id": "TangentialDepressedSparrowJebaited-08Viuy-aSXfqTkl-",
@@ -103,7 +113,7 @@
       "gameName": "Overwatch",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3d3d111b-4dac-40bb-8a05-eceba971fe09/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-05T14:26:07.000Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "GoodIgnorantNikudonCoolStoryBob-ncouVxpLRwUBnsOS",
@@ -133,7 +143,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/edde017b-d9e6-431c-8a20-85a2be8a7415/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-04T09:03:43.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "AlertTameWrenchMikeHogu-_hD2IWGoqhllUOrQ",
@@ -153,7 +163,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0f980275-eeb6-42f4-ad73-2299ffb457a2/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-03T18:36:30.000Z",
-      "views": 16
+      "views": 17
     },
     {
       "id": "EphemeralResoluteOrcaJebaited-V6CFmWHa3EV_xRaG",
@@ -343,7 +353,7 @@
       "gameName": "Overwatch",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/168359c4-1feb-4055-8a13-4d178e8baf55/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-13T18:34:46.000Z",
-      "views": 184
+      "views": 185
     },
     {
       "id": "VastTawdryTriangleMVGame-3wKvsU_lcKDLK0gu",
@@ -353,7 +363,7 @@
       "gameName": "Overwatch",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/839c1509-7471-4e1d-a57f-d5a9d2829290/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-13T17:18:02.000Z",
-      "views": 131
+      "views": 132
     },
     {
       "id": "BombasticAmazonianRavenBatChest-Hcely9pEjPwvbD8T",
@@ -1353,7 +1363,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7f1b2650-151b-4f76-8dba-03bbf5f039fd/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-03-19T17:46:22.000Z",
-      "views": 17
+      "views": 18
     },
     {
       "id": "IncredulousTangibleJellyfishCorgiDerp-p8ODdAv_yKniHk89",
@@ -1473,7 +1483,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/83542df6-1e74-4ceb-97ac-11876edfb447/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-03-06T18:51:01.000Z",
-      "views": 103
+      "views": 104
     },
     {
       "id": "CloudyCrypticOrcaShadyLulu-DbMfidW7RNK9pDki",
@@ -6683,7 +6693,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0f6d274b-d6f6-4b31-bc9f-226ef80bbc86/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2024-10-01T19:58:38.000Z",
-      "views": 887
+      "views": 889
     },
     {
       "id": "SlickRacyLaptopJKanStyle-H2C75Nf9HHcCFbJe",
@@ -10663,7 +10673,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c117b20b-e337-4ff1-b79d-4348c25e0bb6/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2023-12-23T16:32:21.000Z",
-      "views": 255
+      "views": 256
     },
     {
       "id": "CredulousBeautifulIguanaOSkomodo-L8qt6MKbzJ37CR3I",
@@ -18473,7 +18483,7 @@
       "gameName": "Teamfight Tactics",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0703b5b9-6a92-4503-9f58-9cc7ffe1509b/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2021-05-16T11:22:07.000Z",
-      "views": 411
+      "views": 412
     },
     {
       "id": "ArborealLongReindeerRiPepperonis-tIGBaZOEI6t4n6_e",
@@ -19293,7 +19303,7 @@
       "gameName": "Talk Shows & Podcasts",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ff4d35ff-93a7-4598-a68f-ec95e35a8e34/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2020-12-25T12:43:33.000Z",
-      "views": 97
+      "views": 98
     },
     {
       "id": "InterestingUninterestedPigeonKeepo",
@@ -21933,7 +21943,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1215a81b-e1a9-48de-84d6-b3ae30970fdf/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-08-03T09:50:22.000Z",
-      "views": 517
+      "views": 518
     },
     {
       "id": "HeadstrongPreciousBeeItsBoshyTime",
@@ -21993,7 +22003,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/261f85d8-3c01-403c-8707-c2e9e4b41aba/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-07-29T02:00:06.000Z",
-      "views": 479
+      "views": 480
     },
     {
       "id": "DarkCrypticClintmullinsPJSalt",
@@ -23133,7 +23143,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1e3cbc83-be39-46e3-b321-f725d809f389/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-01-26T13:50:08.000Z",
-      "views": 989
+      "views": 990
     },
     {
       "id": "AveragePlacidAyeayeRuleFive",
@@ -23193,7 +23203,7 @@
       "gameName": "IRL",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/04bc0bd7-109d-456a-a029-f6c7590d4b0d/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-01-14T18:05:07.000Z",
-      "views": 198
+      "views": 199
     },
     {
       "id": "SillyFurtiveToadSMOrc",
@@ -23253,7 +23263,7 @@
       "gameName": "Food & Drink",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/5db6fb13-d633-4c85-9c33-47deac4b9291/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-28T20:56:02.000Z",
-      "views": 282
+      "views": 283
     },
     {
       "id": "PerfectRacyDumplingsResidentSleeper",
@@ -23263,7 +23273,7 @@
       "gameName": "Food & Drink",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0f33f003-9b48-4cdf-a299-644aeeb90d38/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-28T20:54:44.000Z",
-      "views": 1475
+      "views": 1477
     },
     {
       "id": "SparklingTolerantToadOSkomodo",
@@ -23273,7 +23283,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e42861c8-e617-47f9-a883-7dfa43c5f2d8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-16T14:47:11.000Z",
-      "views": 2266
+      "views": 2267
     },
     {
       "id": "FunAbrasiveSpiderTBTacoRight",
@@ -23283,7 +23293,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/46694883-252a-4027-b686-cd4746e5ff4e/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-16T14:12:14.000Z",
-      "views": 337
+      "views": 338
     },
     {
       "id": "InterestingPopularPotPhilosoraptor",
@@ -23883,7 +23893,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/adc7ed6d-d5f3-4c63-893b-c69623f51209/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-05-26T08:14:28.000Z",
-      "views": 2526
+      "views": 2527
     },
     {
       "id": "LuckySillyHornetWutFace",
@@ -24513,7 +24523,7 @@
       "gameName": null,
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7be1599e-ad90-4f6f-80a8-c52fd8b209b6/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-04-22T02:17:46.000Z",
-      "views": 733
+      "views": 734
     },
     {
       "id": "ExuberantUnsightlyMangoNerfBlueBlaster",
@@ -25743,7 +25753,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/8d84e8ad-b7d5-46ed-b7c3-2958d233c5ad/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-02-14T10:31:41.000Z",
-      "views": 464
+      "views": 465
     },
     {
       "id": "HardCrunchyPizzaDxAbomb",
