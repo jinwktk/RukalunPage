@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-12T15:45:04.989Z",
-  "total": 2780,
+  "generatedAt": "2026-07-12T22:19:43.409Z",
+  "total": 2781,
   "clipSync": {
-    "recentSyncedAt": "2026-07-12T15:45:05.370Z"
+    "recentSyncedAt": "2026-07-12T22:19:42.051Z"
   },
   "clips": [
+    {
+      "id": "ExuberantBusyNeanderthalBleedPurple-GU2i3HtJsHZn787Z",
+      "url": "https://www.twitch.tv/rukalun/clip/ExuberantBusyNeanderthalBleedPurple-GU2i3HtJsHZn787Z",
+      "title": "芸歴１６年のダチョウ倶楽部",
+      "creator": "かのんのん",
+      "gameName": "7 Days to Die",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3c027a54-9712-4fcb-8f44-bcd21ffaeca2/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-12T15:40:25.000Z",
+      "views": 2
+    },
     {
       "id": "ShinyWittyMageWholeWheat-zHZjMScMp6yPCuMn",
       "url": "https://www.twitch.tv/rukalun/clip/ShinyWittyMageWholeWheat-zHZjMScMp6yPCuMn",
