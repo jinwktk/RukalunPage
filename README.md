@@ -122,3 +122,13 @@ npm test
 GitHub Pages の公開URLは `https://www.rukalun.mydns.jp/` です。
 
 `AGENTS.md` はローカル運用メモとしてGitIgnoreを維持します。公開CIでは追跡済みの `README.md` をドキュメント契約として検証し、ローカルでは `AGENTS.md` が存在する場合に同じ契約も確認します。
+
+## AIエージェント設定
+
+Matt Pocock Skills のプロジェクト設定を `docs/agents/` に保存しています。
+
+- Issue管理: GitHub Issues（外部PRは自動トリアージ対象外）
+- トリアージ: `needs-triage` などの既定5ラベル
+- ドメイン文書: 単一コンテキスト構成
+
+詳細は `docs/agents/issue-tracker.md`、`docs/agents/triage-labels.md`、`docs/agents/domain.md` を参照してください。
