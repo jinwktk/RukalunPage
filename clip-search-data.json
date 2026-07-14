@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-14T05:35:55.849Z",
-  "total": 2783,
+  "generatedAt": "2026-07-14T06:04:14.581Z",
+  "total": 2784,
   "clipSync": {
-    "recentSyncedAt": "2026-07-14T05:35:54.378Z"
+    "recentSyncedAt": "2026-07-14T06:04:13.073Z"
   },
   "clips": [
+    {
+      "id": "TardySassyBulgogiWutFace-NRRz2Jx3cOj_e2lT",
+      "url": "https://www.twitch.tv/rukalun/clip/TardySassyBulgogiWutFace-NRRz2Jx3cOj_e2lT",
+      "title": "っき？",
+      "creator": "かのんのん",
+      "gameName": "Overwatch",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/14666cae-bb03-4015-b6c8-da2c87632c62/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-14T05:39:47.000Z",
+      "views": 3
+    },
     {
       "id": "GoodCallousUdonLitty-0-8f9TlKhrxJgKDD",
       "url": "https://www.twitch.tv/rukalun/clip/GoodCallousUdonLitty-0-8f9TlKhrxJgKDD",
