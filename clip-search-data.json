@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-19T18:55:32.856Z",
-  "total": 2791,
+  "generatedAt": "2026-07-19T19:28:24.227Z",
+  "total": 2792,
   "clipSync": {
-    "recentSyncedAt": "2026-07-19T18:55:31.314Z"
+    "recentSyncedAt": "2026-07-19T19:28:22.629Z"
   },
   "clips": [
+    {
+      "id": "FurtiveBrightHerringRalpherZ-nGTbxs4CQljdaGlM",
+      "url": "https://www.twitch.tv/rukalun/clip/FurtiveBrightHerringRalpherZ-nGTbxs4CQljdaGlM",
+      "title": "ぐぅ～！",
+      "creator": "にめいや",
+      "gameName": "7 Days to Die",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7e4e666a-9c58-402d-b9ec-64334e2b9e17/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-19T18:52:30.000Z",
+      "views": 9
+    },
     {
       "id": "FitHotGuanacoBlargNaut-e3NyO0UaD1kDD1bT",
       "url": "https://www.twitch.tv/rukalun/clip/FitHotGuanacoBlargNaut-e3NyO0UaD1kDD1bT",
