@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-19T19:28:24.227Z",
-  "total": 2792,
+  "generatedAt": "2026-07-20T06:05:17.356Z",
+  "total": 2793,
   "clipSync": {
-    "recentSyncedAt": "2026-07-19T19:28:22.629Z"
+    "recentSyncedAt": "2026-07-20T06:05:15.999Z"
   },
   "clips": [
+    {
+      "id": "FaintCoweringTireShadyLulu-bFzNBuZw3G1uzAjV",
+      "url": "https://www.twitch.tv/rukalun/clip/FaintCoweringTireShadyLulu-bFzNBuZw3G1uzAjV",
+      "title": "顔芸",
+      "creator": "にめいや",
+      "gameName": "7 Days to Die",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e81bf0bd-2952-4c59-9cac-785566d92022/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-19T19:23:07.000Z",
+      "views": 5
+    },
     {
       "id": "FurtiveBrightHerringRalpherZ-nGTbxs4CQljdaGlM",
       "url": "https://www.twitch.tv/rukalun/clip/FurtiveBrightHerringRalpherZ-nGTbxs4CQljdaGlM",
@@ -13,7 +23,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7e4e666a-9c58-402d-b9ec-64334e2b9e17/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:52:30.000Z",
-      "views": 9
+      "views": 11
     },
     {
       "id": "FitHotGuanacoBlargNaut-e3NyO0UaD1kDD1bT",
@@ -23,7 +33,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/69a2ad43-2243-4520-ba56-ed68f92c98af/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:04:34.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "ZealousDepressedFinchKappaClaus-I54AGgAARzKMrATg",
@@ -33,7 +43,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a14afce4-5f18-4658-be6a-0d06d5b22915/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:03:58.000Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "PlacidToughTomatoBloodTrail-nz92fwV60IT54A8i",
