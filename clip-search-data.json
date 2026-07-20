@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-20T14:49:07.707Z",
-  "total": 2798,
+  "generatedAt": "2026-07-20T15:07:11.193Z",
+  "total": 2799,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T14:49:06.141Z"
+    "recentSyncedAt": "2026-07-20T15:07:09.586Z"
   },
   "clips": [
+    {
+      "id": "PunchyMistyCucumberGrammarKing-lCqXTY0wlm5sQ5MP",
+      "url": "https://www.twitch.tv/rukalun/clip/PunchyMistyCucumberGrammarKing-lCqXTY0wlm5sQ5MP",
+      "title": "破壊神その3",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b50556ef-0506-425c-92ae-2db0480c14af/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T14:45:28.000Z",
+      "views": 1
+    },
     {
       "id": "TameBigMarrowEagleEye-RJPmkLyADPGlqUgp",
       "url": "https://www.twitch.tv/rukalun/clip/TameBigMarrowEagleEye-RJPmkLyADPGlqUgp",
