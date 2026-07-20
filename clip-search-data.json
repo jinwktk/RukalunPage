@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-20T14:17:45.788Z",
-  "total": 2797,
+  "generatedAt": "2026-07-20T14:49:07.707Z",
+  "total": 2798,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T14:17:44.170Z"
+    "recentSyncedAt": "2026-07-20T14:49:06.141Z"
   },
   "clips": [
+    {
+      "id": "TameBigMarrowEagleEye-RJPmkLyADPGlqUgp",
+      "url": "https://www.twitch.tv/rukalun/clip/TameBigMarrowEagleEye-RJPmkLyADPGlqUgp",
+      "title": "破壊神その2",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/07a1b760-6291-433e-a690-b2d5c26a7926/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T14:14:12.000Z",
+      "views": 2
+    },
     {
       "id": "EmpathicBrightOpossumBuddhaBar-y932-S-GlH5ymTZj",
       "url": "https://www.twitch.tv/rukalun/clip/EmpathicBrightOpossumBuddhaBar-y932-S-GlH5ymTZj",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/631aafac-1384-4920-a763-2792069771dd/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-20T13:57:18.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "FaithfulArborealGarageWow-FI6UaNh_CLRP4Hjw",
