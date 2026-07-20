@@ -1,10 +1,30 @@
 {
-  "generatedAt": "2026-07-20T19:46:54.485Z",
-  "total": 2801,
+  "generatedAt": "2026-07-20T21:09:33.884Z",
+  "total": 2803,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T19:46:52.899Z"
+    "recentSyncedAt": "2026-07-20T21:09:32.290Z"
   },
   "clips": [
+    {
+      "id": "HonorableArborealGorillaHassanChop-oCkoJwh-1LHlUzGs",
+      "url": "https://www.twitch.tv/rukalun/clip/HonorableArborealGorillaHassanChop-oCkoJwh-1LHlUzGs",
+      "title": "まなDからの心配のお電話",
+      "creator": "くしゃこら",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ce2c1047-56fc-4115-a896-7503c4b7f4c7/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T19:44:22.000Z",
+      "views": 1
+    },
+    {
+      "id": "ViscousFineSparrowPanicBasket-Zioo6kB3PLx7rrAt",
+      "url": "https://www.twitch.tv/rukalun/clip/ViscousFineSparrowPanicBasket-Zioo6kB3PLx7rrAt",
+      "title": "間違えただけだよね？",
+      "creator": "くしゃこら",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/2944da2d-d6d2-4e93-9ff9-ea3c0b2594a5/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T19:42:33.000Z",
+      "views": 1
+    },
     {
       "id": "AnnoyingDiligentPeachCopyThis-7y-mGmkg_sE-CGEN",
       "url": "https://www.twitch.tv/rukalun/clip/AnnoyingDiligentPeachCopyThis-7y-mGmkg_sE-CGEN",
