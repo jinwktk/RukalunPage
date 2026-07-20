@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-20T15:07:11.193Z",
-  "total": 2799,
+  "generatedAt": "2026-07-20T15:15:43.256Z",
+  "total": 2800,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T15:07:09.586Z"
+    "recentSyncedAt": "2026-07-20T15:15:41.712Z"
   },
   "clips": [
+    {
+      "id": "CarefulMagnificentCaterpillarTakeNRG-Quj2e7EJPDbIbXXY",
+      "url": "https://www.twitch.tv/rukalun/clip/CarefulMagnificentCaterpillarTakeNRG-Quj2e7EJPDbIbXXY",
+      "title": "そうじゃなさすぎて焦るママD",
+      "creator": "勇者みすちぬす4世",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/449bc363-abc9-4d4d-b96d-261b2ad6aac0/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T15:02:22.000Z",
+      "views": 1
+    },
     {
       "id": "PunchyMistyCucumberGrammarKing-lCqXTY0wlm5sQ5MP",
       "url": "https://www.twitch.tv/rukalun/clip/PunchyMistyCucumberGrammarKing-lCqXTY0wlm5sQ5MP",
