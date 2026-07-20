@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-20T13:57:43.898Z",
-  "total": 2796,
+  "generatedAt": "2026-07-20T14:17:45.788Z",
+  "total": 2797,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T13:57:42.521Z"
+    "recentSyncedAt": "2026-07-20T14:17:44.170Z"
   },
   "clips": [
+    {
+      "id": "EmpathicBrightOpossumBuddhaBar-y932-S-GlH5ymTZj",
+      "url": "https://www.twitch.tv/rukalun/clip/EmpathicBrightOpossumBuddhaBar-y932-S-GlH5ymTZj",
+      "title": "破壊神トローるっか",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/631aafac-1384-4920-a763-2792069771dd/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T13:57:18.000Z",
+      "views": 6
+    },
     {
       "id": "FaithfulArborealGarageWow-FI6UaNh_CLRP4Hjw",
       "url": "https://www.twitch.tv/rukalun/clip/FaithfulArborealGarageWow-FI6UaNh_CLRP4Hjw",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/6d03f4e7-3dd9-4d61-894d-4b13ad0c95e5/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-20T13:39:53.000Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "YawningEntertainingKoalaWoofer-_8G-9evv5RZGaUTy",
