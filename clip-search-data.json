@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-20T15:15:43.256Z",
-  "total": 2800,
+  "generatedAt": "2026-07-20T19:46:54.485Z",
+  "total": 2801,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T15:15:41.712Z"
+    "recentSyncedAt": "2026-07-20T19:46:52.899Z"
   },
   "clips": [
+    {
+      "id": "AnnoyingDiligentPeachCopyThis-7y-mGmkg_sE-CGEN",
+      "url": "https://www.twitch.tv/rukalun/clip/AnnoyingDiligentPeachCopyThis-7y-mGmkg_sE-CGEN",
+      "title": "破壊神その４",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/979b0aa5-521f-4582-9da4-30409fe261c8/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T15:10:00.000Z",
+      "views": 1
+    },
     {
       "id": "CarefulMagnificentCaterpillarTakeNRG-Quj2e7EJPDbIbXXY",
       "url": "https://www.twitch.tv/rukalun/clip/CarefulMagnificentCaterpillarTakeNRG-Quj2e7EJPDbIbXXY",
