@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-20T07:08:45.752Z",
-  "total": 2794,
+  "generatedAt": "2026-07-20T13:36:57.227Z",
+  "total": 2795,
   "clipSync": {
-    "recentSyncedAt": "2026-07-20T07:08:44.288Z"
+    "recentSyncedAt": "2026-07-20T13:36:55.830Z"
   },
   "clips": [
+    {
+      "id": "YawningEntertainingKoalaWoofer-_8G-9evv5RZGaUTy",
+      "url": "https://www.twitch.tv/rukalun/clip/YawningEntertainingKoalaWoofer-_8G-9evv5RZGaUTy",
+      "title": "かわいいママD",
+      "creator": "勇者みすちぬす4世",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0ec9fcf2-798e-4f1f-8e46-ce4012be52fb/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-20T07:08:25.000Z",
+      "views": 1
+    },
     {
       "id": "RelievedEncouragingBarracudaRlyTho-urMKMlhntKRnG_4m",
       "url": "https://www.twitch.tv/rukalun/clip/RelievedEncouragingBarracudaRlyTho-urMKMlhntKRnG_4m",
@@ -33,7 +43,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7e4e666a-9c58-402d-b9ec-64334e2b9e17/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:52:30.000Z",
-      "views": 11
+      "views": 12
     },
     {
       "id": "FitHotGuanacoBlargNaut-e3NyO0UaD1kDD1bT",
@@ -53,7 +63,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a14afce4-5f18-4658-be6a-0d06d5b22915/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:03:58.000Z",
-      "views": 4
+      "views": 5
     },
     {
       "id": "PlacidToughTomatoBloodTrail-nz92fwV60IT54A8i",
@@ -63,7 +73,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/73a22677-3252-46d7-90f5-6c7fbbe75528/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T07:31:57.000Z",
-      "views": 35
+      "views": 100
     },
     {
       "id": "AuspiciousDeterminedPangolinPogChamp-5m88rDCvCmca_PCC",
@@ -73,7 +83,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ae0c51f0-f1fd-419e-8efd-11f457f5b074/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-18T07:07:09.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "SpinelessConsiderateElkBrainSlug-A_Uqhr0966Kj3S-h",
@@ -83,7 +93,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/944ac778-7b0d-4d8a-bb8a-27a28a6b433b/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-17T14:06:00.000Z",
-      "views": 7
+      "views": 9
     },
     {
       "id": "GeniusLovelyTeaCmonBruh-2g1vzGUR1HBRcamt",
