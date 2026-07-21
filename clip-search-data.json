@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-21T14:09:28.887Z",
-  "total": 2804,
+  "generatedAt": "2026-07-21T16:04:24.106Z",
+  "total": 2805,
   "clipSync": {
-    "recentSyncedAt": "2026-07-21T14:09:27.516Z"
+    "recentSyncedAt": "2026-07-21T16:04:22.523Z"
   },
   "clips": [
+    {
+      "id": "PlacidPrettiestSpindleCclamChamp-VWrL5J8lMILTi1GZ",
+      "url": "https://www.twitch.tv/rukalun/clip/PlacidPrettiestSpindleCclamChamp-VWrL5J8lMILTi1GZ",
+      "title": "可愛すぎて助けられない",
+      "creator": "くしゃこら",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b9f0b26e-67f9-4b8f-834c-59aab60cfa98/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-21T14:00:07.000Z",
+      "views": 2
+    },
     {
       "id": "ApatheticSquareSalmonAMPEnergyCherry-ZprkeqH7XZAnI-LM",
       "url": "https://www.twitch.tv/rukalun/clip/ApatheticSquareSalmonAMPEnergyCherry-ZprkeqH7XZAnI-LM",
