@@ -1,10 +1,30 @@
 {
-  "generatedAt": "2026-07-21T16:15:46.218Z",
-  "total": 2806,
+  "generatedAt": "2026-07-21T16:37:32.404Z",
+  "total": 2808,
   "clipSync": {
-    "recentSyncedAt": "2026-07-21T16:15:44.636Z"
+    "recentSyncedAt": "2026-07-21T16:37:30.783Z"
   },
   "clips": [
+    {
+      "id": "MoldyLivelyAxeBatChest-y8rizagyyKjConyL",
+      "url": "https://www.twitch.tv/rukalun/clip/MoldyLivelyAxeBatChest-y8rizagyyKjConyL",
+      "title": "現行犯逮捕",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d5d6dc5a-144a-434e-8875-a7a9dad130ac/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-21T16:19:03.000Z",
+      "views": 1
+    },
+    {
+      "id": "BoringResilientManateeRaccAttack-8FzdJqjcaq0Y2wlf",
+      "url": "https://www.twitch.tv/rukalun/clip/BoringResilientManateeRaccAttack-8FzdJqjcaq0Y2wlf",
+      "title": "【るっか視点】偽まなD？のおえぇ～",
+      "creator": "江夏ちゃん大先生",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ac8f75f1-176a-4f3b-b90b-88f583a64981/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-21T16:12:26.000Z",
+      "views": 2
+    },
     {
       "id": "DignifiedAbrasiveCroissantPastaThat-ii686f3mHSPpgXPt",
       "url": "https://www.twitch.tv/rukalun/clip/DignifiedAbrasiveCroissantPastaThat-ii686f3mHSPpgXPt",
