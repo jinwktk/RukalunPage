@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-24T06:16:18.071Z",
-  "total": 2809,
+  "generatedAt": "2026-07-24T13:37:59.103Z",
+  "total": 2810,
   "clipSync": {
-    "recentSyncedAt": "2026-07-24T06:16:16.737Z"
+    "recentSyncedAt": "2026-07-24T13:37:57.731Z"
   },
   "clips": [
+    {
+      "id": "PerfectHilariousBurritoFUNgineer-vtJm1E0w5RbGr5br",
+      "url": "https://www.twitch.tv/rukalun/clip/PerfectHilariousBurritoFUNgineer-vtJm1E0w5RbGr5br",
+      "title": "カモンレッツゴーデリバリー",
+      "creator": "バルス9029",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/972c9393-9812-458d-9ed3-e304e18f699a/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-24T06:14:27.000Z",
+      "views": 7
+    },
     {
       "id": "ArborealTriangularAmazonBrainSlug-BJy3g6hzS1TGNUnF",
       "url": "https://www.twitch.tv/rukalun/clip/ArborealTriangularAmazonBrainSlug-BJy3g6hzS1TGNUnF",
