@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-24T06:16:18.071Z",
-  "total": 2809,
+  "generatedAt": "2026-07-25T06:07:25.472Z",
+  "total": 2810,
   "clipSync": {
-    "recentSyncedAt": "2026-07-24T06:16:16.737Z"
+    "recentSyncedAt": "2026-07-25T06:07:24.148Z"
   },
   "clips": [
+    {
+      "id": "PerfectHilariousBurritoFUNgineer-vtJm1E0w5RbGr5br",
+      "url": "https://www.twitch.tv/rukalun/clip/PerfectHilariousBurritoFUNgineer-vtJm1E0w5RbGr5br",
+      "title": "カモンレッツゴーデリバリー",
+      "creator": "バルス9029",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/972c9393-9812-458d-9ed3-e304e18f699a/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-24T06:14:27.000Z",
+      "views": 7
+    },
     {
       "id": "ArborealTriangularAmazonBrainSlug-BJy3g6hzS1TGNUnF",
       "url": "https://www.twitch.tv/rukalun/clip/ArborealTriangularAmazonBrainSlug-BJy3g6hzS1TGNUnF",
@@ -213,7 +223,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/73a22677-3252-46d7-90f5-6c7fbbe75528/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T07:31:57.000Z",
-      "views": 161
+      "views": 163
     },
     {
       "id": "AuspiciousDeterminedPangolinPogChamp-5m88rDCvCmca_PCC",
@@ -15923,7 +15933,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/028e861a-b73f-4377-a32b-168bdb31efdb/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2022-03-14T13:07:36.000Z",
-      "views": 1206
+      "views": 1207
     },
     {
       "id": "GoodPoliteKleeKappaPride-W5d10X__fU8TO3BP",
@@ -17893,7 +17903,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0539a0f5-6b9c-42a2-bd73-4a949178f065/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2021-09-08T15:38:20.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "HungryDeafDunlinNomNom-p2eacJvMA5401wZi",
