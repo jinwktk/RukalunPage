@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-25T06:39:41.319Z",
-  "total": 2811,
+  "generatedAt": "2026-07-25T16:39:20.628Z",
+  "total": 2812,
   "clipSync": {
-    "recentSyncedAt": "2026-07-25T06:39:39.784Z"
+    "recentSyncedAt": "2026-07-25T16:39:19.313Z"
   },
   "clips": [
+    {
+      "id": "DreamySpinelessNuggetsTBTacoLeft-AJiWzTb6SPEtBmL-",
+      "url": "https://www.twitch.tv/rukalun/clip/DreamySpinelessNuggetsTBTacoLeft-AJiWzTb6SPEtBmL-",
+      "title": "ﾝｯｯ…♡中…中ｧｧ…♡溢れ…ｷﾓﾁｨ…♡",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/59f4af24-c534-4045-b97f-9c297dc545cb/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-25T06:30:55.000Z",
+      "views": 6
+    },
     {
       "id": "EnticingSmilingStingrayWOOP-y6TbvQ-Wqd_v97Wh",
       "url": "https://www.twitch.tv/rukalun/clip/EnticingSmilingStingrayWOOP-y6TbvQ-Wqd_v97Wh",
@@ -23,7 +33,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/972c9393-9812-458d-9ed3-e304e18f699a/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-24T06:14:27.000Z",
-      "views": 7
+      "views": 8
     },
     {
       "id": "ArborealTriangularAmazonBrainSlug-BJy3g6hzS1TGNUnF",
