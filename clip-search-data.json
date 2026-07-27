@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-07-27T14:08:35.368Z",
-  "total": 2815,
+  "generatedAt": "2026-07-27T16:38:37.634Z",
+  "total": 2816,
   "clipSync": {
-    "recentSyncedAt": "2026-07-27T14:08:34.297Z"
+    "recentSyncedAt": "2026-07-27T16:38:36.328Z"
   },
   "clips": [
+    {
+      "id": "PatientPhilanthropicStarlingMVGame-QK2EF7AeIZb61u3l",
+      "url": "https://www.twitch.tv/rukalun/clip/PatientPhilanthropicStarlingMVGame-QK2EF7AeIZb61u3l",
+      "title": "落とすと壊れちゃうもんね",
+      "creator": "くしゃこら",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/4a752663-7817-488b-8b52-aff2331a8e4e/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-07-27T14:06:18.000Z",
+      "views": 2
+    },
     {
       "id": "TenuousChillyHorseDoubleRainbow-Yd4ZRE2EuwRkwRlN",
       "url": "https://www.twitch.tv/rukalun/clip/TenuousChillyHorseDoubleRainbow-Yd4ZRE2EuwRkwRlN",
