@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-03T11:16:29.846Z",
-  "total": 2772,
+  "generatedAt": "2026-08-03T14:47:21.195Z",
+  "total": 2773,
   "clipSync": {
-    "recentSyncedAt": "2026-08-03T11:16:28.564Z"
+    "recentSyncedAt": "2026-08-03T14:47:19.911Z"
   },
   "clips": [
+    {
+      "id": "HandsomeRoundMilkShadyLulu-gfG7jk4fvGOaGGfO",
+      "url": "https://www.twitch.tv/rukalun/clip/HandsomeRoundMilkShadyLulu-gfG7jk4fvGOaGGfO",
+      "title": "なにこで",
+      "creator": "勇者みすちぬす4世",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ef95f572-9b29-47be-9083-2b8e3007a5bb/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-03T11:12:47.000Z",
+      "views": 19
+    },
     {
       "id": "SlickAlluringLampPartyTime-Ng-D6Btl_0CQjDnf",
       "url": "https://www.twitch.tv/rukalun/clip/SlickAlluringLampPartyTime-Ng-D6Btl_0CQjDnf",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/afe0ffd9-ff59-48c0-8eaf-cd476ce826ed/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-03T11:08:11.000Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "EsteemedAthleticShieldKAPOW-w0Aogj8ehIdUNHlx",
