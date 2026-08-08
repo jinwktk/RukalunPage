@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-08T17:57:44.520Z",
-  "total": 2772,
+  "generatedAt": "2026-08-08T21:06:41.971Z",
+  "total": 2773,
   "clipSync": {
-    "recentSyncedAt": "2026-08-08T17:57:43.137Z"
+    "recentSyncedAt": "2026-08-08T21:06:40.625Z"
   },
   "clips": [
+    {
+      "id": "CrypticCuteTurnipKreygasm--77krykb_UKh4vjx",
+      "url": "https://www.twitch.tv/rukalun/clip/CrypticCuteTurnipKreygasm--77krykb_UKh4vjx",
+      "title": "まなDですっ",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/8c527dfe-4e97-42b4-8c00-6cbc03f69823/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-08T17:59:36.000Z",
+      "views": 1
+    },
     {
       "id": "BusyDifferentWitchOhMyDog-OVp82Q5TCCcDOtd3",
       "url": "https://www.twitch.tv/rukalun/clip/BusyDifferentWitchOhMyDog-OVp82Q5TCCcDOtd3",
