@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-08T13:28:27.734Z",
-  "total": 2771,
+  "generatedAt": "2026-08-08T17:57:44.520Z",
+  "total": 2772,
   "clipSync": {
-    "recentSyncedAt": "2026-08-08T13:28:26.520Z"
+    "recentSyncedAt": "2026-08-08T17:57:43.137Z"
   },
   "clips": [
+    {
+      "id": "BusyDifferentWitchOhMyDog-OVp82Q5TCCcDOtd3",
+      "url": "https://www.twitch.tv/rukalun/clip/BusyDifferentWitchOhMyDog-OVp82Q5TCCcDOtd3",
+      "title": "お”ッ",
+      "creator": "にめいや",
+      "gameName": "Overwatch",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/88b294f3-ca21-4032-bcbc-1b55a7ea8867/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-08T13:20:21.000Z",
+      "views": 1
+    },
     {
       "id": "PlayfulThoughtfulAlmondYouDontSay-R5i8ff6qQtZhdSNN",
       "url": "https://www.twitch.tv/rukalun/clip/PlayfulThoughtfulAlmondYouDontSay-R5i8ff6qQtZhdSNN",
