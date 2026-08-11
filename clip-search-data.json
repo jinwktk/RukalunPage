@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-11T12:18:51.924Z",
-  "total": 2775,
+  "generatedAt": "2026-08-11T18:19:38.462Z",
+  "total": 2776,
   "clipSync": {
-    "recentSyncedAt": "2026-08-11T12:18:50.779Z"
+    "recentSyncedAt": "2026-08-11T18:19:37.076Z"
   },
   "clips": [
+    {
+      "id": "TangentialGoldenSwanKappa-PFAKshFDBqEI7BLo",
+      "url": "https://www.twitch.tv/rukalun/clip/TangentialGoldenSwanKappa-PFAKshFDBqEI7BLo",
+      "title": "検証用クリップ",
+      "creator": "c_saki",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/4928ef15-1202-4910-afaa-981dd4f2ecb5/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-11T12:15:09.000Z",
+      "views": 1
+    },
     {
       "id": "AffluentAgreeableAubergineOSfrog-BWHphnJGHyH1cGW8",
       "url": "https://www.twitch.tv/rukalun/clip/AffluentAgreeableAubergineOSfrog-BWHphnJGHyH1cGW8",
