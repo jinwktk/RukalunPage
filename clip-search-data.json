@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-11T18:19:38.462Z",
-  "total": 2776,
+  "generatedAt": "2026-08-11T21:48:55.824Z",
+  "total": 2777,
   "clipSync": {
-    "recentSyncedAt": "2026-08-11T18:19:37.076Z"
+    "recentSyncedAt": "2026-08-11T21:48:53.886Z"
   },
   "clips": [
+    {
+      "id": "LovelyVictoriousKittenJKanStyle-EzeaFsitV1uIbk3L",
+      "url": "https://www.twitch.tv/rukalun/clip/LovelyVictoriousKittenJKanStyle-EzeaFsitV1uIbk3L",
+      "title": "かわいい",
+      "creator": "にめいや",
+      "gameName": "PEAK",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ac28fef6-da34-430f-957f-89c81a38609d/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-11T18:11:23.000Z",
+      "views": 1
+    },
     {
       "id": "TangentialGoldenSwanKappa-PFAKshFDBqEI7BLo",
       "url": "https://www.twitch.tv/rukalun/clip/TangentialGoldenSwanKappa-PFAKshFDBqEI7BLo",
@@ -23,7 +33,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/8e9abb1b-c823-45f5-b238-dad6e9ee5517/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-10T02:11:39.000Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "DistinctTentativeMonkeyImGlitch-meNKKMVWiVjQfkXw",
@@ -33,7 +43,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b6df22a4-db24-44b2-9bb5-748612162d22/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-10T01:51:40.000Z",
-      "views": 8
+      "views": 9
     },
     {
       "id": "CheerfulDepressedSushiDoubleRainbow-2_8J4AVgz2uLMk-T",
