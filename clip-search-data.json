@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-12T12:18:28.869Z",
-  "total": 2778,
+  "generatedAt": "2026-08-12T13:04:45.519Z",
+  "total": 2779,
   "clipSync": {
-    "recentSyncedAt": "2026-08-12T12:18:27.726Z"
+    "recentSyncedAt": "2026-08-12T13:04:44.133Z"
   },
   "clips": [
+    {
+      "id": "FineResourcefulShingleRalpherZ-2smD7OjykECPuYH9",
+      "url": "https://www.twitch.tv/rukalun/clip/FineResourcefulShingleRalpherZ-2smD7OjykECPuYH9",
+      "title": "えぇぇええの二段活用",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/12a43a0d-f9be-495f-bfaf-b9bad7714f4b/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-12T12:17:25.000Z",
+      "views": 2
+    },
     {
       "id": "FunTangibleDragonflyStoneLightning-ZfxBp7GvCV6cR5FX",
       "url": "https://www.twitch.tv/rukalun/clip/FunTangibleDragonflyStoneLightning-ZfxBp7GvCV6cR5FX",
