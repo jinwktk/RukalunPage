@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-12T15:45:24.782Z",
-  "total": 2781,
+  "generatedAt": "2026-08-12T16:56:30.925Z",
+  "total": 2782,
   "clipSync": {
-    "recentSyncedAt": "2026-08-12T15:45:23.349Z"
+    "recentSyncedAt": "2026-08-12T16:56:29.551Z"
   },
   "clips": [
+    {
+      "id": "PleasantCrowdedBorkKeyboardCat-cnmAT2dU-JoFxxwC",
+      "url": "https://www.twitch.tv/rukalun/clip/PleasantCrowdedBorkKeyboardCat-cnmAT2dU-JoFxxwC",
+      "title": "おしり",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/71a8b38c-3ef5-4712-aa38-a56d969c38e8/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-12T15:42:47.000Z",
+      "views": 1
+    },
     {
       "id": "SparklingHelplessStarlingSMOrc-9-NP11ZSyQJxUdq9",
       "url": "https://www.twitch.tv/rukalun/clip/SparklingHelplessStarlingSMOrc-9-NP11ZSyQJxUdq9",
