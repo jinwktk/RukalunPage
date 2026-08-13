@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-13T21:14:33.639Z",
-  "total": 2787,
+  "generatedAt": "2026-08-14T03:07:16.327Z",
+  "total": 2788,
   "clipSync": {
-    "recentSyncedAt": "2026-08-13T21:14:31.965Z"
+    "recentSyncedAt": "2026-08-14T03:07:15.049Z"
   },
   "clips": [
+    {
+      "id": "SpeedyPrettyLouseBloodTrail-BIcOw7Ni9RTRAkDB",
+      "url": "https://www.twitch.tv/rukalun/clip/SpeedyPrettyLouseBloodTrail-BIcOw7Ni9RTRAkDB",
+      "title": "運搬アニマル",
+      "creator": "ごはんたべ太",
+      "gameName": "Special Events",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/486dd715-671a-4f6a-849d-a5ba6e1453a9/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-13T21:16:47.000Z",
+      "views": 4
+    },
     {
       "id": "SecretiveFairGoshawkPastaThat-xwNe5rC9CWgNAJar",
       "url": "https://www.twitch.tv/rukalun/clip/SecretiveFairGoshawkPastaThat-xwNe5rC9CWgNAJar",
@@ -23,7 +33,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/078d2c3f-6afe-493e-8785-afa3edbc3028/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-13T18:15:45.000Z",
-      "views": 13
+      "views": 15
     },
     {
       "id": "LaconicAverageBillPoooound-0yEQEXgpvfPy7s9h",
