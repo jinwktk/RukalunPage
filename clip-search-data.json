@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-13T18:20:33.068Z",
-  "total": 2786,
+  "generatedAt": "2026-08-13T21:14:33.639Z",
+  "total": 2787,
   "clipSync": {
-    "recentSyncedAt": "2026-08-13T18:20:31.662Z"
+    "recentSyncedAt": "2026-08-13T21:14:31.965Z"
   },
   "clips": [
     {
@@ -16,6 +16,16 @@
       "views": 1
     },
     {
+      "id": "UglyInquisitiveCodShazBotstix-JqwQwedBghrLcSk8",
+      "url": "https://www.twitch.tv/rukalun/clip/UglyInquisitiveCodShazBotstix-JqwQwedBghrLcSk8",
+      "title": "でっかあああああああああああああ",
+      "creator": "にめいや",
+      "gameName": "Special Events",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/078d2c3f-6afe-493e-8785-afa3edbc3028/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-13T18:15:45.000Z",
+      "views": 13
+    },
+    {
       "id": "LaconicAverageBillPoooound-0yEQEXgpvfPy7s9h",
       "url": "https://www.twitch.tv/rukalun/clip/LaconicAverageBillPoooound-0yEQEXgpvfPy7s9h",
       "title": "お片付け（１３５BPM）",
@@ -23,7 +33,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/36e66bbc-4506-4a55-8905-d2fdfaf32826/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-13T17:13:37.000Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "CourteousFlirtyJackalRickroll-bsO_7bQea8RY6Rli",
