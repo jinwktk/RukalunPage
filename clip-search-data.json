@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-15T15:26:21.837Z",
-  "total": 2795,
+  "generatedAt": "2026-08-15T23:38:22.432Z",
+  "total": 2796,
   "clipSync": {
-    "recentSyncedAt": "2026-08-15T15:26:20.431Z"
+    "recentSyncedAt": "2026-08-15T23:38:21.034Z"
   },
   "clips": [
+    {
+      "id": "ExpensiveTangiblePoultryPJSalt-SNcBdqtGYkjPnOiD",
+      "url": "https://www.twitch.tv/rukalun/clip/ExpensiveTangiblePoultryPJSalt-SNcBdqtGYkjPnOiD",
+      "title": "目がおかしい目がおかしい",
+      "creator": "にめいや",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/669e62c1-d17a-47d4-bc72-cf361e86e907/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-15T15:29:28.000Z",
+      "views": 1
+    },
     {
       "id": "HungryDifferentBobaWutFace-g11aoZodZ8vkZ0Ce",
       "url": "https://www.twitch.tv/rukalun/clip/HungryDifferentBobaWutFace-g11aoZodZ8vkZ0Ce",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9206a7cf-017b-4cf0-a8a3-bdc3d982f8ce/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-15T13:59:23.000Z",
-      "views": 4
+      "views": 5
     },
     {
       "id": "PlacidCorrectJaguarArsonNoSexy-xHYtwr7kBaz7T5Qi",
@@ -113,7 +123,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/078d2c3f-6afe-493e-8785-afa3edbc3028/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-13T18:15:45.000Z",
-      "views": 25
+      "views": 27
     },
     {
       "id": "LaconicAverageBillPoooound-0yEQEXgpvfPy7s9h",
