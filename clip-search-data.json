@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-15T10:34:38.976Z",
-  "total": 2791,
+  "generatedAt": "2026-08-15T13:04:36.982Z",
+  "total": 2792,
   "clipSync": {
-    "recentSyncedAt": "2026-08-15T10:34:37.631Z"
+    "recentSyncedAt": "2026-08-15T13:04:35.657Z"
   },
   "clips": [
+    {
+      "id": "BlatantThirstyCucumberUWot-3_Q_4ELrJbAPd13_",
+      "url": "https://www.twitch.tv/rukalun/clip/BlatantThirstyCucumberUWot-3_Q_4ELrJbAPd13_",
+      "title": "神業",
+      "creator": "にめいや",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/569c0406-e09c-4718-8335-7f40e7ffabd9/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-15T10:30:02.000Z",
+      "views": 2
+    },
     {
       "id": "MoralTalentedSpaghettiTBTacoLeft-YrZQtuBnxOGIJo7h",
       "url": "https://www.twitch.tv/rukalun/clip/MoralTalentedSpaghettiTBTacoLeft-YrZQtuBnxOGIJo7h",
