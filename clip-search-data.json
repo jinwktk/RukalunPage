@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-15T13:55:41.601Z",
-  "total": 2794,
+  "generatedAt": "2026-08-15T15:26:21.837Z",
+  "total": 2795,
   "clipSync": {
-    "recentSyncedAt": "2026-08-15T13:55:40.265Z"
+    "recentSyncedAt": "2026-08-15T15:26:20.431Z"
   },
   "clips": [
+    {
+      "id": "HungryDifferentBobaWutFace-g11aoZodZ8vkZ0Ce",
+      "url": "https://www.twitch.tv/rukalun/clip/HungryDifferentBobaWutFace-g11aoZodZ8vkZ0Ce",
+      "title": "どゆことぉ？",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9206a7cf-017b-4cf0-a8a3-bdc3d982f8ce/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-15T13:59:23.000Z",
+      "views": 4
+    },
     {
       "id": "PlacidCorrectJaguarArsonNoSexy-xHYtwr7kBaz7T5Qi",
       "url": "https://www.twitch.tv/rukalun/clip/PlacidCorrectJaguarArsonNoSexy-xHYtwr7kBaz7T5Qi",
