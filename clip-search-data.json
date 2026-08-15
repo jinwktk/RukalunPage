@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-15T13:16:06.469Z",
-  "total": 2793,
+  "generatedAt": "2026-08-15T13:55:41.601Z",
+  "total": 2794,
   "clipSync": {
-    "recentSyncedAt": "2026-08-15T13:16:05.104Z"
+    "recentSyncedAt": "2026-08-15T13:55:40.265Z"
   },
   "clips": [
+    {
+      "id": "PlacidCorrectJaguarArsonNoSexy-xHYtwr7kBaz7T5Qi",
+      "url": "https://www.twitch.tv/rukalun/clip/PlacidCorrectJaguarArsonNoSexy-xHYtwr7kBaz7T5Qi",
+      "title": "...イクッ...んっ!!!",
+      "creator": "にめいや",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c7250dc7-b8e3-4a8b-99e5-2fb128c1dcd8/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-15T13:15:31.000Z",
+      "views": 5
+    },
     {
       "id": "SpunkyDullAppleThunBeast-CADc3lMawUXb7eC0",
       "url": "https://www.twitch.tv/rukalun/clip/SpunkyDullAppleThunBeast-CADc3lMawUXb7eC0",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cc47a3f0-76a8-462b-858d-dc034b1384db/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-15T13:04:32.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "BlatantThirstyCucumberUWot-3_Q_4ELrJbAPd13_",
@@ -43,7 +53,7 @@
       "gameName": null,
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ad6d43bc-5265-43c9-9bd5-8af0a98d89e5/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-15T08:23:36.000Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "HilariousThoughtfulKleeDoritosChip-GWBIilC1J5gCp54P",
