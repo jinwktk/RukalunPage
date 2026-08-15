@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-15T23:38:22.432Z",
-  "total": 2796,
+  "generatedAt": "2026-08-15T23:57:16.068Z",
+  "total": 2797,
   "clipSync": {
-    "recentSyncedAt": "2026-08-15T23:38:21.034Z"
+    "recentSyncedAt": "2026-08-15T23:57:14.576Z"
   },
   "clips": [
+    {
+      "id": "ResilientDeterminedKuduSaltBae-ni4JaFDLHUk8kw96",
+      "url": "https://www.twitch.tv/rukalun/clip/ResilientDeterminedKuduSaltBae-ni4JaFDLHUk8kw96",
+      "title": "落ちるっかこと～",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/67335e1b-8bf2-49e9-b0fd-1b8b06f63338/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-15T23:39:04.000Z",
+      "views": 1
+    },
     {
       "id": "ExpensiveTangiblePoultryPJSalt-SNcBdqtGYkjPnOiD",
       "url": "https://www.twitch.tv/rukalun/clip/ExpensiveTangiblePoultryPJSalt-SNcBdqtGYkjPnOiD",
