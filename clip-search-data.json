@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-15T08:25:49.609Z",
-  "total": 2789,
+  "generatedAt": "2026-08-15T09:28:54.123Z",
+  "total": 2790,
   "clipSync": {
-    "recentSyncedAt": "2026-08-15T08:25:48.440Z"
+    "recentSyncedAt": "2026-08-15T09:28:52.571Z"
   },
   "clips": [
+    {
+      "id": "InventiveStupidMink4Head-qysuX5m66Lcz6_N4",
+      "url": "https://www.twitch.tv/rukalun/clip/InventiveStupidMink4Head-qysuX5m66Lcz6_N4",
+      "title": "自認インDジョーンズ",
+      "creator": "勇者みすちぬす4世",
+      "gameName": null,
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ad6d43bc-5265-43c9-9bd5-8af0a98d89e5/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-15T08:23:36.000Z",
+      "views": 1
+    },
     {
       "id": "HilariousThoughtfulKleeDoritosChip-GWBIilC1J5gCp54P",
       "url": "https://www.twitch.tv/rukalun/clip/HilariousThoughtfulKleeDoritosChip-GWBIilC1J5gCp54P",
