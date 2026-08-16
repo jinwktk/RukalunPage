@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-16T01:47:33.009Z",
-  "total": 2799,
+  "generatedAt": "2026-08-16T03:07:55.508Z",
+  "total": 2800,
   "clipSync": {
-    "recentSyncedAt": "2026-08-16T01:47:31.333Z"
+    "recentSyncedAt": "2026-08-16T03:07:54.142Z"
   },
   "clips": [
+    {
+      "id": "RespectfulAssiduousWombatCmonBruh-_eON-uU-ntMfvZZd",
+      "url": "https://www.twitch.tv/rukalun/clip/RespectfulAssiduousWombatCmonBruh-_eON-uU-ntMfvZZd",
+      "title": "あちょ虐",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/eabcc52e-e236-445d-a6b4-b49b802ab23c/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-16T01:42:58.000Z",
+      "views": 10
+    },
     {
       "id": "UgliestShakingBunnyCeilingCat-ZQgQxiz-uaTCjl7J",
       "url": "https://www.twitch.tv/rukalun/clip/UgliestShakingBunnyCeilingCat-ZQgQxiz-uaTCjl7J",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/dc6e6fd3-09e8-4fef-b41a-17bfe3e4e5ef/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-16T01:20:32.000Z",
-      "views": 1
+      "views": 3
     },
     {
       "id": "CreativeFairVultureCmonBruh-1uKl44Tun9cfz6UH",
