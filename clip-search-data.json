@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-16T03:07:55.508Z",
-  "total": 2800,
+  "generatedAt": "2026-08-17T13:36:39.793Z",
+  "total": 2801,
   "clipSync": {
-    "recentSyncedAt": "2026-08-16T03:07:54.142Z"
+    "recentSyncedAt": "2026-08-17T13:36:38.446Z"
   },
   "clips": [
+    {
+      "id": "ExquisiteSmoggyWheelM4xHeh-CPqLxazZ41-2yp1O",
+      "url": "https://www.twitch.tv/rukalun/clip/ExquisiteSmoggyWheelM4xHeh-CPqLxazZ41-2yp1O",
+      "title": "さんびゃくよんじゅう",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d16c5ccc-0fe3-4e8a-acab-dec84123db0f/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-16T03:02:20.000Z",
+      "views": 3
+    },
     {
       "id": "RespectfulAssiduousWombatCmonBruh-_eON-uU-ntMfvZZd",
       "url": "https://www.twitch.tv/rukalun/clip/RespectfulAssiduousWombatCmonBruh-_eON-uU-ntMfvZZd",
@@ -13,7 +23,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/eabcc52e-e236-445d-a6b4-b49b802ab23c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-16T01:42:58.000Z",
-      "views": 10
+      "views": 17
     },
     {
       "id": "UgliestShakingBunnyCeilingCat-ZQgQxiz-uaTCjl7J",
@@ -63,7 +73,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9206a7cf-017b-4cf0-a8a3-bdc3d982f8ce/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-15T13:59:23.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "PlacidCorrectJaguarArsonNoSexy-xHYtwr7kBaz7T5Qi",
@@ -73,7 +83,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c7250dc7-b8e3-4a8b-99e5-2fb128c1dcd8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-15T13:15:31.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "SpunkyDullAppleThunBeast-CADc3lMawUXb7eC0",
@@ -103,7 +113,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/61048192-7323-4614-9dd8-3ccb891062b0/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-15T09:24:27.000Z",
-      "views": 1
+      "views": 3
     },
     {
       "id": "InventiveStupidMink4Head-qysuX5m66Lcz6_N4",
@@ -143,7 +153,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/94f6d7e0-5e14-41de-aa82-eb71642c6ea5/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-14T03:04:05.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "SpeedyPrettyLouseBloodTrail-BIcOw7Ni9RTRAkDB",
@@ -163,7 +173,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/078d2c3f-6afe-493e-8785-afa3edbc3028/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-13T18:15:45.000Z",
-      "views": 27
+      "views": 30
     },
     {
       "id": "LaconicAverageBillPoooound-0yEQEXgpvfPy7s9h",
@@ -183,7 +193,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c8149d2a-a387-497a-986f-f1488ab0470c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-13T16:19:22.000Z",
-      "views": 8
+      "views": 10
     },
     {
       "id": "PunchyAthleticPoxCclamChamp-EpvITkpIzccJAnni",
@@ -223,7 +233,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/00e8610e-7f89-44ee-8a03-cb1107969efd/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-12T13:00:15.000Z",
-      "views": 6
+      "views": 8
     },
     {
       "id": "FineResourcefulShingleRalpherZ-2smD7OjykECPuYH9",
@@ -243,7 +253,7 @@
       "gameName": " SEKIRO: SHADOWS DIE TWICE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/35921ac3-7a67-4602-9639-c8f2293f93f5/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-11T21:48:51.000Z",
-      "views": 12
+      "views": 15
     },
     {
       "id": "LovelyVictoriousKittenJKanStyle-EzeaFsitV1uIbk3L",
@@ -273,7 +283,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/8e9abb1b-c823-45f5-b238-dad6e9ee5517/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-10T02:11:39.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "DistinctTentativeMonkeyImGlitch-meNKKMVWiVjQfkXw",
@@ -283,7 +293,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b6df22a4-db24-44b2-9bb5-748612162d22/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-10T01:51:40.000Z",
-      "views": 14
+      "views": 15
     },
     {
       "id": "CheerfulDepressedSushiDoubleRainbow-2_8J4AVgz2uLMk-T",
@@ -313,7 +323,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/8c527dfe-4e97-42b4-8c00-6cbc03f69823/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-08T17:59:36.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "BusyDifferentWitchOhMyDog-OVp82Q5TCCcDOtd3",
@@ -343,7 +353,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ef95f572-9b29-47be-9083-2b8e3007a5bb/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-03T11:12:47.000Z",
-      "views": 160
+      "views": 161
     },
     {
       "id": "SlickAlluringLampPartyTime-Ng-D6Btl_0CQjDnf",
@@ -363,7 +373,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b87c0f4d-5d09-4192-a9c7-9febbb1cb206/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-01T17:49:49.000Z",
-      "views": 11
+      "views": 12
     },
     {
       "id": "WittyPeacefulPistachioLitFam-JnIDMU2kbHqej9d2",
@@ -373,7 +383,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1d7224ec-84b8-4c6b-85a2-ef604ddc45c8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-01T17:48:34.000Z",
-      "views": 10
+      "views": 11
     },
     {
       "id": "BoxyPeppyAubergineBleedPurple-nzJe7LeIe-HImCl3",
@@ -393,7 +403,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c01697e1-43e2-4e32-8685-5c1aef5ee312/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-01T16:54:47.000Z",
-      "views": 7
+      "views": 9
     },
     {
       "id": "LachrymoseMoistCaribouPermaSmug-kBjbU5-VJ1kWJh0Q",
@@ -403,7 +413,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/64ab048a-01dd-40cd-b11c-a7b844489d5c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-31T01:46:58.000Z",
-      "views": 206
+      "views": 208
     },
     {
       "id": "HealthyViscousLadiesOSkomodo-EKVKQC1xPl8IIeCv",
@@ -413,7 +423,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/232411d5-ec04-4c06-8e8e-353298e03f8b/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-28T18:00:19.000Z",
-      "views": 14
+      "views": 15
     },
     {
       "id": "SpunkyShinyElephantPogChamp-fUbOfen3GbFFoTlN",
@@ -423,7 +433,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c78429f4-46c5-44bd-85e1-2d37e3c8d259/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-28T10:50:08.000Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "TolerantHonorableSoymilkJonCarnage-zYZel6566Y1VbYXX",
@@ -433,7 +443,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/65db3c23-d415-4c7d-95da-e19ec966de58/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-27T16:31:26.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "PatientPhilanthropicStarlingMVGame-QK2EF7AeIZb61u3l",
@@ -443,7 +453,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/4a752663-7817-488b-8b52-aff2331a8e4e/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-27T14:06:18.000Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "TenuousChillyHorseDoubleRainbow-Yd4ZRE2EuwRkwRlN",
@@ -453,7 +463,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/5913d40e-604a-4a74-84b2-4866eedbd242/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-26T06:52:41.000Z",
-      "views": 23
+      "views": 24
     },
     {
       "id": "ShortSpunkyLlamaDerp-WbOGxfu22CADp2tZ",
@@ -463,7 +473,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/01454db4-b62c-4521-b11a-d17acb7011d2/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-25T16:35:39.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "MiniatureAmericanTarsierAllenHuhu--hpUsgkVUp2G_xEk",
@@ -473,7 +483,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e3266f25-30fc-4abb-81d3-7a64f09a2636/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-25T16:35:21.000Z",
-      "views": 13
+      "views": 14
     },
     {
       "id": "DreamySpinelessNuggetsTBTacoLeft-AJiWzTb6SPEtBmL-",
@@ -483,7 +493,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/59f4af24-c534-4045-b97f-9c297dc545cb/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-25T06:30:55.000Z",
-      "views": 19
+      "views": 21
     },
     {
       "id": "EnticingSmilingStingrayWOOP-y6TbvQ-Wqd_v97Wh",
@@ -493,7 +503,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d1142366-4ea9-4411-8d71-3e1f4bf325d8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-25T06:02:22.000Z",
-      "views": 11
+      "views": 12
     },
     {
       "id": "PerfectHilariousBurritoFUNgineer-vtJm1E0w5RbGr5br",
@@ -503,7 +513,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/972c9393-9812-458d-9ed3-e304e18f699a/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-24T06:14:27.000Z",
-      "views": 11
+      "views": 12
     },
     {
       "id": "ArborealTriangularAmazonBrainSlug-BJy3g6hzS1TGNUnF",
@@ -533,7 +543,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ac8f75f1-176a-4f3b-b90b-88f583a64981/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-21T16:12:26.000Z",
-      "views": 5
+      "views": 7
     },
     {
       "id": "DignifiedAbrasiveCroissantPastaThat-ii686f3mHSPpgXPt",
@@ -593,7 +603,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/979b0aa5-521f-4582-9da4-30409fe261c8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-20T15:10:00.000Z",
-      "views": 7
+      "views": 8
     },
     {
       "id": "CarefulMagnificentCaterpillarTakeNRG-Quj2e7EJPDbIbXXY",
@@ -603,7 +613,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/449bc363-abc9-4d4d-b96d-261b2ad6aac0/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-20T15:02:22.000Z",
-      "views": 2
+      "views": 4
     },
     {
       "id": "PunchyMistyCucumberGrammarKing-lCqXTY0wlm5sQ5MP",
@@ -633,7 +643,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/631aafac-1384-4920-a763-2792069771dd/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-20T13:57:18.000Z",
-      "views": 9
+      "views": 11
     },
     {
       "id": "FaithfulArborealGarageWow-FI6UaNh_CLRP4Hjw",
@@ -683,7 +693,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7e4e666a-9c58-402d-b9ec-64334e2b9e17/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:52:30.000Z",
-      "views": 15
+      "views": 18
     },
     {
       "id": "FitHotGuanacoBlargNaut-e3NyO0UaD1kDD1bT",
@@ -693,7 +703,7 @@
       "gameName": "7 Days to Die",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/69a2ad43-2243-4520-ba56-ed68f92c98af/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T18:04:34.000Z",
-      "views": 5
+      "views": 7
     },
     {
       "id": "ZealousDepressedFinchKappaClaus-I54AGgAARzKMrATg",
@@ -713,7 +723,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/73a22677-3252-46d7-90f5-6c7fbbe75528/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-19T07:31:57.000Z",
-      "views": 169
+      "views": 170
     },
     {
       "id": "AuspiciousDeterminedPangolinPogChamp-5m88rDCvCmca_PCC",
@@ -723,7 +733,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ae0c51f0-f1fd-419e-8efd-11f457f5b074/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-18T07:07:09.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "SpinelessConsiderateElkBrainSlug-A_Uqhr0966Kj3S-h",
@@ -733,7 +743,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/944ac778-7b0d-4d8a-bb8a-27a28a6b433b/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-17T14:06:00.000Z",
-      "views": 13
+      "views": 14
     },
     {
       "id": "GeniusLovelyTeaCmonBruh-2g1vzGUR1HBRcamt",
@@ -983,7 +993,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/4c0ac25b-cdb6-4102-b3fd-8fc20722f0ac/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-21T06:53:13.000Z",
-      "views": 30
+      "views": 31
     },
     {
       "id": "LongBreakableTomatoGivePLZ-9FJYq2oi50YZrXSg",
@@ -1213,7 +1223,7 @@
       "gameName": "Overwatch",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/484fef13-0905-4a9e-a892-bd952127ded1/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-06-02T03:46:42.000Z",
-      "views": 111
+      "views": 112
     },
     {
       "id": "SpicySpeedyLocustFunRun-Zm9rv_i1-Vd5lfy_",
@@ -4023,7 +4033,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3c2d60d1-c250-4108-99da-def3ed8e3674/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2025-08-01T03:27:44.000Z",
-      "views": 58
+      "views": 59
     },
     {
       "id": "AmazingAdventurousGiraffeNerfRedBlaster-DVqwR1JrwfJaK2Yz",
@@ -10893,7 +10903,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f7073d01-0f9f-47ad-9022-e96e77ebe131/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2024-01-15T05:20:23.000Z",
-      "views": 3590
+      "views": 3591
     },
     {
       "id": "SwissVibrantWeaselLitFam-B1noz-sH2c4vpSl8",
@@ -18683,7 +18693,7 @@
       "gameName": "Teamfight Tactics",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0703b5b9-6a92-4503-9f58-9cc7ffe1509b/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2021-05-16T11:22:07.000Z",
-      "views": 416
+      "views": 417
     },
     {
       "id": "ArborealLongReindeerRiPepperonis-tIGBaZOEI6t4n6_e",
@@ -22143,7 +22153,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1215a81b-e1a9-48de-84d6-b3ae30970fdf/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-08-03T09:50:22.000Z",
-      "views": 519
+      "views": 520
     },
     {
       "id": "HeadstrongPreciousBeeItsBoshyTime",
@@ -23473,7 +23483,7 @@
       "gameName": "Food & Drink",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0f33f003-9b48-4cdf-a299-644aeeb90d38/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-28T20:54:44.000Z",
-      "views": 1490
+      "views": 1491
     },
     {
       "id": "SparklingTolerantToadOSkomodo",
@@ -23483,7 +23493,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e42861c8-e617-47f9-a883-7dfa43c5f2d8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-16T14:47:11.000Z",
-      "views": 2280
+      "views": 2281
     },
     {
       "id": "FunAbrasiveSpiderTBTacoRight",
@@ -24093,7 +24103,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/adc7ed6d-d5f3-4c63-893b-c69623f51209/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-05-26T08:14:28.000Z",
-      "views": 2546
+      "views": 2547
     },
     {
       "id": "LuckySillyHornetWutFace",
@@ -27213,7 +27223,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cac0cdcc-cc66-4fed-b583-c71b812e5090/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2017-12-11T23:06:06.000Z",
-      "views": 4742
+      "views": 4743
     },
     {
       "id": "AdventurousColdbloodedVelociraptorCharlietheUnicorn",
