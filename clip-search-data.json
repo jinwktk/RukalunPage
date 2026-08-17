@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-17T13:36:39.793Z",
-  "total": 2801,
+  "generatedAt": "2026-08-18T10:06:32.546Z",
+  "total": 2802,
   "clipSync": {
-    "recentSyncedAt": "2026-08-17T13:36:38.446Z"
+    "recentSyncedAt": "2026-08-18T10:06:31.148Z"
   },
   "clips": [
+    {
+      "id": "RenownedBlightedSeahorseKAPOW-jsLzOyZktiN0zFMZ",
+      "url": "https://www.twitch.tv/rukalun/clip/RenownedBlightedSeahorseKAPOW-jsLzOyZktiN0zFMZ",
+      "title": "フラグ回収委員会代表",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a5f00b18-7713-4544-9ccb-3694fbaf71bc/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-17T13:39:36.000Z",
+      "views": 5
+    },
     {
       "id": "ExquisiteSmoggyWheelM4xHeh-CPqLxazZ41-2yp1O",
       "url": "https://www.twitch.tv/rukalun/clip/ExquisiteSmoggyWheelM4xHeh-CPqLxazZ41-2yp1O",
@@ -403,7 +413,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c01697e1-43e2-4e32-8685-5c1aef5ee312/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-01T16:54:47.000Z",
-      "views": 9
+      "views": 10
     },
     {
       "id": "LachrymoseMoistCaribouPermaSmug-kBjbU5-VJ1kWJh0Q",
@@ -24223,7 +24233,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/94d9a090-180e-41eb-b52e-c18f4ca98e45/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-05-22T10:34:51.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "PolishedAthleticSwordBloodTrail",
@@ -27223,7 +27233,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cac0cdcc-cc66-4fed-b583-c71b812e5090/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2017-12-11T23:06:06.000Z",
-      "views": 4743
+      "views": 4744
     },
     {
       "id": "AdventurousColdbloodedVelociraptorCharlietheUnicorn",
