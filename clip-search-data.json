@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-18T10:45:04.032Z",
-  "total": 2803,
+  "generatedAt": "2026-08-19T14:06:25.186Z",
+  "total": 2804,
   "clipSync": {
-    "recentSyncedAt": "2026-08-18T10:45:02.715Z"
+    "recentSyncedAt": "2026-08-19T14:06:23.975Z"
   },
   "clips": [
+    {
+      "id": "FaintTalentedSaladOhMyDog-Nk9XhPnLRuX3ZXaX",
+      "url": "https://www.twitch.tv/rukalun/clip/FaintTalentedSaladOhMyDog-Nk9XhPnLRuX3ZXaX",
+      "title": "夢がないよりましだ…ｴｯ?",
+      "creator": "あまはねまな",
+      "gameName": "Refind Self: The Personality Test Game",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d35fc6d9-86d9-4075-ac17-148bfafe146a/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-18T10:44:29.000Z",
+      "views": 1
+    },
     {
       "id": "DeafRelentlessRadishRaccAttack-j6uSDrcXF2XePAKn",
       "url": "https://www.twitch.tv/rukalun/clip/DeafRelentlessRadishRaccAttack-j6uSDrcXF2XePAKn",
@@ -13,7 +23,7 @@
       "gameName": "Refind Self: The Personality Test Game",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/13c54fc1-ec9a-4ebf-9f90-82e8a9da0e7c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-18T10:03:08.000Z",
-      "views": 9
+      "views": 22
     },
     {
       "id": "RenownedBlightedSeahorseKAPOW-jsLzOyZktiN0zFMZ",
@@ -23,7 +33,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a5f00b18-7713-4544-9ccb-3694fbaf71bc/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-17T13:39:36.000Z",
-      "views": 5
+      "views": 10
     },
     {
       "id": "ExquisiteSmoggyWheelM4xHeh-CPqLxazZ41-2yp1O",
@@ -43,7 +53,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/eabcc52e-e236-445d-a6b4-b49b802ab23c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-16T01:42:58.000Z",
-      "views": 17
+      "views": 25
     },
     {
       "id": "UgliestShakingBunnyCeilingCat-ZQgQxiz-uaTCjl7J",
@@ -173,7 +183,7 @@
       "gameName": "Special Events",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/94f6d7e0-5e14-41de-aa82-eb71642c6ea5/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-14T03:04:05.000Z",
-      "views": 7
+      "views": 11
     },
     {
       "id": "SpeedyPrettyLouseBloodTrail-BIcOw7Ni9RTRAkDB",
@@ -563,7 +573,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ac8f75f1-176a-4f3b-b90b-88f583a64981/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-21T16:12:26.000Z",
-      "views": 7
+      "views": 8
     },
     {
       "id": "DignifiedAbrasiveCroissantPastaThat-ii686f3mHSPpgXPt",
@@ -19639,7 +19649,7 @@
       "id": "DistinctBreakableGalagoPlanking",
       "url": "https://www.twitch.tv/rukalun/clip/DistinctBreakableGalagoPlanking",
       "title": "ニート8日目(｡´◕ω◕｀｡)P２目指す！JP👼ENG",
-      "creator": "じぇいみい",
+      "creator": "xdayxxxx",
       "gameName": "Apex Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/dd362d10-965e-4f84-a8e4-041c7274aa25/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2020-12-11T02:54:15.000Z",
