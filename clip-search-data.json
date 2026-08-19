@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-19T14:06:25.186Z",
-  "total": 2804,
+  "generatedAt": "2026-08-19T17:06:21.315Z",
+  "total": 2805,
   "clipSync": {
-    "recentSyncedAt": "2026-08-19T14:06:23.975Z"
+    "recentSyncedAt": "2026-08-19T17:06:19.948Z"
   },
   "clips": [
+    {
+      "id": "PowerfulHyperAsparagusCoolCat-9GQV6D2Wy4RH0MBb",
+      "url": "https://www.twitch.tv/rukalun/clip/PowerfulHyperAsparagusCoolCat-9GQV6D2Wy4RH0MBb",
+      "title": "てぃあ3おはようボイス付くらしい",
+      "creator": "かじまる",
+      "gameName": null,
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f8464e88-cf94-4089-93dd-8481ef63ba8f/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-19T14:06:08.000Z",
+      "views": 1
+    },
     {
       "id": "FaintTalentedSaladOhMyDog-Nk9XhPnLRuX3ZXaX",
       "url": "https://www.twitch.tv/rukalun/clip/FaintTalentedSaladOhMyDog-Nk9XhPnLRuX3ZXaX",
