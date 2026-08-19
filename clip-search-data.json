@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-19T17:27:06.044Z",
-  "total": 2807,
+  "generatedAt": "2026-08-20T06:14:43.785Z",
+  "total": 2808,
   "clipSync": {
-    "recentSyncedAt": "2026-08-19T17:27:04.612Z"
+    "recentSyncedAt": "2026-08-20T06:14:42.647Z"
   },
   "clips": [
+    {
+      "id": "BloodyDependableJackalGivePLZ-Xn3pEOWs-uFcVzhZ",
+      "url": "https://www.twitch.tv/rukalun/clip/BloodyDependableJackalGivePLZ-Xn3pEOWs-uFcVzhZ",
+      "title": "ぷぷぷぷぷー！",
+      "creator": "あまはねまな",
+      "gameName": null,
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c76e4b49-5e3e-4122-b799-7cbb4ea1ad9b/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-19T17:21:58.000Z",
+      "views": 2
+    },
     {
       "id": "GracefulBenevolentMagpieFailFish-Oh4cFatKkxIWM2p5",
       "url": "https://www.twitch.tv/rukalun/clip/GracefulBenevolentMagpieFailFish-Oh4cFatKkxIWM2p5",
@@ -13,7 +23,7 @@
       "gameName": null,
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a025301f-bd38-4cb4-aec1-c706e059f8fa/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-19T17:04:18.000Z",
-      "views": 4
+      "views": 6
     },
     {
       "id": "DaintyManlyBatteryCmonBruh-EqxLpjq7z5gi9cEX",
@@ -23,7 +33,7 @@
       "gameName": null,
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c2f0b189-277d-4e68-914b-36bc6b179876/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-19T17:02:05.000Z",
-      "views": 4
+      "views": 8
     },
     {
       "id": "PowerfulHyperAsparagusCoolCat-9GQV6D2Wy4RH0MBb",
