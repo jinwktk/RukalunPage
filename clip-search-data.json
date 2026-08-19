@@ -1,10 +1,30 @@
 {
-  "generatedAt": "2026-08-19T17:06:21.315Z",
-  "total": 2805,
+  "generatedAt": "2026-08-19T17:27:06.044Z",
+  "total": 2807,
   "clipSync": {
-    "recentSyncedAt": "2026-08-19T17:06:19.948Z"
+    "recentSyncedAt": "2026-08-19T17:27:04.612Z"
   },
   "clips": [
+    {
+      "id": "GracefulBenevolentMagpieFailFish-Oh4cFatKkxIWM2p5",
+      "url": "https://www.twitch.tv/rukalun/clip/GracefulBenevolentMagpieFailFish-Oh4cFatKkxIWM2p5",
+      "title": "パート2",
+      "creator": "あまはねまな",
+      "gameName": null,
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a025301f-bd38-4cb4-aec1-c706e059f8fa/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-19T17:04:18.000Z",
+      "views": 4
+    },
+    {
+      "id": "DaintyManlyBatteryCmonBruh-EqxLpjq7z5gi9cEX",
+      "url": "https://www.twitch.tv/rukalun/clip/DaintyManlyBatteryCmonBruh-EqxLpjq7z5gi9cEX",
+      "title": "眠くて落ちたみたい",
+      "creator": "あまはねまな",
+      "gameName": null,
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c2f0b189-277d-4e68-914b-36bc6b179876/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-19T17:02:05.000Z",
+      "views": 4
+    },
     {
       "id": "PowerfulHyperAsparagusCoolCat-9GQV6D2Wy4RH0MBb",
       "url": "https://www.twitch.tv/rukalun/clip/PowerfulHyperAsparagusCoolCat-9GQV6D2Wy4RH0MBb",
