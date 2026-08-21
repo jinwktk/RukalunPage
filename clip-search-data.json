@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-21T16:27:25.689Z",
-  "total": 2810,
+  "generatedAt": "2026-08-21T17:09:15.055Z",
+  "total": 2811,
   "clipSync": {
-    "recentSyncedAt": "2026-08-21T16:27:24.408Z"
+    "recentSyncedAt": "2026-08-21T17:09:13.689Z"
   },
   "clips": [
+    {
+      "id": "CautiousBlindingPigeonCoolStoryBob-LFR8B12SmmAE-PA9",
+      "url": "https://www.twitch.tv/rukalun/clip/CautiousBlindingPigeonCoolStoryBob-LFR8B12SmmAE-PA9",
+      "title": "こっちだよ～こっち～ ｱｰﾝｯ",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1afe06dc-6e0b-41d4-8c37-1a0ec9e3cc48/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-21T16:24:15.000Z",
+      "views": 2
+    },
     {
       "id": "ImpossiblePlainNuggetsPanicVis-OMFQ9_doX1UKCQlR",
       "url": "https://www.twitch.tv/rukalun/clip/ImpossiblePlainNuggetsPanicVis-OMFQ9_doX1UKCQlR",
@@ -43,7 +53,7 @@
       "gameName": null,
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a025301f-bd38-4cb4-aec1-c706e059f8fa/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-19T17:04:18.000Z",
-      "views": 6
+      "views": 7
     },
     {
       "id": "DaintyManlyBatteryCmonBruh-EqxLpjq7z5gi9cEX",
@@ -53,7 +63,7 @@
       "gameName": null,
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c2f0b189-277d-4e68-914b-36bc6b179876/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-19T17:02:05.000Z",
-      "views": 8
+      "views": 9
     },
     {
       "id": "PowerfulHyperAsparagusCoolCat-9GQV6D2Wy4RH0MBb",
