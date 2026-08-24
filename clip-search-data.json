@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-24T13:18:23.416Z",
-  "total": 2813,
+  "generatedAt": "2026-08-24T13:37:27.612Z",
+  "total": 2814,
   "clipSync": {
-    "recentSyncedAt": "2026-08-24T13:18:22.256Z"
+    "recentSyncedAt": "2026-08-24T13:37:26.238Z"
   },
   "clips": [
+    {
+      "id": "BrainySarcasticCaribouHumbleLife-deLLzcuutwX5V9vh",
+      "url": "https://www.twitch.tv/rukalun/clip/BrainySarcasticCaribouHumbleLife-deLLzcuutwX5V9vh",
+      "title": "だぶこんぼ",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c97fa7f6-1e48-4b06-ba2d-9e2ef54984bc/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-24T13:13:30.000Z",
+      "views": 1
+    },
     {
       "id": "ImportantAlluringClipsmomHeyGuys-JeHjKNC2uSY2BW8R",
       "url": "https://www.twitch.tv/rukalun/clip/ImportantAlluringClipsmomHeyGuys-JeHjKNC2uSY2BW8R",
