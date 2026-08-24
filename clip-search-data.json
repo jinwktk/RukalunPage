@@ -1,10 +1,30 @@
 {
-  "generatedAt": "2026-08-24T13:37:27.612Z",
-  "total": 2814,
+  "generatedAt": "2026-08-25T08:07:14.766Z",
+  "total": 2816,
   "clipSync": {
-    "recentSyncedAt": "2026-08-24T13:37:26.238Z"
+    "recentSyncedAt": "2026-08-25T08:07:13.559Z"
   },
   "clips": [
+    {
+      "id": "SpotlessSillyPresidentPanicBasket-tYmGouu0RA1uEIZP",
+      "url": "https://www.twitch.tv/rukalun/clip/SpotlessSillyPresidentPanicBasket-tYmGouu0RA1uEIZP",
+      "title": "ホールインワン！！！",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/09d8adc7-69f9-4767-9bf2-34f516b0d487/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-24T13:36:29.000Z",
+      "views": 1
+    },
+    {
+      "id": "AlertHonestTroutSaltBae-KxRFrrr7F0FHDHj0",
+      "url": "https://www.twitch.tv/rukalun/clip/AlertHonestTroutSaltBae-KxRFrrr7F0FHDHj0",
+      "title": "あ゛あ゛ぁ",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/6c537ede-42c7-4687-95af-29e11b99ad0b/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-24T13:31:10.000Z",
+      "views": 2
+    },
     {
       "id": "BrainySarcasticCaribouHumbleLife-deLLzcuutwX5V9vh",
       "url": "https://www.twitch.tv/rukalun/clip/BrainySarcasticCaribouHumbleLife-deLLzcuutwX5V9vh",
@@ -23,7 +43,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/417d2c7f-5401-45be-a711-9564c6f4d014/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-22T18:01:22.000Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "BumblingEndearingGrasshopperKevinTurtle-mZ9KJnOdZiLZIQUU",
