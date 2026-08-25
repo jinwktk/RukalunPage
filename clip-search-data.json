@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-25T08:07:14.766Z",
-  "total": 2816,
+  "generatedAt": "2026-08-25T09:46:04.397Z",
+  "total": 2817,
   "clipSync": {
-    "recentSyncedAt": "2026-08-25T08:07:13.559Z"
+    "recentSyncedAt": "2026-08-25T09:46:02.783Z"
   },
   "clips": [
+    {
+      "id": "HyperCredulousStorkUncleNox-jdnqUUg4oVlvPNiu",
+      "url": "https://www.twitch.tv/rukalun/clip/HyperCredulousStorkUncleNox-jdnqUUg4oVlvPNiu",
+      "title": "チクニー",
+      "creator": "かのんのん",
+      "gameName": "FINAL FANTASY XIV ONLINE",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/641e3659-6615-4e4a-81ca-2aeb64952f31/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-25T08:09:06.000Z",
+      "views": 2
+    },
     {
       "id": "SpotlessSillyPresidentPanicBasket-tYmGouu0RA1uEIZP",
       "url": "https://www.twitch.tv/rukalun/clip/SpotlessSillyPresidentPanicBasket-tYmGouu0RA1uEIZP",
