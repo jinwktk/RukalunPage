@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-25T09:46:04.397Z",
-  "total": 2817,
+  "generatedAt": "2026-08-25T10:19:05.046Z",
+  "total": 2818,
   "clipSync": {
-    "recentSyncedAt": "2026-08-25T09:46:02.783Z"
+    "recentSyncedAt": "2026-08-25T10:19:03.592Z"
   },
   "clips": [
+    {
+      "id": "InexpensiveTrustworthyVampireTakeNRG-l6lXd9bORcLZK2ni",
+      "url": "https://www.twitch.tv/rukalun/clip/InexpensiveTrustworthyVampireTakeNRG-l6lXd9bORcLZK2ni",
+      "title": "ぐぅ～",
+      "creator": "にめいや",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cfcf1ce0-c140-4ae0-b902-fe894d14b340/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-25T09:45:52.000Z",
+      "views": 4
+    },
     {
       "id": "HyperCredulousStorkUncleNox-jdnqUUg4oVlvPNiu",
       "url": "https://www.twitch.tv/rukalun/clip/HyperCredulousStorkUncleNox-jdnqUUg4oVlvPNiu",
