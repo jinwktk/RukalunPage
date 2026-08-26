@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-08-26T15:59:13.467Z",
-  "total": 2823,
+  "generatedAt": "2026-08-26T16:17:08.735Z",
+  "total": 2824,
   "clipSync": {
-    "recentSyncedAt": "2026-08-26T15:59:11.969Z"
+    "recentSyncedAt": "2026-08-26T16:17:07.299Z"
   },
   "clips": [
+    {
+      "id": "OddNaiveMoonStrawBeary-GNdEgLpFF7mE5uc1",
+      "url": "https://www.twitch.tv/rukalun/clip/OddNaiveMoonStrawBeary-GNdEgLpFF7mE5uc1",
+      "title": "いい悲鳴",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/277ab0cd-f8af-444a-a21a-d8bacb2cd1d6/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-08-26T15:51:24.000Z",
+      "views": 3
+    },
     {
       "id": "BlazingEnjoyableDadTBTacoRight-3OAGejMhfn5peRtN",
       "url": "https://www.twitch.tv/rukalun/clip/BlazingEnjoyableDadTBTacoRight-3OAGejMhfn5peRtN",
