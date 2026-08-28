@@ -64,7 +64,7 @@ Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。�
 
 ## 検索エンジン向け運用
 
-Google Search Console は URL プレフィックスプロパティ `https://rukalun-page.vercel.app/` を使い、`https://rukalun-page.vercel.app/sitemap.xml` を送信します。XMLの取得が不安定な場合だけ、同じプロパティに `sitemap.txt` を送信します。旧 `sc-domain:rukalun.mydns.jp` は過去実績の参照用に残しますが、MyDNSのDNSレコードが消失しているため旧URLの301リダイレクトとChange of Address事前チェックは成立しません。
+Google Search Console は URL プレフィックスプロパティ `https://rukalun-page.vercel.app/` を使い、`https://rukalun-page.vercel.app/sitemap.xml` を送信します。2026-08-28の移行時に所有権確認を完了し、サイトマップは `成功しました`・検出1ページになったことを確認しました。XMLの取得が不安定な場合だけ、同じプロパティに `sitemap.txt` を送信します。旧 `sc-domain:rukalun.mydns.jp` は過去実績の参照用に残しますが、MyDNSのDNSレコードが消失しているため旧URLの301リダイレクトとChange of Address事前チェックは成立しません。
 
 Search Console のHTMLファイル認証は、`googled9f512eea3a99dc1.html` をVercelの公開ルートで配信して行います。認証後も所有権確認が継続できるよう、このファイルはリポジトリ直下に残します。
 
@@ -80,7 +80,15 @@ GSC/GA4の現行確認では、GSC URLプレフィックスプロパティ `http
 
 ## アクセス解析運用
 
-Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める公開識別子として扱います。自動 `page_view` は無効にし、クエリとハッシュを除いた `origin + pathname` を `page_location` に使う手動 `page_view` を送ります。`page_referrer` も同じ規則で匿名化し、GA4の拡張計測が `?q=` を `search_term` として収集する経路を避けます。ページ側では `clip_search`、`select_content`、`clip_load_more` を失敗してもUIを止めない形で送り、検索語そのものは送信しません。タイトル、作成者名、入力値などの高カーディナリティ値や個人情報になり得る文字列をイベントパラメータへ入れず、検索データの読み込み中はイベントを保留して、読込完了後の件数帯で送ります。検索語・選択中の作成者・ゲームは、別条件を同じイベントとして落とさないためのブラウザ内重複判定にだけ使い、GA4へ渡しません。`filter_type`、`result_bucket`、`source` などをGA4レポートで直接使う場合は、管理画面側で同名のイベントスコープのカスタムディメンション登録が必要です。GA管理画面での登録、権限管理、リアルタイム計測確認は外部アカウント操作のため、このリポジトリの自動作業範囲には含めません。
+Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める公開識別子として扱います。property `541705085` のWebストリームURLは2026-08-28に `https://rukalun-page.vercel.app/` へ変更済みです。自動 `page_view` は無効にし、クエリとハッシュを除いた `origin + pathname` を `page_location` に使う手動 `page_view` を送ります。`page_referrer` も同じ規則で匿名化し、GA4の拡張計測が `?q=` を `search_term` として収集する経路を避けます。ページ側では `clip_search`、`select_content`、`clip_load_more` を失敗してもUIを止めない形で送り、検索語そのものは送信しません。タイトル、作成者名、入力値などの高カーディナリティ値や個人情報になり得る文字列をイベントパラメータへ入れず、検索データの読み込み中はイベントを保留して、読込完了後の件数帯で送ります。検索語・選択中の作成者・ゲームは、別条件を同じイベントとして落とさないためのブラウザ内重複判定にだけ使い、GA4へ渡しません。`filter_type`、`result_bucket`、`source` などをGA4レポートで直接使う場合は、管理画面側で同名のイベントスコープのカスタムディメンション登録が必要です。
+
+## 2026-08-28 Vercel移行結果
+
+- GitHub `main` の移行コミット `475d225` をVercelが取得し、本番deployment `dpl_7tsm3jhj1nC45k7GfTp4kpjtfhLB` と alias `https://rukalun-page.vercel.app/` へ反映しました。
+- Vercel build logで `npm run minify:data` と24件のテストが実行され、24件すべて成功しました。
+- Googlebot相当の取得でトップ、`robots.txt`、`sitemap.xml`、Clip JSONがすべてHTTP 200でした。canonicalとサイトマップに旧MyDNSホストは残っておらず、Clip JSONは2,825件・1行へminify済みでした。
+- Chrome実画面で初期24カード、Vercel canonical、console error / warning 0件を確認しました。
+- Search Consoleの新URLプレフィックスプロパティを確認済みにし、`sitemap.xml` は `成功しました`・検出1ページになりました。Search Console MCP経由の送信は接続scope不足で403だったため、同じアカウントの管理画面から送信して結果を確認しました。
 
 ## 支援導線運用
 
