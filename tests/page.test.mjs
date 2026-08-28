@@ -8,7 +8,7 @@ import test from "node:test";
 const repoDir = process.cwd();
 const displaySiteName = "🖇るっかるんくりっぷ🖇";
 const structuredSiteName = "るっかるんくりっぷ";
-const pageUrl = "https://www.rukalun.mydns.jp/";
+const pageUrl = "https://rukalun-page.vercel.app/";
 const pageTitle = `${displaySiteName} | Twitch Clip・配信切り抜き検索`;
 const shortsPagePath = "shorts/index.html";
 const shortsRoutePath = "shorts/";
@@ -28,7 +28,7 @@ const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-07-10";
+const pageUpdatedOn = "2026-08-28";
 const seoKeywordTerms = [
   "FF14",
   "FFXIV",
@@ -167,6 +167,7 @@ test("required page assets and data are present", () => {
     kofiRedirectPath,
     "clip-search-data.json",
     googleVerificationFile,
+    "robots.txt",
     "assets/rukalun/clip-search-hero.png",
     "assets/rukalun/clip-search-hero.webp",
     "assets/rukalun/clip-search-og.jpg",
@@ -445,7 +446,7 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
     "るっかるん Clip検索",
     "るっかるん Twitchクリップ",
     "るっかるん 配信切り抜き",
-    "www.rukalun.mydns.jp",
+    "rukalun-page.vercel.app",
   ]);
   assert.equal(website.url, pageUrl);
   assert.equal(website.potentialAction["@type"], "SearchAction");
@@ -611,6 +612,28 @@ test("text sitemap lists only the canonical public URL", () => {
   assert.doesNotMatch(sitemap, /shorts\/index\.html/);
 });
 
+test("robots.txt points crawlers at the Vercel sitemap", () => {
+  const robots = readText("robots.txt");
+
+  assert.match(robots, /^User-agent: \*$/m);
+  assert.match(robots, /^Allow: \/$/m);
+  assert.match(robots, new RegExp(`^Sitemap: ${escapeRegExp(pageUrl)}sitemap\\.xml$`, "m"));
+});
+
+test("public files no longer advertise the unavailable MyDNS host", () => {
+  for (const relativePath of [
+    "index.html",
+    "clip-search.html",
+    legacyShortsPagePath,
+    shortsPagePath,
+    "sitemap.xml",
+    "sitemap.txt",
+    "robots.txt",
+  ]) {
+    assert.doesNotMatch(readText(relativePath), /www\.rukalun\.mydns\.jp/, relativePath);
+  }
+});
+
 test("documentation records SEO operation constraints", () => {
   const readme = readText("README.md");
   const agentsPath = path.join(repoDir, "AGENTS.md");
@@ -621,8 +644,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /hostname単位/);
   assert.match(readme, /Search Console/);
   assert.match(readme, new RegExp(googleVerificationFile));
-  assert.match(readme, /www\.rukalun\.mydns\.jp/);
-  assert.match(readme, /カスタムドメイン/);
+  assert.match(readme, /rukalun-page\.vercel\.app/);
+  assert.match(readme, /Vercel/);
   assert.match(readme, /robots\.txt/);
   assert.match(readme, /Google Analytics 4/);
   assert.match(readme, new RegExp(gaMeasurementId));
@@ -695,8 +718,8 @@ test("documentation records SEO operation constraints", () => {
   assert.match(agents, /hostname単位/);
   assert.match(agents, /Search Console/);
   assert.match(agents, new RegExp(googleVerificationFile));
-  assert.match(agents, /www\.rukalun\.mydns\.jp/);
-  assert.match(agents, /カスタムドメイン/);
+  assert.match(agents, /rukalun-page\.vercel\.app/);
+  assert.match(agents, /Vercel/);
   assert.match(agents, /robots\.txt/);
   assert.match(agents, /Google Analytics 4/);
   assert.match(agents, new RegExp(gaMeasurementId));
@@ -1028,7 +1051,7 @@ test("RukaShorts page is a fullscreen random feed with audible autoplay, player 
   assert.match(html, /item\.append\(shell\);/);
 
   assert.match(html, /const DATA_PATH = "\.\.\/clip-search-data\.json";/);
-  assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
+  assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "rukalun-page\.vercel\.app";/);
   assert.match(html, /const SWIPE_HINT_STORAGE_KEY = "rukalun\.rukaShorts\.swipeHintDismissed\.v1";/);
   assert.match(html, /const SHORTS_INITIAL_RENDER_LIMIT = 12;/);
   assert.match(html, /const SHORTS_RENDER_STEP = 8;/);
@@ -1168,7 +1191,7 @@ test("clip modal is desktop-only and lazy-loads Twitch embeds", () => {
   assert.match(html, /clipModalFrameWrap: requireElement\("#clipModalFrameWrap"\)/);
   assert.match(html, /clipModalClose: requireElement\("#clipModalClose"\)/);
   assert.match(html, /const CLIP_MODAL_SMALL_VIEWPORT_QUERY = "\(max-width: 620px\)";/);
-  assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "www\.rukalun\.mydns\.jp";/);
+  assert.match(html, /const TWITCH_EMBED_PARENT_HOST = "rukalun-page\.vercel\.app";/);
   assert.match(html, /function isSmallViewport\(\) \{[\s\S]*window\.matchMedia\(CLIP_MODAL_SMALL_VIEWPORT_QUERY\)\.matches/);
   assert.match(html, /function getTwitchEmbedParents\(\) \{/);
   assert.match(html, /new Set\(\[TWITCH_EMBED_PARENT_HOST\]\)/);
@@ -1280,23 +1303,21 @@ test("clip search data is minified to reduce network payload", () => {
   assert.equal(rawData.trim(), minifiedData);
 });
 
-test("Pages deployment minifies bot-formatted clip data before verification", () => {
+test("Vercel deployment minifies bot-formatted clip data before verification", () => {
   const packageJson = JSON.parse(readText("package.json"));
-  const workflow = readText(".github/workflows/pages.yml");
+  const vercelConfig = JSON.parse(readText("vercel.json"));
   const scriptPath = path.join(repoDir, "scripts/minify-clip-data.mjs");
-  const minifyStepIndex = workflow.indexOf("- name: Minify clip data");
-  const verifyStepIndex = workflow.indexOf("- name: Verify page");
-  const uploadStepIndex = workflow.indexOf("actions/upload-pages-artifact@v3");
 
   assert.equal(
     packageJson.scripts?.["minify:data"],
     "node scripts/minify-clip-data.mjs"
   );
+  assert.equal(packageJson.scripts?.["vercel-build"], "npm run minify:data && npm test");
   assert.equal(fs.existsSync(scriptPath), true);
-  assert.match(workflow, /- name: Minify clip data\s+run: npm run minify:data/);
-  assert.match(workflow, /- name: Verify page\s+run: npm test/);
-  assert.ok(minifyStepIndex >= 0 && minifyStepIndex < verifyStepIndex);
-  assert.ok(verifyStepIndex < uploadStepIndex);
+  assert.equal(vercelConfig.framework, null);
+  assert.equal(vercelConfig.buildCommand, "npm run vercel-build");
+  assert.equal(vercelConfig.outputDirectory, ".");
+  assert.equal(fs.existsSync(path.join(repoDir, ".github/workflows/pages.yml")), false);
 
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "rukalun-page-"));
   const tempDataPath = path.join(tempDir, "clip-search-data.json");

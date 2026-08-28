@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "minify:data": "node scripts/minify-clip-data.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "vercel-build": "npm run minify:data && npm test"
   }
 }

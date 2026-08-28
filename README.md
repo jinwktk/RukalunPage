@@ -1,6 +1,6 @@
 # RukalunPage
 
-るっかるんの公開ページ用リポジトリです。現時点では Twitch Clip・配信切り抜き検索ページを GitHub Pages のカスタムドメイン `https://www.rukalun.mydns.jp/` で公開します。
+るっかるんの公開ページ用リポジトリです。Twitch Clip・配信切り抜き検索ページを Vercel の `https://rukalun-page.vercel.app/` で公開します。
 
 Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。検索しやすい2026年寄りのデザインへ更新しつつ、LCP対象のヒーロー画像だけを優先し、サムネイルやClip JSON取得は後段に寄せて先に操作UIを表示します。
 
@@ -14,10 +14,11 @@ Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。�
 - `clip-search-data.json`: twitchRaid Bot が生成・pushする公開Clipデータです。
 - `sitemap.xml`: 検索エンジンと Search Console 向けに、canonical な公開URLだけを掲載するサイトマップです。
 - `sitemap.txt`: Search Console で XML サイトマップ取得が不安定な場合に使うテキスト形式サイトマップです。canonical な公開URLだけを1行で掲載します。
+- `robots.txt`: Vercelのホストルートでクロールを許可し、canonicalな `sitemap.xml` を案内します。
 - `googled9f512eea3a99dc1.html`: Google Search Console のHTMLファイル所有権確認用ファイルです。Search Console の認証維持に使うため削除しません。
 - `assets/rukalun/`: Clip検索ページで使う軽量化済み画像、favicon、ボタン小アイコンです。検索結果向けfaviconは小さい表示枠でも絵柄が見えるよう、少しズームした版を使います。ページ上の小アイコンは56px WebPを使い、112px PNGは元素材互換として残します。`shorts-swipe-hint.png` はRukaShorts初回表示のスワイプ案内画像です。
 - `.gitattributes`: `clip-search-data.json` を生成物扱いにし、同期時刻更新や整形差分でGitHubの差分表示が膨らまないようにします。
-- `.github/workflows/pages.yml`: GitHub Pages へこのリポジトリ直下を公開します。
+- `vercel.json`: Vercelを静的サイトとしてビルドし、公開前にClip JSONのminifyと全テストを実行する設定です。Vercelプロジェクト `rukalun-page` はGitHubリポジトリへ接続し、`main` のpushを本番へ反映します。
 - `tests/page.test.mjs`: Node.js 標準テストランナーで公開HTML、RukaShorts、必須ファイルを検証します。
 
 ## ページ仕様
@@ -48,26 +49,26 @@ Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。�
 - 画像読み込みに失敗した場合は、Clipタイトル付きの代替表示へ切り替えます。
 - データ取得に失敗した場合は、0件検索とは別の失敗状態として通知します。
 - 検索エンジン向けに、title / meta description / OGP / Twitter Card / JSON-LD をページ内容と揃えます。2026-06-21以降は `Twitch（ツイッチ）`、`Clip・クリップ`、`配信切り抜き`、ゲーム名、名場面系の語彙を、検索意図に合う短い導線で補強します。
-- Google検索結果のサイト名候補は自動判定されるため、`WebSite.name` と `og:site_name` は絵文字なしの `るっかるんくりっぷ` にし、`alternateName` に `Rukalun Clip`、`るっかるん Clip検索`、`るっかるん Twitchクリップ`、`るっかるん 配信切り抜き`、`www.rukalun.mydns.jp` を入れます。表示上の装飾絵文字は title やページ本文側に残します。
+- Google検索結果のサイト名候補は自動判定されるため、`WebSite.name` と `og:site_name` は絵文字なしの `るっかるんくりっぷ` にし、`alternateName` に `Rukalun Clip`、`るっかるん Clip検索`、`るっかるん Twitchクリップ`、`るっかるん 配信切り抜き`、`rukalun-page.vercel.app` を入れます。表示上の装飾絵文字は title やページ本文側に残します。
 - JSON-LD は `WebSite`、`CollectionPage`、`Dataset` を `@graph` で表現し、公開JSONデータの `DataDownload` 情報と実在する `creator` を含めます。配布ライセンスが宣言されていないため `license` は推測で追加しません。
 - SEOキーワード拡張では、検索結果前の短い `keywordGuide` に説明文を置かず、検索結果が返る語彙だけを人気検索リンクとして置きます。デスクトップでは結果カードがファーストビューに入りやすいよう、虫眼鏡風アクセント付き見出しとチップ風リンクを2カラムのコンパクト表示にします。
 - `keywordGuide` の人気検索リンクは `?q=` で検索パネルへ移動する補助導線です。サイトマップには追加せず、現行 `clip-search-data.json` で1件以上ヒットするクエリだけを置きます。`FFXIV` は表示ラベルとし、実検索クエリは `FINAL FANTASY XIV ONLINE` にします。`とぅいっち` や `顔アイコン` のようにGSCで見えた語彙でも、現行検索で0件のものは本文化せず、検索結果が返る語彙へ寄せます。
 - `Dataset.url` はデータセットの説明ページとしてトップページを指し、JSON配布URLは `DataDownload.contentUrl` にだけ置きます。
 - `Dataset` の `dateModified` は固定値で持たせません。`clip-search-data.json` はBotで別サイクル更新されるため、HTML側の固定日付とずれないようにします。
-- `sitemap.xml` には `https://www.rukalun.mydns.jp/` のみを掲載し、`noindex` の互換リダイレクト `clip-search.html` / `ruka-shorts.html` / `/jinnymeia/` と `noindex,follow` の `shorts/index.html` は含めません。
+- `sitemap.xml` には `https://rukalun-page.vercel.app/` のみを掲載し、`noindex` の互換リダイレクト `clip-search.html` / `ruka-shorts.html` / `/jinnymeia/` と `noindex,follow` の `shorts/index.html` は含めません。
 - `sitemap.txt` にも canonical URL のみを掲載し、Search Console の回避用テキストサイトマップとして使えるようにします。
-- Google検索結果のサイト名とfaviconは hostname単位 で扱われるため、canonical / OGP / JSON-LD / favicon はカスタムドメイン `www.rukalun.mydns.jp` の絶対URLに揃えます。
-- 旧GitHub Pages project site の `https://jinwktk.github.io/RukalunPage/robots.txt` はホストルートの `robots.txt` として扱われないため、このリポジトリでは `robots.txt` をSEO成果の前提にしません。
+- Google検索結果のサイト名とfaviconは hostname単位 で扱われるため、canonical / OGP / JSON-LD / favicon はVercel本番ホスト `rukalun-page.vercel.app` の絶対URLに揃えます。
+- Vercelではこのリポジトリの `robots.txt` がホストルート `/robots.txt` として配信されるため、`Sitemap: https://rukalun-page.vercel.app/sitemap.xml` を明示します。
 - Google Analytics 4 は Measurement ID `G-TTVJN1V2LJ` のGoogle tagを `head` で非同期読み込みします。LCP対象のヒーロー画像preloadを先に発見できるよう、GAタグはヒーローpreloadより後、JSON-LDより前に置きます。検索条件の組み合わせは `clip_search`、Clip・主要導線・Ko-fiの選択は推奨イベント `select_content`、追加表示は `clip_load_more` で計測します。検索語そのものは送信しないため、イベントパラメータは検索有無、絞り込み種別、件数帯、操作元など低カーディナリティ値だけにします。
 - Ko-fi支援導線は `jinnymeia` への通常リンクとローカルWebPだけで構成し、外部scriptを読み込まない文字なしの小型追尾表示にします。PC/SPとも右下に抑え、検索やClip操作を覆いにくくします。
 
 ## 検索エンジン向け運用
 
-公開後は、Google Search Console に URL プレフィックスプロパティ `https://www.rukalun.mydns.jp/` を追加し、`https://www.rukalun.mydns.jp/sitemap.xml` を送信します。Search Console 側で XML の取得が不安定な場合は、同じプロパティに `sitemap.txt` を送信します。Search Console へのログインや所有権確認は外部アカウント操作になるため、このリポジトリの自動作業範囲には含めません。
+Google Search Console は URL プレフィックスプロパティ `https://rukalun-page.vercel.app/` を使い、`https://rukalun-page.vercel.app/sitemap.xml` を送信します。XMLの取得が不安定な場合だけ、同じプロパティに `sitemap.txt` を送信します。旧 `sc-domain:rukalun.mydns.jp` は過去実績の参照用に残しますが、MyDNSのDNSレコードが消失しているため旧URLの301リダイレクトとChange of Address事前チェックは成立しません。
 
-Search Console のHTMLファイル認証は、`googled9f512eea3a99dc1.html` を GitHub Pages の公開ルートで配信して行います。認証後も所有権確認が継続できるよう、このファイルはリポジトリ直下に残します。
+Search Console のHTMLファイル認証は、`googled9f512eea3a99dc1.html` をVercelの公開ルートで配信して行います。認証後も所有権確認が継続できるよう、このファイルはリポジトリ直下に残します。
 
-検索結果のサイト名やfaviconを独自表示に寄せるため、`www.rukalun.mydns.jp` のルートで `WebSite` 構造化データとfaviconを配信します。ただし、Google検索結果のサイト名とfaviconはGoogle側の再クロール/再処理後に自動選択されるため、指定が即時・必ず反映されるわけではありません。GitHub Pages の画面で `rukalun.mydns.jp is improperly configured` が出る場合でも、`www.rukalun.mydns.jp` が primary として valid なら公開URLとしては成立しています。`rukalun.mydns.jp` 直下も使う場合だけ、MyDNS 側で apex の A/AAAA レコードを追加します。
+検索結果のサイト名やfaviconを独自表示に寄せるため、`rukalun-page.vercel.app` のルートで `WebSite` 構造化データとfaviconを配信します。ただし、Google検索結果のサイト名とfaviconはGoogle側の再クロール/再処理後に自動選択されるため、指定が即時・必ず反映されるわけではありません。
 
 `sitemap.xml` の `lastmod` は公開ページを更新した日付（`YYYY-MM-DD`）に合わせます。`sitemap.txt` は canonical URL の1行だけにします。`clip-search.html` は互換用の即時リダイレクトで `noindex,follow` のまま維持します。
 
@@ -75,7 +76,7 @@ SEOキーワード拡張は、Googleが使わない `meta keywords` ではなく
 
 人気検索リンクは `?q=` を使うため、Search Console のページ一覧やインデックス状況で `?q= URL` が大量に検出されていないかを確認します。増えすぎる場合は、人気検索リンク数を減らすか、検索導線をクロールされにくい形へ戻すことを検討します。`sitemap.xml` と `sitemap.txt` は引き続き canonical URL だけを掲載します。
 
-GSC/GA4の確認では、GSCプロパティ `sc-domain:rukalun.mydns.jp` と GA4 property `541705085` を使います。2026-07-10のMCP再確認では、直近30日相当のトップページはデスクトップ42セッション・平均エンゲージメント約335秒に対し、モバイル16セッション・約31秒でした。GSCの2026-06-08〜07-07はトップページ7クリック・158表示・平均掲載順位6.47で、主なクエリ `るっかるん` は4クリック・42表示でした。現行検索で0件の語彙は説明文として足さず、検索結果が返る語彙のリンク、モバイルのファーストビュー、検索操作の計測を優先します。`/jinnymeia/` は引き続きKo-fiへの `noindex,follow` リダイレクトとして受け止めます。
+GSC/GA4の現行確認では、GSC URLプレフィックスプロパティ `https://rukalun-page.vercel.app/` と GA4 property `541705085` を使います。旧GSCプロパティ `sc-domain:rukalun.mydns.jp` は過去実績の比較用です。2026-07-10のMCP再確認では、直近30日相当のトップページはデスクトップ42セッション・平均エンゲージメント約335秒に対し、モバイル16セッション・約31秒でした。GSCの2026-06-08〜07-07はトップページ7クリック・158表示・平均掲載順位6.47で、主なクエリ `るっかるん` は4クリック・42表示でした。現行検索で0件の語彙は説明文として足さず、検索結果が返る語彙のリンク、モバイルのファーストビュー、検索操作の計測を優先します。`/jinnymeia/` は引き続きKo-fiへの `noindex,follow` リダイレクトとして受け止めます。
 
 ## アクセス解析運用
 
@@ -83,7 +84,7 @@ Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める�
 
 ## 支援導線運用
 
-Ko-fi の小型リンクはアカウント `jinnymeia` へ誘導する公開支援導線です。Ko-fi側のプロフィール、決済、表示名、入金確認などの外部アカウント操作は、このリポジトリの自動作業範囲には含めません。ページ側では公式overlayを使わず、ローカルの `present-56px.webp` を使う通常リンクにして外部scriptを読み込まないため、第三者JavaScript・iframe・外部フォントを初期表示へ追加しません。PC/SPとも文字なしの `56px x 56px` 追尾表示とし、クリックは `select_content` の低カーディナリティ値で計測します。`https://www.rukalun.mydns.jp/jinnymeia/` はKo-fi直行の互換リダイレクトとして残し、GA4で見える誤流入を404にしません。
+Ko-fi の小型リンクはアカウント `jinnymeia` へ誘導する公開支援導線です。Ko-fi側のプロフィール、決済、表示名、入金確認などの外部アカウント操作は、このリポジトリの自動作業範囲には含めません。ページ側では公式overlayを使わず、ローカルの `present-56px.webp` を使う通常リンクにして外部scriptを読み込まないため、第三者JavaScript・iframe・外部フォントを初期表示へ追加しません。PC/SPとも文字なしの `56px x 56px` 追尾表示とし、クリックは `select_content` の低カーディナリティ値で計測します。`https://rukalun-page.vercel.app/jinnymeia/` はKo-fi直行の互換リダイレクトとして残し、GA4で見える誤流入を404にしません。
 
 ## 2026-07-10 改善結果
 
@@ -106,20 +107,19 @@ CLIP_SEARCH_PUBLISH_REMOTE=origin
 CLIP_SEARCH_PUBLISH_BRANCH=main
 ```
 
-Bot の直近Clip同期完了後、`clip-search-data.json` に差分があればこのリポジトリの `main` へ commit/push します。Botが読みやすい複数行JSONをcommitしても、GitHub Pagesはartifact作成前に `npm run minify:data` で最新データを1行化し、その状態で `npm test` を通してから公開します。これにより、Botの同期形式と公開時のネットワーク重量を分離します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしているため、同期時刻だけの更新や整形戻りでGitHub上の差分表示を肥大化させない運用にします。履歴整理を行う場合は、件名が `Clip検索JSONを同期時刻更新` のコミットだけを対象にし、公開ページの開発コミットは残します。
+Bot の直近Clip同期完了後、`clip-search-data.json` に差分があればこのリポジトリの `main` へ commit/push します。GitHub接続済みのVercelがpushを検出し、`npm run vercel-build` で最新データを1行化して全テストを通した後だけ本番へ反映します。これにより、Botの同期形式と公開時のネットワーク重量を分離します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしているため、同期時刻だけの更新や整形戻りでGitHub上の差分表示を肥大化させない運用にします。履歴整理を行う場合は、件名が `Clip検索JSONを同期時刻更新` のコミットだけを対象にし、公開ページの開発コミットは残します。
 
-手元で公開artifact相当の状態を確認する場合は、`npm run minify:data` の後に `npm test` を実行します。`npm run minify:data -- <JSONパス>` の代わりに、スクリプトへ任意パスを直接渡して一時ファイルの正規化も検証できます。通常運用では既定の `clip-search-data.json` だけを対象にします。
+手元でVercelビルド相当の状態を確認する場合は、`npm run vercel-build` を実行します。`npm run minify:data -- <JSONパス>` の代わりに、スクリプトへ任意パスを直接渡して一時ファイルの正規化も検証できます。通常運用では既定の `clip-search-data.json` だけを対象にします。
 
 ## 検証
 
 ```powershell
-npm run minify:data
-npm test
+npm run vercel-build
 ```
 
 テストでは、PageSpeed Insightsで指摘されやすいLCP画像の優先読み込み、公開JSONのminify、主要ボタンの色コントラスト、Google Analytics 4 タグと低カーディナリティイベント、静的Ko-fiリンク、Dataset `creator`、作成者候補の操作時生成、サムネイルの表示範囲連動読み込み、既存カードを再生成しない追加表示、SEOキーワード拡張の人気検索リンク・JSON-LD語彙、Clip検索のページ下端スクロールによる自動 `もっと見る`、PC版Clipモーダルの遅延iframe生成とSP版Twitchリンク維持、RukaShorts（るかしょーつ）のTopファーストビュー導線、`./shorts/へ移動` する通常リンク、`ruka-shorts.html` の互換リダイレクト、検索パネル/Clipカード導線なし、PC/SPとも画面いっぱい、初回スワイプ案内、初回案内中のiframe生成保留、初期12件の段階描画、縦スクロール、常時キューなし、`muted=false`付き遅延iframe生成、音付き自動再生のブラウザポリシー注記、Twitchプレイヤーの音量変更を含むプレイヤー操作、Twitch終了通知、`currentTime` / `duration` による終端付近通知、60秒フォールバック、一時停止中のフォールバック停止も検証します。
 
-GitHub Pages の公開URLは `https://www.rukalun.mydns.jp/` です。
+Vercel の公開URLは `https://rukalun-page.vercel.app/` です。
 
 `AGENTS.md` はローカル運用メモとしてGitIgnoreを維持します。公開CIでは追跡済みの `README.md` をドキュメント契約として検証し、ローカルでは `AGENTS.md` が存在する場合に同じ契約も確認します。
 
