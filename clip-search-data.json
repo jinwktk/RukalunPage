@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-06T19:36:39.246Z",
-  "total": 2833,
+  "generatedAt": "2026-09-07T05:47:16.338Z",
+  "total": 2834,
   "clipSync": {
-    "recentSyncedAt": "2026-09-06T19:36:37.736Z"
+    "recentSyncedAt": "2026-09-07T05:47:15.194Z"
   },
   "clips": [
+    {
+      "id": "MistyCrunchyShinglePMSTwin-Y5H3gYEQ2GxE05AP",
+      "url": "https://www.twitch.tv/rukalun/clip/MistyCrunchyShinglePMSTwin-Y5H3gYEQ2GxE05AP",
+      "title": "自分用",
+      "creator": "とんちゃん07",
+      "gameName": "FINAL FANTASY XIV ONLINE",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/418a61c5-1af6-4578-890e-98c6df9ec517/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-06T19:35:52.000Z",
+      "views": 1
+    },
     {
       "id": "FurtiveHyperBarracudaKeyboardCat-g2FhyLIQMLrWcDMh",
       "url": "https://www.twitch.tv/rukalun/clip/FurtiveHyperBarracudaKeyboardCat-g2FhyLIQMLrWcDMh",
@@ -13,7 +23,7 @@
       "gameName": "Dragon Quest I & II HD-2D Remake",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/87c6015c-fe7f-449c-ac77-c3640476d1bc/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-09-04T16:04:42.000Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "HumbleExpensiveBatStrawBeary-QJYIUlLFCBxVFu8P",
@@ -23,7 +33,7 @@
       "gameName": "Teamfight Tactics",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/9b003c09-bc4b-4bb7-a320-c07c81af1cf7/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-31T10:10:11.000Z",
-      "views": 5
+      "views": 7
     },
     {
       "id": "EnergeticViscousDeerRuleFive-GeyhZ6tFOQeznB1P",
@@ -673,7 +683,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ef95f572-9b29-47be-9083-2b8e3007a5bb/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-03T11:12:47.000Z",
-      "views": 162
+      "views": 163
     },
     {
       "id": "SlickAlluringLampPartyTime-Ng-D6Btl_0CQjDnf",
@@ -933,7 +943,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/449bc363-abc9-4d4d-b96d-261b2ad6aac0/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-07-20T15:02:22.000Z",
-      "views": 4
+      "views": 5
     },
     {
       "id": "PunchyMistyCucumberGrammarKing-lCqXTY0wlm5sQ5MP",
@@ -5533,7 +5543,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/52c019bd-7196-4c77-8feb-e3f2d331c101/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2025-04-28T12:57:47.000Z",
-      "views": 178
+      "views": 180
     },
     {
       "id": "AbnegateColdbloodedEggnogTebowing-XaR6fKC593Oi_gX1",
@@ -11223,7 +11233,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f7073d01-0f9f-47ad-9022-e96e77ebe131/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2024-01-15T05:20:23.000Z",
-      "views": 3595
+      "views": 3596
     },
     {
       "id": "SwissVibrantWeaselLitFam-B1noz-sH2c4vpSl8",
@@ -23673,7 +23683,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1e3cbc83-be39-46e3-b321-f725d809f389/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-01-26T13:50:08.000Z",
-      "views": 998
+      "views": 999
     },
     {
       "id": "AveragePlacidAyeayeRuleFive",
@@ -25333,7 +25343,7 @@
       "gameName": "PUBG: BATTLEGROUNDS",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/80f16f7d-d6b1-4322-88aa-6fe8160336c8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-04-14T05:49:05.000Z",
-      "views": 704
+      "views": 705
     },
     {
       "id": "IncredulousStormySrirachaFloof",
