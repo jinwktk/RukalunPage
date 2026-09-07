@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-07T10:28:51.868Z",
-  "total": 2835,
+  "generatedAt": "2026-09-07T11:56:59.883Z",
+  "total": 2836,
   "clipSync": {
-    "recentSyncedAt": "2026-09-07T10:28:50.435Z"
+    "recentSyncedAt": "2026-09-07T11:56:58.410Z"
   },
   "clips": [
+    {
+      "id": "SmoothJollyPlumberDatSheffy-TGej9Mf3vfZ3cFS3",
+      "url": "https://www.twitch.tv/rukalun/clip/SmoothJollyPlumberDatSheffy-TGej9Mf3vfZ3cFS3",
+      "title": "うん？",
+      "creator": "にめいや",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/58d32c6f-525f-400d-8047-8370893b8a78/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-07T10:21:16.000Z",
+      "views": 13
+    },
     {
       "id": "PlacidAuspiciousOrangePupper-aamsGwVknvrbhsGh",
       "url": "https://www.twitch.tv/rukalun/clip/PlacidAuspiciousOrangePupper-aamsGwVknvrbhsGh",
