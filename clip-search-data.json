@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-09T03:49:31.124Z",
-  "total": 2837,
+  "generatedAt": "2026-09-09T16:55:47.940Z",
+  "total": 2838,
   "clipSync": {
-    "recentSyncedAt": "2026-09-09T03:49:30.039Z"
+    "recentSyncedAt": "2026-09-09T16:55:46.763Z"
   },
   "clips": [
+    {
+      "id": "BombasticRockyChickpeaTBTacoLeft-zMnADnstKQ1Bz2B-",
+      "url": "https://www.twitch.tv/rukalun/clip/BombasticRockyChickpeaTBTacoLeft-zMnADnstKQ1Bz2B-",
+      "title": "やばいかもーう",
+      "creator": "バルス9029",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/251466c1-3c7b-4014-a1df-4a1dfab8def0/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-09T03:43:25.000Z",
+      "views": 11
+    },
     {
       "id": "DeadJoyousCatBabyRage-iQ3KdJByZL13ETyW",
       "url": "https://www.twitch.tv/rukalun/clip/DeadJoyousCatBabyRage-iQ3KdJByZL13ETyW",
