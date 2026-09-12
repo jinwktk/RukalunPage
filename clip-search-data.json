@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-12T23:17:10.027Z",
-  "total": 2842,
+  "generatedAt": "2026-09-12T23:25:10.077Z",
+  "total": 2843,
   "clipSync": {
-    "recentSyncedAt": "2026-09-12T23:17:08.728Z"
+    "recentSyncedAt": "2026-09-12T23:25:08.743Z"
   },
   "clips": [
+    {
+      "id": "TallFantasticPenguinTwitchRaid-ze0fYj4ttFPVl8ek",
+      "url": "https://www.twitch.tv/rukalun/clip/TallFantasticPenguinTwitchRaid-ze0fYj4ttFPVl8ek",
+      "title": "10人で大航海",
+      "creator": "かじまる",
+      "gameName": "Valheim",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a0b49e19-1048-45f7-b69c-cc8438100a44/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-12T23:10:34.000Z",
+      "views": 3
+    },
     {
       "id": "AggressiveQuaintWeaselPunchTrees-ZXbW6eAwSSE_3hM8",
       "url": "https://www.twitch.tv/rukalun/clip/AggressiveQuaintWeaselPunchTrees-ZXbW6eAwSSE_3hM8",
