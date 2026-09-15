@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-15T11:14:14.256Z",
-  "total": 2843,
+  "generatedAt": "2026-09-15T20:46:01.018Z",
+  "total": 2844,
   "clipSync": {
-    "recentSyncedAt": "2026-09-15T11:14:13.109Z"
+    "recentSyncedAt": "2026-09-15T20:45:59.640Z"
   },
   "clips": [
+    {
+      "id": "SarcasticMoralTofuKappaPride-eV_RIPptKpNRuhl7",
+      "url": "https://www.twitch.tv/rukalun/clip/SarcasticMoralTofuKappaPride-eV_RIPptKpNRuhl7",
+      "title": "道ぱぱぱ",
+      "creator": "かんぜ",
+      "gameName": "Valheim",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ca05475a-9b05-4c02-adf0-1e00afb7b6c5/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-15T11:12:21.000Z",
+      "views": 3
+    },
     {
       "id": "SneakySoftMelonGivePLZ-OeK3o3xEgZqikGkP",
       "url": "https://www.twitch.tv/rukalun/clip/SneakySoftMelonGivePLZ-OeK3o3xEgZqikGkP",
