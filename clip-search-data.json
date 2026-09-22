@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-22T08:48:00.532Z",
-  "total": 2848,
+  "generatedAt": "2026-09-22T08:56:43.278Z",
+  "total": 2849,
   "clipSync": {
-    "recentSyncedAt": "2026-09-22T08:47:59.329Z"
+    "recentSyncedAt": "2026-09-22T08:56:41.451Z"
   },
   "clips": [
+    {
+      "id": "HomelyResourcefulCockroachFeelsBadMan-9SJgVhDLGdCEAgpe",
+      "url": "https://www.twitch.tv/rukalun/clip/HomelyResourcefulCockroachFeelsBadMan-9SJgVhDLGdCEAgpe",
+      "title": "もりもりもりもりもーいー",
+      "creator": "IKmellon",
+      "gameName": "Valheim",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d7c55e73-8fa0-4193-9454-d7dc6a7333fc/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-22T08:48:11.000Z",
+      "views": 1
+    },
     {
       "id": "PopularNimbleLorisWTRuck-H-MsMA7YTZzyLv-0",
       "url": "https://www.twitch.tv/rukalun/clip/PopularNimbleLorisWTRuck-H-MsMA7YTZzyLv-0",
