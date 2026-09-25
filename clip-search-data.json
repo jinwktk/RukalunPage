@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-09-25T15:44:22.207Z",
-  "total": 2851,
+  "generatedAt": "2026-09-26T22:56:13.222Z",
+  "total": 2852,
   "clipSync": {
-    "recentSyncedAt": "2026-09-25T15:44:21.050Z"
+    "recentSyncedAt": "2026-09-26T22:56:11.879Z"
   },
   "clips": [
+    {
+      "id": "SeductiveObeseCookiePJSalt-1EgLPuYz0sf1avNZ",
+      "url": "https://www.twitch.tv/rukalun/clip/SeductiveObeseCookiePJSalt-1EgLPuYz0sf1avNZ",
+      "title": "るかうさぎ「ハァ？」",
+      "creator": "かじまる",
+      "gameName": "Valheim",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/44b4fe0d-7af7-4b11-87e5-ab6107655043/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-09-25T15:46:30.000Z",
+      "views": 5
+    },
     {
       "id": "WanderingSteamyWormOSsloth-WeNmCJQ_hbR1OEE9",
       "url": "https://www.twitch.tv/rukalun/clip/WanderingSteamyWormOSsloth-WeNmCJQ_hbR1OEE9",
@@ -73,7 +83,7 @@
       "gameName": "Valheim",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/2fc4cf1f-5161-4c49-83c5-9263b77a11b2/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-09-19T17:56:42.000Z",
-      "views": 22
+      "views": 24
     },
     {
       "id": "SarcasticMoralTofuKappaPride-eV_RIPptKpNRuhl7",
@@ -25843,7 +25853,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/881a1d75-2942-4333-99e4-ca7dc58a1c0c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-03-20T07:50:30.000Z",
-      "views": 6
+      "views": 15
     },
     {
       "id": "VivaciousSavageYogurtMingLee",
