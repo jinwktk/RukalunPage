@@ -4,6 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import vm from "node:vm";
 
 const repoDir = process.cwd();
 const displaySiteName = "🖇るっかるんくりっぷ🖇";
@@ -28,7 +29,7 @@ const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}clip-search-data.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-08-28";
+const pageUpdatedOn = "2026-09-28";
 const seoKeywordTerms = [
   "FF14",
   "FFXIV",
@@ -72,6 +73,25 @@ function getScriptFunctionBlock(html, signature) {
   assert.notEqual(start, -1, `${marker} should exist`);
   const nextFunction = html.indexOf("\n      function ", start + marker.length);
   return html.slice(start, nextFunction === -1 ? html.length : nextFunction);
+}
+
+function loadClipFilterFunctions(html) {
+  const source = [
+    getScriptFunctionBlock(html, "getPopularPeriodMs(sort)"),
+    getScriptFunctionBlock(html, "isClipWithinPopularPeriod(clip, sort, now)"),
+    getScriptFunctionBlock(html, "sortClips(clips, sort = elements.sortSelect.value)"),
+    getScriptFunctionBlock(html, "compareCreatedAtDesc(a, b)"),
+    getScriptFunctionBlock(html, "compareCreatedAtAsc(a, b)"),
+    getScriptFunctionBlock(html, "filterAndSortClips(clips, { query, creator, game, sort, now })"),
+    "({ getPopularPeriodMs, isClipWithinPopularPeriod, sortClips, filterAndSortClips })",
+  ].join("\n");
+  const context = {
+    elements: { sortSelect: { value: "newest" } },
+    favoriteClips: {},
+    isFavoriteClip: (clip) => Boolean(context.favoriteClips[clip.id]),
+    normalizeText: normalizeSearchText,
+  };
+  return { context, functions: vm.runInNewContext(source, context) };
 }
 
 function normalizeSearchText(value) {
@@ -375,6 +395,115 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.doesNotMatch(filterChipStyle, /text-overflow: ellipsis;/);
 });
 
+test("popular sort controls explain their period and cumulative view count", () => {
+  const html = readText("index.html");
+
+  assert.match(html, /<select id="sortSelect" aria-describedby="sortHelp">/);
+  assert.match(html, /<option value="popular_day">1日の人気順<\/option>/);
+  assert.match(html, /<option value="popular_week">1週間の人気順<\/option>/);
+  assert.match(
+    html,
+    /<p id="sortHelp" class="field-note">人気順は期間内に作成されたClipを累計再生数で並べます。<\/p>/
+  );
+  assert.match(html, /id="emptyStateMessage"/);
+  assert.match(html, /<section id="emptyState" class="empty" aria-live="polite">/);
+  assert.match(html, /直近1日に作成されたClip/);
+  assert.match(html, /直近1週間に作成されたClip/);
+});
+
+test("popular sorts apply inclusive time windows and cumulative view ordering", () => {
+  const html = readText("index.html");
+  const { functions } = loadClipFilterFunctions(html);
+  const now = Date.parse("2026-09-28T12:00:00.000Z");
+  const hour = 60 * 60 * 1000;
+  const clips = [
+    { id: "now", title: "Now", createdAt: new Date(now).toISOString(), views: 10, searchText: "now" },
+    { id: "day-boundary", title: "Day", createdAt: new Date(now - 24 * hour).toISOString(), views: 50, searchText: "day" },
+    { id: "older-day", title: "Older day", createdAt: new Date(now - 24 * hour - 1).toISOString(), views: 100, searchText: "older day" },
+    { id: "week-boundary", title: "Week", createdAt: new Date(now - 7 * 24 * hour).toISOString(), views: 40, searchText: "week" },
+    { id: "older-week", title: "Older week", createdAt: new Date(now - 7 * 24 * hour - 1).toISOString(), views: 1000, searchText: "older week" },
+    { id: "invalid", title: "Invalid", createdAt: "invalid", views: 1000, searchText: "invalid" },
+    { id: "future", title: "Future", createdAt: new Date(now + 1).toISOString(), views: 1000, searchText: "future" },
+  ];
+
+  const daily = functions.filterAndSortClips(clips, {
+    query: "",
+    creator: "",
+    game: "",
+    sort: "popular_day",
+    now,
+  });
+  const weekly = functions.filterAndSortClips(clips, {
+    query: "",
+    creator: "",
+    game: "",
+    sort: "popular_week",
+    now,
+  });
+
+  assert.deepEqual(Array.from(daily, (clip) => clip.id), ["day-boundary", "now"]);
+  assert.deepEqual(Array.from(weekly, (clip) => clip.id), [
+    "older-day",
+    "day-boundary",
+    "week-boundary",
+    "now",
+  ]);
+
+  const filterBlock = getScriptFunctionBlock(html, "filterClips()");
+  assert.equal((filterBlock.match(/Date\.now\(\)/g) ?? []).length, 1);
+  assert.match(filterBlock, /filterAndSortClips\(allClips, \{ query, creator, game, sort, now \}\)/);
+});
+
+test("popular sorts combine period, query, creator, and game filters", () => {
+  const html = readText("index.html");
+  const { functions } = loadClipFilterFunctions(html);
+  const now = Date.parse("2026-09-28T12:00:00.000Z");
+  const recent = "2026-09-27T12:00:00.000Z";
+  const clips = [
+    { id: "match-high", title: "Boss win", creator: "Ruka", gameName: "FF14", createdAt: recent, views: 30, searchText: "boss win ruka ff14" },
+    { id: "match-low", title: "Boss try", creator: "Ruka", gameName: "FF14", createdAt: recent, views: 10, searchText: "boss try ruka ff14" },
+    { id: "wrong-query", title: "Chat", creator: "Ruka", gameName: "FF14", createdAt: recent, views: 100, searchText: "chat ruka ff14" },
+    { id: "wrong-creator", title: "Boss", creator: "Other", gameName: "FF14", createdAt: recent, views: 100, searchText: "boss other ff14" },
+    { id: "wrong-game", title: "Boss", creator: "Ruka", gameName: "LoL", createdAt: recent, views: 100, searchText: "boss ruka lol" },
+  ];
+
+  const results = functions.filterAndSortClips(clips, {
+    query: "boss",
+    creator: "Ruka",
+    game: "FF14",
+    sort: "popular_week",
+    now,
+  });
+  const noResults = functions.filterAndSortClips(clips, {
+    query: "missing",
+    creator: "Ruka",
+    game: "FF14",
+    sort: "popular_week",
+    now,
+  });
+
+  assert.deepEqual(Array.from(results, (clip) => clip.id), ["match-high", "match-low"]);
+  assert.equal(noResults.length, 0);
+});
+
+test("existing sort modes keep their ordering", () => {
+  const html = readText("index.html");
+  const { context, functions } = loadClipFilterFunctions(html);
+  const clips = [
+    { id: "older", title: "Beta", createdAt: "2026-09-20T00:00:00.000Z", views: 20 },
+    { id: "newer", title: "Alpha", createdAt: "2026-09-21T00:00:00.000Z", views: 10 },
+    { id: "latest", title: "Gamma", createdAt: "2026-09-22T00:00:00.000Z", views: 5 },
+  ];
+  context.favoriteClips.older = 100;
+  context.favoriteClips.newer = 200;
+
+  assert.deepEqual(Array.from(functions.sortClips(clips, "newest"), (clip) => clip.id), ["latest", "newer", "older"]);
+  assert.deepEqual(Array.from(functions.sortClips(clips, "oldest"), (clip) => clip.id), ["older", "newer", "latest"]);
+  assert.deepEqual(Array.from(functions.sortClips(clips, "favorites"), (clip) => clip.id), ["newer", "older", "latest"]);
+  assert.deepEqual(Array.from(functions.sortClips(clips, "views"), (clip) => clip.id), ["older", "newer", "latest"]);
+  assert.deepEqual(Array.from(functions.sortClips(clips, "title"), (clip) => clip.id), ["newer", "older", "latest"]);
+});
+
 test("index.html exposes search-oriented SEO metadata and structured data", () => {
   const html = readText("index.html");
   const keywordGuide = html.match(/<section id="keywordGuide"[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -538,6 +667,8 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.match(searchParametersBlock, /SEARCH_SOURCES\.has\(source\)/);
   assert.match(searchParametersBlock, /has_query:/);
   assert.match(searchParametersBlock, /result_bucket: getResultCountBucket\(filteredClips\.length\)/);
+  assert.match(searchParametersBlock, /"popular_day"/);
+  assert.match(searchParametersBlock, /"popular_week"/);
   assert.doesNotMatch(searchParametersBlock, /result_count:/);
   assert.doesNotMatch(searchParametersBlock, /\b(?:search_term|query|item_name|clip_id):/);
   assert.match(
@@ -652,6 +783,10 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /clip_search/);
   assert.match(readme, /select_content/);
   assert.match(readme, /clip_load_more/);
+  assert.match(readme, /1日の人気順/);
+  assert.match(readme, /1週間の人気順/);
+  assert.match(readme, /累計再生数/);
+  assert.match(readme, /期間内の再生数増分ではありません/);
   assert.match(readme, /検索語そのものは送信しない/);
   assert.match(readme, /カスタムディメンション/);
   assert.match(readme, /Ko-fi/);

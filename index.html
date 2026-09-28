@@ -84,7 +84,7 @@
             "url": "https://rukalun-page.vercel.app/",
             "image": "https://rukalun-page.vercel.app/assets/rukalun/clip-search-og.jpg",
             "inLanguage": "ja",
-            "dateModified": "2026-08-28",
+            "dateModified": "2026-09-28",
             "keywords": [
               "FF14",
               "FFXIV",
@@ -573,6 +573,14 @@
       .field {
         display: grid;
         gap: 5px;
+      }
+
+      .field-note {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        line-height: 1.4;
       }
 
       label {
@@ -1416,7 +1424,8 @@
         }
 
         .search-panel.is-collapsed .search-primary,
-        .search-panel.is-collapsed .search-grid {
+        .search-panel.is-collapsed .search-grid,
+        .search-panel.is-collapsed .field-note {
           display: none;
         }
 
@@ -1613,11 +1622,13 @@
             </div>
             <div class="field">
               <label for="sortSelect">並び替え</label>
-              <select id="sortSelect">
+              <select id="sortSelect" aria-describedby="sortHelp">
                 <option value="newest">新しい順</option>
                 <option value="oldest">古い順</option>
                 <option value="favorites">お気に入り順</option>
                 <option value="views">再生数順</option>
+                <option value="popular_day">1日の人気順</option>
+                <option value="popular_week">1週間の人気順</option>
                 <option value="title">タイトル順</option>
               </select>
             </div>
@@ -1635,6 +1646,7 @@
               </button>
             </div>
           </div>
+          <p id="sortHelp" class="field-note">人気順は期間内に作成されたClipを累計再生数で並べます。</p>
         </div>
       </div>
     </section>
@@ -1657,9 +1669,9 @@
         </div>
       </section>
 
-      <section id="emptyState" class="empty">
+      <section id="emptyState" class="empty" aria-live="polite">
         <h2>見つかりませんでした</h2>
-        <p>検索語を短くするか、作成者の絞り込みを外してください。</p>
+        <p id="emptyStateMessage">検索語を短くするか、作成者の絞り込みを外してください。</p>
       </section>
 
       <section id="results" class="results" aria-label="検索結果">
@@ -1790,6 +1802,7 @@
         loadMoreWrap: requireElement("#loadMoreWrap"),
         results: requireElement("#results"),
         emptyState: requireElement("#emptyState"),
+        emptyStateMessage: requireElement("#emptyStateMessage"),
         heroClipCount: requireElement("#heroClipCount"),
         heroVisibleCount: requireElement("#heroVisibleCount"),
         heroClipSyncedAt: requireElement("#heroClipSyncedAt"),
@@ -1855,9 +1868,15 @@
 
       function getSearchAnalyticsParameters(source) {
         const safeSource = SEARCH_SOURCES.has(source) ? source : "input";
-        const safeSort = ["newest", "oldest", "favorites", "views", "title"].includes(
-          elements.sortSelect.value
-        )
+        const safeSort = [
+          "newest",
+          "oldest",
+          "favorites",
+          "views",
+          "popular_day",
+          "popular_week",
+          "title",
+        ].includes(elements.sortSelect.value)
           ? elements.sortSelect.value
           : "newest";
 
@@ -2312,8 +2331,20 @@
         }
       }
 
-      function sortClips(clips) {
-        const sort = elements.sortSelect.value;
+      function getPopularPeriodMs(sort) {
+        if (sort === "popular_day") return 24 * 60 * 60 * 1000;
+        if (sort === "popular_week") return 7 * 24 * 60 * 60 * 1000;
+        return null;
+      }
+
+      function isClipWithinPopularPeriod(clip, sort, now) {
+        const periodMs = getPopularPeriodMs(sort);
+        if (periodMs === null) return true;
+        const createdAt = Date.parse(clip.createdAt);
+        return Number.isFinite(createdAt) && createdAt >= now - periodMs && createdAt <= now;
+      }
+
+      function sortClips(clips, sort = elements.sortSelect.value) {
         return [...clips].sort((a, b) => {
           if (sort === "oldest") {
             return compareCreatedAtAsc(a, b);
@@ -2325,7 +2356,7 @@
             if (favoriteTimeDiff !== 0) return favoriteTimeDiff;
             return compareCreatedAtDesc(a, b);
           }
-          if (sort === "views") {
+          if (sort === "views" || getPopularPeriodMs(sort) !== null) {
             return (b.views ?? -1) - (a.views ?? -1) || compareCreatedAtDesc(a, b);
           }
           if (sort === "title") {
@@ -2343,21 +2374,42 @@
         return String(a.createdAt ?? "").localeCompare(String(b.createdAt ?? "")) || a.id.localeCompare(b.id);
       }
 
-      function filterClips() {
-        const query = normalizeText(elements.searchInput.value);
-        const terms = query ? query.split(" ") : [];
-        const creator = elements.creatorFilter.value;
-        const game = elements.gameFilter.value;
+      function filterAndSortClips(clips, { query, creator, game, sort, now }) {
+        const normalizedQuery = normalizeText(query);
+        const terms = normalizedQuery ? normalizedQuery.split(" ") : [];
 
-        filteredClips = sortClips(
-          allClips.filter((clip) => {
+        return sortClips(
+          clips.filter((clip) => {
+            if (!isClipWithinPopularPeriod(clip, sort, now)) return false;
             if (creator && clip.creator !== creator) return false;
             if (game && clip.gameName !== game) return false;
             if (terms.length === 0) return true;
 
             return terms.every((term) => clip.searchText.includes(term));
-          })
+          }),
+          sort
         );
+      }
+
+      function filterClips() {
+        const now = Date.now();
+        const query = elements.searchInput.value;
+        const creator = elements.creatorFilter.value;
+        const game = elements.gameFilter.value;
+        const sort = elements.sortSelect.value;
+
+        filteredClips = filterAndSortClips(allClips, { query, creator, game, sort, now });
+      }
+
+      function getEmptyStateMessage() {
+        const sort = elements.sortSelect.value;
+        if (sort === "popular_day") {
+          return "直近1日に作成されたClipが、現在の検索・絞り込み条件では見つかりませんでした。";
+        }
+        if (sort === "popular_week") {
+          return "直近1週間に作成されたClipが、現在の検索・絞り込み条件では見つかりませんでした。";
+        }
+        return "検索語を短くするか、作成者の絞り込みを外してください。";
       }
 
       function getSelectedSortLabel() {
@@ -2560,6 +2612,7 @@
       }
 
       function updateResultState() {
+        elements.emptyStateMessage.textContent = getEmptyStateMessage();
         elements.emptyState.classList.toggle(
           "is-visible",
           dataLoadState === "loaded" && filteredClips.length === 0
