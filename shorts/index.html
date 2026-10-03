@@ -12,9 +12,31 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTVJN1V2LJ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-TTVJN1V2LJ");
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      function getAnalyticsPageUrl(value) {
+        try {
+          const url = new URL(value, window.location.origin);
+          return `${url.origin}${url.pathname}`;
+        } catch {
+          return `${window.location.origin}${window.location.pathname}`;
+        }
+      }
+      const analyticsEnabled = window.location.hostname === "rukalun-page.vercel.app";
+      const analyticsPageLocation = getAnalyticsPageUrl(window.location.href);
+      const analyticsPageReferrer = document.referrer ? getAnalyticsPageUrl(document.referrer) : "";
+      if (analyticsEnabled) {
+        gtag("js", new Date());
+        gtag("set", "page_location", analyticsPageLocation);
+        gtag("set", "page_referrer", analyticsPageReferrer);
+        gtag("config", "G-TTVJN1V2LJ", { send_page_view: false });
+        gtag("event", "page_view", {
+          page_title: document.title,
+          page_location: analyticsPageLocation,
+          page_referrer: analyticsPageReferrer,
+        });
+      }
     </script>
     <style>
       * {

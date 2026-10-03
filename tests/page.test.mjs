@@ -10,7 +10,7 @@ const repoDir = process.cwd();
 const displaySiteName = "🖇るっかるんくりっぷ🖇";
 const structuredSiteName = "るっかるんくりっぷ";
 const pageUrl = "https://rukalun-page.vercel.app/";
-const pageTitle = `${displaySiteName} | Twitch Clip・配信切り抜き検索`;
+const pageTitle = `${displaySiteName} | るっかるんのTwitchクリップ検索`;
 const shortsPagePath = "shorts/index.html";
 const shortsRoutePath = "shorts/";
 const legacyShortsPagePath = "ruka-shorts.html";
@@ -29,7 +29,7 @@ const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
 const dataUrl = `${pageUrl}live-clips.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
-const pageUpdatedOn = "2026-09-28";
+const pageUpdatedOn = "2026-10-04";
 const seoKeywordTerms = [
   "FF14",
   "FFXIV",
@@ -44,7 +44,7 @@ const seoKeywordTerms = [
 ];
 const popularSearches = [
   ["FF14", "FF14"],
-  ["FFXIV", "FINAL FANTASY XIV ONLINE"],
+  ["FFXIV", "FFXIV"],
   ["LoL", "LoL"],
   ["League of Legends", "League of Legends"],
   ["VALORANT", "VALORANT"],
@@ -77,13 +77,14 @@ function getScriptFunctionBlock(html, signature) {
 
 function loadClipFilterFunctions(html) {
   const source = [
+    getScriptFunctionBlock(html, "getSearchTermCandidates(term)"),
     getScriptFunctionBlock(html, "getPopularPeriodMs(sort)"),
     getScriptFunctionBlock(html, "isClipWithinPopularPeriod(clip, sort, now)"),
     getScriptFunctionBlock(html, "sortClips(clips, sort = elements.sortSelect.value)"),
     getScriptFunctionBlock(html, "compareCreatedAtDesc(a, b)"),
     getScriptFunctionBlock(html, "compareCreatedAtAsc(a, b)"),
     getScriptFunctionBlock(html, "filterAndSortClips(clips, { query, creator, game, sort, now })"),
-    "({ getPopularPeriodMs, isClipWithinPopularPeriod, sortClips, filterAndSortClips })",
+    "({ getSearchTermCandidates, getPopularPeriodMs, isClipWithinPopularPeriod, sortClips, filterAndSortClips })",
   ].join("\n");
   const context = {
     elements: { sortSelect: { value: "newest" } },
@@ -104,11 +105,14 @@ function normalizeSearchText(value) {
 
 function getClipSearchHitCount(query) {
   const data = JSON.parse(readText("clip-search-data.json"));
-  const terms = normalizeSearchText(query).split(" ");
-  return data.clips.filter((clip) => {
-    const searchText = normalizeSearchText(`${clip.title} ${clip.creator} ${clip.gameName}`);
-    return terms.every((term) => searchText.includes(term));
-  }).length;
+  const { functions } = loadClipFilterFunctions(readText("index.html"));
+  return functions.filterAndSortClips(
+    data.clips.map((clip) => ({
+      ...clip,
+      searchText: normalizeSearchText(`${clip.title} ${clip.creator} ${clip.gameName}`),
+    })),
+    { query, creator: "", game: "", sort: "newest", now: Date.now() }
+  ).length;
 }
 
 function readPngSize(relativePath) {
@@ -291,7 +295,8 @@ test("index.html exposes the modern search-first design surface", () => {
   assert.match(html, /class="site-clip-symbol"/);
   assert.doesNotMatch(html, /fonts\.googleapis|fonts\.gstatic|@font-face/);
   assert.doesNotMatch(html, /おはるっか Clip回収所|class="eyebrow"|class="eyebrow-icon"/);
-  assert.match(html, /るっかと愉快な名場面、<span class="title-phrase">すぐ回収。<\/span>/);
+  assert.match(html, /<h1 id="pageTitle">るっかるんの<span class="title-phrase">Twitchクリップ検索<\/span><\/h1>/);
+  assert.match(html, /class="lead-line">るっかと愉快な名場面、すぐ回収。/);
   assert.match(html, /笑い声も絶叫も言質も/);
   assert.match(html, /h1\s*\{[\s\S]*?overflow-wrap: anywhere;/);
   assert.match(html, /\.lead\s*\{[\s\S]*?overflow-wrap: anywhere;/);
@@ -487,6 +492,77 @@ test("popular sorts combine period, query, creator, and game filters", () => {
   assert.equal(noResults.length, 0);
 });
 
+test("game aliases expand one query term while preserving AND and other filters", () => {
+  const html = readText("index.html");
+  const { functions } = loadClipFilterFunctions(html);
+  const now = Date.parse("2026-10-04T12:00:00.000Z");
+  const recent = "2026-10-03T12:00:00.000Z";
+  const old = "2026-09-01T12:00:00.000Z";
+  const clips = [
+    { id: "match", title: "Boss win", creator: "Ruka", gameName: "FINAL FANTASY XIV ONLINE", createdAt: recent, views: 30, searchText: "boss win ruka final fantasy xiv online" },
+    { id: "wrong-query", title: "Chat", creator: "Ruka", gameName: "FINAL FANTASY XIV ONLINE", createdAt: recent, views: 100, searchText: "chat ruka final fantasy xiv online" },
+    { id: "wrong-creator", title: "Boss", creator: "Other", gameName: "FINAL FANTASY XIV ONLINE", createdAt: recent, views: 100, searchText: "boss other final fantasy xiv online" },
+    { id: "wrong-game", title: "Boss", creator: "Ruka", gameName: "League of Legends", createdAt: recent, views: 100, searchText: "boss ruka league of legends" },
+    { id: "old", title: "Boss", creator: "Ruka", gameName: "FINAL FANTASY XIV ONLINE", createdAt: old, views: 100, searchText: "boss ruka final fantasy xiv online" },
+    { id: "split-noise", title: "FF challenge 14", creator: "Ruka", gameName: "Other", createdAt: recent, views: 100, searchText: "ff challenge 14 ruka other" },
+  ];
+
+  for (const query of ["FF14 boss", "FFXIV boss", "ファイナルファンタジー14 boss"]) {
+    const results = functions.filterAndSortClips(clips, {
+      query,
+      creator: "Ruka",
+      game: "FINAL FANTASY XIV ONLINE",
+      sort: "popular_week",
+      now,
+    });
+    assert.deepEqual(Array.from(results, (clip) => clip.id), ["match"], query);
+  }
+
+  assert.deepEqual(Array.from(functions.getSearchTermCandidates("ff14")), ["ff14", "final fantasy xiv online"]);
+  assert.deepEqual(Array.from(functions.getSearchTermCandidates("lol")), ["lol", "league of legends"]);
+  assert.deepEqual(Array.from(functions.getSearchTermCandidates("valo")), ["valo", "valorant"]);
+  assert.deepEqual(Array.from(functions.getSearchTermCandidates("雑談")), ["雑談", "just chatting"]);
+  assert.deepEqual(Array.from(functions.getSearchTermCandidates("boss")), ["boss"]);
+});
+
+test("game aliases match the canonical games in the bundled clip data", () => {
+  const html = readText("index.html");
+  const { functions } = loadClipFilterFunctions(html);
+  const clips = JSON.parse(readText("clip-search-data.json")).clips.map((clip) => ({
+    ...clip,
+    searchText: normalizeSearchText(`${clip.title} ${clip.creator} ${clip.gameName}`),
+  }));
+  const aliases = [
+    ["FF14", "FINAL FANTASY XIV ONLINE"],
+    ["FFXIV", "FINAL FANTASY XIV ONLINE"],
+    ["ファイナルファンタジー14", "FINAL FANTASY XIV ONLINE"],
+    ["LoL", "League of Legends"],
+    ["VALO", "VALORANT"],
+    ["雑談", "Just Chatting"],
+  ];
+
+  for (const [alias, canonical] of aliases) {
+    const candidates = functions.getSearchTermCandidates(normalizeSearchText(alias));
+    const expectedIds = new Set(
+      clips
+        .filter((clip) => candidates.some((candidate) => clip.searchText.includes(candidate)))
+        .map((clip) => clip.id)
+    );
+    const actual = functions.filterAndSortClips(clips, {
+      query: alias,
+      creator: "",
+      game: "",
+      sort: "newest",
+      now: Date.now(),
+    });
+    const canonicalCount = clips.filter((clip) => clip.gameName === canonical).length;
+
+    assert.ok(canonicalCount > 0, `${canonical} should exist in bundled data`);
+    assert.equal(actual.length, expectedIds.size, alias);
+    assert.ok(actual.length >= canonicalCount, `${alias} should include the canonical game clips`);
+  }
+});
+
 test("existing sort modes keep their ordering", () => {
   const html = readText("index.html");
   const { context, functions } = loadClipFilterFunctions(html);
@@ -516,8 +592,10 @@ test("index.html exposes search-oriented SEO metadata and structured data", () =
   assert.ok(html.includes(`<meta name="twitter:description" content="${seoDescription}" />`));
   assert.ok(html.includes(`<meta name="twitter:title" content="${pageTitle}" />`));
   assert.doesNotMatch(html, /<meta name="keywords"/);
-  assert.match(html, /class="lead-line">FF14もLoLもVALOも、/);
-  assert.match(html, /class="lead-line">タイトル・作成者・ゲームでそっと探して、/);
+  assert.match(html, /<h1 id="pageTitle">るっかるんの<span class="title-phrase">Twitchクリップ検索<\/span><\/h1>/);
+  assert.match(html, /class="lead-line">るっかと愉快な名場面、すぐ回収。/);
+  assert.match(html, /class="lead-line">るっかるんのTwitchクリップを、<\/span>/);
+  assert.match(html, /class="lead-line">タイトル・作成者・ゲーム名から検索できます。<\/span>/);
   assert.doesNotMatch(html, /id="clipSearchOverview"/);
   assert.match(html, /id="keywordGuide"/);
   assert.match(html, /id="keywordGuideTitle"/);
@@ -630,18 +708,62 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.deepEqual(gaConfigCalls, [`gtag("config", "${gaMeasurementId}", { send_page_view: false });`]);
   assert.match(html, /window\.dataLayer = window\.dataLayer \|\| \[\];/);
   assert.match(html, /function gtag\(\) \{\s*dataLayer\.push\(arguments\);\s*\}/);
+  assert.match(html, /const analyticsEnabled = window\.location\.hostname === "rukalun-page\.vercel\.app";/);
   assert.match(html, /function getAnalyticsPageUrl\(value\)/);
   assert.match(html, /return `\$\{url\.origin\}\$\{url\.pathname\}`;/);
   assert.match(html, /const analyticsPageLocation = getAnalyticsPageUrl\(window\.location\.href\);/);
   assert.match(html, /const analyticsPageReferrer = document\.referrer \? getAnalyticsPageUrl\(document\.referrer\) : "";/);
-  assert.match(html, /gtag\("js", new Date\(\)\);/);
-  assert.match(html, /gtag\("set", "page_location", analyticsPageLocation\);/);
-  assert.match(html, /gtag\("set", "page_referrer", analyticsPageReferrer\);/);
+  assert.match(html, /if \(analyticsEnabled\) \{[\s\S]*gtag\("js", new Date\(\)\);[\s\S]*gtag\("config", "G-TTVJN1V2LJ", \{ send_page_view: false \}\);[\s\S]*gtag\("event", "page_view"/);
   assert.match(
     html,
     /gtag\("event", "page_view", \{\s*page_title: document\.title,\s*page_location: analyticsPageLocation,\s*page_referrer: analyticsPageReferrer,?\s*\}\);/
   );
   assert.doesNotMatch(html, /page_location:\s*window\.location\.(?:href|search)/);
+  assert.doesNotMatch(html, /document\.title\s*=/);
+  const analyticsScript = html.match(
+    /<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+"><\/script>\s*<script>([\s\S]*?)<\/script>/
+  )?.[1];
+  assert.ok(analyticsScript, "index analytics bootstrap should exist");
+  const runAnalytics = (hostname) => {
+    const context = {
+      URL,
+      document: {
+        referrer: "https://example.com/from?private=yes#fragment",
+        title: pageTitle,
+      },
+      location: {
+        hostname,
+        href: `https://${hostname}/?q=private#fragment`,
+        origin: `https://${hostname}`,
+        pathname: "/",
+      },
+    };
+    context.window = context;
+    vm.runInNewContext(analyticsScript, context);
+    return context;
+  };
+  const productionAnalytics = runAnalytics("rukalun-page.vercel.app");
+  const previewAnalytics = runAnalytics("rukalun-page-git-preview.vercel.app");
+  const productionCalls = Array.from(productionAnalytics.dataLayer, (args) =>
+    JSON.parse(JSON.stringify(Array.from(args)))
+  );
+  assert.equal(previewAnalytics.dataLayer.length, 0);
+  assert.deepEqual(
+    productionCalls.find(([command]) => command === "config"),
+    ["config", gaMeasurementId, { send_page_view: false }]
+  );
+  assert.deepEqual(
+    productionCalls.find(([command, eventName]) => command === "event" && eventName === "page_view"),
+    [
+      "event",
+      "page_view",
+      {
+        page_title: pageTitle,
+        page_location: pageUrl,
+        page_referrer: "https://example.com/from",
+      },
+    ]
+  );
   assert.ok(
     html.indexOf(heroPreload) < html.indexOf(gaScriptTag),
     "GA4 should not be inserted before the LCP hero preload"
@@ -660,12 +782,14 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.match(html, /const LOAD_MORE_SOURCES = new Set\(\["button", "auto"\]\);/);
   assert.match(html, /const CONTENT_IDS = new Set\(\["clip", "search", "shorts", "twitch", "kofi"\]\);/);
   assert.match(html, /const CONTENT_SOURCES = new Set\(\["thumbnail", "clip_action", "hero", "floating"\]\);/);
-  assert.match(trackerBlock, /typeof window\.gtag !== "function"/);
+  assert.match(trackerBlock, /!analyticsEnabled \|\| typeof window\.gtag !== "function"/);
   assert.match(trackerBlock, /try \{/);
   assert.match(trackerBlock, /window\.gtag\("event", eventName, parameters\);/);
   assert.match(trackerBlock, /catch \{/);
   assert.match(html, /function getResultCountBucket\(count\)/);
   assert.match(searchParametersBlock, /SEARCH_SOURCES\.has\(source\)/);
+  assert.match(searchParametersBlock, /interaction_source: safeSource/);
+  assert.doesNotMatch(searchParametersBlock, /\bsource:/);
   assert.match(searchParametersBlock, /has_query:/);
   assert.match(searchParametersBlock, /result_bucket: getResultCountBucket\(filteredClips\.length\)/);
   assert.match(searchParametersBlock, /"popular_day"/);
@@ -694,8 +818,12 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.match(contentSelectionBlock, /CONTENT_IDS\.has\(itemId\)/);
   assert.match(contentSelectionBlock, /CONTENT_SOURCES\.has\(source\)/);
   assert.match(contentSelectionBlock, /trackAnalyticsEvent\("select_content", \{/);
+  assert.match(contentSelectionBlock, /interaction_source: source/);
+  assert.doesNotMatch(contentSelectionBlock, /\n\s*source(?:,|:)/);
   assert.doesNotMatch(contentSelectionBlock, /clip\.(?:id|title|creator)|elements\.searchInput\.value/);
   assert.match(html, /trackAnalyticsEvent\("clip_load_more", \{/);
+  assert.match(html, /trackAnalyticsEvent\("clip_load_more", \{\s*interaction_source: source,/);
+  assert.doesNotMatch(html, /trackAnalyticsEvent\("clip_load_more", \{\s*source,/);
   assert.match(html, /elements\.heroSearchLink\.addEventListener\("click", \(\) => trackContentSelection\("search", "hero"\)\);/);
   assert.match(html, /elements\.heroShortsLink\.addEventListener\("click", \(\) => trackContentSelection\("shorts", "hero"\)\);/);
   assert.match(html, /elements\.heroTwitchLink\.addEventListener\("click", \(\) => trackContentSelection\("twitch", "hero"\)\);/);
@@ -790,6 +918,17 @@ test("documentation records SEO operation constraints", () => {
   assert.match(readme, /期間内の再生数増分ではありません/);
   assert.match(readme, /検索語そのものは送信しない/);
   assert.match(readme, /カスタムディメンション/);
+  assert.match(readme, /interaction_source/);
+  assert.match(readme, /result_bucket/);
+  assert.match(readme, /sort_type/);
+  assert.match(readme, /has_query/);
+  assert.match(readme, /has_creator_filter/);
+  assert.match(readme, /has_game_filter/);
+  assert.match(readme, /visible_bucket/);
+  assert.match(readme, /filter_type[^。]*送信していません/);
+  assert.match(readme, /7項目を、GA4のイベントスコープのカスタムディメンションとして登録しました/);
+  assert.match(readme, /登録以前のイベントへは遡及適用されず/);
+  assert.match(readme, /キーイベント指定は、Google Ads連携への影響警告が表示されたため変更していません/);
   assert.match(readme, /Ko-fi/);
   assert.match(readme, new RegExp(kofiUsername));
   assert.match(readme, /\/jinnymeia\//);
@@ -1150,6 +1289,66 @@ test("RukaShorts has a first-view page link while cards stay unchanged", () => {
   assert.doesNotMatch(html, /const shortsButton = document\.createElement/);
   assert.doesNotMatch(html, /clip-shorts-button/);
   assert.match(html, /actions\.append\(favoriteButton, linkGroup\)/);
+});
+
+test("RukaShorts sends an anonymized page view only on the production hostname", () => {
+  const html = readText(shortsPagePath);
+  const analyticsScript = html.match(
+    /<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+"><\/script>\s*<script>([\s\S]*?)<\/script>/
+  )?.[1];
+  assert.ok(analyticsScript, "RukaShorts analytics bootstrap should exist");
+
+  function runAnalytics(hostname) {
+    const context = {
+      URL,
+      document: {
+        referrer: "https://example.com/from?private=yes#fragment",
+        title: shortsPageTitle,
+      },
+      location: {
+        hostname,
+        href: `https://${hostname}/shorts/?q=private#fragment`,
+        origin: `https://${hostname}`,
+        pathname: "/shorts/",
+      },
+    };
+    context.window = context;
+    vm.runInNewContext(analyticsScript, context);
+    return context;
+  }
+
+  const production = runAnalytics("rukalun-page.vercel.app");
+  const preview = runAnalytics("rukalun-page-git-preview.vercel.app");
+  const productionCalls = Array.from(production.dataLayer, (args) =>
+    JSON.parse(JSON.stringify(Array.from(args)))
+  );
+
+  assert.equal(typeof production.gtag, "function");
+  assert.equal(typeof preview.gtag, "function");
+  assert.equal(preview.dataLayer.length, 0);
+  assert.deepEqual(
+    productionCalls.filter(([command]) => command === "set"),
+    [
+      ["set", "page_location", `${pageUrl}shorts/`],
+      ["set", "page_referrer", "https://example.com/from"],
+    ]
+  );
+  assert.deepEqual(
+    productionCalls.find(([command]) => command === "config"),
+    ["config", gaMeasurementId, { send_page_view: false }]
+  );
+  assert.deepEqual(
+    productionCalls.find(([command, eventName]) => command === "event" && eventName === "page_view"),
+    [
+      "event",
+      "page_view",
+      {
+        page_title: shortsPageTitle,
+        page_location: `${pageUrl}shorts/`,
+        page_referrer: "https://example.com/from",
+      },
+    ]
+  );
 });
 
 test("RukaShorts page is a fullscreen random feed with audible autoplay, player controls, and auto swipe", () => {

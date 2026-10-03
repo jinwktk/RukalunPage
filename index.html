@@ -11,7 +11,7 @@
     <link rel="preload" as="image" href="./assets/rukalun/clip-search-hero.webp" type="image/webp" fetchpriority="high" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="るっかるんくりっぷ" />
-    <meta property="og:title" content="🖇るっかるんくりっぷ🖇 | Twitch Clip・配信切り抜き検索" />
+    <meta property="og:title" content="🖇るっかるんくりっぷ🖇 | るっかるんのTwitchクリップ検索" />
     <meta property="og:description" content="るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。" />
     <meta property="og:url" content="https://rukalun-page.vercel.app/" />
     <meta property="og:image" content="https://rukalun-page.vercel.app/assets/rukalun/clip-search-og.jpg" />
@@ -20,10 +20,10 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="るっかるんのキャラクターを使ったClip検索キービジュアル" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="🖇るっかるんくりっぷ🖇 | Twitch Clip・配信切り抜き検索" />
+    <meta name="twitter:title" content="🖇るっかるんくりっぷ🖇 | るっかるんのTwitchクリップ検索" />
     <meta name="twitter:description" content="るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。" />
     <meta name="twitter:image" content="https://rukalun-page.vercel.app/assets/rukalun/clip-search-og.jpg" />
-    <title>🖇るっかるんくりっぷ🖇 | Twitch Clip・配信切り抜き検索</title>
+    <title>🖇るっかるんくりっぷ🖇 | るっかるんのTwitchクリップ検索</title>
     <link rel="icon" href="https://rukalun-page.vercel.app/assets/rukalun/clip-search-favicon.ico" sizes="any" />
     <link rel="icon" href="https://rukalun-page.vercel.app/assets/rukalun/clip-search-favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="https://rukalun-page.vercel.app/assets/rukalun/clip-search-apple-touch-icon.png" />
@@ -33,6 +33,7 @@
       function gtag() {
         dataLayer.push(arguments);
       }
+      const analyticsEnabled = window.location.hostname === "rukalun-page.vercel.app";
       function getAnalyticsPageUrl(value) {
         try {
           const url = new URL(value, window.location.origin);
@@ -43,15 +44,17 @@
       }
       const analyticsPageLocation = getAnalyticsPageUrl(window.location.href);
       const analyticsPageReferrer = document.referrer ? getAnalyticsPageUrl(document.referrer) : "";
-      gtag("js", new Date());
-      gtag("set", "page_location", analyticsPageLocation);
-      gtag("set", "page_referrer", analyticsPageReferrer);
-      gtag("config", "G-TTVJN1V2LJ", { send_page_view: false });
-      gtag("event", "page_view", {
-        page_title: document.title,
-        page_location: analyticsPageLocation,
-        page_referrer: analyticsPageReferrer,
-      });
+      if (analyticsEnabled) {
+        gtag("js", new Date());
+        gtag("set", "page_location", analyticsPageLocation);
+        gtag("set", "page_referrer", analyticsPageReferrer);
+        gtag("config", "G-TTVJN1V2LJ", { send_page_view: false });
+        gtag("event", "page_view", {
+          page_title: document.title,
+          page_location: analyticsPageLocation,
+          page_referrer: analyticsPageReferrer,
+        });
+      }
     </script>
     <script type="application/ld+json">
       {
@@ -79,12 +82,12 @@
           {
             "@type": "CollectionPage",
             "@id": "https://rukalun-page.vercel.app/#collection",
-            "name": "🖇るっかるんくりっぷ🖇 | Twitch Clip・配信切り抜き検索",
+            "name": "🖇るっかるんくりっぷ🖇 | るっかるんのTwitchクリップ検索",
             "description": "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。",
             "url": "https://rukalun-page.vercel.app/",
             "image": "https://rukalun-page.vercel.app/assets/rukalun/clip-search-og.jpg",
             "inLanguage": "ja",
-            "dateModified": "2026-09-28",
+            "dateModified": "2026-10-04",
             "keywords": [
               "FF14",
               "FFXIV",
@@ -1545,11 +1548,13 @@
       </picture>
       <div class="wrap hero-content">
         <div class="hero-copy">
-          <h1 id="pageTitle">るっかと愉快な名場面、<span class="title-phrase">すぐ回収。</span></h1>
+          <h1 id="pageTitle">るっかるんの<span class="title-phrase">Twitchクリップ検索</span></h1>
           <p class="lead">
+            <span class="lead-line">るっかと愉快な名場面、すぐ回収。</span>
+            <span class="lead-line">るっかるんのTwitchクリップを、</span>
+            <span class="lead-line">タイトル・作成者・ゲーム名から検索できます。</span>
             <span class="lead-line">FF14もLoLもVALOも、</span>
             <span class="lead-line">笑い声も絶叫も言質も、あとからふわっと。</span>
-            <span class="lead-line">タイトル・作成者・ゲームでそっと探して、</span>
             <span class="lead-line">お気に入りの一瞬を、</span>
             <span class="lead-line">おもちかえりできます。</span>
           </p>
@@ -1657,7 +1662,7 @@
         <h2 id="keywordGuideTitle">探せるキーワード</h2>
         <div class="keyword-link-list" aria-label="人気検索リンク">
           <a href="./?q=FF14#searchPanel">FF14</a>
-          <a href="./?q=FINAL%20FANTASY%20XIV%20ONLINE#searchPanel">FFXIV</a>
+          <a href="./?q=FFXIV#searchPanel">FFXIV</a>
           <a href="./?q=LoL#searchPanel">LoL</a>
           <a href="./?q=League%20of%20Legends#searchPanel">League of Legends</a>
           <a href="./?q=VALORANT#searchPanel">VALORANT</a>
@@ -1861,7 +1866,7 @@
           : null;
 
       function trackAnalyticsEvent(eventName, parameters = {}) {
-        if (typeof window.gtag !== "function") return false;
+        if (!analyticsEnabled || typeof window.gtag !== "function") return false;
 
         try {
           window.gtag("event", eventName, parameters);
@@ -1895,7 +1900,7 @@
           : "newest";
 
         return {
-          source: safeSource,
+          interaction_source: safeSource,
           has_query: normalizeText(elements.searchInput.value) ? "yes" : "no",
           has_creator_filter: elements.creatorFilter.value ? "yes" : "no",
           has_game_filter: elements.gameFilter.value ? "yes" : "no",
@@ -1943,7 +1948,7 @@
         trackAnalyticsEvent("select_content", {
           content_type: itemId === "clip" ? "clip" : "navigation",
           item_id: itemId,
-          source,
+          interaction_source: source,
         });
       }
 
@@ -2388,18 +2393,32 @@
         return String(a.createdAt ?? "").localeCompare(String(b.createdAt ?? "")) || a.id.localeCompare(b.id);
       }
 
+      function getSearchTermCandidates(term) {
+        if (term === "ff14" || term === "ffxiv" || term === "ファイナルファンタジー14") {
+          return [term, "final fantasy xiv online"];
+        }
+        if (term === "lol") return [term, "league of legends"];
+        if (term === "valo") return [term, "valorant"];
+        if (term === "雑談") return [term, "just chatting"];
+        return [term];
+      }
+
       function filterAndSortClips(clips, { query, creator, game, sort, now }) {
         const normalizedQuery = normalizeText(query);
-        const terms = normalizedQuery ? normalizedQuery.split(" ") : [];
+        const termCandidates = normalizedQuery
+          ? normalizedQuery.split(" ").map(getSearchTermCandidates)
+          : [];
 
         return sortClips(
           clips.filter((clip) => {
             if (!isClipWithinPopularPeriod(clip, sort, now)) return false;
             if (creator && clip.creator !== creator) return false;
             if (game && clip.gameName !== game) return false;
-            if (terms.length === 0) return true;
+            if (termCandidates.length === 0) return true;
 
-            return terms.every((term) => clip.searchText.includes(term));
+            return termCandidates.every((candidates) =>
+              candidates.some((candidate) => clip.searchText.includes(candidate))
+            );
           }),
           sort
         );
@@ -2714,7 +2733,7 @@
         updateResultState();
         if (LOAD_MORE_SOURCES.has(source)) {
           trackAnalyticsEvent("clip_load_more", {
-            source,
+            interaction_source: source,
             items_added: visibleLimit - previousVisibleLimit,
             visible_bucket: getResultCountBucket(visibleLimit),
           });

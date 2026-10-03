@@ -27,10 +27,11 @@ Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。�
 - 表示上のサイト名は `🖇るっかるんくりっぷ🖇` とし、検索機能を保ちつつ柔らかい印象にします。
 - ページ全体のフォントは外部Webフォントを読み込まず、OS内蔵の丸み・手書き寄りフォントを優先して軽く表示します。
 - OGP/Twitter Card画像は、AI生成した背景とタイトル文字に、元の透過キャラ素材を後乗せして作成し、軽量なJPGで配信します。
-- ヒーローコピーは「るっかと愉快な名場面、すぐ回収。」として、ふわっと探しておもちかえりできる配信Clipの空気に寄せます。
+- 主見出しは「るっかるんのTwitchクリップ検索」とし、ヒーローコピー「るっかと愉快な名場面、すぐ回収。」は副文として残します。
 - モバイルではヒーロー内の導線を検索1段・RukaShorts/Twitch 2列にしてファーストビューを短くし、検索パネル全体を折りたたみます。開いた時にキーワード、作成者、並び替え、操作ボタンを表示し、条件チップは出さず、閉じる `×` ボタンはクリアの横の右端に配置します。
 - デスクトップ/タブレットの条件チップは、条件文を詰め込まず `2,750 clips` や `123 / 2,750 clips / 条件あり` の短い件数ステータスだけを表示します。詳細条件は検索パネル側に残します。
 - 作成者とゲームの選択肢は、Clip数が多い順に表示します。特に候補数が多い作成者候補は操作時に初めて生成し、初回描画のDOM構築を軽くします。
+- キーワード検索では既存の部分一致と複数語AND検索を維持し、ゲームの別名 `FF14` / `FFXIV` / `ファイナルファンタジー14`、`LoL`、`VALO`、`雑談` を、それぞれ正式ゲーム名 `FINAL FANTASY XIV ONLINE`、`League of Legends`、`VALORANT`、`Just Chatting` にも対応させます。別名は1語単位で展開するため、別名とタイトル・作成者名などを組み合わせた検索もAND条件のままです。
 - 並び替えの「1日の人気順」「1週間の人気順」は、現在時刻から直近24時間・7日間に作成されたClipだけを対象に、現在の累計再生数が多い順で表示します。期間内の再生数増分ではありません。キーワード・作成者・ゲームの絞り込みと組み合わせられます。
 - Clipカード内のゲーム名や作成者名をクリックすると、上部検索パネルのゲーム/作成者フィルタへ反映して絞り込めます。クリック時はキーワード、もう片方のフィルタ、並び替え条件を保持し、検索パネルを開いて現在条件を確認できるようにします。
 - おまかせボタンは、手入力検索ではその条件内から抽選し、ランダムが自動入力したClipタイトルは次回クリック時の抽選条件として再利用しません。作成者・ゲーム・並び替え条件を変更してもランダム由来の出自は保持し、候補が複数ある場合は直前Clipをできるだけ避けます。連打できるよう、抽選後に結果エリアへ自動スクロールしません。
@@ -53,14 +54,14 @@ Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。�
 - Google検索結果のサイト名候補は自動判定されるため、`WebSite.name` と `og:site_name` は絵文字なしの `るっかるんくりっぷ` にし、`alternateName` に `Rukalun Clip`、`るっかるん Clip検索`、`るっかるん Twitchクリップ`、`るっかるん 配信切り抜き`、`rukalun-page.vercel.app` を入れます。表示上の装飾絵文字は title やページ本文側に残します。
 - JSON-LD は `WebSite`、`CollectionPage`、`Dataset` を `@graph` で表現し、公開JSONデータの `DataDownload` 情報と実在する `creator` を含めます。配布ライセンスが宣言されていないため `license` は推測で追加しません。
 - SEOキーワード拡張では、検索結果前の短い `keywordGuide` に説明文を置かず、検索結果が返る語彙だけを人気検索リンクとして置きます。デスクトップでは結果カードがファーストビューに入りやすいよう、虫眼鏡風アクセント付き見出しとチップ風リンクを2カラムのコンパクト表示にします。
-- `keywordGuide` の人気検索リンクは `?q=` で検索パネルへ移動する補助導線です。サイトマップには追加せず、現行 `clip-search-data.json` で1件以上ヒットするクエリだけを置きます。`FFXIV` は表示ラベルとし、実検索クエリは `FINAL FANTASY XIV ONLINE` にします。`とぅいっち` や `顔アイコン` のようにGSCで見えた語彙でも、現行検索で0件のものは本文化せず、検索結果が返る語彙へ寄せます。
+- `keywordGuide` の人気検索リンクは `?q=` で検索パネルへ移動する補助導線です。サイトマップには追加せず、現行 `clip-search-data.json` で1件以上ヒットするクエリだけを置きます。`FFXIV` などの別名もページ側のゲーム別名検索で正式名へ展開します。`とぅいっち` や `顔アイコン` のようにGSCで見えた語彙でも、現行検索で0件のものは本文化せず、検索結果が返る語彙へ寄せます。
 - `Dataset.url` はデータセットの説明ページとしてトップページを指し、JSON配布URLは `DataDownload.contentUrl` にだけ置きます。
 - `Dataset` の `dateModified` は固定値で持たせません。`clip-search-data.json` はBotで別サイクル更新されるため、HTML側の固定日付とずれないようにします。
 - `sitemap.xml` には `https://rukalun-page.vercel.app/` のみを掲載し、`noindex` の互換リダイレクト `clip-search.html` / `ruka-shorts.html` / `/jinnymeia/` と `noindex,follow` の `shorts/index.html` は含めません。
 - `sitemap.txt` にも canonical URL のみを掲載し、Search Console の回避用テキストサイトマップとして使えるようにします。
 - Google検索結果のサイト名とfaviconは hostname単位 で扱われるため、canonical / OGP / JSON-LD / favicon はVercel本番ホスト `rukalun-page.vercel.app` の絶対URLに揃えます。
 - Vercelではこのリポジトリの `robots.txt` がホストルート `/robots.txt` として配信されるため、`Sitemap: https://rukalun-page.vercel.app/sitemap.xml` を明示します。
-- Google Analytics 4 は Measurement ID `G-TTVJN1V2LJ` のGoogle tagを `head` で非同期読み込みします。LCP対象のヒーロー画像preloadを先に発見できるよう、GAタグはヒーローpreloadより後、JSON-LDより前に置きます。検索条件の組み合わせは `clip_search`、Clip・主要導線・Ko-fiの選択は推奨イベント `select_content`、追加表示は `clip_load_more` で計測します。検索語そのものは送信しないため、イベントパラメータは検索有無、絞り込み種別、件数帯、操作元など低カーディナリティ値だけにします。
+- Google Analytics 4 は Measurement ID `G-TTVJN1V2LJ` のGoogle tagを `head` で非同期読み込みします。LCP対象のヒーロー画像preloadを先に発見できるよう、GAタグはヒーローpreloadより後、JSON-LDより前に置きます。`rukalun-page.vercel.app` 以外では `config` とイベントを送らず、ローカル確認やプレビューを本番集計へ混ぜません。検索条件の組み合わせは `clip_search`、Clip・主要導線・Ko-fiの選択は推奨イベント `select_content`、追加表示は `clip_load_more` で計測します。検索語そのものは送信しないため、イベントパラメータは検索有無、絞り込み種別、件数帯、操作元など低カーディナリティ値だけにします。
 - Ko-fi支援導線は `jinnymeia` への通常リンクとローカルWebPだけで構成し、外部scriptを読み込まない文字なしの小型追尾表示にします。PC/SPとも右下に抑え、検索やClip操作を覆いにくくします。
 
 ## 検索エンジン向け運用
@@ -81,7 +82,18 @@ GSC/GA4の現行確認では、GSC URLプレフィックスプロパティ `http
 
 ## アクセス解析運用
 
-Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める公開識別子として扱います。property `541705085` のWebストリームURLは2026-08-28に `https://rukalun-page.vercel.app/` へ変更済みです。自動 `page_view` は無効にし、クエリとハッシュを除いた `origin + pathname` を `page_location` に使う手動 `page_view` を送ります。`page_referrer` も同じ規則で匿名化し、GA4の拡張計測が `?q=` を `search_term` として収集する経路を避けます。ページ側では `clip_search`、`select_content`、`clip_load_more` を失敗してもUIを止めない形で送り、検索語そのものは送信しません。タイトル、作成者名、入力値などの高カーディナリティ値や個人情報になり得る文字列をイベントパラメータへ入れず、検索データの読み込み中はイベントを保留して、読込完了後の件数帯で送ります。検索語・選択中の作成者・ゲームは、別条件を同じイベントとして落とさないためのブラウザ内重複判定にだけ使い、GA4へ渡しません。`filter_type`、`result_bucket`、`source` などをGA4レポートで直接使う場合は、管理画面側で同名のイベントスコープのカスタムディメンション登録が必要です。
+Google Analytics 4 の Measurement ID `G-TTVJN1V2LJ` は公開HTMLに含める公開識別子として扱います。property `541705085` のWebストリームURLは2026-08-28に `https://rukalun-page.vercel.app/` へ変更済みです。自動 `page_view` は無効にし、クエリとハッシュを除いた `origin + pathname` を `page_location` に使う手動 `page_view` を送ります。`page_referrer` も同じ規則で匿名化し、GA4の拡張計測が `?q=` を `search_term` として収集する経路を避けます。ページタイトルは固定し、検索入力・作成者・ゲームを含めません。ページ側では `clip_search`、`select_content`、`clip_load_more` を失敗してもUIを止めない形で送り、検索語そのものは送信しません。タイトル、作成者名、入力値などの高カーディナリティ値や個人情報になり得る文字列をイベントパラメータへ入れず、検索データの読み込み中はイベントを保留して、読込完了後の件数帯で送ります。検索語・選択中の作成者・ゲームは、別条件を同じイベントとして落とさないためのブラウザ内重複判定にだけ使い、GA4へ渡しません。従来の `source` はキャンペーンの流入元分類にも使われ、実測で操作元が流入元へ混ざったため、操作元の独自パラメータは `interaction_source` に変更します。`filter_type` は現状送信していません。
+
+実際に送るイベントとパラメータは次の通りです。独自パラメータを探索レポートなどで使う場合は、GA4管理画面でイベントスコープのカスタムディメンションとして登録します。
+
+| イベント | 送信パラメータ |
+| --- | --- |
+| `page_view` | `page_title`, `page_location`, `page_referrer` |
+| `clip_search` | `interaction_source`, `has_query`, `has_creator_filter`, `has_game_filter`, `sort_type`, `result_bucket` |
+| `select_content` | `content_type`, `item_id`, `interaction_source` |
+| `clip_load_more` | `interaction_source`, `items_added`, `visible_bucket` |
+
+2026-10-04に `interaction_source`、`result_bucket`、`sort_type`、`has_query`、`has_creator_filter`、`has_game_filter`、`visible_bucket` の7項目を、GA4のイベントスコープのカスタムディメンションとして登録しました。登録以前のイベントへは遡及適用されず、登録後に収集されたデータから利用できます。`page_view`、`session_start`、`user_engagement`、`first_visit`、`scroll` のキーイベント指定は、Google Ads連携への影響警告が表示されたため変更していません。
 
 ## 2026-08-28 Vercel移行結果
 
