@@ -180,8 +180,11 @@
       </section>
     </div>
 
-    <script>
+    <script type="module">
+      import { loadClipData } from "../assets/clip-data-refresh.js";
+
       const DATA_PATH = "../clip-search-data.json";
+      const LIVE_DATA_PATH = "/live-clips.json";
       const TWITCH_EMBED_PARENT_HOST = "rukalun-page.vercel.app";
       const SWIPE_HINT_STORAGE_KEY = "rukalun.rukaShorts.swipeHintDismissed.v1";
       const SHORTS_INITIAL_RENDER_LIMIT = 12;
@@ -566,9 +569,7 @@
 
       async function loadShortsData() {
         try {
-          const response = await fetch(DATA_PATH);
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const data = await response.json();
+          const data = await loadClipData({ liveUrl: LIVE_DATA_PATH, fallbackUrl: DATA_PATH });
           allClips = Array.isArray(data.clips) ? data.clips : [];
           shortsPool = buildShortsPool(allClips);
           renderShortsFeed();

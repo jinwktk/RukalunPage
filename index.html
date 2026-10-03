@@ -164,7 +164,7 @@
             "distribution": {
               "@type": "DataDownload",
               "encodingFormat": "application/json",
-              "contentUrl": "https://rukalun-page.vercel.app/clip-search-data.json"
+              "contentUrl": "https://rukalun-page.vercel.app/live-clips.json"
             }
           }
         ]
@@ -1748,8 +1748,16 @@
       </div>
     </div>
 
-    <script>
+    <script type="module">
+      import {
+        classifyClipDataChange,
+        createVisibleDataPoller,
+        loadClipData,
+      } from "./assets/clip-data-refresh.js";
+
       const DATA_URL = "clip-search-data.json";
+      const LIVE_DATA_URL = "/live-clips.json";
+      const DATA_REFRESH_INTERVAL_MS = 60000;
       const CLIP_FAVORITES_STORAGE_KEY = "rukalun.clipSearch.favorites.v1";
       const INITIAL_LIMIT = 24;
       const MORE_STEP = 24;
@@ -1832,6 +1840,12 @@
       let searchAnalyticsTimer = null;
       let lastSearchAnalyticsSignature = "";
       let pendingSearchAnalyticsSource = "";
+      const dataPoller = createVisibleDataPoller({
+        refresh: () => refreshData(false),
+        intervalMs: DATA_REFRESH_INTERVAL_MS,
+        documentObject: document,
+        timerObject: window,
+      });
       const thumbnailObserver =
         "IntersectionObserver" in window
           ? new IntersectionObserver(
@@ -2497,9 +2511,35 @@
         return chip;
       }
 
+      function captureCardControlState(element) {
+        if (!(element instanceof HTMLElement)) return null;
+        const control = element.closest("[data-clip-control-index]");
+        const card = control?.closest("[data-clip-id]");
+        if (!control || !card?.dataset.clipId) return null;
+        return {
+          clipId: card.dataset.clipId,
+          controlIndex: control.dataset.clipControlIndex,
+        };
+      }
+
+      function restoreCardControlState(state, { focus = false } = {}) {
+        if (!state) return null;
+        const card = Array.from(elements.results.querySelectorAll("[data-clip-id]")).find(
+          (candidate) => candidate.dataset.clipId === state.clipId
+        );
+        const control = Array.from(card?.querySelectorAll("[data-clip-control-index]") ?? []).find(
+          (candidate) => candidate.dataset.clipControlIndex === state.controlIndex
+        );
+        if (focus && control instanceof HTMLElement) {
+          control.focus({ preventScroll: true });
+        }
+        return control instanceof HTMLElement ? control : null;
+      }
+
       function renderCard(clip) {
         const card = document.createElement("article");
         card.className = "clip-card";
+        card.dataset.clipId = clip.id;
         card.classList.toggle("is-favorite", isFavoriteClip(clip));
 
         const ribbon = document.createElement("div");
@@ -2517,6 +2557,7 @@
           ribbonMain.append(newBadge);
         }
         const views = document.createElement("span");
+        views.className = "clip-view-count";
         views.textContent = formatViews(clip.views);
         ribbon.append(ribbonMain, views);
 
@@ -2608,6 +2649,13 @@
         actions.append(favoriteButton, linkGroup);
         body.append(title, meta, actions);
         card.append(ribbon, thumbnail, body);
+        [thumbnail, game, creator, favoriteButton, link, copyButton].forEach(
+          (control, index) => {
+            if (control instanceof HTMLElement) {
+              control.dataset.clipControlIndex = String(index);
+            }
+          }
+        );
         return card;
       }
 
@@ -2642,10 +2690,16 @@
           return;
         }
 
+        const focusedControlState = captureCardControlState(document.activeElement);
+        const modalTriggerState = captureCardControlState(lastClipModalTrigger);
         thumbnailObserver?.disconnect();
         elements.results.replaceChildren();
         appendVisibleCards(0, Math.min(visibleLimit, filteredClips.length));
         updateResultState();
+        restoreCardControlState(focusedControlState, { focus: true });
+        if (modalTriggerState) {
+          lastClipModalTrigger = restoreCardControlState(modalTriggerState);
+        }
       }
 
       function hasMoreClips() {
@@ -2735,28 +2789,89 @@
         scheduleSearchAnalytics("random");
       }
 
-      async function loadData() {
+      function prepareClipData(data) {
+        return Array.isArray(data.clips)
+          ? data.clips.map((clip) => ({
+              ...clip,
+              searchText: normalizeText(`${clip.title} ${clip.creator} ${clip.gameName}`),
+            }))
+          : [];
+      }
+
+      function updateClipSyncTime(data) {
+        const recentSyncedAt = data.clipSync?.recentSyncedAt ?? null;
+        elements.heroClipSyncedAt.textContent = recentSyncedAt
+          ? formatDateTimeWithSeconds(recentSyncedAt)
+          : "未記録";
+      }
+
+      function restoreSelectedFilters(selectedCreator, selectedGame) {
+        if (selectedCreator) {
+          ensureCreatorOptions();
+          if (!Array.from(elements.creatorFilter.options).some((option) => option.value === selectedCreator)) {
+            const option = document.createElement("option");
+            option.value = selectedCreator;
+            option.textContent = `${selectedCreator} (0)`;
+            elements.creatorFilter.append(option);
+          }
+          elements.creatorFilter.value = selectedCreator;
+        }
+        if (selectedGame) {
+          if (!Array.from(elements.gameFilter.options).some((option) => option.value === selectedGame)) {
+            const option = document.createElement("option");
+            option.value = selectedGame;
+            option.textContent = `${selectedGame} (0)`;
+            elements.gameFilter.append(option);
+          }
+          elements.gameFilter.value = selectedGame;
+        }
+      }
+
+      function updateVisibleClipViews() {
+        filterClips();
+        const clipsById = new Map(allClips.map((clip) => [clip.id, clip]));
+        for (const card of elements.results.querySelectorAll("[data-clip-id]")) {
+          const clip = clipsById.get(card.dataset.clipId);
+          const viewCount = card.querySelector(".clip-view-count");
+          if (clip && viewCount) viewCount.textContent = formatViews(clip.views);
+        }
+        updateResultState();
+      }
+
+      async function refreshData(isInitialLoad) {
         try {
-          const response = await fetch(DATA_URL);
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const data = await response.json();
-          allClips = Array.isArray(data.clips)
-            ? data.clips.map((clip) => ({
-                ...clip,
-                searchText: normalizeText(`${clip.title} ${clip.creator} ${clip.gameName}`),
-              }))
-            : [];
+          const data = await loadClipData({
+            liveUrl: LIVE_DATA_URL,
+            fallbackUrl: isInitialLoad ? DATA_URL : null,
+          });
+          const nextClips = prepareClipData(data);
+          const shouldFlushSearchAnalytics = isInitialLoad || dataLoadState !== "loaded";
+          const changeType = shouldFlushSearchAnalytics
+            ? "content"
+            : classifyClipDataChange(allClips, nextClips);
+          updateClipSyncTime(data);
+          if (changeType === "none") return;
+
+          const selectedCreator = elements.creatorFilter.value;
+          const selectedGame = elements.gameFilter.value;
+          allClips = nextClips;
           dataLoadState = "loaded";
-          buildCreatorOptions(allClips);
-          buildGameOptions(allClips);
-          const recentSyncedAt = data.clipSync?.recentSyncedAt ?? null;
-          elements.heroClipSyncedAt.textContent = recentSyncedAt
-            ? formatDateTimeWithSeconds(recentSyncedAt)
-            : "未記録";
           setNotice(allClips.length === 0 ? "Clipデータがまだありません。しばらくしてから再読み込みしてください。" : "");
-          render();
-          flushPendingSearchAnalytics();
+          if (
+            changeType === "views" &&
+            elements.sortSelect.value !== "views" &&
+            getPopularPeriodMs(elements.sortSelect.value) === null
+          ) {
+            updateVisibleClipViews();
+          } else {
+            buildCreatorOptions(allClips);
+            buildGameOptions(allClips);
+            restoreSelectedFilters(selectedCreator, selectedGame);
+            render();
+          }
+          if (shouldFlushSearchAnalytics) flushPendingSearchAnalytics();
         } catch (error) {
+          if (!isInitialLoad) return;
           allClips = [];
           filteredClips = [];
           dataLoadState = "failed";
@@ -2768,6 +2883,11 @@
           setNotice("Clipデータを読み込めませんでした。しばらくしてから再読み込みしてください。");
           render();
         }
+      }
+
+      async function loadData() {
+        await refreshData(true);
+        dataPoller.start();
       }
 
       function scheduleDataLoad() {

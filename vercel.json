@@ -2,5 +2,31 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "buildCommand": "npm run vercel-build",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "git": {
+    "deploymentEnabled": {
+      "clip-data": false
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/live-clips.json",
+      "destination": "https://raw.githubusercontent.com/jinwktk/RukalunPage/clip-data/clip-search-data.json"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/live-clips.json",
+      "headers": [
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, s-maxage=60"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        }
+      ]
+    }
+  ]
 }

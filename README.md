@@ -6,19 +6,19 @@ Clip検索ページは、軽量な静的HTML/CSS/JSだけで動作します。�
 
 ## 構成
 
-- `index.html`: Clip検索ページ本体。`clip-search-data.json` を読み込み、ブラウザ内で検索・並び替え・お気に入り表示を行います。SEOキーワード拡張用の短い `keywordGuide`、Google Analytics 4 のGoogle tag、外部scriptを読み込まないKo-fi支援リンクもここで扱います。
+- `index.html`: Clip検索ページ本体。`/live-clips.json` から最新データを読み込み、表示中だけ60秒ごとに更新します。ブラウザ内で検索・並び替え・お気に入り表示を行い、更新時も検索条件や表示済み件数を維持します。初回の取得失敗時は同梱の `clip-search-data.json` を使い、更新中の失敗では現在の表示を維持します。SEOキーワード拡張用の短い `keywordGuide`、Google Analytics 4 のGoogle tag、外部scriptを読み込まないKo-fi支援リンクもここで扱います。
 - `shorts/index.html`: RukaShorts（るかしょーつ）の別ページです。TikTok / YouTube Shorts / Reels のように、PC/SPとも画面いっぱいのランダム縦送りClip視聴ページとして、activeな1件だけTwitch iframeを生成します。Topのファーストビューには `検索する / るかしょーつ / Twitchへ` の導線を置き、`るかしょーつ` は通常リンクで `./shorts/へ移動` します。`るかしょーつ` は赤ボタンに `bikkuri-56px.webp` スタンプ、`Twitchへ` は紫ボタンに `Hi-56px.webp` スタンプを添えます。検索パネルやClipカードからの導線は置かないため、カード操作は従来通り検索・Twitch・コピー中心です。初回表示時は `shorts-swipe-hint.png` の全画面案内を重ね、閉じたらlocalStorageに記録して同じブラウザでは次回以降は表示しません。全Clipから `crypto.getRandomValues()` でFisher-Yates shuffleし、同期順や先頭付近へ寄りにくいランダム順にします。初回案内を閉じるまではTwitch iframeを生成せず、閉じた後にactiveな1件だけ `autoplay=true` / `muted=false` で生成します。音付き自動再生はブラウザの自動再生ポリシーで止まる場合がありますが、ページ側では強制ミュートしません。Twitchプレイヤーはクリック可能にし、ミュート解除、音量変更、再生位置などのプレイヤー操作ができます。スクロール / スワイプ、Twitchの終了通知、終端付近の再生位置通知、または60秒フォールバックで次のClipへ自動スワイプします。プレイヤー操作で一時停止している間は60秒フォールバックを止めます。動画上に常時キューは置きません。検索SEO用のページではないため `noindex,follow` とし、サイトマップには含めません。
 - `ruka-shorts.html`: 旧RukaShorts URL互換のリダイレクトページです。`noindex,follow` とし、クエリとハッシュを保ったまま `./shorts/` へ移動します。
 - `clip-search.html`: 旧形式URL互換のリダイレクトページ。クエリ文字列を維持して `index.html` へ移動します。
 - `jinnymeia/index.html`: GA4で確認した `/jinnymeia` への誤流入を、Ko-fi支援ページ `https://ko-fi.com/jinnymeia` へ逃がす互換リダイレクトです。検索用ページではないため `noindex,follow` とし、サイトマップには含めません。
-- `clip-search-data.json`: twitchRaid Bot が生成・pushする公開Clipデータです。
+- `clip-search-data.json`: 同梱のClipデータです。最新データはtwitchRaid Botが `clip-data` ブランチへ更新する同名JSONを、`/live-clips.json` 経由で動的に読み込みます。Shortsも開いた時に最新データを読み込み、再生中のリストは入れ替えません。
 - `sitemap.xml`: 検索エンジンと Search Console 向けに、canonical な公開URLだけを掲載するサイトマップです。
 - `sitemap.txt`: Search Console で XML サイトマップ取得が不安定な場合に使うテキスト形式サイトマップです。canonical な公開URLだけを1行で掲載します。
 - `robots.txt`: Vercelのホストルートでクロールを許可し、canonicalな `sitemap.xml` を案内します。
 - `googled9f512eea3a99dc1.html`: Google Search Console のHTMLファイル所有権確認用ファイルです。Search Console の認証維持に使うため削除しません。
 - `assets/rukalun/`: Clip検索ページで使う軽量化済み画像、favicon、ボタン小アイコンです。検索結果向けfaviconは小さい表示枠でも絵柄が見えるよう、少しズームした版を使います。ページ上の小アイコンは56px WebPを使い、112px PNGは元素材互換として残します。`shorts-swipe-hint.png` はRukaShorts初回表示のスワイプ案内画像です。
 - `.gitattributes`: `clip-search-data.json` を生成物扱いにし、同期時刻更新や整形差分でGitHubの差分表示が膨らまないようにします。
-- `vercel.json`: Vercelを静的サイトとしてビルドし、公開前にClip JSONのminifyと全テストを実行する設定です。Vercelプロジェクト `rukalun-page` はGitHubリポジトリへ接続し、`main` のpushを本番へ反映します。
+- `vercel.json`: Vercelを静的サイトとしてビルドし、公開前に同梱Clip JSONのminifyと全テストを実行する設定です。`main` のコード変更は本番へ反映し、`clip-data` ブランチのデプロイは無効にしています。`/live-clips.json` はGitHubの `clip-data` ブランチへ外部rewriteし、データ更新でビルドやデプロイを発生させません。
 - `tests/page.test.mjs`: Node.js 標準テストランナーで公開HTML、RukaShorts、必須ファイルを検証します。
 
 ## ページ仕様
@@ -113,10 +113,10 @@ CLIP_SEARCH_AUTO_PUBLISH_ENABLED=true
 CLIP_SEARCH_PUBLISH_REPO_DIR=C:\Users\mlove\Documents\GitHub\RukalunPage
 CLIP_SEARCH_DATA_PATH=C:\Users\mlove\Documents\GitHub\RukalunPage\clip-search-data.json
 CLIP_SEARCH_PUBLISH_REMOTE=origin
-CLIP_SEARCH_PUBLISH_BRANCH=main
+CLIP_SEARCH_PUBLISH_BRANCH=clip-data
 ```
 
-Bot の直近Clip同期完了後、`clip-search-data.json` に差分があればこのリポジトリの `main` へ commit/push します。GitHub接続済みのVercelがpushを検出し、`npm run vercel-build` で最新データを1行化して全テストを通した後だけ本番へ反映します。これにより、Botの同期形式と公開時のネットワーク重量を分離します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしているため、同期時刻だけの更新や整形戻りでGitHub上の差分表示を肥大化させない運用にします。履歴整理を行う場合は、件名が `Clip検索JSONを同期時刻更新` のコミットだけを対象にし、公開ページの開発コミットは残します。
+Botの公開用cloneは `clip-data` ブランチをcheckoutし、直近Clip同期完了後にClipの追加・削除・再生数などの変更があれば、同ブランチへcommit/pushします。`main` はページのコード更新用に維持します。`generatedAt` と `clipSync.recentSyncedAt` だけの変更やJSONの整形差分では、twitchRaid側のexporterが既存ファイルを維持します。Vercelは `clip-data` のpushではデプロイを作成せず、ページから `/live-clips.json` を取得した時に最新の公開JSONを返します。Vercel Functionや新しい認証情報は使用しません。GitHub側のキャッシュにより、更新の反映には数分かかる場合があります。閲覧のHTTPリクエストと転送量は通常の無料枠を使用します。`main` を変更する場合だけ、`npm run vercel-build` で同梱JSONを1行化して全テストを通した後に本番へ反映します。`clip-search-data.json` は `.gitattributes` で生成物かつ非diff対象にしています。
 
 手元でVercelビルド相当の状態を確認する場合は、`npm run vercel-build` を実行します。`npm run minify:data -- <JSONパス>` の代わりに、スクリプトへ任意パスを直接渡して一時ファイルの正規化も検証できます。通常運用では既定の `clip-search-data.json` だけを対象にします。
 

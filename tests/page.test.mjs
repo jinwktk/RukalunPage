@@ -27,7 +27,7 @@ const faviconPngUrl = `${pageUrl}assets/rukalun/clip-search-favicon.png`;
 const appleTouchIconUrl = `${pageUrl}assets/rukalun/clip-search-apple-touch-icon.png`;
 const seoDescription =
   "るっかるんのTwitch（ツイッチ）配信Clip・クリップや切り抜きを、タイトル・作成者・ゲーム名で探せる公開検索ページです。FF14、LoL、VALORANT、雑談の名場面を軽く回収できます。";
-const dataUrl = `${pageUrl}clip-search-data.json`;
+const dataUrl = `${pageUrl}live-clips.json`;
 const googleVerificationFile = "googled9f512eea3a99dc1.html";
 const pageUpdatedOn = "2026-09-28";
 const seoKeywordTerms = [
@@ -188,6 +188,7 @@ test("required page assets and data are present", () => {
     "clip-search-data.json",
     googleVerificationFile,
     "robots.txt",
+    "assets/clip-data-refresh.js",
     "assets/rukalun/clip-search-hero.png",
     "assets/rukalun/clip-search-hero.webp",
     "assets/rukalun/clip-search-og.jpg",
@@ -689,7 +690,7 @@ test("index.html installs the GA4 Google tag after critical hero discovery", () 
   assert.match(html, /function flushPendingSearchAnalytics\(\)/);
   assert.match(html, /const source = pendingSearchAnalyticsSource \|\| \(initialQuery \? "url" : ""\);/);
   assert.match(html, /pendingSearchAnalyticsSource = "";/);
-  assert.match(html, /render\(\);\s*flushPendingSearchAnalytics\(\);/);
+  assert.match(html, /if \(shouldFlushSearchAnalytics\) flushPendingSearchAnalytics\(\);/);
   assert.match(contentSelectionBlock, /CONTENT_IDS\.has\(itemId\)/);
   assert.match(contentSelectionBlock, /CONTENT_SOURCES\.has\(source\)/);
   assert.match(contentSelectionBlock, /trackAnalyticsEvent\("select_content", \{/);
