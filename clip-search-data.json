@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-05T10:40:04.925Z",
-  "total": 2860,
+  "generatedAt": "2026-10-05T11:10:19.092Z",
+  "total": 2861,
   "clipSync": {
-    "recentSyncedAt": "2026-10-05T10:40:03.053Z"
+    "recentSyncedAt": "2026-10-05T11:10:17.698Z"
   },
   "clips": [
+    {
+      "id": "AffluentLazyWaffleFunRun-3Fepgqn8yCEgwu0x",
+      "url": "https://www.twitch.tv/rukalun/clip/AffluentLazyWaffleFunRun-3Fepgqn8yCEgwu0x",
+      "title": "るっか転生",
+      "creator": "くしゃこら",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/6b889789-d38a-4426-8b61-a7a097b7c8b2/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-05T11:03:38.000Z",
+      "views": 1
+    },
     {
       "id": "RelatedSquareParrotYouWHY-E2tLr14DrH_6ow9o",
       "url": "https://www.twitch.tv/rukalun/clip/RelatedSquareParrotYouWHY-E2tLr14DrH_6ow9o",
