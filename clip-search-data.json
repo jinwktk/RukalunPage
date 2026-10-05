@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-05T05:21:20.530Z",
-  "total": 2858,
+  "generatedAt": "2026-10-05T10:37:23.895Z",
+  "total": 2859,
   "clipSync": {
-    "recentSyncedAt": "2026-10-05T05:21:19.017Z"
+    "recentSyncedAt": "2026-10-05T10:37:22.368Z"
   },
   "clips": [
+    {
+      "id": "BadRacyGrousePoooound-T-JOId4WLAEWShpa",
+      "url": "https://www.twitch.tv/rukalun/clip/BadRacyGrousePoooound-T-JOId4WLAEWShpa",
+      "title": "10/5 バーキン禁止令",
+      "creator": "かじまる",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/35cb64b9-0d68-4f87-ab12-5b2fe0c6b8fb/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-05T06:08:39.000Z",
+      "views": 2
+    },
     {
       "id": "GorgeousAnimatedLyrebirdDoggo-eNAT3-PUmuT516uX",
       "url": "https://www.twitch.tv/rukalun/clip/GorgeousAnimatedLyrebirdDoggo-eNAT3-PUmuT516uX",
@@ -13,7 +23,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/02d837b3-bf7b-4bce-abad-158ecdf935fb/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-10-05T00:37:10.000Z",
-      "views": 10
+      "views": 11
     },
     {
       "id": "FlirtySourBoarFUNgineer-ycYSzcmtVUafixAa",
