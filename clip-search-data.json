@@ -1,10 +1,30 @@
 {
-  "generatedAt": "2026-10-04T12:00:02.116Z",
-  "total": 2856,
+  "generatedAt": "2026-10-05T05:21:20.530Z",
+  "total": 2858,
   "clipSync": {
-    "recentSyncedAt": "2026-10-04T12:00:01.479Z"
+    "recentSyncedAt": "2026-10-05T05:21:19.017Z"
   },
   "clips": [
+    {
+      "id": "GorgeousAnimatedLyrebirdDoggo-eNAT3-PUmuT516uX",
+      "url": "https://www.twitch.tv/rukalun/clip/GorgeousAnimatedLyrebirdDoggo-eNAT3-PUmuT516uX",
+      "title": "trrrrrrrイヤァ",
+      "creator": "acchonbrike",
+      "gameName": "League of Legends",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/02d837b3-bf7b-4bce-abad-158ecdf935fb/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-05T00:37:10.000Z",
+      "views": 10
+    },
+    {
+      "id": "FlirtySourBoarFUNgineer-ycYSzcmtVUafixAa",
+      "url": "https://www.twitch.tv/rukalun/clip/FlirtySourBoarFUNgineer-ycYSzcmtVUafixAa",
+      "title": "tntnやばい",
+      "creator": "バルス9029",
+      "gameName": "League of Legends",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/258d5cf3-9ef6-430d-911e-0f6f44fea448/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-05T00:36:51.000Z",
+      "views": 2
+    },
     {
       "id": "BlitheSpikyBibimbapChocolateRain-RVzz1Ub5Vc9plqcy",
       "url": "https://www.twitch.tv/rukalun/clip/BlitheSpikyBibimbapChocolateRain-RVzz1Ub5Vc9plqcy",
