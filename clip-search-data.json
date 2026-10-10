@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-10T15:36:44.927Z",
-  "total": 2865,
+  "generatedAt": "2026-10-10T17:40:12.446Z",
+  "total": 2866,
   "clipSync": {
-    "recentSyncedAt": "2026-10-10T15:36:43.631Z"
+    "recentSyncedAt": "2026-10-10T17:40:10.010Z"
   },
   "clips": [
+    {
+      "id": "HedonisticComfortableSnakeBleedPurple-yPMKPqghZ91eGpUk",
+      "url": "https://www.twitch.tv/rukalun/clip/HedonisticComfortableSnakeBleedPurple-yPMKPqghZ91eGpUk",
+      "title": "わっちゅ",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/fcaeb8f0-dd47-4c6f-af3d-a4b0354f63fc/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-10T17:33:36.000Z",
+      "views": 1
+    },
     {
       "id": "SpookySneakyCougarTakeNRG-18cxgn2K82rb9qF3",
       "url": "https://www.twitch.tv/rukalun/clip/SpookySneakyCougarTakeNRG-18cxgn2K82rb9qF3",
