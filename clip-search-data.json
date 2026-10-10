@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-10T17:40:12.446Z",
-  "total": 2866,
+  "generatedAt": "2026-10-11T07:22:48.235Z",
+  "total": 2867,
   "clipSync": {
-    "recentSyncedAt": "2026-10-10T17:40:10.010Z"
+    "recentSyncedAt": "2026-10-11T07:22:46.919Z"
   },
   "clips": [
+    {
+      "id": "FaintMotionlessMuleTBCheesePull-fh8jlBgdZ9jb2bvm",
+      "url": "https://www.twitch.tv/rukalun/clip/FaintMotionlessMuleTBCheesePull-fh8jlBgdZ9jb2bvm",
+      "title": "5000レベルでも無理",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f49b94ea-a782-4a29-87dc-bc27c42fea70/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-10T17:49:17.000Z",
+      "views": 3
+    },
     {
       "id": "HedonisticComfortableSnakeBleedPurple-yPMKPqghZ91eGpUk",
       "url": "https://www.twitch.tv/rukalun/clip/HedonisticComfortableSnakeBleedPurple-yPMKPqghZ91eGpUk",
@@ -2083,7 +2093,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/25ca45f2-5ba3-413f-ad27-0e1cae02bf94/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-05-15T04:46:04.000Z",
-      "views": 28
+      "views": 29
     },
     {
       "id": "GiantFlaccidDillFutureMan-FfPCeftpGD-KzLuF",
@@ -27873,7 +27883,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cac0cdcc-cc66-4fed-b583-c71b812e5090/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2017-12-11T23:06:06.000Z",
-      "views": 4769
+      "views": 4770
     },
     {
       "id": "AdventurousColdbloodedVelociraptorCharlietheUnicorn",
