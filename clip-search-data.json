@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-10T07:22:34.402Z",
-  "total": 2864,
+  "generatedAt": "2026-10-10T15:36:44.927Z",
+  "total": 2865,
   "clipSync": {
-    "recentSyncedAt": "2026-10-10T07:22:33.344Z"
+    "recentSyncedAt": "2026-10-10T15:36:43.631Z"
   },
   "clips": [
+    {
+      "id": "SpookySneakyCougarTakeNRG-18cxgn2K82rb9qF3",
+      "url": "https://www.twitch.tv/rukalun/clip/SpookySneakyCougarTakeNRG-18cxgn2K82rb9qF3",
+      "title": "０ダメ",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/bfd85461-cf68-42e7-a314-cb4ca4038c69/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-10T15:20:20.000Z",
+      "views": 2
+    },
     {
       "id": "ExcitedBoringLapwingOptimizePrime--lRcoNWc7VQ_5FRb",
       "url": "https://www.twitch.tv/rukalun/clip/ExcitedBoringLapwingOptimizePrime--lRcoNWc7VQ_5FRb",
