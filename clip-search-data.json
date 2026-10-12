@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-11T07:22:48.235Z",
-  "total": 2867,
+  "generatedAt": "2026-10-12T14:29:23.482Z",
+  "total": 2868,
   "clipSync": {
-    "recentSyncedAt": "2026-10-11T07:22:46.919Z"
+    "recentSyncedAt": "2026-10-12T14:29:22.126Z"
   },
   "clips": [
+    {
+      "id": "IcyPopularGazelleNomNom-MIiS1-L1NluCaUqL",
+      "url": "https://www.twitch.tv/rukalun/clip/IcyPopularGazelleNomNom-MIiS1-L1NluCaUqL",
+      "title": "やっぶわあああい",
+      "creator": "バルス9029",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/939c4719-109e-49f5-b7d2-40a7ea071871/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-12T08:44:32.000Z",
+      "views": 9
+    },
     {
       "id": "FaintMotionlessMuleTBCheesePull-fh8jlBgdZ9jb2bvm",
       "url": "https://www.twitch.tv/rukalun/clip/FaintMotionlessMuleTBCheesePull-fh8jlBgdZ9jb2bvm",
