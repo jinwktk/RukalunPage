@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-12T19:35:40.475Z",
-  "total": 2869,
+  "generatedAt": "2026-10-13T19:06:47.171Z",
+  "total": 2870,
   "clipSync": {
-    "recentSyncedAt": "2026-10-12T19:35:39.051Z"
+    "recentSyncedAt": "2026-10-13T19:06:45.198Z"
   },
   "clips": [
+    {
+      "id": "TawdryWimpyEggnogDoritosChip-rPsEpqwr7pZlYH0M",
+      "url": "https://www.twitch.tv/rukalun/clip/TawdryWimpyEggnogDoritosChip-rPsEpqwr7pZlYH0M",
+      "title": "勝つよ･･･ｵﾃﾞ･･･",
+      "creator": "さきさかまぼこ",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/71e4e12b-b0d2-423b-9261-b593ae446283/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-13T10:29:13.000Z",
+      "views": 2
+    },
     {
       "id": "ArborealSparklyCookieVoteNay-9WOJiXNxeFP3wIrm",
       "url": "https://www.twitch.tv/rukalun/clip/ArborealSparklyCookieVoteNay-9WOJiXNxeFP3wIrm",
@@ -23,7 +33,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/939c4719-109e-49f5-b7d2-40a7ea071871/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-10-12T08:44:32.000Z",
-      "views": 13
+      "views": 16
     },
     {
       "id": "FaintMotionlessMuleTBCheesePull-fh8jlBgdZ9jb2bvm",
