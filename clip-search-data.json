@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-14T19:42:47.375Z",
-  "total": 2872,
+  "generatedAt": "2026-10-16T19:45:42.422Z",
+  "total": 2873,
   "clipSync": {
-    "recentSyncedAt": "2026-10-14T19:42:45.926Z"
+    "recentSyncedAt": "2026-10-16T19:45:41.049Z"
   },
   "clips": [
+    {
+      "id": "DepressedCleverEmuWoofer-70tJFid5BG0-7BmD",
+      "url": "https://www.twitch.tv/rukalun/clip/DepressedCleverEmuWoofer-70tJFid5BG0-7BmD",
+      "title": "お\"ぉ〜んっ♡",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f121a89b-f830-4aec-b8b6-756de26536ee/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-15T16:26:38.000Z",
+      "views": 5
+    },
     {
       "id": "PlayfulAgileLEDNinjaGrumpy-QmVm74gMmIIScpe-",
       "url": "https://www.twitch.tv/rukalun/clip/PlayfulAgileLEDNinjaGrumpy-QmVm74gMmIIScpe-",
@@ -273,7 +283,7 @@
       "gameName": "Valheim",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/5ef52ad9-59ec-4c50-b964-d4806eced5a8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-09-20T08:04:57.000Z",
-      "views": 11
+      "views": 12
     },
     {
       "id": "RudeUgliestCroissantBCWarrior-XOjurVqlsB2T1lEJ",
@@ -553,7 +563,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c26f0312-48bb-489b-baea-b8b9f8e9b5ae/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-25T10:13:02.000Z",
-      "views": 185
+      "views": 186
     },
     {
       "id": "InexpensiveTrustworthyVampireTakeNRG-l6lXd9bORcLZK2ni",
@@ -22583,7 +22593,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f5f6e251-010e-4cb7-ae19-90bb1f810409/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-10-26T22:44:16.000Z",
-      "views": 198
+      "views": 201
     },
     {
       "id": "StupidAnimatedMarrowTBCheesePull",
@@ -24813,7 +24823,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/adc7ed6d-d5f3-4c63-893b-c69623f51209/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-05-26T08:14:28.000Z",
-      "views": 2567
+      "views": 2568
     },
     {
       "id": "LuckySillyHornetWutFace",
@@ -27883,7 +27893,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/bd563b32-b2f4-4cf6-9a7e-9641be96cb9c/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2017-12-13T11:59:55.000Z",
-      "views": 2435
+      "views": 2436
     },
     {
       "id": "HotApatheticNightingaleFeelsBadMan",
