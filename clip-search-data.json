@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-19T19:41:26.911Z",
-  "total": 2874,
+  "generatedAt": "2026-10-20T11:50:33.934Z",
+  "total": 2875,
   "clipSync": {
-    "recentSyncedAt": "2026-10-19T19:41:25.514Z"
+    "recentSyncedAt": "2026-10-20T11:50:32.580Z"
   },
   "clips": [
+    {
+      "id": "AgilePoorStarlingDatBoi-twmTJFBHYsBpM8We",
+      "url": "https://www.twitch.tv/rukalun/clip/AgilePoorStarlingDatBoi-twmTJFBHYsBpM8We",
+      "title": "じゃじゃバーガー",
+      "creator": "バルス9029",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e94bbbaf-2c98-4a07-89fe-eaa0f66435c5/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-20T11:43:37.000Z",
+      "views": 1
+    },
     {
       "id": "PreciousCourteousGerbilTBTacoLeft-tiliH6iWrkzIp2Lu",
       "url": "https://www.twitch.tv/rukalun/clip/PreciousCourteousGerbilTBTacoLeft-tiliH6iWrkzIp2Lu",
