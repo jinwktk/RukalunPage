@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-25T16:32:15.221Z",
-  "total": 2880,
+  "generatedAt": "2026-10-25T19:46:07.896Z",
+  "total": 2881,
   "clipSync": {
-    "recentSyncedAt": "2026-10-25T16:32:13.882Z"
+    "recentSyncedAt": "2026-10-25T19:46:06.521Z"
   },
   "clips": [
+    {
+      "id": "InquisitiveHardChinchillaThunBeast-1k_GQUAQygo__67D",
+      "url": "https://www.twitch.tv/rukalun/clip/InquisitiveHardChinchillaThunBeast-1k_GQUAQygo__67D",
+      "title": "るかいんぐりっしゅ",
+      "creator": "バルス9029",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7ad11efd-9ca4-4938-a3e7-749ae3b49143/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-25T19:31:42.000Z",
+      "views": 3
+    },
     {
       "id": "CleanAlertVelociraptorArsonNoSexy-l1_yme21iPQCvuo9",
       "url": "https://www.twitch.tv/rukalun/clip/CleanAlertVelociraptorArsonNoSexy-l1_yme21iPQCvuo9",
