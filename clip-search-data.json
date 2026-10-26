@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-26T01:35:38.463Z",
-  "total": 2883,
+  "generatedAt": "2026-10-26T20:16:21.550Z",
+  "total": 2884,
   "clipSync": {
-    "recentSyncedAt": "2026-10-26T01:35:37.171Z"
+    "recentSyncedAt": "2026-10-26T20:16:22.082Z"
   },
   "clips": [
+    {
+      "id": "AlertCoyLeopardJKanStyle-mmwwPhluaAdIE--D",
+      "url": "https://www.twitch.tv/rukalun/clip/AlertCoyLeopardJKanStyle-mmwwPhluaAdIE--D",
+      "title": "わっちゅ",
+      "creator": "HeZNa",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/41554cf1-2f74-4d5d-888c-5dcf26290e23/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-26T16:16:29.000Z",
+      "views": 7
+    },
     {
       "id": "DrabKindSoymilkDxAbomb-FYC8Ffn2wmU2AWqm",
       "url": "https://www.twitch.tv/rukalun/clip/DrabKindSoymilkDxAbomb-FYC8Ffn2wmU2AWqm",
@@ -23,7 +33,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e9aa4c5a-b411-4f81-8917-4946e62168ca/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-10-25T19:43:56.000Z",
-      "views": 6
+      "views": 13
     },
     {
       "id": "InquisitiveHardChinchillaThunBeast-1k_GQUAQygo__67D",
@@ -53,7 +63,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ea3340cd-102f-4ea8-9de2-20edc9c3d49d/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-10-25T03:55:19.000Z",
-      "views": 8
+      "views": 9
     },
     {
       "id": "AthleticGiftedChinchillaMoreCowbell-_B8DCCLgsdUqQRLT",
