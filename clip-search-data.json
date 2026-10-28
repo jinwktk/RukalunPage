@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-28T01:13:42.423Z",
-  "total": 2886,
+  "generatedAt": "2026-10-28T18:48:39.667Z",
+  "total": 2887,
   "clipSync": {
-    "recentSyncedAt": "2026-10-28T01:13:41.122Z"
+    "recentSyncedAt": "2026-10-28T18:48:38.249Z"
   },
   "clips": [
+    {
+      "id": "IncredulousGiftedDiscRedCoat-SFBe6YY9yYU-8dYa",
+      "url": "https://www.twitch.tv/rukalun/clip/IncredulousGiftedDiscRedCoat-SFBe6YY9yYU-8dYa",
+      "title": "はぐち",
+      "creator": "バルス9029",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/7fef98b4-8fc3-4c8d-9c06-eb16104d3c62/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-28T07:21:59.000Z",
+      "views": 12
+    },
     {
       "id": "SuaveRichRadicchioStoneLightning-ixmLwe487dl2Ocbt",
       "url": "https://www.twitch.tv/rukalun/clip/SuaveRichRadicchioStoneLightning-ixmLwe487dl2Ocbt",
@@ -13,7 +23,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/dfffb7fb-886c-4e12-a19b-dd933ae1042e/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-10-27T16:54:49.000Z",
-      "views": 7
+      "views": 8
     },
     {
       "id": "BusySteamyArtichokeFrankerZ-MHIEOeTmD4aBirjN",
