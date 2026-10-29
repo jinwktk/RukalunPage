@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-29T20:00:02.042Z",
-  "total": 2891,
+  "generatedAt": "2026-10-29T21:32:32.060Z",
+  "total": 2892,
   "clipSync": {
-    "recentSyncedAt": "2026-10-29T20:00:00.676Z"
+    "recentSyncedAt": "2026-10-29T21:32:30.588Z"
   },
   "clips": [
+    {
+      "id": "HealthyCoyAirGuitarBleedPurple-t5fUspeexHpr6uhV",
+      "url": "https://www.twitch.tv/rukalun/clip/HealthyCoyAirGuitarBleedPurple-t5fUspeexHpr6uhV",
+      "title": "バロラントやってるるっかへ",
+      "creator": "バルス9029",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/012f9985-2119-4069-8cca-7247a8a66973/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-29T21:19:52.000Z",
+      "views": 2
+    },
     {
       "id": "DaintyOriginalHyenaBatChest-z2K3zv29pYPM_KE8",
       "url": "https://www.twitch.tv/rukalun/clip/DaintyOriginalHyenaBatChest-z2K3zv29pYPM_KE8",
