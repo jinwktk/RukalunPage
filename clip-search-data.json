@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-29T16:22:12.362Z",
-  "total": 2890,
+  "generatedAt": "2026-10-29T20:00:02.042Z",
+  "total": 2891,
   "clipSync": {
-    "recentSyncedAt": "2026-10-29T16:22:10.936Z"
+    "recentSyncedAt": "2026-10-29T20:00:00.676Z"
   },
   "clips": [
+    {
+      "id": "DaintyOriginalHyenaBatChest-z2K3zv29pYPM_KE8",
+      "url": "https://www.twitch.tv/rukalun/clip/DaintyOriginalHyenaBatChest-z2K3zv29pYPM_KE8",
+      "title": "あちょのあちょ",
+      "creator": "バルス9029",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f5aad8e2-49ba-423e-8ab2-f247af6322f6/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-29T19:57:14.000Z",
+      "views": 1
+    },
     {
       "id": "StrongKitschyKathySquadGoals-feycP87XfEE5X3rh",
       "url": "https://www.twitch.tv/rukalun/clip/StrongKitschyKathySquadGoals-feycP87XfEE5X3rh",
