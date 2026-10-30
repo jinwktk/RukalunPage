@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-30T11:06:01.575Z",
-  "total": 2894,
+  "generatedAt": "2026-10-30T15:06:25.213Z",
+  "total": 2895,
   "clipSync": {
-    "recentSyncedAt": "2026-10-30T11:06:00.218Z"
+    "recentSyncedAt": "2026-10-30T15:06:23.779Z"
   },
   "clips": [
+    {
+      "id": "DarlingFragileCrabsBibleThump-f_Y_ZYByqNCagyT8",
+      "url": "https://www.twitch.tv/rukalun/clip/DarlingFragileCrabsBibleThump-f_Y_ZYByqNCagyT8",
+      "title": "ACE",
+      "creator": "かじまる",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e512141c-9f64-48d5-a360-f6ec21848335/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-30T14:50:16.000Z",
+      "views": 2
+    },
     {
       "id": "PoorHandsomeCamelDansGame-JiIqhot5P_gM5wYk",
       "url": "https://www.twitch.tv/rukalun/clip/PoorHandsomeCamelDansGame-JiIqhot5P_gM5wYk",
