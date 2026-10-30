@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-30T15:06:25.213Z",
-  "total": 2895,
+  "generatedAt": "2026-10-30T15:30:07.961Z",
+  "total": 2896,
   "clipSync": {
-    "recentSyncedAt": "2026-10-30T15:06:23.779Z"
+    "recentSyncedAt": "2026-10-30T15:30:06.630Z"
   },
   "clips": [
+    {
+      "id": "BovineDifferentBatteryUnSane-fdB3a9WhJJ2Elold",
+      "url": "https://www.twitch.tv/rukalun/clip/BovineDifferentBatteryUnSane-fdB3a9WhJJ2Elold",
+      "title": "はぐち３",
+      "creator": "バルス9029",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/2ce7a8b1-3cf1-40a8-945c-13ad743166db/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-30T15:27:22.000Z",
+      "views": 1
+    },
     {
       "id": "DarlingFragileCrabsBibleThump-f_Y_ZYByqNCagyT8",
       "url": "https://www.twitch.tv/rukalun/clip/DarlingFragileCrabsBibleThump-f_Y_ZYByqNCagyT8",
