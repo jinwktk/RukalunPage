@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-30T15:30:07.961Z",
-  "total": 2896,
+  "generatedAt": "2026-10-30T17:57:23.653Z",
+  "total": 2897,
   "clipSync": {
-    "recentSyncedAt": "2026-10-30T15:30:06.630Z"
+    "recentSyncedAt": "2026-10-30T17:57:21.986Z"
   },
   "clips": [
+    {
+      "id": "AnnoyingFuriousGullChocolateRain-qb4h0fdTPB0lWj-4",
+      "url": "https://www.twitch.tv/rukalun/clip/AnnoyingFuriousGullChocolateRain-qb4h0fdTPB0lWj-4",
+      "title": "余裕がないんでしょ",
+      "creator": "バルス9029",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c572ea28-437c-4c34-9b34-86d24bd3eda2/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-30T17:32:10.000Z",
+      "views": 2
+    },
     {
       "id": "BovineDifferentBatteryUnSane-fdB3a9WhJJ2Elold",
       "url": "https://www.twitch.tv/rukalun/clip/BovineDifferentBatteryUnSane-fdB3a9WhJJ2Elold",
