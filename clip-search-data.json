@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-10-30T01:12:31.078Z",
-  "total": 2893,
+  "generatedAt": "2026-10-30T11:06:01.575Z",
+  "total": 2894,
   "clipSync": {
-    "recentSyncedAt": "2026-10-30T01:12:29.613Z"
+    "recentSyncedAt": "2026-10-30T11:06:00.218Z"
   },
   "clips": [
+    {
+      "id": "PoorHandsomeCamelDansGame-JiIqhot5P_gM5wYk",
+      "url": "https://www.twitch.tv/rukalun/clip/PoorHandsomeCamelDansGame-JiIqhot5P_gM5wYk",
+      "title": "犯人視点",
+      "creator": "くしゃこら",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b4983f0a-75b6-4e1e-9b0b-72bfd29b4b67/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-10-30T10:52:30.000Z",
+      "views": 3
+    },
     {
       "id": "ImpartialUgliestAniseWOOP-i65PbIUQDze0m327",
       "url": "https://www.twitch.tv/rukalun/clip/ImpartialUgliestAniseWOOP-i65PbIUQDze0m327",
