@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-02T18:26:32.606Z",
-  "total": 2901,
+  "generatedAt": "2026-11-02T20:50:11.585Z",
+  "total": 2902,
   "clipSync": {
-    "recentSyncedAt": "2026-11-02T18:26:30.929Z"
+    "recentSyncedAt": "2026-11-02T20:50:10.070Z"
   },
   "clips": [
+    {
+      "id": "CorrectCreativeDolphinArsonNoSexy-YLM9l1bepGNSLmTq",
+      "url": "https://www.twitch.tv/rukalun/clip/CorrectCreativeDolphinArsonNoSexy-YLM9l1bepGNSLmTq",
+      "title": "センシティブなカオナシ",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ea4fa189-0cb7-44e4-a311-47a00d0f5082/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-02T20:41:57.000Z",
+      "views": 1
+    },
     {
       "id": "ResilientBombasticTrayGrammarKing-eYcJvlE9zYHs8fp6",
       "url": "https://www.twitch.tv/rukalun/clip/ResilientBombasticTrayGrammarKing-eYcJvlE9zYHs8fp6",
