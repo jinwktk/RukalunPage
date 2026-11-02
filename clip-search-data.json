@@ -1,10 +1,30 @@
 {
-  "generatedAt": "2026-11-02T21:11:50.020Z",
-  "total": 2903,
+  "generatedAt": "2026-11-03T00:11:44.152Z",
+  "total": 2905,
   "clipSync": {
-    "recentSyncedAt": "2026-11-02T21:11:48.322Z"
+    "recentSyncedAt": "2026-11-03T00:11:42.854Z"
   },
   "clips": [
+    {
+      "id": "FitEsteemedGoldfishCclamChamp-fPwffgZtNt7XnvcZ",
+      "url": "https://www.twitch.tv/rukalun/clip/FitEsteemedGoldfishCclamChamp-fPwffgZtNt7XnvcZ",
+      "title": "「危ないからね」今日はこれでいいや",
+      "creator": "バルス9029",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/57a03c3b-59e4-4bee-bb62-bb66b8aa5552/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-02T22:18:24.000Z",
+      "views": 2
+    },
+    {
+      "id": "DrabObeseGrasshopperKappa-aJJqtg9fuzjMycPd",
+      "url": "https://www.twitch.tv/rukalun/clip/DrabObeseGrasshopperKappa-aJJqtg9fuzjMycPd",
+      "title": "いったんすまん伝わらん...",
+      "creator": "バルス9029",
+      "gameName": "VALORANT",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/37453b66-1b41-4898-bb1c-a1fe07f227a3/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-02T22:12:43.000Z",
+      "views": 1
+    },
     {
       "id": "SuperFairChamoisOMGScoots-caVpqLJ9Cf88LC8J",
       "url": "https://www.twitch.tv/rukalun/clip/SuperFairChamoisOMGScoots-caVpqLJ9Cf88LC8J",
@@ -13,7 +33,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/148efea3-f382-49f5-a9e8-b95bc976f6a1/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-11-02T20:59:59.000Z",
-      "views": 4
+      "views": 5
     },
     {
       "id": "CorrectCreativeDolphinArsonNoSexy-YLM9l1bepGNSLmTq",
