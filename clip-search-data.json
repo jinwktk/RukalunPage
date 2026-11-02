@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-02T20:50:11.585Z",
-  "total": 2902,
+  "generatedAt": "2026-11-02T21:11:50.020Z",
+  "total": 2903,
   "clipSync": {
-    "recentSyncedAt": "2026-11-02T20:50:10.070Z"
+    "recentSyncedAt": "2026-11-02T21:11:48.322Z"
   },
   "clips": [
+    {
+      "id": "SuperFairChamoisOMGScoots-caVpqLJ9Cf88LC8J",
+      "url": "https://www.twitch.tv/rukalun/clip/SuperFairChamoisOMGScoots-caVpqLJ9Cf88LC8J",
+      "title": "心臓飛び出た",
+      "creator": "かじまる",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/148efea3-f382-49f5-a9e8-b95bc976f6a1/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-02T20:59:59.000Z",
+      "views": 4
+    },
     {
       "id": "CorrectCreativeDolphinArsonNoSexy-YLM9l1bepGNSLmTq",
       "url": "https://www.twitch.tv/rukalun/clip/CorrectCreativeDolphinArsonNoSexy-YLM9l1bepGNSLmTq",
