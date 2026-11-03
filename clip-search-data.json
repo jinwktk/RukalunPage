@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-03T00:11:44.152Z",
-  "total": 2905,
+  "generatedAt": "2026-11-03T04:28:47.802Z",
+  "total": 2906,
   "clipSync": {
-    "recentSyncedAt": "2026-11-03T00:11:42.854Z"
+    "recentSyncedAt": "2026-11-03T04:28:46.450Z"
   },
   "clips": [
+    {
+      "id": "GenerousZanyCaribouDxAbomb-FMpX1KTU08nzktbm",
+      "url": "https://www.twitch.tv/rukalun/clip/GenerousZanyCaribouDxAbomb-FMpX1KTU08nzktbm",
+      "title": "ち○ぽぉ！",
+      "creator": "バルス9029",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c4b24c0f-6931-437d-a078-96d94619ed78/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-03T01:38:12.000Z",
+      "views": 4
+    },
     {
       "id": "FitEsteemedGoldfishCclamChamp-fPwffgZtNt7XnvcZ",
       "url": "https://www.twitch.tv/rukalun/clip/FitEsteemedGoldfishCclamChamp-fPwffgZtNt7XnvcZ",
