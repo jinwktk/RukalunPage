@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-04T14:07:15.513Z",
-  "total": 2908,
+  "generatedAt": "2026-11-04T15:52:13.359Z",
+  "total": 2909,
   "clipSync": {
-    "recentSyncedAt": "2026-11-04T14:07:14.139Z"
+    "recentSyncedAt": "2026-11-04T15:52:11.984Z"
   },
   "clips": [
+    {
+      "id": "PeppyTacitWolfPunchTrees-eFM4WOlPfDEcoTY7",
+      "url": "https://www.twitch.tv/rukalun/clip/PeppyTacitWolfPunchTrees-eFM4WOlPfDEcoTY7",
+      "title": "またふうせんこわした！",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3fcdcae9-ff1d-4c86-a4db-92da8922685f/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-04T15:36:56.000Z",
+      "views": 2
+    },
     {
       "id": "VivaciousHonorableHippoTF2John-24JnTOSgswPvXlOp",
       "url": "https://www.twitch.tv/rukalun/clip/VivaciousHonorableHippoTF2John-24JnTOSgswPvXlOp",
