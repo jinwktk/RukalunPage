@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-04T10:49:57.533Z",
-  "total": 2907,
+  "generatedAt": "2026-11-04T14:07:15.513Z",
+  "total": 2908,
   "clipSync": {
-    "recentSyncedAt": "2026-11-04T10:49:57.756Z"
+    "recentSyncedAt": "2026-11-04T14:07:14.139Z"
   },
   "clips": [
+    {
+      "id": "VivaciousHonorableHippoTF2John-24JnTOSgswPvXlOp",
+      "url": "https://www.twitch.tv/rukalun/clip/VivaciousHonorableHippoTF2John-24JnTOSgswPvXlOp",
+      "title": "あぁああん",
+      "creator": "あまはねまな",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/85dc3168-ec66-4f1e-be98-2de58dd85a79/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-04T13:42:19.000Z",
+      "views": 2
+    },
     {
       "id": "NiceCourteousRingFeelsBadMan-A1wH9-rnlliXcM_F",
       "url": "https://www.twitch.tv/rukalun/clip/NiceCourteousRingFeelsBadMan-A1wH9-rnlliXcM_F",
