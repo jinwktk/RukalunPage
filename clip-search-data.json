@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-07T10:54:21.797Z",
-  "total": 2911,
+  "generatedAt": "2026-11-07T15:47:06.308Z",
+  "total": 2912,
   "clipSync": {
-    "recentSyncedAt": "2026-11-07T10:54:20.313Z"
+    "recentSyncedAt": "2026-11-07T15:47:04.934Z"
   },
   "clips": [
+    {
+      "id": "EndearingSuperThymeKeyboardCat-3ertv5mOhTta3Joe",
+      "url": "https://www.twitch.tv/rukalun/clip/EndearingSuperThymeKeyboardCat-3ertv5mOhTta3Joe",
+      "title": "「逃げないでよ」が見つかりませんでした。",
+      "creator": "かじまる",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/2bd96656-3a4c-48f5-b486-99e11275b8ad/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-07T15:25:36.000Z",
+      "views": 3
+    },
     {
       "id": "ScaryBitterWatercressPhilosoraptor-ZMT7EsTLY97h4cnG",
       "url": "https://www.twitch.tv/rukalun/clip/ScaryBitterWatercressPhilosoraptor-ZMT7EsTLY97h4cnG",
