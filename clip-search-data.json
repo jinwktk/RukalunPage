@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-07T15:47:06.308Z",
-  "total": 2912,
+  "generatedAt": "2026-11-07T19:39:21.628Z",
+  "total": 2913,
   "clipSync": {
-    "recentSyncedAt": "2026-11-07T15:47:04.934Z"
+    "recentSyncedAt": "2026-11-07T19:39:20.010Z"
   },
   "clips": [
+    {
+      "id": "PrettyTangibleWoodpeckerKevinTurtle-Ec8Zb1dSWsUG_xcE",
+      "url": "https://www.twitch.tv/rukalun/clip/PrettyTangibleWoodpeckerKevinTurtle-Ec8Zb1dSWsUG_xcE",
+      "title": "一人芝居でメス出するっか",
+      "creator": "バルス9029",
+      "gameName": "Dragon Quest I & II HD-2D Remake",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/3e113ac6-f1b9-4b40-99b1-857ae98ac452/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-07T18:18:10.000Z",
+      "views": 2
+    },
     {
       "id": "EndearingSuperThymeKeyboardCat-3ertv5mOhTta3Joe",
       "url": "https://www.twitch.tv/rukalun/clip/EndearingSuperThymeKeyboardCat-3ertv5mOhTta3Joe",
@@ -33,7 +43,7 @@
       "gameName": "Dragon Quest I & II HD-2D Remake",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/4f2e3c8d-e241-4cfd-9595-86c710bb9a72/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-11-05T04:23:42.000Z",
-      "views": 11
+      "views": 12
     },
     {
       "id": "PeppyTacitWolfPunchTrees-eFM4WOlPfDEcoTY7",
