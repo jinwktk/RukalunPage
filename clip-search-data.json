@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-08T15:17:49.823Z",
-  "total": 2915,
+  "generatedAt": "2026-11-08T17:58:43.859Z",
+  "total": 2916,
   "clipSync": {
-    "recentSyncedAt": "2026-11-08T15:17:49.211Z"
+    "recentSyncedAt": "2026-11-08T17:58:42.476Z"
   },
   "clips": [
+    {
+      "id": "SincerePricklyPenguinNomNom-f4JmTi_CoLca0bg6",
+      "url": "https://www.twitch.tv/rukalun/clip/SincerePricklyPenguinNomNom-f4JmTi_CoLca0bg6",
+      "title": "犯行現場",
+      "creator": "にめいや",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/6e510057-f60d-4ea5-8621-6bd30a0c573d/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-08T17:29:53.000Z",
+      "views": 4
+    },
     {
       "id": "TangiblePluckyTapirGingerPower-f77JXvHtaZnf8GHH",
       "url": "https://www.twitch.tv/rukalun/clip/TangiblePluckyTapirGingerPower-f77JXvHtaZnf8GHH",
