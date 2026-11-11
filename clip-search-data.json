@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-10T22:52:31.193Z",
-  "total": 2919,
+  "generatedAt": "2026-11-11T01:00:31.584Z",
+  "total": 2920,
   "clipSync": {
-    "recentSyncedAt": "2026-11-10T22:52:29.867Z"
+    "recentSyncedAt": "2026-11-11T01:00:30.216Z"
   },
   "clips": [
+    {
+      "id": "ArborealPleasantPresidentArgieB8-wka2SbpSWWRJYRfp",
+      "url": "https://www.twitch.tv/rukalun/clip/ArborealPleasantPresidentArgieB8-wka2SbpSWWRJYRfp",
+      "title": "はぐち６",
+      "creator": "バルス9029",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/ebbfb8a5-4663-4da6-8277-3ab8815ff197/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-11T00:50:25.000Z",
+      "views": 1
+    },
     {
       "id": "CharmingManlyButterPhilosoraptor-5GSCgzvCN2glO7uk",
       "url": "https://www.twitch.tv/rukalun/clip/CharmingManlyButterPhilosoraptor-5GSCgzvCN2glO7uk",
