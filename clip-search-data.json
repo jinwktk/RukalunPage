@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-11T07:37:17.541Z",
-  "total": 2921,
+  "generatedAt": "2026-11-11T16:06:27.555Z",
+  "total": 2922,
   "clipSync": {
-    "recentSyncedAt": "2026-11-11T07:37:15.984Z"
+    "recentSyncedAt": "2026-11-11T16:06:25.944Z"
   },
   "clips": [
+    {
+      "id": "SassyAgreeableSushiDxCat-b3MFaDFBP0K0HrBS",
+      "url": "https://www.twitch.tv/rukalun/clip/SassyAgreeableSushiDxCat-b3MFaDFBP0K0HrBS",
+      "title": "なにがデマーシアや",
+      "creator": "かじまる",
+      "gameName": "MIMESIS",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/dc9e90dc-3ec8-4f03-90ec-89125dba1556/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-11T15:51:32.000Z",
+      "views": 2
+    },
     {
       "id": "HappyRefinedLemurFutureMan-xKQzm8R_Mg0YZu7V",
       "url": "https://www.twitch.tv/rukalun/clip/HappyRefinedLemurFutureMan-xKQzm8R_Mg0YZu7V",
