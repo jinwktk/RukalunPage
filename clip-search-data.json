@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-11T01:00:31.584Z",
-  "total": 2920,
+  "generatedAt": "2026-11-11T07:37:17.541Z",
+  "total": 2921,
   "clipSync": {
-    "recentSyncedAt": "2026-11-11T01:00:30.216Z"
+    "recentSyncedAt": "2026-11-11T07:37:15.984Z"
   },
   "clips": [
+    {
+      "id": "HappyRefinedLemurFutureMan-xKQzm8R_Mg0YZu7V",
+      "url": "https://www.twitch.tv/rukalun/clip/HappyRefinedLemurFutureMan-xKQzm8R_Mg0YZu7V",
+      "title": "もうこのゲームワイプしなくね？",
+      "creator": "バルス9029",
+      "gameName": "R.E.P.O.",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/cf5540d1-6898-4f79-90c7-dfcdab2e095f/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-11T02:49:05.000Z",
+      "views": 3
+    },
     {
       "id": "ArborealPleasantPresidentArgieB8-wka2SbpSWWRJYRfp",
       "url": "https://www.twitch.tv/rukalun/clip/ArborealPleasantPresidentArgieB8-wka2SbpSWWRJYRfp",
