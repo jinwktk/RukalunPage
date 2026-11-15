@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-14T22:54:24.344Z",
-  "total": 2925,
+  "generatedAt": "2026-11-15T05:19:41.834Z",
+  "total": 2926,
   "clipSync": {
-    "recentSyncedAt": "2026-11-14T22:54:23.060Z"
+    "recentSyncedAt": "2026-11-15T05:19:40.506Z"
   },
   "clips": [
+    {
+      "id": "SwissAmazonianNarwhalDuDudu-mOT4KPoLPIqDtrQ9",
+      "url": "https://www.twitch.tv/rukalun/clip/SwissAmazonianNarwhalDuDudu-mOT4KPoLPIqDtrQ9",
+      "title": "えぇぇ！？",
+      "creator": "かじまる",
+      "gameName": "Potato Please",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/e3471edf-e922-4061-b4dd-ab1b44b98dd7/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-15T04:46:04.000Z",
+      "views": 8
+    },
     {
       "id": "DeterminedRefinedRabbitKappaWealth-GfgrFTK9sg6ELCy1",
       "url": "https://www.twitch.tv/rukalun/clip/DeterminedRefinedRabbitKappaWealth-GfgrFTK9sg6ELCy1",
