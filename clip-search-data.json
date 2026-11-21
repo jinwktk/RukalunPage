@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-21T00:03:31.645Z",
-  "total": 2926,
+  "generatedAt": "2026-11-21T18:24:26.603Z",
+  "total": 2927,
   "clipSync": {
-    "recentSyncedAt": "2026-11-21T00:03:30.297Z"
+    "recentSyncedAt": "2026-11-21T18:24:25.245Z"
   },
   "clips": [
+    {
+      "id": "TangentialFineApeTheTarFu-a-KXvhzvt3Ov_XNF",
+      "url": "https://www.twitch.tv/rukalun/clip/TangentialFineApeTheTarFu-a-KXvhzvt3Ov_XNF",
+      "title": "ただいまあああ(｡´◕ω◕｀｡)寂しかった・・・カナ！？",
+      "creator": "SAOGGoKiriTo",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d5bc9e40-a6b1-43cf-b71d-d0b932d68041/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-21T14:55:02.000Z",
+      "views": 2
+    },
     {
       "id": "JollyFamousMouseTriHard-TKrabWoxQF-WONT9",
       "url": "https://www.twitch.tv/rukalun/clip/JollyFamousMouseTriHard-TKrabWoxQF-WONT9",
