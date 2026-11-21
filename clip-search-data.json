@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-21T00:03:31.645Z",
-  "total": 2926,
+  "generatedAt": "2026-11-22T00:04:53.519Z",
+  "total": 2927,
   "clipSync": {
-    "recentSyncedAt": "2026-11-21T00:03:30.297Z"
+    "recentSyncedAt": "2026-11-22T00:04:52.235Z"
   },
   "clips": [
+    {
+      "id": "TangentialFineApeTheTarFu-a-KXvhzvt3Ov_XNF",
+      "url": "https://www.twitch.tv/rukalun/clip/TangentialFineApeTheTarFu-a-KXvhzvt3Ov_XNF",
+      "title": "ただいまあああ(｡´◕ω◕｀｡)寂しかった・・・カナ！？",
+      "creator": "SAOGGoKiriTo",
+      "gameName": "Just Chatting",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d5bc9e40-a6b1-43cf-b71d-d0b932d68041/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-21T14:55:02.000Z",
+      "views": 2
+    },
     {
       "id": "JollyFamousMouseTriHard-TKrabWoxQF-WONT9",
       "url": "https://www.twitch.tv/rukalun/clip/JollyFamousMouseTriHard-TKrabWoxQF-WONT9",
@@ -343,7 +353,7 @@
       "gameName": "R.E.P.O.",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b4983f0a-75b6-4e1e-9b0b-72bfd29b4b67/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-10-30T10:52:30.000Z",
-      "views": 41
+      "views": 42
     },
     {
       "id": "ImpartialUgliestAniseWOOP-i65PbIUQDze0m327",
@@ -823,7 +833,7 @@
       "gameName": "Valheim",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/5ef52ad9-59ec-4c50-b964-d4806eced5a8/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-09-20T08:04:57.000Z",
-      "views": 13
+      "views": 14
     },
     {
       "id": "RudeUgliestCroissantBCWarrior-XOjurVqlsB2T1lEJ",
@@ -1173,7 +1183,7 @@
       "gameName": "FINAL FANTASY XIV ONLINE",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a4ab63d6-c270-4001-83a8-fd159d478cb5/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-08-21T17:06:05.000Z",
-      "views": 7
+      "views": 8
     },
     {
       "id": "CautiousBlindingPigeonCoolStoryBob-LFR8B12SmmAE-PA9",
@@ -16763,7 +16773,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/063383a7-383e-4468-a1ee-13ef5f258054/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2022-05-03T15:46:35.000Z",
-      "views": 118
+      "views": 119
     },
     {
       "id": "TrustworthyAntsyMouseNotATK-FGzhDRTHXM8ayK5f",
@@ -21113,7 +21123,7 @@
       "gameName": "Apex Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/fedc1323-d4d9-443d-81d0-f32b48c84461/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2020-10-20T19:49:41.000Z",
-      "views": 133
+      "views": 134
     },
     {
       "id": "CloudyStormyStarShadyLulu",
