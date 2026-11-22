@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-22T00:04:53.519Z",
-  "total": 2927,
+  "generatedAt": "2026-11-23T00:04:31.812Z",
+  "total": 2928,
   "clipSync": {
-    "recentSyncedAt": "2026-11-22T00:04:52.235Z"
+    "recentSyncedAt": "2026-11-23T00:04:30.534Z"
   },
   "clips": [
+    {
+      "id": "PrettiestKawaiiHamSSSsss-Zu8hpOt4TFxXbs6E",
+      "url": "https://www.twitch.tv/rukalun/clip/PrettiestKawaiiHamSSSsss-Zu8hpOt4TFxXbs6E",
+      "title": "いたっ..//いたっ/// ン”ん”ん”ん”////♡",
+      "creator": "かのんのん",
+      "gameName": "Overwatch",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/28ce7a65-135b-45b7-818e-e1972995ae4a/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-22T14:01:31.000Z",
+      "views": 7
+    },
     {
       "id": "TangentialFineApeTheTarFu-a-KXvhzvt3Ov_XNF",
       "url": "https://www.twitch.tv/rukalun/clip/TangentialFineApeTheTarFu-a-KXvhzvt3Ov_XNF",
@@ -13,7 +23,7 @@
       "gameName": "Just Chatting",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/d5bc9e40-a6b1-43cf-b71d-d0b932d68041/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2026-11-21T14:55:02.000Z",
-      "views": 2
+      "views": 8
     },
     {
       "id": "JollyFamousMouseTriHard-TKrabWoxQF-WONT9",
@@ -17123,7 +17133,7 @@
       "gameName": "VALORANT",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/028e861a-b73f-4377-a32b-168bdb31efdb/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2022-03-14T13:07:36.000Z",
-      "views": 1222
+      "views": 1224
     },
     {
       "id": "GoodPoliteKleeKappaPride-W5d10X__fU8TO3BP",
@@ -20753,7 +20763,7 @@
       "gameName": "Mario Kart 8",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/8bf901aa-5d8d-4a61-b9f9-35e2d40c6911/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2021-01-05T07:37:44.000Z",
-      "views": 32
+      "views": 33
     },
     {
       "id": "BumblingCharmingShrimpSoonerLater",
@@ -22473,7 +22483,7 @@
       "gameName": "Apex Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/1849afe7-ec3d-4d82-a573-85442e35d5e2/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2020-03-07T21:09:44.000Z",
-      "views": 52
+      "views": 53
     },
     {
       "id": "EnticingCorrectButterCharlieBitMe",
@@ -23133,7 +23143,7 @@
       "gameName": "League of Legends",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/f5f6e251-010e-4cb7-ae19-90bb1f810409/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2019-10-26T22:44:16.000Z",
-      "views": 217
+      "views": 218
     },
     {
       "id": "StupidAnimatedMarrowTBCheesePull",
@@ -24743,7 +24753,7 @@
       "gameName": "Food & Drink",
       "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/0f33f003-9b48-4cdf-a299-644aeeb90d38/landscape/thumb/thumb-0000000000-480x272.jpg",
       "createdAt": "2018-12-28T20:54:44.000Z",
-      "views": 1523
+      "views": 1524
     },
     {
       "id": "SparklingTolerantToadOSkomodo",
