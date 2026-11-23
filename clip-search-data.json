@@ -1,10 +1,20 @@
 {
-  "generatedAt": "2026-11-23T02:51:32.470Z",
-  "total": 2929,
+  "generatedAt": "2026-11-23T03:40:04.035Z",
+  "total": 2930,
   "clipSync": {
-    "recentSyncedAt": "2026-11-23T02:51:31.143Z"
+    "recentSyncedAt": "2026-11-23T03:40:02.654Z"
   },
   "clips": [
+    {
+      "id": "BovineHardFloofPanicVis-65lprRpmVpTNUDPp",
+      "url": "https://www.twitch.tv/rukalun/clip/BovineHardFloofPanicVis-65lprRpmVpTNUDPp",
+      "title": "メイ、飛ぶ",
+      "creator": "tamamo_silver",
+      "gameName": "Overwatch",
+      "thumbnailUrl": "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/dc3a93f2-8178-4f0c-8886-8bd64ff8ccf7/landscape/thumb/thumb-0000000000-480x272.jpg",
+      "createdAt": "2026-11-23T03:32:01.000Z",
+      "views": 1
+    },
     {
       "id": "HealthyUnsightlyWallabyTTours-4FCoCovXQsuQ4er_",
       "url": "https://www.twitch.tv/rukalun/clip/HealthyUnsightlyWallabyTTours-4FCoCovXQsuQ4er_",
